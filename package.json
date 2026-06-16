@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name theapdesign-art"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
@@ -19,6 +20,7 @@
     "autoprefixer": "^10.5.0",
     "playwright": "^1.61.0",
     "postcss": "^8.5.15",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "wrangler": "^4.26.0"
   }
 }
