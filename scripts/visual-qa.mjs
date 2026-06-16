@@ -41,6 +41,7 @@ for (const viewport of viewports) {
       width: image.naturalWidth,
       height: image.naturalHeight,
     })),
+    svgLogoExists: Boolean(document.querySelector('img[src="/ap-logo.svg"]')),
   }));
 
   await page.screenshot({

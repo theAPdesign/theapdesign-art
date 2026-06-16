@@ -1,61 +1,61 @@
 # The AP Design
 
-Modern, premium, single-page creative studio portfolio for `theapdesign.art`.
+`theapdesign.art` için modern, premium, tek sayfalık kreatif stüdyo portfolyosu.
 
-## Tech Stack
+## Teknoloji
 
 - React + Vite
 - Tailwind CSS
-- Static deploy ready
-- Responsive single-page layout
+- Statik deploy uyumlu
+- Responsive tek sayfa yapı
 
-## Local Development
+## Lokal Geliştirme
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build
+## Build Alma
 
 ```bash
 npm run build
 ```
 
-The production output is generated in `dist/`.
+Production çıktısı `dist/` klasöründe oluşur.
 
 ## Cloudflare Pages
 
-1. Push this project to a GitHub repository.
-2. In Cloudflare Dashboard, open **Workers & Pages**.
-3. Select **Create application** → **Pages** → **Connect to Git**.
-4. Choose the repository.
-5. Use these build settings:
+1. Projeyi GitHub reposuna pushla.
+2. Cloudflare Dashboard içinde **Workers & Pages** bölümünü aç.
+3. **Create application** → **Pages** → **Connect to Git** adımlarını seç.
+4. Repoyu seç.
+5. Build ayarlarını şöyle yap:
    - Framework preset: `Vite`
    - Build command: `npm run build`
    - Build output directory: `dist`
-6. Deploy the project.
-7. Add the custom domain `theapdesign.art` in **Custom domains**.
+6. Projeyi deploy et.
+7. **Custom domains** bölümünden `theapdesign.art` domainini ekle.
 
 ## Vercel
 
-1. Push this project to a GitHub repository.
-2. In Vercel, select **Add New** → **Project**.
-3. Import the repository.
-4. Vercel should detect Vite automatically.
-5. Confirm these settings:
+1. Projeyi GitHub reposuna pushla.
+2. Vercel içinde **Add New** → **Project** seç.
+3. Repoyu import et.
+4. Vercel Vite projesini otomatik algılamalı.
+5. Ayarları şöyle doğrula:
    - Build command: `npm run build`
    - Output directory: `dist`
-6. Deploy the project.
-7. Add `theapdesign.art` under **Project Settings** → **Domains**.
+6. Projeyi deploy et.
+7. **Project Settings** → **Domains** bölümünden `theapdesign.art` domainini ekle.
 
 ## GitHub Pages
 
-1. Build the project:
+1. Projeyi build et:
 
 ```bash
 npm run build
 ```
 
-2. Deploy the `dist/` folder using your preferred GitHub Pages workflow.
-3. For a custom domain, add `theapdesign.art` in the repository Pages settings.
+2. `dist/` klasörünü tercih ettiğin GitHub Pages workflow'u ile deploy et.
+3. Özel domain için repo Pages ayarlarında `theapdesign.art` ekle.

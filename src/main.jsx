@@ -13,24 +13,24 @@ import {
 import './styles.css';
 
 const services = [
-  { title: 'UI/UX Design', icon: Layers3 },
-  { title: 'Website Design', icon: MonitorSmartphone },
-  { title: 'App Design', icon: PenTool },
-  { title: 'Brand Identity', icon: BadgeCheck },
-  { title: 'Social Media Design', icon: Sparkles },
-  { title: 'AI-assisted Creative Design', icon: Wand2 },
+  { title: 'UI/UX Tasarımı', icon: Layers3 },
+  { title: 'Web Sitesi Tasarımı', icon: MonitorSmartphone },
+  { title: 'Uygulama Tasarımı', icon: PenTool },
+  { title: 'Marka Kimliği', icon: BadgeCheck },
+  { title: 'Sosyal Medya Tasarımı', icon: Sparkles },
+  { title: 'Yapay Zeka Destekli Kreatif Tasarım', icon: Wand2 },
 ];
 
 const works = [
-  ['Interface System', 'SaaS dashboard concept', 'from-electric/70 via-white to-violet/80'],
-  ['Brand Launch', 'Identity and social direction', 'from-violet/75 via-white to-zinc-300'],
-  ['Mobile Flow', 'Premium app experience', 'from-zinc-900 via-electric/70 to-white'],
-  ['Studio Website', 'Editorial web presence', 'from-white via-zinc-300 to-electric/60'],
-  ['Creator Kit', 'Campaign visuals and templates', 'from-violet/70 via-zinc-950 to-electric/70'],
-  ['Digital Product', 'UX, visuals and launch assets', 'from-zinc-200 via-white to-violet/70'],
+  ['Arayüz Sistemi', 'SaaS panel konsepti', 'from-electric/70 via-white to-violet/80'],
+  ['Marka Lansmanı', 'Kimlik ve sosyal yönlendirme', 'from-violet/75 via-white to-zinc-300'],
+  ['Mobil Akış', 'Premium uygulama deneyimi', 'from-zinc-900 via-electric/70 to-white'],
+  ['Stüdyo Web Sitesi', 'Editoryal web görünümü', 'from-white via-zinc-300 to-electric/60'],
+  ['İçerik Üretici Kiti', 'Kampanya görselleri ve şablonlar', 'from-violet/70 via-zinc-950 to-electric/70'],
+  ['Dijital Ürün', 'UX, görsel sistem ve lansman varlıkları', 'from-zinc-200 via-white to-violet/70'],
 ];
 
-const process = ['Discover', 'Design', 'Refine', 'Deliver'];
+const process = ['Keşif', 'Tasarım', 'İyileştirme', 'Teslim'];
 
 function App() {
   return (
@@ -61,25 +61,25 @@ function Header() {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-ink/70 backdrop-blur-2xl">
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <a href="#top" className="group flex items-center gap-3" aria-label="The AP Design home">
+        <a href="#top" className="group flex items-center gap-3" aria-label="The AP Design ana sayfa">
           <span className="grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-white shadow-soft">
-            <img src="/ap-logo.svg" alt="AP Design logo" className="h-8 w-8 object-contain" />
+            <img src="/ap-logo.svg" alt="AP Design logosu" className="h-8 w-8 object-contain" />
           </span>
           <span className="font-display text-sm font-semibold uppercase tracking-[0.26em] text-white">
             AP Design
           </span>
         </a>
         <div className="hidden items-center gap-8 text-sm text-white/64 md:flex">
-          <a href="#about" className="transition hover:text-white">About</a>
-          <a href="#services" className="transition hover:text-white">Services</a>
-          <a href="#works" className="transition hover:text-white">Works</a>
-          <a href="#contact" className="transition hover:text-white">Contact</a>
+          <a href="#about" className="transition hover:text-white">Hakkında</a>
+          <a href="#services" className="transition hover:text-white">Hizmetler</a>
+          <a href="#works" className="transition hover:text-white">İşler</a>
+          <a href="#contact" className="transition hover:text-white">İletişim</a>
         </div>
         <a
           href="#contact"
           className="inline-flex h-11 items-center gap-2 rounded-full border border-white/15 bg-white px-5 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:bg-smoke"
         >
-          Contact
+          İletişim
           <ArrowRight size={16} />
         </a>
       </nav>
@@ -96,28 +96,28 @@ function Hero() {
             theapdesign.art
           </p>
           <h1 className="font-display text-[clamp(3.8rem,9vw,9.8rem)] font-black leading-[0.86] tracking-normal">
-            Design that feels{' '}
+            Premium hissettiren{' '}
             <span className="animate-sheen bg-gradient-to-r from-white via-electric to-violet bg-[length:220%_220%] bg-clip-text text-transparent">
-              premium.
+              tasarım.
             </span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
-            Modern websites, app interfaces, brand visuals and digital experiences crafted with
-            detail.
+            Modern web siteleri, uygulama arayüzleri, marka görselleri ve dijital deneyimler detayla
+            tasarlanır.
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <a
               href="#works"
               className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-white px-7 text-sm font-bold text-ink transition hover:-translate-y-1 hover:bg-smoke"
             >
-              View Works
+              İşleri Gör
               <ArrowRight size={18} />
             </a>
             <a
               href="#contact"
               className="inline-flex h-14 items-center justify-center rounded-full border border-white/15 px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:border-white/40 hover:bg-white/8"
             >
-              Contact
+              İletişim
             </a>
           </div>
         </div>
@@ -125,11 +125,11 @@ function Hero() {
           <div className="absolute inset-8 rounded-full bg-gradient-to-br from-electric/40 to-violet/35 blur-3xl" />
           <div className="relative animate-float rounded-[2rem] border border-white/12 bg-white/[0.04] p-8 shadow-glow backdrop-blur-xl">
             <div className="aspect-square rounded-[1.6rem] border border-white/12 bg-smoke p-10">
-              <img src="/ap-logo.svg" alt="AP Design monogram" className="h-full w-full object-contain" />
+              <img src="/ap-logo.svg" alt="AP Design monogramı" className="h-full w-full object-contain" />
             </div>
             <div className="mt-6 flex items-end justify-between gap-4">
               <div>
-                <p className="text-sm uppercase tracking-[0.28em] text-white/45">Creative Studio</p>
+                <p className="text-sm uppercase tracking-[0.28em] text-white/45">Kreatif Stüdyo</p>
                 <p className="mt-2 font-display text-2xl font-bold">The AP Design</p>
               </div>
               <span className="rounded-full border border-white/12 px-3 py-1 text-xs text-white/60">
@@ -144,7 +144,7 @@ function Hero() {
 }
 
 function Marquee() {
-  const items = ['UI/UX', 'Websites', 'Brand Visuals', 'Creative Direction', 'App Interfaces'];
+  const items = ['UI/UX', 'Web Siteleri', 'Marka Görselleri', 'Kreatif Yön', 'Uygulama Arayüzleri'];
   return (
     <div className="relative z-10 border-y border-white/10 bg-white/[0.03] py-5">
       <div className="flex w-[200%] animate-marquee gap-8 whitespace-nowrap text-sm font-semibold uppercase tracking-[0.24em] text-white/50">
@@ -163,13 +163,13 @@ function About() {
   return (
     <section id="about" className="relative z-10 px-5 py-24 sm:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-        <SectionLabel eyebrow="About" title="A digital studio for crisp, premium visuals." />
+        <SectionLabel eyebrow="Hakkında" title="Net, modern ve premium görseller için dijital stüdyo." />
         <div className="text-balance text-2xl font-medium leading-tight text-white/82 sm:text-4xl">
-          The AP Design focuses on digital design, UI/UX, brand visuals and creative direction for
-          brands that want their online presence to feel sharp, intentional and memorable.
+          The AP Design; dijital tasarım, UI/UX, marka görselleri ve kreatif yön alanlarında çalışan
+          modern bir tasarım stüdyosudur.
           <p className="mt-8 text-lg leading-8 text-white/58">
-            Every detail is shaped for clarity: clean interfaces, refined visual systems, responsive
-            web experiences and launch-ready creative assets.
+            Her detay netlik ve premium algı için şekillenir: temiz arayüzler, güçlü görsel sistemler,
+            duyarlı web deneyimleri ve yayına hazır kreatif varlıklar.
           </p>
         </div>
       </div>
@@ -181,7 +181,7 @@ function Services() {
   return (
     <section id="services" className="relative z-10 bg-smoke px-5 py-24 text-ink sm:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionLabel eyebrow="Services" title="Design systems for digital presence." dark />
+        <SectionLabel eyebrow="Hizmetler" title="Dijital görünürlük için tasarım sistemleri." dark />
         <div className="mt-12 grid gap-px overflow-hidden rounded-[1.6rem] border border-black/10 bg-black/10 sm:grid-cols-2 lg:grid-cols-3">
           {services.map(({ title, icon: Icon }) => (
             <article key={title} className="group bg-smoke p-7 transition hover:bg-white">
@@ -202,10 +202,10 @@ function Portfolio() {
     <section id="works" className="relative z-10 px-5 py-24 sm:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <SectionLabel eyebrow="Portfolio" title="Selected visual directions." />
+          <SectionLabel eyebrow="Portfolyo" title="Seçilmiş görsel yönler." />
           <p className="max-w-md text-white/58">
-            Gradient mockups preview the range: interfaces, digital launches, identity systems and
-            social-first creative campaigns.
+            Gradient mockup kartları; arayüz, dijital lansman, kimlik sistemi ve sosyal medya odaklı
+            kreatif çalışmaların genel hissini gösterir.
           </p>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -217,7 +217,7 @@ function Portfolio() {
               <div className={`relative aspect-[1.18] overflow-hidden rounded-[1rem] bg-gradient-to-br ${gradient}`}>
                 <div className="absolute inset-6 rounded-[1.1rem] border border-white/35 bg-white/18 backdrop-blur-md transition group-hover:scale-[1.03]" />
                 <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-full border border-white/30 bg-black/20 px-4 py-3 text-white backdrop-blur-xl">
-                  <span className="text-xs font-bold uppercase tracking-[0.22em]">Project {index + 1}</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.22em]">Proje {index + 1}</span>
                   <ArrowRight size={16} />
                 </div>
               </div>
@@ -237,7 +237,7 @@ function Process() {
   return (
     <section className="relative z-10 bg-white px-5 py-24 text-ink sm:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionLabel eyebrow="Process" title="Simple steps, precise execution." dark />
+        <SectionLabel eyebrow="Süreç" title="Sade adımlar, detaylı uygulama." dark />
         <div className="mt-12 grid gap-4 md:grid-cols-4">
           {process.map((step, index) => (
             <article key={step} className="rounded-[1.2rem] border border-black/10 p-6">
@@ -260,9 +260,9 @@ function Contact() {
       <div className="mx-auto max-w-7xl rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 sm:p-12">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
           <div>
-            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.28em] text-electric">Contact</p>
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.28em] text-electric">İletişim</p>
             <h2 className="font-display text-[clamp(2.6rem,6vw,6.8rem)] font-black leading-[0.9]">
-              Let&apos;s create something premium.
+              Premium bir şey tasarlayalım.
             </h2>
           </div>
           <div className="space-y-4">
