@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>AP Design logo</title>
+  <rect width="512" height="512" rx="74" fill="#f5f3ef"/>
+  <path d="M129 365 203 177h46l-74 188h-46Z" fill="#050505"/>
+  <path d="M195 303h-57l18-47h57l-18 47Z" fill="#050505"/>
+  <path d="M278 365 184 128h52l94 237h-52Z" fill="#050505"/>
+  <path d="M251 128h122c62 0 109 45 109 107 0 61-47 106-109 106h-31l-19-48h50c35 0 61-25 61-58 0-34-26-59-61-59H270l-19-48Z" fill="#050505"/>
+</svg>

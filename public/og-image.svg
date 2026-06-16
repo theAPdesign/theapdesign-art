@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title>The AP Design</title>
+  <desc>Premium creative studio brand preview</desc>
+  <rect width="1200" height="630" fill="#050505"/>
+  <rect x="70" y="70" width="1060" height="490" rx="42" fill="#0f1118" stroke="rgba(255,255,255,0.18)"/>
+  <circle cx="957" cy="165" r="240" fill="#2f6bff" opacity="0.25"/>
+  <circle cx="1030" cy="505" r="240" fill="#8b5cf6" opacity="0.2"/>
+  <g transform="translate(776 155)">
+    <rect width="285" height="285" rx="40" fill="#f5f3ef"/>
+    <path d="M72 205 113 99h26L98 205H72Z" fill="#050505"/>
+    <path d="M109 170H77l10-27h32l-10 27Z" fill="#050505"/>
+    <path d="M156 205 103 72h29l53 133h-29Z" fill="#050505"/>
+    <path d="M141 72h68c35 0 61 25 61 60s-26 59-61 59h-17l-11-27h28c20 0 34-14 34-32 0-19-14-33-34-33h-57l-11-27Z" fill="#050505"/>
+  </g>
+  <text x="110" y="190" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="10">THEAPDESIGN.ART</text>
+  <text x="110" y="300" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="78" font-weight="900">Design that feels</text>
+  <text x="110" y="390" fill="#6d7dff" font-family="Inter, Arial, sans-serif" font-size="96" font-weight="900">premium.</text>
+  <text x="112" y="465" fill="rgba(255,255,255,0.68)" font-family="Inter, Arial, sans-serif" font-size="28">Modern websites, app interfaces and brand visuals.</text>
+</svg>

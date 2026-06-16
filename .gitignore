@@ -1,0 +1,4 @@
+node_modules/
+dist/
+qa-screenshots/
+.DS_Store
