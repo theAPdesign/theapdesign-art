@@ -1185,6 +1185,7 @@ function updateMeta(route) {
   setMetaTag('name', 'twitter:description', meta.ogDescription);
   setMetaTag('name', 'twitter:image', meta.image);
   setCanonical(url);
+  trackPageView(route, url);
 }
 
 function setMetaTag(attribute, key, content) {
@@ -1209,6 +1210,16 @@ function setCanonical(url) {
   }
 
   link.setAttribute('href', url);
+}
+
+function trackPageView(route, url) {
+  if (typeof window.gtag === 'function') {
+    window.gtag('config', 'G-W219ZBJWH0', {
+      page_path: route,
+      page_location: url,
+      page_title: document.title,
+    });
+  }
 }
 
 createRoot(document.getElementById('root')).render(<App />);
