@@ -12,8 +12,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         delit: resolve(__dirname, 'del-it/index.html'),
-        privacyPolicy: resolve(__dirname, 'privacy-policy/index.html'),
-        support: resolve(__dirname, 'support/index.html'),
+        launchKit: resolve(__dirname, 'launch-kit/index.html'),
+        sparkflow: resolve(__dirname, 'sparkflow/index.html'),
       },
     },
   },
