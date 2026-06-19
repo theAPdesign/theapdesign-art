@@ -11,9 +11,11 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
+        products: resolve(__dirname, 'products/index.html'),
+        contact: resolve(__dirname, 'contact/index.html'),
         delit: resolve(__dirname, 'del-it/index.html'),
-        launchKit: resolve(__dirname, 'launch-kit/index.html'),
-        sparkflow: resolve(__dirname, 'sparkflow/index.html'),
+        delitPrivacy: resolve(__dirname, 'del-it/gizlilik-politikasi/index.html'),
+        delitTerms: resolve(__dirname, 'del-it/kullanim-sartlari/index.html'),
       },
     },
   },
