@@ -75,6 +75,7 @@ function DelitPage() {
       <Background />
       <Header />
       <DelitHero />
+      <DelitAppStoreCta />
       <DelitDetails />
       <DelitGallery />
       <DelitFaq />
@@ -337,6 +338,49 @@ function DelitHero() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DelitAppStoreCta() {
+  return (
+    <section className="relative z-10 px-5 py-8 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="overflow-hidden rounded-[2rem] border border-black/8 bg-white p-4 shadow-glow">
+          <div className="grid gap-6 rounded-[1.6rem] bg-gradient-to-br from-sky-100 via-white to-rose-100 p-6 sm:p-8 lg:grid-cols-[auto_1fr_auto] lg:items-center">
+            <div className="mx-auto grid h-24 w-24 place-items-center rounded-[1.5rem] bg-white shadow-soft lg:mx-0">
+              <img
+                src={product.logo}
+                alt="Del-It uygulama logosu"
+                className="h-20 w-20 rounded-[1.25rem] object-cover"
+              />
+            </div>
+            <div className="text-center lg:text-left">
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-ink/45">App Store</p>
+              <h2 className="mt-3 font-display text-3xl font-black leading-tight sm:text-4xl">
+                Del-It App Store’da yayında
+              </h2>
+              <p className="mt-3 max-w-2xl text-base leading-7 text-ink/65 sm:text-lg">
+                Fotoğraflarını hızlıca gözden geçir, gereksizleri güvenli Del-It çöp kutusuna ekle ve son
+                onayla temizle.
+              </p>
+              <p className="mt-4 inline-flex rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-semibold text-ink/65">
+                Fotoğrafların cihazında kalır.
+              </p>
+            </div>
+            <a
+              href="https://apps.apple.com/us/app/del-it/id6780890586"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Del-It uygulamasını App Store’da aç"
+              className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-black/85"
+            >
+              App Store’da İndir
+              <ArrowRight size={18} />
+            </a>
           </div>
         </div>
       </div>
