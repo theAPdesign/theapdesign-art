@@ -10,6 +10,13 @@ const product = {
   logo: '/del-it-logo.jpg',
 };
 
+const xoxProduct = {
+  title: 'XOX Taktik Arena',
+  description: 'Klasik X-O hissini 3 taş limitiyle hızlandıran, beraberliksiz ve kısa turlu 3x3 strateji oyunu.',
+  summary: 'Dinamik X-O kuralları, yapay zeka ve iki kişilik hızlı maçlar.',
+  logo: '/xox-taktik-arena-logo.png',
+};
+
 function App() {
   const path = normalizePath(window.location.pathname);
 
@@ -31,6 +38,18 @@ function App() {
 
   if (path === '/del-it/kullanim-sartlari') {
     return <DelitTermsPage />;
+  }
+
+  if (path === '/xox-taktik-arena') {
+    return <XoxPage />;
+  }
+
+  if (path === '/xox-taktik-arena/gizlilik-politikasi') {
+    return <XoxPrivacyPage />;
+  }
+
+  if (path === '/xox-taktik-arena/kullanim-sartlari') {
+    return <XoxTermsPage />;
   }
 
   return <HomePage />;
@@ -192,7 +211,7 @@ function ProductsHero() {
           Uygulamaları burada gösteriyoruz.
         </h1>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-ink/62">
-          Şu anda vitrinde Del-it yer alıyor. Karttan ürünün iç sayfasına geçebilirsin.
+          Del-it ve XOX Taktik Arena burada. Kartlardan ürünlerin iç sayfalarına geçebilirsin.
         </p>
       </div>
     </section>
@@ -203,38 +222,65 @@ function ProductsGrid() {
   return (
     <section className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto grid max-w-7xl gap-5">
-        <a
+        <ProductCard
           href="/del-it"
-          className="group overflow-hidden rounded-[1.8rem] border border-black/8 bg-white p-4 shadow-soft transition duration-300 hover:-translate-y-2 hover:shadow-glow"
-        >
-          <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div className="rounded-[1.4rem] bg-gradient-to-br from-sky-100 via-white to-rose-100 p-5">
-              <div className="rounded-[1.2rem] border border-black/8 bg-white p-5">
-                <img src="/del-it-logo.jpg" alt="Del-it logosu" className="h-auto w-full rounded-[1rem] object-cover" />
-              </div>
-            </div>
-            <div className="px-2 pb-2">
-              <p className="text-sm font-bold uppercase tracking-[0.28em] text-ink/45">Del-it</p>
-              <h2 className="mt-4 font-display text-4xl font-black">Fotoğraf temizliği</h2>
-              <p className="mt-4 max-w-xl text-base leading-7 text-ink/62">
-                Benzer fotoğrafları bulur, gereksiz kareleri ayıklamayı kolaylaştırır ve depolama alanı kazandırır.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {['Benzer kare tarama', 'Alan kazanımı', 'Akıllı seçim önerileri'].map((item) => (
-                  <span key={item} className="rounded-full border border-black/8 bg-[#fbfaf7] px-3 py-2 text-xs font-semibold text-ink/65">
-                    {item}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-7 inline-flex items-center gap-2 font-semibold text-ink">
-                İç sayfayı aç
-                <ChevronRight size={18} />
-              </div>
-            </div>
-          </div>
-        </a>
+          logo={product.logo}
+          logoAlt="Del-it logosu"
+          eyebrow="Del-it"
+          title="Fotoğraf temizliği"
+          description="Benzer fotoğrafları bulur, gereksiz kareleri ayıklamayı kolaylaştırır ve depolama alanı kazandırır."
+          tags={['Benzer kare tarama', 'Alan kazanımı', 'Akıllı seçim önerileri']}
+          tone="soft"
+        />
+        <ProductCard
+          href="/xox-taktik-arena"
+          logo={xoxProduct.logo}
+          logoAlt="XOX Taktik Arena logosu"
+          eyebrow="XOX Taktik Arena"
+          title="Beraberliksiz 3x3 strateji"
+          description="Klasik X-O oyununu 3 taş limiti, eski taş silinme mekaniği ve hızlı skor hedefleriyle daha taktik hale getirir."
+          tags={['Tek oyunculu', 'İki kişilik', 'Neon temalar']}
+          tone="neon"
+        />
       </div>
     </section>
+  );
+}
+
+function ProductCard({ href, logo, logoAlt, eyebrow, title, description, tags, tone }) {
+  const mediaClass = tone === 'neon'
+    ? 'bg-gradient-to-br from-[#0b1025] via-[#12183a] to-[#ff4fc8]'
+    : 'bg-gradient-to-br from-sky-100 via-white to-rose-100';
+
+  return (
+    <a
+      href={href}
+      className="group overflow-hidden rounded-[1.8rem] border border-black/8 bg-white p-4 shadow-soft transition duration-300 hover:-translate-y-2 hover:shadow-glow"
+    >
+      <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div className={`rounded-[1.4rem] p-5 ${mediaClass}`}>
+          <div className="rounded-[1.2rem] border border-white/20 bg-white p-5">
+            <img src={logo} alt={logoAlt} className="h-auto w-full rounded-[1rem] object-cover" />
+          </div>
+        </div>
+        <div className="px-2 pb-2">
+          <p className="text-sm font-bold uppercase tracking-[0.28em] text-ink/45">{eyebrow}</p>
+          <h2 className="mt-4 font-display text-4xl font-black">{title}</h2>
+          <p className="mt-4 max-w-xl text-base leading-7 text-ink/62">{description}</p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {tags.map((item) => (
+              <span key={item} className="rounded-full border border-black/8 bg-[#fbfaf7] px-3 py-2 text-xs font-semibold text-ink/65">
+                {item}
+              </span>
+            ))}
+          </div>
+          <div className="mt-7 inline-flex items-center gap-2 font-semibold text-ink">
+            İç sayfayı aç
+            <ChevronRight size={18} />
+          </div>
+        </div>
+      </div>
+    </a>
   );
 }
 
@@ -542,6 +588,179 @@ function DelitTermsPage() {
   );
 }
 
+function XoxPage() {
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <XoxHero />
+      <XoxRules />
+      <XoxModes />
+      <XoxLegalLinks />
+      <Footer />
+    </main>
+  );
+}
+
+function XoxHero() {
+  return (
+    <section className="relative z-10 px-5 pb-10 pt-12 sm:px-8 lg:pt-16">
+      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+        <div className="max-w-3xl">
+          <p className="mb-5 inline-flex rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-ink/55 shadow-soft">
+            XOX Taktik Arena
+          </p>
+          <h1 className="font-display text-[clamp(3.2rem,7vw,7.8rem)] font-black leading-[0.9]">
+            Beraberliksiz
+            <span className="block bg-gradient-to-r from-sky-500 via-fuchsia-500 to-rose-500 bg-clip-text text-transparent">
+              X-O-X stratejisi.
+            </span>
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/65">
+            Klasik X-O hissini koruyan, 3 taş limiti ve eski taş silinme mekaniğiyle her turu daha hızlı,
+            dinamik ve taktik hale getiren 3x3 mobil strateji oyunu.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {['3 taş limiti', 'Beraberlik yok', 'Neon temalar'].map((item) => (
+              <span key={item} className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-semibold text-ink/65 shadow-soft">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="relative mx-auto w-full max-w-[560px]">
+          <div className="absolute inset-x-12 top-12 h-44 rounded-full bg-gradient-to-r from-sky-300/70 via-fuchsia-300/60 to-rose-300/70 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-black/8 bg-white p-5 shadow-glow">
+            <div className="rounded-[1.5rem] bg-gradient-to-br from-[#070a18] via-[#111936] to-[#ff4fc8] p-5">
+              <div className="rounded-[1.3rem] border border-white/20 bg-white p-5 shadow-soft">
+                <img src={xoxProduct.logo} alt="XOX Taktik Arena logosu" className="h-auto w-full rounded-[1rem] object-cover" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function XoxRules() {
+  const rules = [
+    'Tahta 3x3’tür ve oyuncular sırayla boş hücrelere X veya O koyar.',
+    'Her oyuncunun tahtada aynı anda en fazla 3 taşı bulunabilir.',
+    '4. taş koyulduğunda, aynı oyuncunun en eski taşı otomatik olarak silinir.',
+    'Yatay, dikey veya çapraz 3’lü çizgi yapan oyuncu turu kazanır.',
+  ];
+
+  return (
+    <section className="relative z-10 px-5 py-10 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+          <div>
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">Oyun Mantığı</p>
+            <h2 className="font-display text-4xl font-black leading-none sm:text-6xl">
+              Klasik X-O, daha hızlı.
+            </h2>
+          </div>
+          <p className="max-w-xl text-ink/58">
+            Eski taş silinme mekaniği oyunu tıkamaz, beraberliği ortadan kaldırır ve her turda kazanan üretir.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
+          {rules.map((rule, index) => (
+            <article key={rule} className="rounded-[1.4rem] border border-black/8 bg-white p-6 shadow-soft">
+              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-ink text-white">
+                <span className="text-sm font-bold">{String(index + 1).padStart(2, '0')}</span>
+              </div>
+              <p className="mt-8 text-base leading-7 text-ink/72">{rule}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function XoxModes() {
+  const modes = [
+    ['Tek Oyunculu Mod', 'Kolay, orta ve zor zorluk seçenekleriyle yapay zekaya karşı hızlı maçlar.'],
+    ['İki Kişilik Mod', 'Aynı cihazda iki oyuncu, oyuncu isimleri ve hedef skor seçimiyle karşılıklı oynar.'],
+    ['Tema ve Ses Sistemi', 'Neon, Klasik, Kırmızı, Mavi ve Yeşil tema seçenekleri; ses, müzik ve hamle efektleri.'],
+  ];
+
+  return (
+    <section className="relative z-10 px-5 py-10 sm:px-8">
+      <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
+        {modes.map(([title, text]) => (
+          <article key={title} className="rounded-[1.5rem] border border-black/8 bg-white p-6 shadow-soft">
+            <Sparkles size={22} className="text-fuchsia-500" />
+            <h3 className="mt-6 font-display text-2xl font-black">{title}</h3>
+            <p className="mt-4 text-base leading-7 text-ink/65">{text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function XoxLegalLinks() {
+  return (
+    <section className="relative z-10 px-5 py-10 sm:px-8">
+      <div className="mx-auto max-w-3xl">
+        <div className="rounded-[1.6rem] border border-black/8 bg-white p-5 shadow-soft">
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href="/xox-taktik-arena/gizlilik-politikasi"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-white px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#fbfaf7]"
+            >
+              Gizlilik Politikası
+            </a>
+            <a
+              href="/xox-taktik-arena/kullanim-sartlari"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-[#fbfaf7] px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white"
+            >
+              Kullanım Şartları
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function XoxPrivacyPage() {
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <LegalHero
+        eyebrow="Gizlilik Politikası"
+        title="X-O-X Gizlilik Politikası"
+        description="Yürürlük Tarihi: 24 Haziran 2026. Geliştirici: AP Design. İletişim: theapdesign26@gmail.com"
+      />
+      <LegalContent sections={xoxPrivacySections} />
+      <XoxLegalLinks />
+      <Footer />
+    </main>
+  );
+}
+
+function XoxTermsPage() {
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <LegalHero
+        eyebrow="Kullanım Şartları"
+        title="X-O-X Kullanım Şartları"
+        description="Yürürlük Tarihi: 24 Haziran 2026. Geliştirici: AP Design. İletişim: theapdesign26@gmail.com"
+      />
+      <LegalContent sections={xoxTermsSections} />
+      <XoxLegalLinks />
+      <Footer />
+    </main>
+  );
+}
+
 function LegalHero({ eyebrow, title, description }) {
   return (
     <section className="relative z-10 px-5 pb-6 pt-12 sm:px-8 lg:pt-16">
@@ -813,6 +1032,81 @@ const termsSections = [
   {
     title: '15. İletişim',
     paragraphs: ['Kullanım Şartları, Gizlilik Politikası veya uygulamayla ilgili soruların için bize ulaşabilirsin: theapdesign26@gmail.com'],
+  },
+];
+
+const xoxPrivacySections = [
+  {
+    title: '1. Genel bilgi',
+    paragraphs: [
+      'X-O-X, kısa turlu 3x3 strateji oyunudur. Uygulama, kullanıcıdan hesap oluşturma, üyelik veya doğrudan kişisel profil bilgisi istemez.',
+    ],
+  },
+  {
+    title: '2. Cihazda saklanan tercihler',
+    paragraphs: [
+      'Uygulama; oyun deneyimini sürdürebilmek için bazı tercihleri cihaz üzerinde saklayabilir. Bunlar ses, müzik, tema tercihleri ve reklam kaldırma satın alma durumudur. Ses, müzik ve tema ayarları uygulamada kalıcı olarak tutulabilir.',
+    ],
+  },
+  {
+    title: '3. Reklamlar ve consent',
+    paragraphs: [
+      'X-O-X’ta maç sonlarında geçiş reklamları gösterilebilir. Reklam gösterimi için Google Mobile Ads / AdMob kullanılmaktadır.',
+      'Gerekli bölgelerde Google UMP consent akışı reklam SDK başlamadan önce çalışır ve kullanıcıya gizlilik veya izin formu gösterilebilir.',
+      'Uygulamada bölge veya reklam ayarları gerektirirse Ayarlar ekranında “Reklam Gizlilik Seçenekleri” bölümü görünebilir.',
+    ],
+  },
+  {
+    title: '4. Uygulama içi satın alma',
+    paragraphs: [
+      'Uygulama içinde reklamları kaldırmak için tek seferlik uygulama içi satın alma sunulabilir. Bu satın alma işlemleri Apple App Store altyapısı üzerinden yürütülür. X-O-X ödeme kartı bilgilerinizi işlemez veya saklamaz.',
+      'Satın alma sonrası reklam kaldırma durumu cihazda saklanabilir. Reklam kaldırma satın alımı aktifse geçiş reklamları gösterilmez.',
+    ],
+  },
+  {
+    title: '5. Politika güncellemeleri',
+    paragraphs: ['Bu gizlilik politikası zaman zaman güncellenebilir. Güncellemeler uygulama içinde veya web sitesi üzerinden yayınlanabilir.'],
+  },
+  {
+    title: '6. İletişim',
+    paragraphs: ['Sorularınız için bizimle iletişime geçebilirsiniz: theapdesign26@gmail.com', 'Web Sitesi: theapdesign.art'],
+  },
+];
+
+const xoxTermsSections = [
+  {
+    title: '1. Kabul',
+    paragraphs: ['X-O-X uygulamasını kullanarak bu kullanım şartlarını kabul etmiş olursunuz.'],
+  },
+  {
+    title: '2. Oyun kuralları',
+    paragraphs: [
+      'X-O-X, klasik X-O’dan farklı çalışan 3x3 bir strateji oyunudur. Her oyuncu tahtada en fazla 3 taş tutar.',
+      'Bir oyuncu 4. taşını koyduğunda, aynı oyuncunun ilk koyduğu taş tahtadan silinir. Bu döngü sayesinde oyun tıkanmaz ve her tur bir kazananla biter.',
+    ],
+  },
+  {
+    title: '3. Kullanıcı sorumluluğu',
+    paragraphs: ['Uygulama eğlence amaçlıdır. Kullanıcılar uygulamayı yasalara uygun, adil ve uygulamanın normal işleyişini bozmayacak şekilde kullanmalıdır.'],
+  },
+  {
+    title: '4. Reklamlar ve satın alma',
+    paragraphs: [
+      'X-O-X’ta maç sonunda geçiş reklamı gösterilebilir. Kullanıcı isterse reklamları kaldırmak için tek seferlik uygulama içi satın alma yapabilir.',
+      'Reklam kaldırma satın alımı yalnızca reklamları kaldırır. Oyuncuya skor avantajı, oyun içi güç, ekstra özellik veya rekabet avantajı sağlamaz.',
+      'Satın alma geri yükleme işlemi Ayarlar ekranındaki Geri Yükle butonu ile yapılabilir.',
+    ],
+  },
+  {
+    title: '5. Güncellemeler ve hizmet durumu',
+    paragraphs: [
+      'AP Design, uygulamada zaman zaman güncelleme yapabilir. Oyun kuralları, görsel tasarım, reklam davranışı, teknik altyapı veya uygulama özellikleri değiştirilebilir.',
+      'Uygulamanın kesintisiz, hatasız veya her cihazda aynı performansla çalışacağı garanti edilmez. Ancak AP Design, kullanıcı deneyimini iyileştirmek için gerekli güncellemeleri yapabilir.',
+    ],
+  },
+  {
+    title: '6. İletişim',
+    paragraphs: ['Sorularınız için bizimle iletişime geçebilirsiniz: theapdesign26@gmail.com', 'Web Sitesi: theapdesign.art'],
   },
 ];
 

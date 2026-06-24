@@ -1,53 +1,110 @@
 # Proje Sureci ve Operasyon
 
-## Genel Isleyis
+## Repo ve Deploy
 
-Bu dosya, proje yonetimi ve tasarim operasyonunun duzenli ilerlemesi icin ortak referans olarak kullanilir.
+- Repo: `https://github.com/theAPdesign/theapdesign-art`
+- Branch: `main`
+- Domain: `https://theapdesign.art`
+- Build: `npm run build`
+- Output: `dist`
+- Deploy: GitHub push sonrasi Cloudflare tarafinda otomatik yayin
 
-## Asamalar
+## Lokal Is Akisi
 
-1. Brif alma
-2. Hedef ve kapsam netlestirme
-3. Referans ve yon toplama
-4. Ilk tasarim veya wireframe hazirlama
-5. Geri bildirim toplama
-6. Revize ve final
-7. Teslim veya gelistirmeye devir
+```bash
+npm install
+npm run dev
+npm run build
+```
 
-## Iletisim Duzeni
+Vite lokal adresi genelde:
 
-- Tum kararlar yazili olarak not edilir
-- Revize talepleri maddeler halinde toplanir
-- Belirsiz kararlar ayni gun netlestirilir
-- Son onay alinmadan final kabul edilmez
+```text
+http://127.0.0.1:5173/
+```
 
-## Geri Bildirim Kurali
+Port doluysa Vite farkli port secebilir.
 
-- Geri bildirim tek mesaj veya tek dokuman uzerinden toparlanir
-- Celisen yorumlar ayrica isaretlenir
-- Yoruma gore degil hedefe gore karar verilir
+## Git Is Akisi
 
-## Revize Takibi
+1. Degisiklik yap.
+2. Build al.
+3. `git status --short --branch` ile kontrol et.
+4. Anlamli commit mesaji yaz.
+5. `git push origin main` ile deploy'u tetikle.
 
-| Revize no | Konu | Durum | Tarih |
-| --- | --- | --- | --- |
-| R1 |  | Bekliyor |  |
-| R2 |  | Bekliyor |  |
-| R3 |  | Bekliyor |  |
+Son basarili push'larda HTTPS remote kullanildi:
 
-## Dosya ve Asset Duzeni
+```text
+https://theAPdesign@github.com/theAPdesign/theapdesign-art.git
+```
 
-- Logo dosyalari
-- Font referanslari
-- Renk kodlari
-- Kullanilan gorseller
-- Export edilen ekranlar
-- Gelistirmeye verilen varliklar
+## Dikkat Edilecek Dosyalar
 
-## Devir Notlari
+- `src/main.jsx`: sayfa component'leri, Del-It CTA, urun detaylari, legal sayfa icerikleri
+- `vite.config.js`: multi-page build inputlari
+- `public/app-ads.txt`: AdMob dogrulama dosyasi
+- `public/del-it-logo.jpg`: Del-It logo asset'i
+- `public/xox-taktik-arena-logo.png`: XOX Taktik Arena logo asset'i
+- `index.html` ve alt sayfa `index.html` dosyalari: SEO ve analytics metadata
 
-- Tasarim sisteminde kritik kurallar
-- Responsive davranis notlari
-- Hover, aktif ve bos durum davranislari
-- Form, tablo veya kart mantigi
-- Varsa animasyon beklentileri
+## Deploy Sonrasi Kontroller
+
+Website:
+
+```bash
+curl -I https://theapdesign.art/
+```
+
+Del-It:
+
+```bash
+curl -I https://theapdesign.art/del-it/
+```
+
+XOX Taktik Arena:
+
+```bash
+curl -I https://theapdesign.art/xox-taktik-arena/
+```
+
+App ads:
+
+```bash
+curl -i https://theapdesign.art/app-ads.txt
+```
+
+Beklenen app-ads sonucu:
+
+- HTTP 200
+- `content-type: text/plain`
+- Body tek satir:
+
+```text
+google.com, pub-5911219580546074, DIRECT, f08c47fec0942fa0
+```
+
+## GitHub Token Guvenligi
+
+GitHub personal access token sohbet, not veya dosya icinde tutulmamalidir. Token paylasildiysa GitHub uzerinden revoke edilip yenisi uretilmelidir.
+
+Gerekli izin:
+
+- Repository access: `theAPdesign/theapdesign-art`
+- Contents: Read and write
+
+## Cloudflare Notlari
+
+Bu proje Vite static build uretir. `_redirects` dosyasi kullanilmamali. SPA fallback gerekiyorsa Cloudflare Worker Static Assets ayariyla yonetilmeli.
+
+`app-ads.txt` gibi root text dosyalari `public/` klasorunde tutulur ve build sonrasi `dist/` root'una kopyalanir.
+
+## Revize Kaydi
+
+| Tarih | Konu | Durum |
+| --- | --- | --- |
+| 2026-06-19 | Site 3 ana sayfa + Del-It urun sayfasi yapisina tasindi | Tamam |
+| 2026-06-19 | Del-It gizlilik politikasi ve kullanim sartlari eklendi | Tamam |
+| 2026-06-21 | AdMob `app-ads.txt` root seviyesine eklendi | Tamam |
+| 2026-06-23 | Del-It App Store indirme CTA'i eklendi | Tamam |
+| 2026-06-24 | XOX Taktik Arena urun ve yasal sayfalari eklendi | Tamam |

@@ -1,112 +1,134 @@
 # Uygulama Tasarimi Gidisat Dokumani
 
-## Amac
-
-Bu dokuman, mobil veya web tabanli uygulama tasarimi surecinde urun mantigi, ekran akislari ve tasarim ilerleyisini takip etmek icin kullanilir.
-
 ## Proje Bilgileri
 
-- Proje adi:
-- Urun tipi: Mobil / Web Uygulamasi / Dashboard / SaaS
-- Baslangic tarihi:
-- Hedef teslim tarihi:
-- Sorumlu:
-- Durum: Kesif / UX / UI / Test / Revize / Hazir
+- Uygulama adi: Del-It, XOX Taktik Arena
+- Platform: iOS
+- Durum: Del-It App Store'da yayinda, XOX Taktik Arena gelistirme/yayin hazirligi surecinde
+- Del-It App Store linki: `https://apps.apple.com/us/app/del-it/id6780890586`
+- Del-It web urun sayfasi: `https://theapdesign.art/del-it/`
+- XOX Taktik Arena web urun sayfasi: `https://theapdesign.art/xox-taktik-arena/`
+- Iletisim: `theapdesign26@gmail.com`
+- Son guncelleme: 24 Haziran 2026
 
-## Urun Hedefi
+## Urun Konumu
 
-- Hangi problemi cozer:
-- Hedef kullanici:
-- Basari kriteri:
-- Ana kullanim senaryosu:
+Del-It, iPhone galerisindeki fotograf ve videolari hizli incelemeye, gereksiz gorulen ogeleri uygulama icindeki guvenli Del-It cop kutusuna eklemeye ve son onaydan sonra temizlemeye yardimci olur.
 
-## Kapsam
+Del-It bir sistem temizleme araci degildir. Diger uygulama onbelleklerini, mesajlari veya e-postalari temizlemez.
 
-- Ana ekranlar
-- Kullanici akislari
-- Navigasyon yapisi
-- Formlar ve veri girisi
-- Bildirim veya durum mesajlari
-- Bos durum, hata ve yuklenme ekranlari
+XOX Taktik Arena, klasik X-O oyununu 3 tas limiti ve en eski tasin silinmesi mekanigiyle hizlandiran, beraberliksiz kisa turlu bir 3x3 strateji oyunudur.
 
-## Tasarim Gidisati
+## Temel Mesaj
 
-### 1. Urun Kesfi
+- Fotograf ve video inceleme surecini hizlandirir.
+- Gereksiz ogeleri once Del-It cop kutusuna alir.
+- Kalici silme ancak kullanicinin son onayi ile baslatilir.
+- Fotograflar cihazda kalir.
+- Del-It Plus kullanicisina reklam gosterilmez.
+- XOX Taktik Arena'da tek oyunculu yapay zeka modu ve ayni cihazda iki kisilik mod bulunur.
+- XOX'ta reklam kaldirma satin alimi oyun ici avantaj saglamaz; yalnizca reklamlari kaldirir.
 
-- Kullanici tipi
-- Senaryo bazli kullanim
-- Is hedefi
-- Oncelikli ozellikler
+## Web Sitesindeki Urun Anlatimi
 
-Notlar:
+Del-It urun sayfasinda su akista anlatiliyor:
 
--
+1. Hero tanitim
+2. App Store indirme CTA'i
+3. One cikan ozellikler
+4. Modern galeri hissi
+5. FAQ
+6. Gizlilik Politikasi ve Kullanim Sartlari linkleri
+7. Footer ile iletisim
 
-### 2. UX Akislari
+XOX Taktik Arena urun sayfasinda su akista anlatiliyor:
 
-- Giris ve kayit
-- Ana gorev akislari
-- Onboarding
-- Arama, filtreleme veya yonetim panelleri
+1. Neon oyun hissi veren hero tanitim
+2. 3x3 tahta, 3 tas limiti ve en eski tasin silinmesi kurallari
+3. Tek oyunculu ve iki kisilik modlar
+4. Tema, ses ve reklam kaldirma sistemleri
+5. Gizlilik Politikasi ve Kullanim Sartlari linkleri
 
-Notlar:
+## App Store CTA Icerigi
 
--
+Baslik:
 
-### 3. Wireframe
+```text
+Del-It App Store'da yayinda
+```
 
-- Dusuk baglanti seviyesi ekranlar
-- Bilgi hiyerarsisi
-- Ekranlar arasi gecis mantigi
+Alt metin:
 
-Notlar:
+```text
+Fotograflarini hizlica gozden gecir, gereksizleri guvenli Del-It cop kutusuna ekle ve son onayla temizle.
+```
 
--
+Guven metni:
 
-### 4. UI Tasarimi
+```text
+Fotograflarin cihazinda kalir.
+```
 
-- Tasarim sistemi
-- Renk, tipografi ve component mantigi
-- Button, input, kart, modal, tablo ve navigation cozumleri
+Buton:
 
-Notlar:
+```text
+App Store'da Indir
+```
 
--
+Link:
 
-### 5. Test ve Revize
+```text
+https://apps.apple.com/us/app/del-it/id6780890586
+```
 
-- Kullanilabilirlik geri bildirimi
-- Ic ekip notlari
-- Son duzeltmeler
+## Yasal ve Gizlilik Notlari
 
-Notlar:
+Mevcut yasal sayfalar:
 
--
+- Gizlilik Politikasi: `/del-it/gizlilik-politikasi`
+- Kullanim Sartlari: `/del-it/kullanim-sartlari`
+- XOX Gizlilik Politikasi: `/xox-taktik-arena/gizlilik-politikasi`
+- XOX Kullanim Sartlari: `/xox-taktik-arena/kullanim-sartlari`
 
-## Ekran Listesi
+Gizlilik metninde vurgulananlar:
 
-| Ekran | Durum | Not |
-| --- | --- | --- |
-| Login | Bekliyor |  |
-| Dashboard | Bekliyor |  |
-| Listeleme | Bekliyor |  |
-| Detay | Bekliyor |  |
-| Ayarlar | Bekliyor |  |
-| Bos durumlar | Bekliyor |  |
-| Hata durumlari | Bekliyor |  |
+- iOS Fotograflar izni sadece kullanici onayi ile kullanilir.
+- Fotograf ve video icerikleri Del-It sunucularina yuklenmez.
+- Fotograf icerigi reklam hedefleme icin kullanilmaz.
+- AdMob ucretsiz kullanicilar icin reklam gosterebilir.
+- Del-It Plus kullanicisina reklam gosterilmez.
+- Abonelikler Apple StoreKit uzerinden yonetilir.
+
+## AdMob Durumu
+
+AdMob app-ads dogrulamasi icin web root seviyesinde dosya mevcut:
+
+```text
+https://theapdesign.art/app-ads.txt
+```
+
+Icerik:
+
+```text
+google.com, pub-5911219580546074, DIRECT, f08c47fec0942fa0
+```
 
 ## UX Kontrol Noktalari
 
-- Ilk kullanim net mi
-- Ana aksiyonlar kolay bulunuyor mu
-- Mobil ve masaustu davranisi tutarli mi
-- Kritik akislarda gereksiz adim var mi
-- Hata aninda kullanici yonlendiriliyor mu
+| Alan | Durum | Not |
+| --- | --- | --- |
+| App Store indirme aksiyonu | Tamam | Del-It sayfasinda gorunur CTA |
+| Logo kullanimi | Tamam | Mevcut Del-It logo asset'i kullaniliyor |
+| Guven mesaji | Tamam | Fotograflarin cihazda kaldigi belirtiliyor |
+| Privacy linki | Tamam | Del-It sayfasindan erisilebilir |
+| Terms linki | Tamam | Del-It sayfasindan erisilebilir |
+| Mobil uyum | Tamam | CTA karti mobilde dikey hizalaniyor |
+| XOX urun sayfasi | Tamam | Neon hero, kurallar ve modlar mevcut |
+| XOX yasal linkleri | Tamam | Urun sayfasindan erisilebilir |
 
-## Teslim Ciktilari
+## Sonraki Uygulama Notlari
 
-- Kullanici akis semalari
-- Wireframe seti
-- UI ekranlari
-- Component listesi
-- Gelistirme notlari
+- App Store gorselleri veya resmi badge eklenirse CTA karti guncellenebilir.
+- Del-It Plus fiyat/abonelik detaylari degisirse yasal metinler kontrol edilmeli.
+- XOX App Store linki yayinlandiginda urun sayfasina indirme CTA'i eklenmeli.
+- AdMob publisher ID degisirse `public/app-ads.txt` birebir guncellenmeli.
