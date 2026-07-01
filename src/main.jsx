@@ -41,6 +41,8 @@ const gameboxGames = [
 ];
 
 function App() {
+  useScrollReveal();
+
   const path = normalizePath(window.location.pathname);
 
   if (path === '/products') {
@@ -90,12 +92,44 @@ function App() {
   return <HomePage />;
 }
 
+function useScrollReveal() {
+  React.useEffect(() => {
+    const elements = document.querySelectorAll('.scroll-reveal');
+
+    if (!elements.length) {
+      return undefined;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      elements.forEach((element) => element.classList.add('is-visible'));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 },
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+}
+
 function HomePage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
       <Background />
       <Header />
       <HomeHero />
+      <HomeApplications />
       <Footer />
     </main>
   );
@@ -108,6 +142,7 @@ function ProductsPage() {
       <Header />
       <ProductsHero />
       <ProductsGrid />
+      <Footer />
     </main>
   );
 }
@@ -162,7 +197,7 @@ function Header() {
         </a>
         <div className="hidden items-center gap-7 text-sm font-medium text-ink/65 md:flex">
           <a href="/" className="transition hover:text-ink">Anasayfa</a>
-          <a href="/products" className="transition hover:text-ink">Ürünler</a>
+          <a href="/products" className="transition hover:text-ink">Uygulamalar</a>
           <a href="/contact" className="transition hover:text-ink">İletişim</a>
         </div>
       </nav>
@@ -172,28 +207,30 @@ function Header() {
 
 function HomeHero() {
   return (
-    <section className="relative z-10 px-5 pb-14 pt-12 sm:px-8 lg:pt-16">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative z-10 flex min-h-[calc(100svh-5rem)] items-center overflow-hidden px-5 py-10 sm:px-8 lg:py-14">
+      <HomeHeroFloaters />
+      <div className="relative z-10 mx-auto max-w-7xl">
         <div className="mx-auto max-w-4xl text-center">
           <p className="mb-6 inline-flex rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-ink/65 shadow-soft">
             Uygulama stüdyosu
           </p>
-          <h1 className="font-display text-[clamp(3.2rem,7vw,7.4rem)] font-black leading-[0.86] tracking-tight">
-            Ürünlerimiz var,
-            <span className="block bg-gradient-to-r from-sky-500 via-rose-500 to-violet-500 bg-clip-text text-transparent">
-              teması yumuşak.
+          <h1 className="font-display text-[clamp(2.8rem,6vw,6.8rem)] font-black leading-[0.88] tracking-tight">
+            <span className="block whitespace-nowrap">Eğlenceli, Çözümlü</span>
+            <span className="block bg-gradient-to-r from-[#00c8ff] via-[#3f7cff] to-[#9b35ff] bg-clip-text text-transparent">
+              Fikirler
             </span>
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-ink/66 sm:text-xl">
-            Şirket hikayesinden çok ürünlere odaklanan sade bir vitrin. Burada uygulamalarımızı,
-            ürün detaylarını ve iletişim yolunu net biçimde görürsünüz.
+          <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-ink/66 sm:text-xl">
+            Biz, eğlenceli ve ilgi çekici mini oyunlar ile pratik mobil deneyimler geliştirmeye odaklanan
+            yaratıcı bir stüdyoyuz. Yeniliği, yaratıcılığı ve kullanıcı geri bildirimlerini birleştirerek
+            kolay öğrenilen, bırakması zor ve herkes için keyifli uygulamalar tasarlıyoruz.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href="/products"
               className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-black/85"
             >
-              Ürünleri Gör
+              Uygulamaları Gör
               <ArrowRight size={18} />
             </a>
             <a
@@ -203,50 +240,164 @@ function HomeHero() {
               İletişim
             </a>
           </div>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            {['Soft color system', 'Mobile-first', 'Product led'].map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-semibold text-ink/70 shadow-soft"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <div className="mt-12 overflow-hidden rounded-[2.2rem] border border-black/8 bg-white p-4 text-left shadow-glow">
-            <div className="flex min-h-[300px] items-center gap-6 rounded-[1.6rem] bg-gradient-to-br from-sky-100 via-white to-rose-100 p-6 sm:p-8">
-              <img src="/del-it-logo.jpg" alt="Del-it logosu" className="h-24 w-24 rounded-[1.5rem] object-cover shadow-soft sm:h-28 sm:w-28" />
-              <div className="max-w-3xl">
-                <p className="font-display text-3xl font-black sm:text-4xl">Del-it</p>
-                <p className="mt-3 text-base leading-7 text-ink/62 sm:text-lg">
-                  Benzer fotoğrafları bulur, gereksiz kareleri ayıklar, alan kazandırır.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {['Clean gallery', 'Smart review', 'Soft UI'].map((item) => (
-                    <span key={item} className="rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-ink/55">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
   );
 }
 
+function HomeHeroFloaters() {
+  const floaters = [
+    { src: product.logo, alt: 'Del-it uygulama ikonu', className: 'left-[8%] top-[14%] h-16 w-16 sm:h-20 sm:w-20', delay: '0s', fit: 'contain' },
+    { src: xoxProduct.logo, alt: 'XOX Taktik Arena uygulama ikonu', className: 'right-[9%] top-[18%] h-16 w-16 sm:h-20 sm:w-20', delay: '-1.8s', fit: 'contain' },
+    { src: gameboxProduct.logo, alt: 'Gamebox uygulama ikonu', className: 'left-[13%] bottom-[12%] h-14 w-14 sm:h-[4.5rem] sm:w-[4.5rem]', delay: '-3.2s', fit: 'contain' },
+    { src: '/gamebox/memory-flip-cover.png', alt: 'Memory Flip oyun görseli', className: 'right-[17%] bottom-[16%] h-14 w-14 sm:h-16 sm:w-16', delay: '-0.9s', fit: 'cover' },
+    { src: '/gamebox/air-hockey-cover.png', alt: 'Air Hockey oyun görseli', className: 'left-[3%] top-[48%] hidden h-14 w-14 sm:block', delay: '-2.4s', fit: 'cover' },
+    { src: '/gamebox/sky-bird-cover.png', alt: 'Sky Bird oyun görseli', className: 'right-[4%] top-[52%] hidden h-14 w-14 sm:block', delay: '-4.1s', fit: 'cover' },
+    { src: '/gamebox/quick-tap-cover.png', alt: 'Quick Tap oyun görseli', className: 'left-[29%] top-[7%] hidden h-12 w-12 lg:block', delay: '-1.1s', fit: 'cover' },
+    { src: '/gamebox/fruit-catch-cover.png', alt: 'Fruit Catch oyun görseli', className: 'right-[30%] top-[9%] hidden h-12 w-12 lg:block', delay: '-3.7s', fit: 'cover' },
+    { src: '/gamebox/word-hunt-cover.png', alt: 'Word Hunt oyun görseli', className: 'left-[32%] bottom-[5%] hidden h-12 w-12 lg:block', delay: '-2.9s', fit: 'cover' },
+    { src: '/gamebox/numbers-cover.png', alt: 'Numbers oyun görseli', className: 'right-[32%] bottom-[6%] hidden h-12 w-12 lg:block', delay: '-4.8s', fit: 'cover' },
+  ];
+
+  return (
+    <div className="pointer-events-none absolute inset-0 z-0 opacity-75 [mask-image:radial-gradient(circle_at_center,transparent_0%,black_58%)]">
+      {floaters.map((item) => (
+        <span
+          key={item.alt}
+          className={`home-floater absolute overflow-hidden rounded-[1.1rem] border border-black/8 bg-white/85 p-2 shadow-soft backdrop-blur ${item.className}`}
+          style={{ animationDelay: item.delay }}
+        >
+          <span className="relative block aspect-square h-full w-full overflow-hidden rounded-[0.85rem] bg-white">
+            <img
+              src={item.src}
+              alt={item.alt}
+              className={`absolute inset-0 h-full w-full ${item.fit === 'cover' ? 'object-cover' : 'object-contain'}`}
+            />
+          </span>
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function HomeApplications() {
+  return (
+    <section className="relative z-10 px-5 py-12 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="scroll-reveal mx-auto mb-8 max-w-3xl text-center">
+          <div>
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">Uygulamalarımız</p>
+            <h2 className="font-display text-4xl font-black leading-none sm:text-5xl">
+              Her uygulama kendi <span className="bg-gradient-to-r from-[#00c8ff] via-[#3f7cff] to-[#9b35ff] bg-clip-text text-transparent">küçük dünyasını</span> taşır.
+            </h2>
+          </div>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-ink/62">
+            Kısa sürede anlaşılır, tekrar açıldığında yine keyif verir. Oyunlardan pratik araçlara kadar
+            ürünleri sade, canlı ve mobil öncelikli tasarlıyoruz.
+          </p>
+        </div>
+        <HomeApplicationShowcase />
+      </div>
+    </section>
+  );
+}
+
+function HomeApplicationShowcase() {
+  const homeApps = [
+    {
+      href: '/del-it',
+      logo: product.logo,
+      logoAlt: 'Del-it uygulama logosu',
+      title: 'Del-it',
+      status: 'App Store’da',
+      description: 'Fotoğraflarını hızlıca gözden geçir, gereksizleri güvenli Del-It çöp kutusuna ekle.',
+      appStoreUrl: 'https://apps.apple.com/us/app/del-it/id6780890586',
+      background: 'from-pink-100 via-white to-violet-100',
+    },
+    {
+      href: '/xox-taktik-arena',
+      logo: xoxProduct.logo,
+      logoAlt: 'XOX Taktik Arena logosu',
+      title: 'XOX Taktik Arena',
+      status: 'App Store’da',
+      description: '3 taş limitiyle hızlanan, beraberliksiz ve kısa turlu strateji oyunu.',
+      appStoreUrl: 'https://apps.apple.com/us/app/xox-arena/id6783572878',
+      background: 'from-sky-100 via-white to-fuchsia-100',
+    },
+    {
+      href: '/gamebox',
+      logo: gameboxProduct.logo,
+      logoAlt: 'Gamebox logosu',
+      title: 'Gamebox',
+      status: 'Yakında',
+      description: 'Sky Bird, Air Hockey, Peak, Memory Flip ve daha fazlasını taşıyan mini oyun kutusu.',
+      appStoreUrl: '',
+      background: 'from-emerald-100 via-white to-amber-100',
+    },
+  ];
+
+  return (
+    <div className="grid gap-5 lg:grid-cols-3">
+      {homeApps.map((app, index) => (
+        <HomeAppFeatureCard key={app.title} {...app} delay={`${index * 120}ms`} />
+      ))}
+    </div>
+  );
+}
+
+function HomeAppFeatureCard({ href, logo, logoAlt, title, status, description, appStoreUrl, background, delay = '0ms' }) {
+  return (
+    <article className="scroll-reveal group flex h-full flex-col overflow-hidden rounded-[2rem] border border-black/8 bg-white p-4 shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-glow" style={{ transitionDelay: delay }}>
+      <div className={`grid min-h-[14rem] place-items-center rounded-[1.5rem] bg-gradient-to-br ${background} p-8`}>
+        <img src={logo} alt={logoAlt} className="h-28 w-28 object-contain transition duration-300 group-hover:scale-105" />
+      </div>
+      <div className="flex flex-1 flex-col px-2 pb-2 pt-6">
+        <div className="flex items-start justify-between gap-4">
+          <h3 className="font-display text-3xl font-black leading-none">{title}</h3>
+          <span className="shrink-0 rounded-full border border-black/8 bg-[#fbfaf7] px-3 py-1.5 text-xs font-bold text-ink/55">
+            {status}
+          </span>
+        </div>
+        <p className="mt-4 min-h-[5.25rem] text-sm leading-6 text-ink/62">{description}</p>
+        <div className="mt-auto grid gap-3 pt-6">
+          <a href={href} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#fbfaf7]">
+            Daha fazla
+            <ChevronRight size={17} />
+          </a>
+          {appStoreUrl ? (
+            <a
+              href={appStoreUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${title} uygulamasını App Store’da aç`}
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-black px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85"
+            >
+              App Store
+              <ArrowRight size={16} />
+            </a>
+          ) : (
+            <span className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-black/8 bg-[#fbfaf7] px-5 py-3 text-sm font-bold text-ink/55">
+              Yakında
+              <Sparkles size={16} />
+            </span>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function ProductsHero() {
   return (
-    <section className="relative z-10 px-5 pb-8 pt-12 sm:px-8 lg:pt-16">
+    <section className="relative z-10 px-5 pb-6 pt-12 sm:px-8 lg:pt-14">
       <div className="mx-auto max-w-7xl">
-        <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">Ürünler</p>
-        <h1 className="font-display text-[clamp(3rem,7vw,7rem)] font-black leading-[0.92]">
-          Uygulamaları burada gösteriyoruz.
+        <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">Uygulamalar</p>
+        <h1 className="font-display text-[clamp(2.8rem,5vw,5rem)] font-black leading-[0.95]">
+          Uygulamalar
         </h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-ink/62">
-          Del-it, XOX Taktik Arena ve Gamebox burada. Kartlardan ürünlerin iç sayfalarına geçebilirsin.
+        <p className="mt-4 max-w-3xl text-lg leading-8 text-ink/62">
+          Del-it, XOX Taktik Arena ve Gamebox burada. Kartlardan uygulamaların iç sayfalarına geçebilirsin.
         </p>
       </div>
     </section>
@@ -255,79 +406,113 @@ function ProductsHero() {
 
 function ProductsGrid() {
   return (
-    <section className="relative z-10 px-5 py-10 sm:px-8">
-      <div className="mx-auto grid max-w-7xl gap-5">
-        <ProductCard
-          href="/del-it"
-          logo={product.logo}
-          logoAlt="Del-it logosu"
-          eyebrow="Del-it"
-          title="Fotoğraf temizliği"
-          description="Benzer fotoğrafları bulur, gereksiz kareleri ayıklamayı kolaylaştırır ve depolama alanı kazandırır."
-          tags={['Benzer kare tarama', 'Alan kazanımı', 'Akıllı seçim önerileri']}
-          tone="soft"
-        />
-        <ProductCard
-          href="/xox-taktik-arena"
-          logo={xoxProduct.logo}
-          logoAlt="XOX Taktik Arena logosu"
-          eyebrow="XOX Taktik Arena"
-          title="Beraberliksiz 3x3 strateji"
-          description="Klasik X-O oyununu 3 taş limiti, eski taş silinme mekaniği ve hızlı skor hedefleriyle daha taktik hale getirir."
-          tags={['Tek oyunculu', 'İki kişilik', 'Neon temalar']}
-          tone="neon"
-        />
-        <ProductCard
-          href="/gamebox"
-          logo={gameboxProduct.logo}
-          logoAlt="Gamebox logosu"
-          eyebrow="Gamebox"
-          title="Mini oyun kutusu"
-          description="Tek uygulama içinde kısa turlu, renkli ve farklı türlerde mini oyunları toplayan pastel arcade merkezi."
-          tags={['11 mini oyun', 'Coin sistemi', 'Yakında App Store']}
-          tone="gamebox"
-        />
+    <section className="relative z-10 px-5 py-8 sm:px-8 lg:pb-12">
+      <div className="mx-auto max-w-7xl">
+        <HomeApplicationShowcase />
       </div>
     </section>
   );
 }
 
-function ProductCard({ href, logo, logoAlt, eyebrow, title, description, tags, tone }) {
-  const mediaClass = {
-    gamebox: 'bg-gradient-to-br from-[#00cb80] via-[#ffb400] to-[#ff003c]',
-    neon: 'bg-gradient-to-br from-[#0b1025] via-[#12183a] to-[#ff4fc8]',
-    soft: 'bg-gradient-to-br from-sky-100 via-white to-rose-100',
-  }[tone] || 'bg-gradient-to-br from-sky-100 via-white to-rose-100';
+function ApplicationsGrid() {
+  const productCards = [
+    {
+      href: '/del-it',
+      logo: product.logo,
+      logoAlt: 'Del-it logosu',
+      eyebrow: 'Del-it',
+      title: 'Fotoğraf temizliği',
+      description: 'Benzer fotoğrafları bulur, gereksiz kareleri ayıklamayı kolaylaştırır ve depolama alanı kazandırır.',
+      appStoreUrl: 'https://apps.apple.com/us/app/del-it/id6780890586',
+      tone: 'soft',
+    },
+    {
+      href: '/xox-taktik-arena',
+      logo: xoxProduct.logo,
+      logoAlt: 'XOX Taktik Arena logosu',
+      eyebrow: 'XOX Taktik Arena',
+      title: 'Beraberliksiz 3x3 strateji',
+      description: 'Klasik X-O oyununu 3 taş limiti, eski taş silinme mekaniği ve hızlı skor hedefleriyle daha taktik hale getirir.',
+      appStoreUrl: 'https://apps.apple.com/us/app/xox-arena/id6783572878',
+      tone: 'neon',
+    },
+    {
+      href: '/gamebox',
+      logo: gameboxProduct.logo,
+      logoAlt: 'Gamebox logosu',
+      eyebrow: 'Gamebox',
+      title: 'Mini oyun kutusu',
+      description: 'Tek uygulama içinde kısa turlu, renkli ve farklı türlerde mini oyunları toplayan pastel arcade merkezi.',
+      appStoreUrl: '',
+      tone: 'gamebox',
+    },
+  ];
 
   return (
-    <a
-      href={href}
-      className="group overflow-hidden rounded-[1.8rem] border border-black/8 bg-white p-4 shadow-soft transition duration-300 hover:-translate-y-2 hover:shadow-glow"
-    >
-      <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div className={`rounded-[1.4rem] p-5 ${mediaClass}`}>
-          <div className="grid aspect-[1.45] place-items-center rounded-[1.2rem] border border-white/20 bg-white p-5">
-            <img src={logo} alt={logoAlt} className="max-h-full max-w-full rounded-[1rem] object-contain" />
-          </div>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      {productCards.map((item, index) => (
+        <ProductCard
+          key={item.href}
+          {...item}
+          className={index === 0 ? 'xl:col-start-2' : ''}
+        />
+      ))}
+    </div>
+  );
+}
+
+function ProductCard({ href, logo, logoAlt, eyebrow, title, description, appStoreUrl, tone, className = '' }) {
+  const mediaClass = {
+    gamebox: 'bg-white',
+    neon: 'bg-white',
+    soft: 'bg-white',
+  }[tone] || 'bg-white';
+
+  return (
+    <article className={`group flex min-h-[24rem] flex-col overflow-hidden rounded-[1.5rem] border border-black/8 bg-white p-3 shadow-soft transition duration-300 hover:-translate-y-2 hover:shadow-glow ${className}`}>
+      <div className="flex h-full flex-col">
+        <div className={`grid aspect-square place-items-center rounded-[1.2rem] p-5 ${mediaClass}`}>
+          <img src={logo} alt={logoAlt} className="max-h-full max-w-full object-contain" />
         </div>
-        <div className="px-2 pb-2">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-ink/45">{eyebrow}</p>
-          <h2 className="mt-4 font-display text-4xl font-black">{title}</h2>
-          <p className="mt-4 max-w-xl text-base leading-7 text-ink/62">{description}</p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {tags.map((item) => (
-              <span key={item} className="rounded-full border border-black/8 bg-[#fbfaf7] px-3 py-2 text-xs font-semibold text-ink/65">
-                {item}
-              </span>
-            ))}
-          </div>
-          <div className="mt-7 inline-flex items-center gap-2 font-semibold text-ink">
-            İç sayfayı aç
-            <ChevronRight size={18} />
+        <div className="flex flex-1 flex-col px-1 pb-2 pt-5">
+          <p className="text-[0.72rem] font-bold uppercase tracking-[0.24em] text-ink/45">{eyebrow}</p>
+          <h2 className="mt-3 font-display text-2xl font-black leading-tight">{title}</h2>
+          <p className="mt-3 line-clamp-3 text-sm leading-6 text-ink/62">{description}</p>
+          <div className="mt-auto space-y-3 pt-6">
+            <a
+              href={href}
+              className="flex min-h-12 items-center justify-center gap-2 rounded-full border border-black/10 bg-white px-4 py-3 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#fbfaf7]"
+            >
+              Daha fazla
+              <ChevronRight size={17} />
+            </a>
+            {appStoreUrl ? (
+              <a
+                href={appStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${eyebrow} uygulamasını App Store’da aç`}
+                className="flex min-h-14 items-center gap-3 rounded-[0.9rem] bg-black px-4 py-3 text-white transition hover:-translate-y-0.5 hover:bg-black/85"
+              >
+                <span className="text-3xl leading-none" aria-hidden="true"></span>
+                <span>
+                  <span className="block text-xl font-semibold leading-none tracking-tight">App Store’dan</span>
+                  <span className="block text-base font-semibold leading-tight">indirin</span>
+                </span>
+              </a>
+            ) : (
+              <div className="flex min-h-14 items-center justify-between rounded-[1rem] border border-black/8 bg-[#fbfaf7] px-4 py-3 text-ink/62">
+                <span>
+                  <span className="block text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-ink/38">App Store</span>
+                  <span className="block text-sm font-black">Yakında</span>
+                </span>
+                <Sparkles size={17} />
+              </div>
+            )}
           </div>
         </div>
       </div>
-    </a>
+    </article>
   );
 }
 
@@ -1022,32 +1207,48 @@ function LegalContent({ sections }) {
 
 function Footer() {
   return (
-    <footer className="relative z-10 px-5 py-16 sm:px-8">
-      <div className="mx-auto max-w-5xl rounded-[2rem] border border-black/8 bg-white p-7 shadow-soft sm:p-10">
-        <div className="mx-auto grid max-w-3xl gap-8 text-center">
+    <footer className="scroll-reveal relative z-10 px-5 pb-8 pt-14 sm:px-8">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-soft">
+        <div className="grid gap-8 p-7 sm:p-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
           <div>
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">İletişim</p>
-            <h2 className="font-display text-[clamp(2.6rem,6vw,6rem)] font-black leading-[0.92]">
-              Yeni ürünler için konuşalım.
+            <a href="/" className="inline-flex items-center gap-3">
+              <span className="grid h-12 w-12 place-items-center rounded-full border border-black/8 bg-white shadow-soft">
+                <img src="/ap-logo.svg" alt="AP Design logosu" className="h-8 w-8 object-contain" />
+              </span>
+              <span className="font-display text-sm font-semibold uppercase tracking-[0.28em] text-ink">
+                AP Design
+              </span>
+            </a>
+            <h2 className="mt-7 font-display text-4xl font-black leading-none sm:text-5xl">
+              Kısa, eğlenceli ve tekrar oynanabilir deneyimler.
             </h2>
+            <p className="mt-5 max-w-xl text-base leading-7 text-ink/62">
+              Mobil uygulamalar ve mini oyunlar geliştiriyoruz. Amacımız öğrenmesi kolay, geri dönmesi keyifli ürünler üretmek.
+            </p>
           </div>
-          <div className="space-y-4">
+
+          <div className="grid gap-5 lg:justify-items-end">
+            <p className="text-sm font-bold uppercase tracking-[0.28em] text-ink/45">İletişim</p>
             <a
               href="mailto:theapdesign26@gmail.com"
-              className="mx-auto flex max-w-[34rem] items-center justify-between rounded-full border border-black/8 bg-[#fbfaf7] px-5 py-4 font-semibold text-ink transition hover:bg-white"
+              className="flex w-full items-center justify-between rounded-[1.2rem] border border-black/8 bg-[#fbfaf7] px-5 py-4 font-semibold text-ink transition hover:bg-white lg:max-w-md"
             >
-              <span className="flex items-center gap-3">
-                <Mail size={19} />
-                theapdesign26@gmail.com
+              <span className="flex min-w-0 items-center gap-3">
+                <Mail size={19} className="shrink-0" />
+                <span className="truncate">theapdesign26@gmail.com</span>
               </span>
-              <ArrowRight size={18} />
+              <ArrowRight size={18} className="shrink-0" />
             </a>
-            <div className="flex flex-wrap justify-center gap-3 text-sm font-semibold text-ink/70">
+            <div className="flex flex-wrap gap-2 text-sm font-semibold text-ink/70 lg:justify-end">
               <a href="/" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">Anasayfa</a>
-              <a href="/products" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">Ürünler</a>
+              <a href="/products" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">Uygulamalar</a>
               <a href="/contact" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">İletişim</a>
             </div>
           </div>
+        </div>
+        <div className="flex flex-col gap-2 border-t border-black/8 px-7 py-5 text-xs font-semibold uppercase tracking-[0.18em] text-ink/38 sm:flex-row sm:items-center sm:justify-between sm:px-10">
+          <span>AP Design</span>
+          <span>theapdesign.art</span>
         </div>
       </div>
     </footer>
