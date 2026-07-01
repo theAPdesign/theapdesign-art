@@ -7,6 +7,7 @@
 - [x] Logo guncel AP logosu ile kullaniliyor
 - [x] Del-It logo asset'i mevcut
 - [x] XOX Taktik Arena logo asset'i mevcut
+- [x] Gamebox logo ve oyun kapak asset'leri mevcut
 - [x] Tum gorunen ana navigasyon metinleri Turkce
 - [x] Iletisim maili guncel: `theapdesign26@gmail.com`
 - [x] Google Analytics etiketi mevcut: `G-W219ZBJWH0`
@@ -18,11 +19,14 @@
 - [x] Urunler sayfasi mevcut
 - [x] Del-It urun sayfasi mevcut
 - [x] XOX Taktik Arena urun sayfasi mevcut
+- [x] Gamebox urun sayfasi mevcut
 - [x] Iletisim sayfasi mevcut
 - [x] Del-It gizlilik politikasi mevcut
 - [x] Del-It kullanim sartlari mevcut
 - [x] XOX gizlilik politikasi mevcut
 - [x] XOX kullanim sartlari mevcut
+- [x] Gamebox gizlilik politikasi mevcut
+- [x] Gamebox kullanim sartlari mevcut
 - [x] Contact gorunen metinleri `Iletisim` olarak guncellendi
 - [x] Iletisim sayfasinda footer yok
 
@@ -46,6 +50,15 @@
 - [x] 3x3 tahta ve 3 tas limiti anlatiliyor
 - [x] En eski tasin otomatik silinmesi mekanigi anlatiliyor
 - [x] Tek oyunculu ve iki kisilik modlar mevcut
+- [x] Gizlilik Politikasi ve Kullanim Sartlari linkleri urun sayfasinda mevcut
+
+## Gamebox Urun Sayfasi
+
+- [x] Gamebox logosu gorunuyor
+- [x] Urun tanitimi mevcut
+- [x] 11 mini oyun kapagi kare mockup grid olarak gosteriliyor
+- [x] Coin, StoreKit, reklam ve ayar sistemleri anlatiliyor
+- [x] Gamebox henuz App Store'da yayinda degil bilgisine uygun yumuşak dil kullaniliyor
 - [x] Gizlilik Politikasi ve Kullanim Sartlari linkleri urun sayfasinda mevcut
 
 ## AdMob Kontrolu
@@ -72,6 +85,7 @@ google.com, pub-5911219580546074, DIRECT, f08c47fec0942fa0
 - [x] Iletisim sayfasi title ve description mevcut
 - [x] Del-It sayfasi title ve description mevcut
 - [x] XOX Taktik Arena sayfasi title ve description mevcut
+- [x] Gamebox sayfasi title ve description mevcut
 - [x] Gizlilik Politikasi metadata mevcut
 - [x] Kullanim Sartlari metadata mevcut
 - [x] Open Graph ve Twitter Card etiketleri mevcut
@@ -92,5 +106,6 @@ curl -i https://theapdesign.art/app-ads.txt
 ## Bekleyen / Sonraki Isler
 
 - [x] XOX Taktik Arena yeni urun olarak eklendi
+- [x] Gamebox yeni urun olarak eklendi
 - [ ] Del-It App Store badge'i resmi Apple badge ile degistirilebilir
 - [ ] App Store urun metinleri degisirse Del-It CTA ve yasal metinler tekrar kontrol edilecek

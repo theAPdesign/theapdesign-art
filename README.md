@@ -5,9 +5,10 @@
 ## Mevcut Yapi
 
 - Ana sayfa: urun odakli karsilama, urun tanitim kartlari ve iletisim footer'i
-- Urunler: Del-It ve XOX Taktik Arena urun listesi
+- Urunler: Del-It, XOX Taktik Arena ve Gamebox urun listesi
 - Del-It: urun detay sayfasi, App Store indirme CTA'i, ozellikler, galeri, FAQ, gizlilik politikasi ve kullanim sartlari linkleri
 - XOX Taktik Arena: urun detay sayfasi, oyun kurallari, modlar, gizlilik politikasi ve kullanim sartlari linkleri
+- Gamebox: urun detay sayfasi, mini oyun vitrini, sistem ozeti, gizlilik politikasi ve kullanim sartlari linkleri
 - Iletisim: footer olmayan iletisim formu sayfasi
 - AdMob dogrulama: root seviyesinde `app-ads.txt`
 
@@ -21,6 +22,9 @@
 - XOX Taktik Arena urun sayfasi: `https://theapdesign.art/xox-taktik-arena/`
 - XOX Gizlilik Politikasi: `https://theapdesign.art/xox-taktik-arena/gizlilik-politikasi`
 - XOX Kullanim Sartlari: `https://theapdesign.art/xox-taktik-arena/kullanim-sartlari`
+- Gamebox urun sayfasi: `https://theapdesign.art/gamebox/`
+- Gamebox Gizlilik Politikasi: `https://theapdesign.art/gamebox/gizlilik-politikasi`
+- Gamebox Kullanim Sartlari: `https://theapdesign.art/gamebox/kullanim-sartlari`
 - AdMob app-ads: `https://theapdesign.art/app-ads.txt`
 
 ## Teknoloji
@@ -57,11 +61,14 @@ Production ciktisi `dist/` klasorunde olusur.
 - `vite.config.js`: multi-page Vite build girisleri
 - `public/del-it-logo.jpg`: Del-It logo asset'i
 - `public/xox-taktik-arena-logo.png`: XOX Taktik Arena logo asset'i
+- `public/gamebox/`: Gamebox logo ve mini oyun kapak asset'leri
 - `public/app-ads.txt`: AdMob app-ads dogrulama dosyasi
 - `del-it/gizlilik-politikasi/index.html`: Del-It gizlilik politikasi entry dosyasi
 - `del-it/kullanim-sartlari/index.html`: Del-It kullanim sartlari entry dosyasi
 - `xox-taktik-arena/gizlilik-politikasi/index.html`: XOX gizlilik politikasi entry dosyasi
 - `xox-taktik-arena/kullanim-sartlari/index.html`: XOX kullanim sartlari entry dosyasi
+- `gamebox/gizlilik-politikasi/index.html`: Gamebox gizlilik politikasi entry dosyasi
+- `gamebox/kullanim-sartlari/index.html`: Gamebox kullanim sartlari entry dosyasi
 
 ## AdMob app-ads.txt
 

@@ -7,7 +7,7 @@
 - Repo: `theAPdesign/theapdesign-art`
 - Teknoloji: React + Vite + Tailwind CSS
 - Durum: Yayinda, urun odakli yapi aktif
-- Son guncelleme: 24 Haziran 2026
+- Son guncelleme: 1 Temmuz 2026
 
 ## Amac
 
@@ -16,7 +16,7 @@ Site artik hizmet anlatan bir ajans sayfasi degil; The AP Design tarafindan geli
 Ana hedefler:
 
 - Uygulamalari net sekilde gostermek
-- Del-It ve XOX Taktik Arena icin guven veren urun sayfalari sunmak
+- Del-It, XOX Taktik Arena ve Gamebox icin guven veren urun sayfalari sunmak
 - App Store indirme aksiyonunu gorunur yapmak
 - Gizlilik politikasi, kullanim sartlari ve AdMob gereksinimlerini karsilamak
 - Mobilde temiz, masaustunde dengeli bir beyaz tema korumak
@@ -26,14 +26,17 @@ Ana hedefler:
 | Sayfa | URL | Durum | Not |
 | --- | --- | --- | --- |
 | Ana sayfa | `/` | Aktif | Ortali hero, urun tanitim alani, iletisim footer'i |
-| Urunler | `/products` | Aktif | Del-It ve XOX Taktik Arena kartlari |
+| Urunler | `/products` | Aktif | Del-It, XOX Taktik Arena ve Gamebox kartlari |
 | Del-It | `/del-it/` | Aktif | Hero, App Store CTA, ozellikler, galeri, FAQ, yasal linkler |
 | XOX Taktik Arena | `/xox-taktik-arena/` | Aktif | Hero, oyun kurallari, modlar, yasal linkler |
+| Gamebox | `/gamebox/` | Aktif | Hero, mini oyun vitrini, sistem kartlari, yasal linkler |
 | Iletisim | `/contact` | Aktif | Footer yok, dogrudan form akisi |
 | Del-It Gizlilik Politikasi | `/del-it/gizlilik-politikasi` | Aktif | Del-It iOS veri/reklam politikasi |
 | Del-It Kullanim Sartlari | `/del-it/kullanim-sartlari` | Aktif | Del-It kullanim sartlari |
 | XOX Gizlilik Politikasi | `/xox-taktik-arena/gizlilik-politikasi` | Aktif | XOX reklam, consent ve satin alma politikasi |
 | XOX Kullanim Sartlari | `/xox-taktik-arena/kullanim-sartlari` | Aktif | XOX oyun, reklam ve satin alma sartlari |
+| Gamebox Gizlilik Politikasi | `/gamebox/gizlilik-politikasi` | Aktif | Gamebox coin, reklam, StoreKit ve ayar politikasi |
+| Gamebox Kullanim Sartlari | `/gamebox/kullanim-sartlari` | Aktif | Gamebox oyun, coin, reklam ve satin alma sartlari |
 | app-ads.txt | `/app-ads.txt` | Aktif | AdMob dogrulama dosyasi |
 
 ## Tasarim Kararlari
@@ -44,6 +47,7 @@ Ana hedefler:
 - Ana sayfa hero: ustte ortali baslik ve alt metin; altinda Del-It icin genis yatay urun alani
 - Del-It urun sayfasi: App Store CTA hero yakininda gorunur
 - XOX Taktik Arena sayfasi: neon oyun hissi, 3 tas limiti ve mod anlatimi
+- Gamebox sayfasi: pastel arcade hissi, kare oyun kapak grid'i ve App Store oncesi yasal hazirlik
 - Iletisim sayfasi: footer olmadan sade form deneyimi
 - Yasal linkler: ilgili urun sayfasinda icerik ile footer arasinda konumlanir
 
@@ -74,6 +78,9 @@ Onemli entry dosyalari:
 - `xox-taktik-arena/index.html`
 - `xox-taktik-arena/gizlilik-politikasi/index.html`
 - `xox-taktik-arena/kullanim-sartlari/index.html`
+- `gamebox/index.html`
+- `gamebox/gizlilik-politikasi/index.html`
+- `gamebox/kullanim-sartlari/index.html`
 
 ## AdMob app-ads.txt
 
@@ -103,8 +110,10 @@ Canli kontrol sonucu:
 | Del-It logo asset'i | Tamam | `public/del-it-logo.jpg` |
 | App Store CTA | Tamam | Del-It sayfasinda hero altinda |
 | XOX urun sayfasi | Tamam | Oyun kurallari ve modlar eklendi |
+| Gamebox urun sayfasi | Tamam | Mini oyun kapak grid'i ve sistem kartlari eklendi |
 | Privacy / Terms | Tamam | Del-It sayfasinda FAQ ile footer arasinda linkli |
 | XOX Privacy / Terms | Tamam | XOX sayfasinda legal linkler mevcut |
+| Gamebox Privacy / Terms | Tamam | Gamebox sayfasinda legal linkler mevcut |
 | Iletisim maili | Tamam | `theapdesign26@gmail.com` |
 | Google Analytics | Tamam | `G-W219ZBJWH0` |
 | AdMob app-ads.txt | Tamam | Root seviyesinde text/plain |

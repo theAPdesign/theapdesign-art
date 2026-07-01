@@ -46,6 +46,7 @@ https://theAPdesign@github.com/theAPdesign/theapdesign-art.git
 - `public/app-ads.txt`: AdMob dogrulama dosyasi
 - `public/del-it-logo.jpg`: Del-It logo asset'i
 - `public/xox-taktik-arena-logo.png`: XOX Taktik Arena logo asset'i
+- `public/gamebox/`: Gamebox logo ve mini oyun kapak asset'leri
 - `index.html` ve alt sayfa `index.html` dosyalari: SEO ve analytics metadata
 
 ## Deploy Sonrasi Kontroller
@@ -66,6 +67,12 @@ XOX Taktik Arena:
 
 ```bash
 curl -I https://theapdesign.art/xox-taktik-arena/
+```
+
+Gamebox:
+
+```bash
+curl -I https://theapdesign.art/gamebox/
 ```
 
 App ads:
@@ -108,3 +115,4 @@ Bu proje Vite static build uretir. `_redirects` dosyasi kullanilmamali. SPA fall
 | 2026-06-21 | AdMob `app-ads.txt` root seviyesine eklendi | Tamam |
 | 2026-06-23 | Del-It App Store indirme CTA'i eklendi | Tamam |
 | 2026-06-24 | XOX Taktik Arena urun ve yasal sayfalari eklendi | Tamam |
+| 2026-07-01 | Gamebox urun, mini oyun vitrini ve yasal sayfalari eklendi | Tamam |

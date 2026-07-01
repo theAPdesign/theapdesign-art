@@ -17,6 +17,28 @@ const xoxProduct = {
   logo: '/xox-taktik-arena-logo.png',
 };
 
+const gameboxProduct = {
+  title: 'Gamebox',
+  description: 'Tek uygulama içinde Sky Bird, Air Hockey, Peak, Memory Flip ve daha fazlasını taşıyan pastel mini oyun kutusu.',
+  summary: 'Mini oyunlar, coin sistemi, ayarlar ve StoreKit altyapısıyla oyun merkezi.',
+  logo: '/gamebox/gamebox-logo-light.svg',
+  darkLogo: '/gamebox/gamebox-logo-dark.svg',
+};
+
+const gameboxGames = [
+  ['Sky Bird', '/gamebox/sky-bird-cover.png', 'Refleks ve ritim odaklı uçuş oyunu'],
+  ['Air Hockey', '/gamebox/air-hockey-cover.png', 'Aynı cihazda hızlı arcade düellosu'],
+  ['Peak', '/gamebox/peak-cover.png', 'Zamanlama ve hamle hesabı isteyen tırmanış'],
+  ['Slider Puzzle', '/gamebox/slider-puzzle-cover.png', 'Klasik sürükle-bırak bulmaca'],
+  ['Memory Flip', '/gamebox/memory-flip-cover.png', 'Eşleşen kartları hatırlama oyunu'],
+  ['Quick Tap', '/gamebox/quick-tap-cover.png', 'Hızlı tepki ve doğru hedef seçimi'],
+  ['Numbers', '/gamebox/numbers-cover.png', 'Sayıları birleştiren sakin zeka oyunu'],
+  ['Word Hunt', '/gamebox/word-hunt-cover.png', 'Harflerden kelime avı'],
+  ['Sand Party', '/gamebox/sand-party-cover.png', 'Renkli blok ve kum hissi'],
+  ['Chess', '/gamebox/chess-cover.png', 'Klasik strateji molası'],
+  ['Fruit Catch', '/gamebox/fruit-catch-cover.png', 'Meyveleri yakala, bombalardan kaç'],
+];
+
 function App() {
   const path = normalizePath(window.location.pathname);
 
@@ -50,6 +72,18 @@ function App() {
 
   if (path === '/xox-taktik-arena/kullanim-sartlari') {
     return <XoxTermsPage />;
+  }
+
+  if (path === '/gamebox') {
+    return <GameboxPage />;
+  }
+
+  if (path === '/gamebox/gizlilik-politikasi') {
+    return <GameboxPrivacyPage />;
+  }
+
+  if (path === '/gamebox/kullanim-sartlari') {
+    return <GameboxTermsPage />;
   }
 
   return <HomePage />;
@@ -211,7 +245,7 @@ function ProductsHero() {
           Uygulamaları burada gösteriyoruz.
         </h1>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-ink/62">
-          Del-it ve XOX Taktik Arena burada. Kartlardan ürünlerin iç sayfalarına geçebilirsin.
+          Del-it, XOX Taktik Arena ve Gamebox burada. Kartlardan ürünlerin iç sayfalarına geçebilirsin.
         </p>
       </div>
     </section>
@@ -242,15 +276,27 @@ function ProductsGrid() {
           tags={['Tek oyunculu', 'İki kişilik', 'Neon temalar']}
           tone="neon"
         />
+        <ProductCard
+          href="/gamebox"
+          logo={gameboxProduct.logo}
+          logoAlt="Gamebox logosu"
+          eyebrow="Gamebox"
+          title="Mini oyun kutusu"
+          description="Tek uygulama içinde kısa turlu, renkli ve farklı türlerde mini oyunları toplayan pastel arcade merkezi."
+          tags={['11 mini oyun', 'Coin sistemi', 'Yakında App Store']}
+          tone="gamebox"
+        />
       </div>
     </section>
   );
 }
 
 function ProductCard({ href, logo, logoAlt, eyebrow, title, description, tags, tone }) {
-  const mediaClass = tone === 'neon'
-    ? 'bg-gradient-to-br from-[#0b1025] via-[#12183a] to-[#ff4fc8]'
-    : 'bg-gradient-to-br from-sky-100 via-white to-rose-100';
+  const mediaClass = {
+    gamebox: 'bg-gradient-to-br from-[#00cb80] via-[#ffb400] to-[#ff003c]',
+    neon: 'bg-gradient-to-br from-[#0b1025] via-[#12183a] to-[#ff4fc8]',
+    soft: 'bg-gradient-to-br from-sky-100 via-white to-rose-100',
+  }[tone] || 'bg-gradient-to-br from-sky-100 via-white to-rose-100';
 
   return (
     <a
@@ -761,6 +807,187 @@ function XoxTermsPage() {
   );
 }
 
+function GameboxPage() {
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <GameboxHero />
+      <GameboxGames />
+      <GameboxSystems />
+      <GameboxLegalLinks />
+      <Footer />
+    </main>
+  );
+}
+
+function GameboxHero() {
+  return (
+    <section className="relative z-10 px-5 pb-10 pt-12 sm:px-8 lg:pt-16">
+      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+        <div className="max-w-3xl">
+          <p className="mb-5 inline-flex rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-ink/55 shadow-soft">
+            Gamebox
+          </p>
+          <h1 className="font-display text-[clamp(3.2rem,7vw,7.8rem)] font-black leading-[0.9]">
+            Tek kutuda
+            <span className="block bg-gradient-to-r from-emerald-500 via-amber-400 to-rose-500 bg-clip-text text-transparent">
+              mini oyunlar.
+            </span>
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/65">
+            Gamebox, iOS için hazırlanan pastel arcade hissinde bir mini oyun merkezidir. Kısa turlu oyunlar,
+            coin sistemi, ayarlar, ödüllü reklamlar ve uygulama içi satın alma altyapısı tek uygulamada buluşur.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {['11 mini oyun', 'Coin sistemi', 'Türkçe / İngilizce', 'App Store hazırlığında'].map((item) => (
+              <span key={item} className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-semibold text-ink/65 shadow-soft">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="relative mx-auto w-full max-w-[620px]">
+          <div className="absolute inset-x-8 top-10 h-48 rounded-full bg-gradient-to-r from-emerald-300/70 via-amber-200/70 to-rose-300/70 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-black/8 bg-white p-4 shadow-glow">
+            <div className="rounded-[1.6rem] bg-gradient-to-br from-[#13192a] via-[#1d2a54] to-[#4b59f6] p-6">
+              <div className="mx-auto grid max-w-[22rem] place-items-center rounded-[1.4rem] border border-white/15 bg-white/10 p-8 shadow-soft backdrop-blur-md">
+                <img src={gameboxProduct.darkLogo} alt="Gamebox logosu" className="h-auto w-full max-w-[16rem]" />
+              </div>
+              <div className="mt-5 grid grid-cols-4 gap-3">
+                {gameboxGames.slice(0, 8).map(([title, image]) => (
+                  <div key={title} className="overflow-hidden rounded-[1rem] border border-white/15 bg-white/10 p-1">
+                    <img src={image} alt={`${title} oyun kapağı`} className="aspect-square h-full w-full rounded-[0.8rem] object-cover" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function GameboxGames() {
+  return (
+    <section className="relative z-10 px-5 py-10 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+          <div>
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">Oyunlar</p>
+            <h2 className="font-display text-4xl font-black leading-none sm:text-6xl">
+              Kare kare oyun vitrini.
+            </h2>
+          </div>
+          <p className="max-w-xl text-ink/58">
+            Kapaklar ürün sayfasında kare mockup olarak kırpıldı; tek bakışta Gamebox’ın oyun kutusu hissini verir.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {gameboxGames.map(([title, image, description]) => (
+            <article key={title} className="group overflow-hidden rounded-[1.5rem] border border-black/8 bg-white p-3 shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-glow">
+              <div className="overflow-hidden rounded-[1.2rem] bg-[#fbfaf7]">
+                <img src={image} alt={`${title} oyun kapağı`} className="aspect-square h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+              </div>
+              <div className="p-3">
+                <h3 className="font-display text-2xl font-black">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-ink/62">{description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function GameboxSystems() {
+  const systems = [
+    ['Pastel arcade hub', 'Beyaz ve koyu tema, yumuşak gradientler, büyük dokunma alanları ve kısa oyun akışları.'],
+    ['Coin ve StoreKit', 'Coin paketleri, reklam kaldırma satın alımı ve satın alma geri yükleme akışı App Store altyapısına göre hazırlanır.'],
+    ['Reklam dengesi', 'Geçiş reklamları uygun anlarda sınırlandırılır; ödüllü reklamlar kullanıcı isteğiyle yardımcı seçenekler için kullanılabilir.'],
+    ['Ayarlar', 'Dil, tema, müzik, ses efekti, FPS tercihi, gizlilik politikası ve kullanım şartları tek ayar ekranında toplanır.'],
+  ];
+
+  return (
+    <section className="relative z-10 px-5 py-10 sm:px-8">
+      <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2">
+        {systems.map(([title, text], index) => (
+          <article key={title} className="rounded-[1.5rem] border border-black/8 bg-white p-6 shadow-soft">
+            <div className="flex items-center gap-3">
+              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-emerald-400 via-amber-300 to-rose-400 text-sm font-black text-white">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+              <h3 className="font-display text-2xl font-black">{title}</h3>
+            </div>
+            <p className="mt-5 text-base leading-7 text-ink/65">{text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function GameboxLegalLinks() {
+  return (
+    <section className="relative z-10 px-5 py-10 sm:px-8">
+      <div className="mx-auto max-w-3xl">
+        <div className="rounded-[1.6rem] border border-black/8 bg-white p-5 shadow-soft">
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href="/gamebox/gizlilik-politikasi"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-white px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#fbfaf7]"
+            >
+              Gizlilik Politikası
+            </a>
+            <a
+              href="/gamebox/kullanim-sartlari"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-[#fbfaf7] px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white"
+            >
+              Kullanım Şartları
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function GameboxPrivacyPage() {
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <LegalHero
+        eyebrow="Gizlilik Politikası"
+        title="Gamebox Gizlilik Politikası"
+        description="Son güncelleme: 1 Temmuz 2026. Geliştirici: AP Design. İletişim: theapdesign26@gmail.com"
+      />
+      <LegalContent sections={gameboxPrivacySections} />
+      <GameboxLegalLinks />
+      <Footer />
+    </main>
+  );
+}
+
+function GameboxTermsPage() {
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <LegalHero
+        eyebrow="Kullanım Şartları"
+        title="Gamebox Kullanım Şartları"
+        description="Son güncelleme: 1 Temmuz 2026. Geliştirici: AP Design. İletişim: theapdesign26@gmail.com"
+      />
+      <LegalContent sections={gameboxTermsSections} />
+      <GameboxLegalLinks />
+      <Footer />
+    </main>
+  );
+}
+
 function LegalHero({ eyebrow, title, description }) {
   return (
     <section className="relative z-10 px-5 pb-6 pt-12 sm:px-8 lg:pt-16">
@@ -1107,6 +1334,268 @@ const xoxTermsSections = [
   {
     title: '6. İletişim',
     paragraphs: ['Sorularınız için bizimle iletişime geçebilirsiniz: theapdesign26@gmail.com', 'Web Sitesi: theapdesign.art'],
+  },
+];
+
+const gameboxPrivacySections = [
+  {
+    title: 'Genel bilgi',
+    paragraphs: [
+      'Bu Gizlilik Politikası, Gamebox mobil uygulamasını (“Gamebox”, “uygulama”, “biz”) kullandığınızda hangi bilgilerin işlenebileceğini, bu bilgilerin nasıl kullanıldığını ve kullanıcı haklarınızı açıklar.',
+      'Gamebox, iOS için geliştirilmiş bir mini oyun merkezidir. Uygulama; mini oyunlar, ayarlar, coin dengesi, uygulama içi satın almalar, reklam kaldırma seçeneği, ödüllü reklamlar, dil seçenekleri ve tema tercihleri gibi özellikler sunar.',
+    ],
+  },
+  {
+    title: '1. Topladığımız veya işlediğimiz bilgiler',
+    paragraphs: [
+      'Gamebox doğrudan adınız, e-posta adresiniz, telefon numaranız veya açık adresiniz gibi kişisel bilgileri istemez.',
+      'Ancak uygulamanın çalışması için bazı bilgiler cihazınızda veya kullanılan üçüncü taraf hizmetler aracılığıyla işlenebilir.',
+    ],
+  },
+  {
+    title: '1.1. Cihazda saklanan uygulama tercihleri',
+    paragraphs: [
+      'Gamebox; dil tercihi, açık/koyu tema tercihi, müzik ve ses efekti seviyeleri, FPS tercihi, coin bakiyesi, reklamların kaldırılıp kaldırılmadığı bilgisi ve gelecekte açılabilecek oyun kimlikleri veya kilit durumları gibi tercihleri cihazınızda saklayabilir.',
+      'Bu bilgiler, uygulama deneyiminizin korunması ve uygulamayı tekrar açtığınızda tercihlerinizin devam etmesi için kullanılır. Gamebox’ta bu kalıcı veriler PersistenceService üzerinden yönetilir ve mevcut durumda UserDefaults altyapısı ile saklanır.',
+    ],
+  },
+  {
+    title: '1.2. Uygulama içi satın alma bilgileri',
+    paragraphs: [
+      'Gamebox, App Store üzerinden uygulama içi satın almalar sunabilir. Satın alma işlemleri Apple’ın StoreKit altyapısı üzerinden gerçekleştirilir.',
+      'Gamebox içinde coin paketleri ve reklamları kaldırma satın alımı bulunabilir. Coin paketleri tüketilebilir ürünlerdir; reklam kaldırma ise geri yüklenebilir, tüketilemeyen bir satın alımdır.',
+      'Satın alma işlemlerinin ödeme ve faturalandırma kısmı Apple tarafından yürütülür. Gamebox, kredi kartı bilgilerinizi veya ödeme yöntemlerinizi doğrudan görmez, toplamaz veya saklamaz.',
+    ],
+  },
+  {
+    title: '1.3. Reklamlarla ilgili bilgiler',
+    paragraphs: [
+      'Gamebox’ta geçiş reklamları ve ödüllü reklamlar bulunabilir. Reklamlar üçüncü taraf reklam sağlayıcıları aracılığıyla gösterilebilir.',
+      'Reklam sağlayıcıları; reklam gösterimi, reklam performansı, sahtekarlık önleme, reklam sıklığı, cihaz bilgileri veya reklam tanımlayıcıları gibi bilgileri kendi gizlilik politikalarına göre işleyebilir.',
+      'Oyun sonu ekranlarında geçiş reklamı gösterilmez. Duraklatma veya oyundan çıkış gibi uygun anlarda geçiş reklamı gösterilebilir. Geçiş reklamları belirli bir sıklık kuralına bağlıdır.',
+      '“Reklamları Kaldır” satın alımı geçiş reklamlarını devre dışı bırakır. Ödüllü reklamlar, reklam kaldırma satın alınmış olsa bile kullanıcı tarafından isteğe bağlı olarak kullanılabilir.',
+    ],
+  },
+  {
+    title: '1.4. Coin sistemi',
+    paragraphs: [
+      'Gamebox, oyun içi coin bakiyesi kullanabilir. Coinler; satın alma sonrası eklenebilir, oyun içi bazı yardımcı işlemler için harcanabilir veya gelecekte oyun kilidi açma gibi özelliklerde kullanılabilir.',
+      'Coin bakiyesi cihazda saklanabilir ve uygulama içindeki deneyimi yönetmek için kullanılır.',
+    ],
+  },
+  {
+    title: '1.5. Oyun ve ayar bilgileri',
+    paragraphs: [
+      'Gamebox, uygulama deneyiminizi yönetmek için ayarlarınızı kullanır. Bunlar arasında tema, ses seviyesi, dil, FPS tercihi, reklam kaldırma durumu, gizlilik politikası ve kullanım şartları bağlantıları bulunabilir.',
+    ],
+  },
+  {
+    title: '2. Bilgileri hangi amaçlarla kullanıyoruz?',
+    paragraphs: [
+      'Bilgiler; uygulamayı çalıştırmak, oyun deneyiminizi sunmak, tercihlerinizi hatırlamak, dil/tema/ses/FPS ayarlarınızı korumak, coin bakiyenizi yönetmek, satın alımları doğrulamak ve geri yüklemek için kullanılabilir.',
+      'Bilgiler ayrıca reklamları göstermek veya reklam kaldırma satın alımını uygulamak, ödüllü reklamlar karşılığında uygulama içi avantajlar sunmak, uygulama performansını ve güvenliğini iyileştirmek, App Store gerekliliklerine ve yasal yükümlülüklere uymak için kullanılabilir.',
+    ],
+  },
+  {
+    title: '3. Üçüncü taraf hizmetler',
+    paragraphs: [
+      'Gamebox; uygulama içi satın almalar ve satın alımların geri yüklenmesi için Apple App Store / StoreKit, reklam gösterimi ve ödüllü reklamlar için Google Mobile Ads veya benzeri reklam sağlayıcıları kullanabilir.',
+      'Bu üçüncü taraflar, kendi hizmetlerini sunmak amacıyla belirli bilgileri işleyebilir. Üçüncü taraf hizmetlerin veri işleme faaliyetleri, ilgili hizmet sağlayıcıların kendi gizlilik politikalarına tabidir.',
+    ],
+  },
+  {
+    title: '4. Çocukların gizliliği',
+    paragraphs: [
+      'Gamebox genel kullanıcı kitlesine yönelik eğlence amaçlı bir mini oyun uygulamasıdır. Uygulama bilerek çocuklardan ad, e-posta, telefon numarası veya adres gibi kişisel bilgiler toplamaz.',
+      'Uygulamanın çocuklara yönelik olarak yayınlanması veya çocukların yoğun şekilde kullanabileceği bir kategoriye alınması halinde, App Store gizlilik beyanları, reklam ayarları ve geçerli çocuk gizliliği kuralları ayrıca dikkatle değerlendirilmelidir.',
+    ],
+  },
+  {
+    title: '5. Verilerin saklanması',
+    paragraphs: [
+      'Cihazda saklanan ayarlar ve uygulama içi durum bilgileri, uygulama cihazda kaldığı veya ilgili bilgiler kullanıcı tarafından sıfırlanmadığı sürece saklanabilir.',
+      'Satın alma geçmişi ve ödeme bilgileri Apple tarafından kendi sistemlerinde saklanır. Gamebox yalnızca satın alım durumunu uygulama özelliklerini etkinleştirmek için kullanır.',
+    ],
+  },
+  {
+    title: '6. Verilerin paylaşılması',
+    paragraphs: [
+      'Gamebox, kişisel bilgilerinizi satmaz.',
+      'Ancak reklam gösterimi için reklam sağlayıcılarıyla, satın alma doğrulaması için Apple altyapısıyla, yasal yükümlülüklerin yerine getirilmesi gerektiğinde veya uygulama güvenliğini ve kötüye kullanım önlemeyi sağlamak için gerekli olduğunda bazı bilgiler işlenebilir veya paylaşılabilir.',
+    ],
+  },
+  {
+    title: '7. Kullanıcı hakları',
+    paragraphs: [
+      'Bulunduğunuz ülke veya bölgeye bağlı olarak hakkınızda işlenen bilgilere erişme, yanlış bilgilerin düzeltilmesini isteme, belirli bilgilerin silinmesini isteme, veri işlemeye itiraz etme ve rızaya dayalı işlemlerde rızanızı geri çekme haklarına sahip olabilirsiniz.',
+      'Gamebox çoğu kullanıcı tercihini cihaz üzerinde sakladığı için, uygulamayı silmek veya cihaz ayarlarından uygulama verilerini temizlemek bazı yerel bilgileri kaldırabilir.',
+    ],
+  },
+  {
+    title: '8. Reklam takibi ve cihaz ayarları',
+    paragraphs: [
+      'iOS cihazınızda reklam takip tercihlerinizi Apple’ın gizlilik ayarları üzerinden yönetebilirsiniz. Reklam tanımlayıcıları ve takip izinleri, cihazınızın işletim sistemi ayarlarına ve üçüncü taraf reklam sağlayıcının uygulamalarına bağlıdır.',
+    ],
+  },
+  {
+    title: '9. Güvenlik',
+    paragraphs: [
+      'Gamebox, uygulama içindeki bilgilerin korunması için makul teknik ve organizasyonel önlemler almaya çalışır. Ancak hiçbir elektronik saklama veya iletim yöntemi tamamen güvenli değildir.',
+    ],
+  },
+  {
+    title: '10. Uluslararası veri aktarımları',
+    paragraphs: [
+      'Üçüncü taraf hizmet sağlayıcıları, bilgileri bulunduğunuz ülke dışında işleyebilir. Bu durum, reklam sağlayıcıları veya Apple hizmetleri gibi küresel altyapılar için geçerli olabilir.',
+    ],
+  },
+  {
+    title: '11. Bu politikadaki değişiklikler',
+    paragraphs: [
+      'Bu Gizlilik Politikası zaman zaman güncellenebilir. Güncel sürüm uygulama içinde veya ilgili web sayfasında yayınlanır. Politikanın güncellenmesinden sonra uygulamayı kullanmaya devam etmeniz, güncel politikayı kabul ettiğiniz anlamına gelebilir.',
+    ],
+  },
+  {
+    title: '12. İletişim',
+    paragraphs: [
+      'Geliştirici / Şirket Adı: AP Design',
+      'E-posta: theapdesign26@gmail.com',
+      'Ülke: Türkiye',
+    ],
+  },
+];
+
+const gameboxTermsSections = [
+  {
+    title: 'Genel bilgi',
+    paragraphs: [
+      'Bu Kullanım Şartları, Gamebox mobil uygulamasını (“Gamebox”, “uygulama”, “biz”) kullanımınıza ilişkin kuralları ve koşulları açıklar. Uygulamayı indirerek, açarak veya kullanarak bu şartları kabul etmiş olursunuz.',
+      'Bu şartları kabul etmiyorsanız Gamebox’ı kullanmamalısınız.',
+    ],
+  },
+  {
+    title: '1. Hizmetin tanımı',
+    paragraphs: [
+      'Gamebox, iOS için geliştirilmiş bir mini oyun merkezidir. Uygulama içinde birden fazla bağımsız mini oyun, ana ekran oyun listesi, oyun detay ekranları, ayarlar, coin bakiyesi, reklamlar, ödüllü reklamlar, uygulama içi satın almalar ve reklam kaldırma seçeneği bulunabilir.',
+      'Gamebox’ın mevcut oynanabilir oyunları arasında Sky Bird, Air Hockey, Peak, Slider Puzzle, Memory Flip, Quick Tap, Numbers, Word Hunt, Sand Party, Chess ve Fruit Catch gibi mini oyunlar yer alabilir.',
+    ],
+  },
+  {
+    title: '2. Uygun kullanım',
+    paragraphs: [
+      'Gamebox’ı yalnızca yasal, kişisel ve eğlence amaçlı kullanabilirsiniz.',
+      'Uygulamayı yasa dışı amaçlarla kullanmak, tersine mühendislik yapmak, kopyalamak, değiştirmek, izinsiz dağıtmak, güvenlik/reklam/satın alma/coin sistemini kötüye kullanmak, hile veya bot kullanmak, uygulamanın normal çalışmasını bozmak, üçüncü taraf haklarını ihlal etmek ve uygulama içeriğini izinsiz ticari amaçlarla kullanmak yasaktır.',
+    ],
+  },
+  {
+    title: '3. Kullanıcı hesabı',
+    paragraphs: [
+      'Gamebox mevcut yapısı itibarıyla kullanıcıdan hesap oluşturmasını gerektirmeyebilir. Bazı ayarlar, coin bakiyesi, reklam kaldırma durumu ve oyun tercihleri cihaz üzerinde saklanabilir.',
+      'Cihaz değişikliği, uygulamanın silinmesi veya cihaz verilerinin temizlenmesi durumunda yerel olarak saklanan bazı bilgiler kaybolabilir. Satın alımların geri yüklenmesi Apple App Store altyapısı üzerinden yapılabilir.',
+    ],
+  },
+  {
+    title: '4. Uygulama içi satın almalar',
+    paragraphs: [
+      'Gamebox, Apple App Store üzerinden uygulama içi satın almalar sunabilir. Satın alınabilecek ürünler küçük coin paketi, orta coin paketi, büyük coin paketi, mega coin paketi ve reklamları kaldırma satın alımını içerebilir.',
+      'Coin paketleri tüketilebilir ürünlerdir. Reklam kaldırma satın alımı tüketilemeyen bir üründür ve desteklenen durumlarda geri yüklenebilir. Satın alma işlemleri StoreKit 2 altyapısı üzerinden yönetilir.',
+      'Satın alma işlemlerinde ödeme, faturalandırma, iade süreçleri ve ödeme yöntemi Apple’ın App Store kurallarına tabidir. Gamebox, Apple tarafından onaylanan ve doğrulanan satın alımlara göre uygulama içi hakları etkinleştirir.',
+    ],
+  },
+  {
+    title: '5. Coinler ve sanal öğeler',
+    paragraphs: [
+      'Gamebox içinde coin sistemi bulunabilir. Coinler uygulama içinde yardımcı işlemler, oyun içi avantajlar, gelecekte oyun kilidi açma veya benzeri özellikler için kullanılabilir.',
+      'Coinler gerçek para, elektronik para, kripto varlık veya finansal değer temsil etmez. Coinler yalnızca Gamebox içinde kullanılabilir. Coinler nakde çevrilemez, başka kullanıcılara devredilemez ve uygulama dışında herhangi bir değere sahip değildir.',
+      'Gamebox, teknik, dengeleme, güvenlik veya ürün geliştirme nedenleriyle coin kullanım kurallarını, coin gerektiren özellikleri veya oyun içi ekonomiyi değiştirebilir.',
+    ],
+  },
+  {
+    title: '6. Reklamlar',
+    paragraphs: [
+      'Gamebox’ta reklamlar gösterilebilir. Bu reklamlar geçiş reklamları veya kullanıcı tarafından başlatılan ödüllü reklamlar olabilir.',
+      '“Reklamları Kaldır” satın alımı, geçiş reklamlarını devre dışı bırakabilir. Ancak ödüllü reklamlar, kullanıcı tarafından isteğe bağlı olarak başlatılan yardımcı seçenekler olduğu için kullanılabilir kalabilir.',
+      'Reklam içerikleri üçüncü taraf reklam sağlayıcıları tarafından sunulabilir. Reklamların içeriği, hedeflemesi veya gösterimi üzerinde her zaman tam kontrolümüz olmayabilir.',
+    ],
+  },
+  {
+    title: '7. Oyun kuralları ve adil kullanım',
+    paragraphs: [
+      'Gamebox içindeki oyunlar eğlence amaçlıdır. Oyun skorları, ilerleme, coin harcamaları veya oyun içi avantajlar, uygulamanın teknik kurallarına göre çalışır.',
+      'Hile, açık kötüye kullanımı, sistem manipülasyonu, sahte satın alma, reklam ödülü manipülasyonu veya oyun dengesini bozacak davranışlar yasaktır.',
+      'Bu tür davranışların tespit edilmesi halinde, ilgili uygulama içi haklar sınırlandırılabilir, coin bakiyesi düzeltilebilir veya uygulama erişimi kısıtlanabilir.',
+    ],
+  },
+  {
+    title: '8. Fikri mülkiyet hakları',
+    paragraphs: [
+      'Gamebox’a ait tasarım, yazılım, oyun yapısı, görseller, arayüz, marka unsurları, metinler ve diğer içerikler ilgili hak sahiplerine aittir.',
+      'Uygulamayı kullanmanız, size yalnızca kişisel, sınırlı, devredilemez ve münhasır olmayan bir kullanım hakkı verir. Uygulama veya içerikleri üzerinde mülkiyet hakkı kazanmazsınız.',
+    ],
+  },
+  {
+    title: '9. Güncellemeler ve değişiklikler',
+    paragraphs: [
+      'Gamebox zaman zaman güncellenebilir. Yeni oyunlar eklenebilir, mevcut oyunlar değiştirilebilir, bazı özellikler kaldırılabilir veya uygulama içi sistemler yenilenebilir.',
+      'Gamebox’ın yol haritasında oyun kilidi açma kuralları, başarımlar, reklamlar, liderlik tabloları ve daha zengin ilerleme sistemleri gibi gelecekte geliştirilebilecek özellikler yer alabilir.',
+      'Uygulamanın bazı özellikleri internet bağlantısı, App Store hizmetleri veya üçüncü taraf reklam hizmetlerinin çalışmasına bağlı olabilir.',
+    ],
+  },
+  {
+    title: '10. Garanti reddi',
+    paragraphs: [
+      'Gamebox “olduğu gibi” ve “mevcut olduğu şekilde” sunulur. Uygulamanın kesintisiz, hatasız, güvenli veya her cihazda tam uyumlu çalışacağını garanti etmeyiz.',
+      'Uygulama içindeki oyunlar, skorlar, coinler, reklam ödülleri veya diğer özellikler teknik hatalardan, cihaz ayarlarından, internet bağlantısından, App Store hizmetlerinden veya üçüncü taraf hizmetlerden etkilenebilir.',
+    ],
+  },
+  {
+    title: '11. Sorumluluğun sınırlandırılması',
+    paragraphs: [
+      'Yürürlükteki yasaların izin verdiği ölçüde, Gamebox’ın kullanımından veya kullanılamamasından doğan dolaylı, arızi, özel, sonuçsal veya cezai zararlardan sorumlu olmayız.',
+      'Bu kapsam; veri kaybı, uygulama içi ilerleme kaybı, coin kaybı, cihaz sorunları, hizmet kesintisi veya üçüncü taraf hizmetlerden kaynaklanan sorunları içerebilir.',
+    ],
+  },
+  {
+    title: '12. Üçüncü taraf hizmetler',
+    paragraphs: [
+      'Gamebox; Apple App Store, StoreKit, reklam sağlayıcıları ve benzeri üçüncü taraf hizmetlerle entegre olabilir. Bu hizmetlerin kullanımı ilgili üçüncü tarafların kendi şartlarına ve politikalarına tabidir.',
+      'Üçüncü taraf hizmetlerin kesintileri, değişiklikleri, reklam içerikleri, ödeme süreçleri veya veri işleme uygulamalarından sorumlu değiliz.',
+    ],
+  },
+  {
+    title: '13. Gizlilik',
+    paragraphs: [
+      'Gamebox’ın bilgi işleme uygulamaları Gizlilik Politikası’nda açıklanır. Uygulamayı kullanarak Gizlilik Politikası’nı da okuduğunuzu ve kabul ettiğinizi beyan edersiniz.',
+    ],
+  },
+  {
+    title: '14. Kullanımın sonlandırılması',
+    paragraphs: [
+      'Bu şartları ihlal etmeniz, uygulamayı kötüye kullanmanız veya güvenlik riski oluşturmanız halinde Gamebox’a erişiminiz sınırlandırılabilir veya uygulama içi bazı özellikleri kullanmanız engellenebilir.',
+      'Uygulamayı kullanmayı dilediğiniz zaman bırakabilir ve cihazınızdan silebilirsiniz.',
+    ],
+  },
+  {
+    title: '15. Şartlardaki değişiklikler',
+    paragraphs: [
+      'Bu Kullanım Şartları zaman zaman güncellenebilir. Güncel sürüm uygulama içinde veya ilgili web sayfasında yayınlanır.',
+      'Değişikliklerden sonra Gamebox’ı kullanmaya devam etmeniz, güncellenmiş şartları kabul ettiğiniz anlamına gelir.',
+    ],
+  },
+  {
+    title: '16. Geçerli hukuk',
+    paragraphs: [
+      'Bu şartlar, aksi zorunlu yasal kurallar gerektirmedikçe Türkiye yasalarına tabi olacaktır.',
+      'Tüketici hakları, bulunduğunuz ülkedeki emredici yasal düzenlemeler kapsamında saklıdır.',
+    ],
+  },
+  {
+    title: '17. İletişim',
+    paragraphs: [
+      'Geliştirici / Şirket Adı: AP Design',
+      'E-posta: theapdesign26@gmail.com',
+      'Ülke: Türkiye',
+    ],
   },
 ];
 
