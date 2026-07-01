@@ -21,7 +21,8 @@ const gameboxProduct = {
   title: 'Gamebox',
   description: 'Tek uygulama içinde Sky Bird, Air Hockey, Peak, Memory Flip ve daha fazlasını taşıyan pastel mini oyun kutusu.',
   summary: 'Mini oyunlar, coin sistemi, ayarlar ve StoreKit altyapısıyla oyun merkezi.',
-  logo: '/gamebox/gamebox-logo-light.svg',
+  logo: '/gamebox/gamebox-icon.svg',
+  fullLogo: '/gamebox/gamebox-logo-light.svg',
   darkLogo: '/gamebox/gamebox-logo-dark.svg',
 };
 
@@ -305,8 +306,8 @@ function ProductCard({ href, logo, logoAlt, eyebrow, title, description, tags, t
     >
       <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div className={`rounded-[1.4rem] p-5 ${mediaClass}`}>
-          <div className="rounded-[1.2rem] border border-white/20 bg-white p-5">
-            <img src={logo} alt={logoAlt} className="h-auto w-full rounded-[1rem] object-cover" />
+          <div className="grid aspect-[1.45] place-items-center rounded-[1.2rem] border border-white/20 bg-white p-5">
+            <img src={logo} alt={logoAlt} className="max-h-full max-w-full rounded-[1rem] object-contain" />
           </div>
         </div>
         <div className="px-2 pb-2">
