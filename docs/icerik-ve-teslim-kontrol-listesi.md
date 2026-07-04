@@ -1,111 +1,43 @@
 # Icerik ve Teslim Kontrol Listesi
 
-## Website Genel
+Son guncelleme: 4 Temmuz 2026
 
-- [x] Marka adi dogru: The AP Design
-- [x] Domain dogru: `theapdesign.art`
-- [x] Logo guncel AP logosu ile kullaniliyor
-- [x] Del-It logo asset'i mevcut
-- [x] XOX Taktik Arena logo asset'i mevcut
-- [x] Gamebox logo ve oyun kapak asset'leri mevcut
-- [x] Tum gorunen ana navigasyon metinleri Turkce
-- [x] Iletisim maili guncel: `theapdesign26@gmail.com`
-- [x] Google Analytics etiketi mevcut: `G-W219ZBJWH0`
-- [x] Build basarili: `npm run build`
-
-## Sayfa Kontrolleri
+## Genel
 
 - [x] Ana sayfa mevcut
-- [x] Urunler sayfasi mevcut
-- [x] Del-It urun sayfasi mevcut
-- [x] XOX Taktik Arena urun sayfasi mevcut
-- [x] Gamebox urun sayfasi mevcut
+- [x] Uygulamalar sayfasi mevcut
 - [x] Iletisim sayfasi mevcut
-- [x] Del-It gizlilik politikasi mevcut
-- [x] Del-It kullanim sartlari mevcut
-- [x] XOX gizlilik politikasi mevcut
-- [x] XOX kullanim sartlari mevcut
-- [x] Gamebox gizlilik politikasi mevcut
-- [x] Gamebox kullanim sartlari mevcut
-- [x] Contact gorunen metinleri `Iletisim` olarak guncellendi
-- [x] Iletisim sayfasinda footer yok
+- [x] Ortak footer ana ve urun sayfalarinda mevcut
+- [x] Iletisim sayfasi footersiz
+- [x] Simdilik yayinlanmayacak urunler siteden kaldirildi
 
-## Del-It Urun Sayfasi
+## Del-It
 
-- [x] Del-It logosu gorunuyor
-- [x] Urun tanitimi mevcut
-- [x] App Store CTA mevcut
-- [x] App Store linki dogru:
-  `https://apps.apple.com/us/app/del-it/id6780890586`
-- [x] CTA yeni sekmede aciliyor
-- [x] CTA `aria-label` mevcut
-- [x] Guven metni mevcut: `Fotograflarin cihazinda kalir.`
-- [x] FAQ mevcut
-- [x] Gizlilik Politikasi ve Kullanim Sartlari linkleri FAQ ile footer arasinda
+- [x] Urun sayfasi mevcut
+- [x] App Store indirme linki mevcut
+- [x] Logo gorunuyor
+- [x] Gizlilik politikasi mevcut
+- [x] Kullanim sartlari mevcut
 
-## XOX Taktik Arena Urun Sayfasi
+## XOX Taktik Arena
 
-- [x] XOX logo asset'i gorunuyor
-- [x] Urun tanitimi mevcut
-- [x] 3x3 tahta ve 3 tas limiti anlatiliyor
-- [x] En eski tasin otomatik silinmesi mekanigi anlatiliyor
-- [x] Tek oyunculu ve iki kisilik modlar mevcut
-- [x] Gizlilik Politikasi ve Kullanim Sartlari linkleri urun sayfasinda mevcut
+- [x] Urun sayfasi mevcut
+- [x] App Store indirme linki mevcut
+- [x] Logo gorunuyor
+- [x] Gizlilik politikasi mevcut
+- [x] Kullanim sartlari mevcut
 
-## Gamebox Urun Sayfasi
+## SEO / Teknik
 
-- [x] Gamebox logosu gorunuyor
-- [x] Urun tanitimi mevcut
-- [x] 11 mini oyun kapagi kare mockup grid olarak gosteriliyor
-- [x] Coin, StoreKit, reklam ve ayar sistemleri anlatiliyor
-- [x] Gamebox henuz App Store'da yayinda degil bilgisine uygun yumuşak dil kullaniliyor
-- [x] Gizlilik Politikasi ve Kullanim Sartlari linkleri urun sayfasinda mevcut
+- [x] Ana sayfa title/meta mevcut
+- [x] Del-It title/meta mevcut
+- [x] XOX title/meta mevcut
+- [x] `app-ads.txt` root seviyesinde mevcut
+- [x] `_redirects` kullanılmıyor
+- [x] `npm run build` basarili
 
-## AdMob Kontrolu
+## Deploy
 
-- [x] `public/app-ads.txt` mevcut
-- [x] `dist/app-ads.txt` build sonrasi olusuyor
-- [x] Canli URL dogru:
-  `https://theapdesign.art/app-ads.txt`
-- [x] Publisher ID dogru:
-  `pub-5911219580546074`
-- [x] Icerik tek satir:
-
-```text
-google.com, pub-5911219580546074, DIRECT, f08c47fec0942fa0
-```
-
-- [x] HTML template donmuyor
-- [x] `content-type: text/plain`
-
-## SEO ve Metadata
-
-- [x] Ana sayfa title ve description mevcut
-- [x] Urunler sayfasi title ve description mevcut
-- [x] Iletisim sayfasi title ve description mevcut
-- [x] Del-It sayfasi title ve description mevcut
-- [x] XOX Taktik Arena sayfasi title ve description mevcut
-- [x] Gamebox sayfasi title ve description mevcut
-- [x] Gizlilik Politikasi metadata mevcut
-- [x] Kullanim Sartlari metadata mevcut
-- [x] Open Graph ve Twitter Card etiketleri mevcut
-
-## Teslim Oncesi Komutlar
-
-```bash
-npm run build
-git status --short --branch
-```
-
-Canli app-ads kontrolu:
-
-```bash
-curl -i https://theapdesign.art/app-ads.txt
-```
-
-## Bekleyen / Sonraki Isler
-
-- [x] XOX Taktik Arena yeni urun olarak eklendi
-- [x] Gamebox yeni urun olarak eklendi
-- [ ] Del-It App Store badge'i resmi Apple badge ile degistirilebilir
-- [ ] App Store urun metinleri degisirse Del-It CTA ve yasal metinler tekrar kontrol edilecek
+- [x] Cloudflare/Vite build uyumlu
+- [x] Kaldirilan urun build inputlari temizlendi
+- [x] Kaldirilan urun public assetleri temizlendi
