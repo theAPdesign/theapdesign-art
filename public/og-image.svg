@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title>The AP Design</title>
+  <desc>Soft white product showcase for app design</desc>
+  <defs>
+    <linearGradient id="g1" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#d9ecff" />
+      <stop offset="50%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#ffe3ec" />
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f4f0ff" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#faf8f5"/>
+  <rect x="70" y="70" width="1060" height="490" rx="42" fill="#ffffff" stroke="rgba(17,17,17,0.08)"/>
+  <circle cx="950" cy="140" r="220" fill="#d9ecff" opacity="0.75"/>
+  <circle cx="1015" cy="505" r="240" fill="#ffe3ec" opacity="0.72"/>
+  <g transform="translate(780 145)">
+    <rect width="260" height="260" rx="40" fill="url(#g1)" stroke="rgba(17,17,17,0.08)"/>
+    <rect x="24" y="24" width="212" height="212" rx="30" fill="url(#g2)" stroke="rgba(17,17,17,0.08)"/>
+    <circle cx="78" cy="82" r="18" fill="#111111"/>
+    <rect x="108" y="68" width="84" height="18" rx="9" fill="#111111"/>
+    <rect x="60" y="118" width="140" height="18" rx="9" fill="#7c9bff"/>
+    <rect x="60" y="150" width="110" height="18" rx="9" fill="#f4b7c6"/>
+    <rect x="60" y="182" width="90" height="18" rx="9" fill="#bce9ce"/>
+  </g>
+  <text x="110" y="188" fill="#111111" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="10">THEAPDESIGN.ART</text>
+  <text x="110" y="300" fill="#111111" font-family="Inter, Arial, sans-serif" font-size="74" font-weight="900">Uygulama ürünleri</text>
+  <text x="110" y="390" fill="#7c9bff" font-family="Inter, Arial, sans-serif" font-size="90" font-weight="900">soft ve temiz</text>
+  <text x="112" y="465" fill="rgba(17,17,17,0.68)" font-family="Inter, Arial, sans-serif" font-size="28">Beyaz temalı, ürün odaklı ve yumuşak renkli dijital deneyimler.</text>
+</svg>

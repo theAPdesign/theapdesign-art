@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title>Del-it</title>
+  <desc>Del-it soft product preview</desc>
+  <defs>
+    <linearGradient id="dg1" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#d9ecff" />
+      <stop offset="100%" stop-color="#ffe3ec" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#faf8f5"/>
+  <rect x="70" y="70" width="1060" height="490" rx="42" fill="#ffffff" stroke="rgba(17,17,17,0.08)"/>
+  <circle cx="945" cy="135" r="220" fill="#d9ecff" opacity="0.72"/>
+  <circle cx="1010" cy="500" r="240" fill="#ffe3ec" opacity="0.7"/>
+  <g transform="translate(790 145)">
+    <rect width="260" height="260" rx="40" fill="url(#dg1)" stroke="rgba(17,17,17,0.08)"/>
+    <rect x="28" y="28" width="204" height="204" rx="28" fill="#ffffff" stroke="rgba(17,17,17,0.08)"/>
+    <circle cx="80" cy="84" r="18" fill="#111111"/>
+    <rect x="108" y="72" width="84" height="18" rx="9" fill="#111111"/>
+    <rect x="58" y="118" width="144" height="18" rx="9" fill="#7c9bff"/>
+    <rect x="58" y="150" width="112" height="18" rx="9" fill="#f4b7c6"/>
+    <rect x="58" y="182" width="88" height="18" rx="9" fill="#bce9ce"/>
+  </g>
+  <text x="110" y="188" fill="#111111" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="10">DEL-IT</text>
+  <text x="110" y="300" fill="#111111" font-family="Inter, Arial, sans-serif" font-size="74" font-weight="900">Akıllı fotoğraf</text>
+  <text x="110" y="390" fill="#7c9bff" font-family="Inter, Arial, sans-serif" font-size="90" font-weight="900">temizleme deneyimi</text>
+  <text x="112" y="465" fill="rgba(17,17,17,0.68)" font-family="Inter, Arial, sans-serif" font-size="28">Benzer kareleri bulun, gereksiz fotoğrafları ayıklayın, alan kazanın.</text>
+</svg>
