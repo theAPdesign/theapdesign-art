@@ -955,15 +955,15 @@ const privacySections = [
     paragraphs: [
       'Yürürlük Tarihi: 05.07.2026',
       'Del-It olarak kullanıcı gizliliğine önem veriyoruz. Bu Gizlilik Politikası, Del-It mobil uygulamasını kullandığınızda hangi verilerin işlendiğini, bu verilerin hangi amaçlarla kullanıldığını ve kullanıcı tercihlerinizi açıklamak amacıyla hazırlanmıştır.',
-      'Del-It, iPhone galerisindeki fotoğraf ve videoları hızlıca gözden geçirip ayıklamaya yardımcı olan gizlilik odaklı bir uygulamadır. Uygulamanın temel temizlik akışı cihaz üzerinde çalışır. Del-It, fotoğraf ve video içeriklerinizi sunucuya yüklemez.',
+      'Del-It; fotoğraf ve videoları hızlıca gözden geçirme, gereksiz içerikleri güvenli şekilde ayıklama, medya kasası, rehber temizliği ve kolaj gibi özellikler sunan gizlilik odaklı bir iOS uygulamasıdır. Uygulamanın temel akışları cihaz üzerinde çalışır. Del-It, fotoğraf, video veya rehber içeriklerinizi sunucuya yüklemez.',
     ],
   },
   {
     title: '1. Topladığımız veya İşlediğimiz Veriler',
     paragraphs: [
       'Del-It, uygulamanın çalışması, performansın ölçülmesi, hataların giderilmesi, reklamların gösterilmesi ve kullanıcı deneyiminin iyileştirilmesi amacıyla bazı teknik ve kullanım verilerini işleyebilir.',
-      'İşlenebilecek veri türleri şunları içerebilir: uygulama kullanım verileri, uygulama içi etkileşimler, cihaz ve işletim sistemi bilgileri, uygulama sürümü, performans ve hata/tanı verileri, reklam gösterimi ve reklam etkileşim verileri, reklam tanımlayıcıları, izin verilmesi halinde IDFA gibi tanımlayıcılar, satın alma ve abonelik durumu gibi uygulama içi satın alma bilgileri.',
-      'Del-It, fotoğraf ve video içeriklerinizi reklam amacıyla işlemez, analiz etmez veya üçüncü taraf reklam servislerine göndermez.',
+      'İşlenebilecek veri türleri; uygulama kullanım verileri, uygulama içi etkileşimler, cihaz ve işletim sistemi bilgileri, uygulama sürümü, performans ve hata/tanı verileri, reklam gösterimi ve reklam etkileşim verileri, reklam tanımlayıcıları, izin verilmesi halinde IDFA gibi tanımlayıcılar, satın alma ve abonelik durumu gibi uygulama içi satın alma bilgileri, yerel hak sayaçları ve kullanıcı tercihlerini içerebilir.',
+      'Del-It; fotoğraf, video veya rehber içeriklerinizi reklam amacıyla işlemez, analiz etmez veya üçüncü taraf reklam/analitik servislerine göndermez.',
     ],
   },
   {
@@ -977,103 +977,131 @@ const privacySections = [
     ],
   },
   {
-    title: '3. Reklamlar ve Google AdMob',
+    title: '3. Del-It Çöp Kutusu ve Silme İşlemleri',
     paragraphs: [
-      'Del-It, ücretsiz kullanıcılara reklam göstermek için Google AdMob hizmetini kullanabilir. Uygulamada ödüllü reklamlar, geçiş reklamları ve native reklamlar bulunabilir.',
-      'Google AdMob, reklamların gösterilmesi, reklam performansının ölçülmesi, reklam kalitesinin artırılması, dolandırıcılık ve kötüye kullanımın önlenmesi amacıyla bazı teknik verileri işleyebilir.',
-      'Bu veriler cihaz bilgileri, IP adresi, reklam gösterim ve tıklama verileri, reklam performans verileri, kullanım ve etkileşim verileri, tanılama ve hata verileri ve reklam tanımlayıcılarını içerebilir.',
-      'Google AdMob tarafından işlenen veriler, Google’ın kendi gizlilik politikası ve reklam teknolojileri politikalarına tabidir.',
+      'Del-It içinde çöpe eklenen fotoğraf ve videolar hemen sistem galerisinden silinmez. Bu öğeler önce uygulama içindeki Del-It çöp kutusuna eklenir.',
+      'Kalıcı silme işlemi yalnızca kullanıcının son onayıyla başlatılır. Silme işlemi iOS PhotoKit sistemi üzerinden yapılır ve iOS sistem davranışları geçerli olabilir.',
+      'Del-It çöp kutusu, iOS Fotoğraflar uygulamasındaki “Son Silinenler” alanıyla aynı şey değildir. Bu alan, uygulama içinde son kararınızı vermeniz için kullanılan güvenli bir bekleme alanıdır.',
     ],
   },
   {
-    title: '4. App Tracking Transparency ve Reklam Takibi',
+    title: '4. Medya Kasası',
     paragraphs: [
-      'iOS cihazlarda, kişiselleştirilmiş reklamlar ve uygulamalar arası takip kapsamına girebilecek reklam ölçümleri için Apple’ın App Tracking Transparency izni istenebilir.',
-      'Bu izin, kullanıcının farklı şirketlere ait uygulama ve web siteleri arasında takip edilmesine izin verip vermediğini belirlemesini sağlar.',
-      'Del-It, bu izni onboarding sürecinde isteyebilir. Kullanıcı bu izni kabul edebilir veya reddedebilir.',
-      'İzin vermeniz zorunlu değildir. İzin vermezseniz Del-It’i kullanmaya devam edebilirsiniz. İzin vermediğinizde reklamlar daha az kişiselleştirilmiş olabilir.',
-      'İzin durumunuzu iOS Ayarları üzerinden daha sonra değiştirebilirsiniz. Del-It, ATT izni reddedildiğinde fotoğraf veya video içeriklerinizi reklam amacıyla kullanmaz.',
+      'Medya Kasası, kullanıcının seçtiği fotoğraf ve videoları uygulama içinde ayrı bir alanda saklamasını sağlayan bir özelliktir. Kasaya eklenen öğeler cihaz üzerinde yerel olarak saklanır ve şifreli tutulur. Backend veya sunucu senkronizasyonu kullanılmaz.',
+      'Kasaya eklenen öğeler kullanıcının cihazında kalır. Del-It bu öğeleri sunucuya yüklemez.',
+      'Kasadaki öğeler uygulama silindiğinde kaybolabilir. Uygulamayı silmeden önce gerekli öğeleri dışarı aktarmak kullanıcının sorumluluğundadır.',
+      'Face ID koruması etkinleştirilirse kimlik doğrulama iOS LocalAuthentication sistemiyle yapılır. Del-It biyometrik veriyi görmez, kaydetmez veya işlemez.',
+      'Kasa içindeki dışarı aktarma işlemleri kullanıcının açık isteğiyle yapılır.',
     ],
   },
   {
-    title: '5. Firebase, Analitik ve Performans Ölçümü',
+    title: '5. Rehber Erişimi',
     paragraphs: [
-      'Del-It, uygulama performansını anlamak, hataları tespit etmek, özelliklerin kullanımını ölçmek ve kullanıcı deneyimini geliştirmek amacıyla Firebase ve Google Analytics for Firebase gibi hizmetlerden yararlanabilir.',
-      'Bu hizmetler uygulama kullanım istatistikleri, ekran ve özellik etkileşimleri, cihaz ve işletim sistemi bilgileri, uygulama sürümü, performans verileri, çökme ve hata/tanı verileri gibi verileri işleyebilir.',
-      'Bu veriler, uygulamanın daha stabil çalışmasını sağlamak, sorunları tespit etmek ve kullanıcı deneyimini iyileştirmek amacıyla kullanılır.',
+      'Del-It, kullanıcı izin verdiğinde rehber kayıtlarını cihaz üzerinde analiz edebilir. Bu analizler tüm kişileri listeleme, aynı isimli kayıtları bulma, aynı numaraya sahip kayıtları bulma, isimsiz veya anlamsız isimli kayıtları ayırma, numarasız kayıtları gösterme ve kullanıcının seçtiği özel filtrelere göre rehber sonuçları oluşturma gibi işlemleri kapsayabilir.',
+      'Kullanıcının açık onayı ile kişiler birleştirilebilir veya silinebilir.',
+      'Del-It rehber içeriklerini sunucuya yüklemez ve reklam/analitik hedefleme için kullanmaz. Rehberde yapılan birleştirme, silme veya düzenleme işlemleri kullanıcının açık onayı olmadan gerçekleşmez.',
     ],
   },
   {
-    title: '6. Premium Satın Alma ve Abonelik Bilgileri',
+    title: '6. Kolaj Özelliği',
     paragraphs: [
-      'Del-It, premium özellikler veya uygulama içi satın alma seçenekleri sunabilir. Satın alma işlemleri Apple App Store ödeme altyapısı üzerinden gerçekleştirilir.',
-      'Del-It, ödeme kartı bilgilerinizi doğrudan toplamaz veya saklamaz. Ödeme işlemleri Apple tarafından yönetilir.',
-      'Uygulama, premium erişimin aktif olup olmadığını kontrol etmek için satın alma durumunuzu veya abonelik durumunuzu işleyebilir.',
+      'Kolaj özelliği, kullanıcının seçtiği fotoğraf veya videolardan cihaz üzerinde görsel tasarım oluşturmasını sağlar. Kolaj projeleri varsayılan olarak kalıcı bir bulut projesi şeklinde saklanmaz.',
+      'Kullanıcı kaydetme veya dışarı aktarma işlemi yaptığında sonuç iOS izinleri ve sistem davranışına uygun şekilde kullanıcının seçtiği alana aktarılır.',
+      'Kolaj oluştururken kullanılan fotoğraf ve videolar reklam hedefleme veya analitik amacıyla gönderilmez.',
     ],
   },
   {
-    title: '7. Verilerin Kullanım Amaçları',
+    title: '7. Reklamlar ve Takip İzni',
     paragraphs: [
-      'İşlenen veriler uygulamanın temel özelliklerini sunmak, fotoğraf ve video temizleme deneyimini sağlamak, reklam göstermek, reklam performansını ölçmek, uygulama performansını analiz etmek, hataları ve çökme sorunlarını tespit etmek, kullanıcı deneyimini iyileştirmek, premium erişim durumunu yönetmek, güvenlik, dolandırıcılık ve kötüye kullanım önlemleri almak ve yasal yükümlülükleri yerine getirmek amacıyla kullanılabilir.',
+      'Del-It ücretsiz kullanıcılara reklam gösterebilir. Reklamlar Yandex Mobile Ads SDK üzerinden sunulabilir. Reklam türleri banner, native, geçiş reklamı ve ödüllü reklam olabilir. Del-It Plus kullanıcılarına reklam gösterilmemesi hedeflenir.',
+      'Ödüllü reklamlar, kullanıcının açık şekilde reklam izlemeyi seçmesi halinde ek hak veya deneme hakkı vermek için kullanılır. Reklam tamamlanmadan hak verilmez.',
+      'Uygulama, App Tracking Transparency (ATT) kapsamında kullanıcıdan takip izni isteyebilir. Kullanıcı izin verirse reklam deneyimi daha kişiselleştirilmiş olabilir. Kullanıcı izin vermezse uygulama çalışmaya devam eder ve reklamlar kişiselleştirilmemiş veya bağlamsal şekilde sunulabilir.',
+      'Del-It fotoğraf, video veya rehber içeriklerini reklam hedefleme için kullanmaz.',
     ],
   },
   {
-    title: '8. Üçüncü Taraf Hizmetler',
+    title: '8. Analitik Servisleri',
     paragraphs: [
-      'Del-It, uygulama işlevlerini sağlamak ve geliştirmek için üçüncü taraf hizmetlerden yararlanabilir.',
-      'Bu hizmetler Google AdMob, Firebase, Google Analytics for Firebase, Apple App Store ve uygulama içi satın alma servislerini içerebilir.',
-      'Bu üçüncü taraf hizmetler, kendi gizlilik politikaları kapsamında veri işleyebilir. Kullanıcıların bu hizmetlerin gizlilik politikalarını ayrıca incelemesi önerilir.',
+      'Del-It, uygulamanın nasıl kullanıldığını anlamak, hataları iyileştirmek ve ürün deneyimini geliştirmek için AppMetrica ve Google Analytics gibi analitik servisleri kullanabilir.',
+      'Analitik olaylar uygulama açılışı, ekran görüntüleme, özellik kullanımı, abonelik veya reklam akışlarına ait teknik durumlar, hata ve performans sinyalleri gibi teknik bilgilerden oluşabilir.',
+      'Analitik kapsamında fotoğraf/video içeriği, dosya adı, EXIF konum bilgisi, thumbnail, medya local identifier, rehber içeriği, kişi adı, telefon numarası veya kişisel galeri bilgisi gönderilmez.',
     ],
   },
   {
-    title: '9. Verilerin Paylaşılması',
+    title: '9. Satın Almalar ve Abonelikler',
     paragraphs: [
-      'Del-It, kullanıcıların fotoğraf ve video içeriklerini üçüncü taraflarla paylaşmaz.',
-      'Ancak uygulamanın çalışması, reklam gösterimi, analiz, performans ölçümü, hata tespiti, satın alma doğrulama ve yasal yükümlülükler kapsamında bazı teknik veriler üçüncü taraf servis sağlayıcılarla işlenebilir.',
-      'Bu paylaşım veya işleme, yalnızca ilgili hizmetin sağlanması ve uygulamanın çalışması için gerekli olduğu ölçüde gerçekleşir.',
+      'Del-It Plus abonelikleri Apple App Store üzerinden yönetilir. Ödeme işlemleri Apple tarafından gerçekleştirilir. Del-It kredi kartı, banka kartı veya ödeme yöntemi detaylarını görmez ve saklamaz.',
+      'Uygulama, kullanıcının Del-It Plus yetkisini doğrulamak için StoreKit üzerinden abonelik durumunu okuyabilir. Abonelik iptali, yenileme ve iade süreçleri Apple kurallarına tabidir.',
     ],
   },
   {
-    title: '10. Veri Güvenliği',
+    title: '10. Yerel Saklama ve Hak Sayaçları',
     paragraphs: [
-      'Del-It, kullanıcı verilerinin güvenliğini korumak için makul teknik ve idari önlemler alır.',
-      'Bununla birlikte, internet veya mobil uygulama üzerinden yapılan hiçbir veri aktarımı veya depolama yöntemi yüzde yüz güvenli değildir. Del-It, verilerinizi korumak için makul önlemler alsa da mutlak güvenlik garanti edilemez.',
+      'Del-It, uygulama tercihlerini, ücretsiz hak sayaçlarını, ödüllü reklam haklarını, bazı istatistikleri ve kullanıcının yerel seçimlerini cihazda saklayabilir.',
+      'Kötüye kullanımı önlemek için bazı ücretsiz hak bilgileri Keychain’de saklanabilir. Keychain verisi uygulama silinip yeniden yüklendiğinde aynı cihazda kalabilir.',
+      'Bu bilgiler fotoğraf, video, rehber içeriği veya kişisel medya verisi içermez; yalnızca hak/limit sayaçları gibi teknik kullanım verileridir.',
     ],
   },
   {
-    title: '11. Çocukların Gizliliği',
+    title: '11. Verilerin Saklanma Süresi',
     paragraphs: [
-      'Del-It, çocuklara özel olarak tasarlanmış bir uygulama değildir. Uygulama, bilerek çocuklardan kişisel veri toplamayı amaçlamaz.',
-      'Ebeveyn veya yasal vasi olarak bir çocuğa ait verinin uygunsuz şekilde işlendiğini düşünüyorsanız bizimle iletişime geçebilirsiniz.',
+      'Fotoğraf/video ve rehber içerikleri Del-It sunucularına yüklenmez.',
+      'Kasa içerikleri cihazda saklanır ve uygulama silindiğinde kaybolabilir.',
+      'Çöp kutusu kayıtları ve istatistikler kullanıcı temizleyene, sistem güncellenene veya uygulama silinene kadar cihazda kalabilir.',
+      'Analitik ve reklam servislerinin saklama süreleri ilgili üçüncü taraf servislerin politikalarına tabidir.',
+      'Satın alma kayıtları Apple tarafından saklanır.',
     ],
   },
   {
-    title: '12. Kullanıcı Hakları ve Tercihleri',
+    title: '12. Üçüncü Taraf Servisler',
     paragraphs: [
-      'Kullanıcılar, cihaz ve uygulama ayarları üzerinden bazı veri işleme tercihlerini yönetebilir.',
-      'iOS Ayarları üzerinden fotoğraf erişim iznini değiştirebilir, takip iznini değiştirebilir, reklam kişiselleştirme tercihlerini cihaz ayarlarından yönetebilir, uygulama bildirimleri veya izinlerini cihaz ayarlarından değiştirebilir ve uygulamayı silerek yerel uygulama verilerini cihazdan kaldırabilirsiniz.',
-      'Verilerinizle ilgili talepleriniz için bizimle iletişime geçebilirsiniz.',
+      'Del-It aşağıdaki üçüncü taraf servisleri kullanabilir: Apple PhotoKit, Apple Contacts, Apple StoreKit, Apple LocalAuthentication, Yandex Mobile Ads, AppMetrica ve Google Analytics / Firebase Analytics.',
+      'Apple PhotoKit fotoğraf ve video izinleri, listeleme ve silme işlemleri için; Apple Contacts rehber izinleri ve kullanıcı onaylı rehber işlemleri için; Apple StoreKit abonelik ve satın alma doğrulama için; Apple LocalAuthentication Face ID / cihaz kimlik doğrulaması için kullanılabilir.',
+      'Yandex Mobile Ads reklam gösterimi ve reklam performansı için; AppMetrica ve Google Analytics / Firebase Analytics uygulama analitiği için kullanılabilir.',
+      'Bu servislerin veri işleme pratikleri kendi gizlilik politikalarına tabidir. Del-It, fotoğraf/video veya rehber içeriğini bu servislerle paylaşmamak üzere tasarlanmıştır.',
     ],
   },
   {
-    title: '13. Uluslararası Veri İşleme',
+    title: '13. Çocukların Gizliliği',
     paragraphs: [
-      'Del-It tarafından kullanılan üçüncü taraf hizmet sağlayıcılar, verileri farklı ülkelerde işleyebilir. Bu durumda veriler, ilgili hizmet sağlayıcının gizlilik politikası ve geçerli yasal düzenlemeler kapsamında işlenebilir.',
+      'Del-It, bilerek çocuklardan kişisel veri toplamayı hedeflemez. Uygulama çocuklara yönelik reklam hedefleme veya çocuk profilleme amacıyla tasarlanmamıştır.',
+      'Bir ebeveyn veya yasal temsilci gizlilikle ilgili bir endişe taşıyorsa bizimle iletişime geçebilir.',
     ],
   },
   {
-    title: '14. Gizlilik Politikasındaki Değişiklikler',
+    title: '14. Kullanıcı Hakları ve Kontroller',
     paragraphs: [
-      'Bu Gizlilik Politikası zaman zaman güncellenebilir. Politika güncellendiğinde yürürlük tarihi değiştirilebilir ve güncel metin bu sayfada yayınlanır.',
-      'Uygulamayı kullanmaya devam etmeniz, güncel Gizlilik Politikası’nı kabul ettiğiniz anlamına gelir.',
+      'Kullanıcı iOS Ayarlar üzerinden fotoğraf erişimini, rehber erişimini ve takip iznini değiştirebilir.',
+      'Kullanıcı uygulama içinden Del-It Plus abonelik ekranına ulaşabilir ve Apple App Store üzerinden aboneliklerini yönetebilir.',
+      'Kullanıcı kasa içeriklerini dışarı aktarabilir veya kasadan çıkarabilir. Çöp kutusundaki öğeleri geri alabilir veya son onayla kalıcı silebilir.',
+      'Del-It’te zorunlu hesap sistemi yoktur. Bu nedenle hesap silme akışına gerek yoktur. Gelecekte hesap sistemi eklenirse uygulama içinden hesap silme akışı sağlanmalıdır.',
     ],
   },
   {
-    title: '15. İletişim',
+    title: '15. Güvenlik',
     paragraphs: [
-      'Bu Gizlilik Politikası veya kişisel verilerinizle ilgili sorularınız için bizimle iletişime geçebilirsiniz.',
-      'Web sitesi: theapdesign.art',
-      'Uygulama: Del-It',
+      'Del-It, gereksiz veri toplamamayı ve hassas içerikleri cihaz içinde tutmayı temel alır. Kasa içerikleri yerel olarak şifreli saklanır. Face ID kullanıldığında biyometrik doğrulama iOS tarafından yapılır; Del-It biyometrik veriyi işlemez.',
+      'Buna rağmen hiçbir dijital sistem mutlak güvenlik garantisi veremez. Kullanıcı, silme ve dışarı aktarma işlemlerinde onay ekranlarını dikkatle kontrol etmelidir.',
+    ],
+  },
+  {
+    title: '16. App Store Gizlilik Beyanları İçin Not',
+    paragraphs: [
+      'App Store Connect gizlilik formu ve PrivacyInfo.xcprivacy dosyası, uygulamada kullanılan SDK’lar ve gerçek veri işleme pratikleriyle tutarlı olmalıdır. Reklam SDK’si, analitik SDK’si veya takip izni kullanılıyorsa App Store gizlilik beyanları buna göre güncellenmelidir.',
+      'Mevcut uygulama davranışına göre fotoğraf ve video erişimi cihaz içinde özellik sağlamak içindir. Rehber erişimi cihaz içinde rehber temizliği içindir. Reklam SDK’si teknik reklam verileri işleyebilir. AppMetrica ve Google Analytics teknik analitik olayları işleyebilir. ATT izni isteniyorsa takip/kişiselleştirilmiş reklam beyanları App Store Connect ile uyumlu olmalıdır.',
+    ],
+  },
+  {
+    title: '17. Politika Güncellemeleri',
+    paragraphs: [
+      'Bu politika zaman zaman güncellenebilir. Uygulamanın veri işleme pratiklerinde, kullanılan SDK’larda, reklam/analitik yapısında veya yeni özelliklerde önemli değişiklik olursa bu metin de güncellenmelidir.',
+    ],
+  },
+  {
+    title: '18. İletişim',
+    paragraphs: [
+      'Gizlilikle ilgili sorularınız için bizimle iletişime geçebilirsiniz.',
+      'E-posta: theapdesign26@gmail.com',
     ],
   },
 ];
