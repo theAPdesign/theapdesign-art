@@ -30,6 +30,7 @@ const product = {
 };
 
 const delitAppStoreUrl = 'https://apps.apple.com/tr/app/del-it/id6780890586?l=tr';
+const delitHeroMockup = '/del-it-hero-mockup.png';
 
 const xoxProduct = {
   title: 'XOX Taktik Arena',
@@ -146,15 +147,18 @@ function ContactPage() {
 
 function DelitPage() {
   return (
-    <main className="delit-page relative min-h-screen overflow-hidden bg-[#F8F7FF] text-[#11121A]">
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
       <DelitPageNav />
       <DelitHero />
-      <DelitStory />
-      <DelitSteps />
-      <DelitProductExperience />
-      <DelitBento />
+      <DelitProblem />
+      <DelitHowItWorks />
+      <DelitFeatures />
+      <DelitMoreFeatures />
       <DelitPrivacy />
       <DelitPlus />
+      <DelitScreens />
       <DelitFaq />
       <DelitFinalCta />
       <DelitLegalLinks variant="full" />
@@ -437,28 +441,21 @@ function ContactForm() {
 function DelitPageNav() {
   const links = [
     ['Özellikler', '#features'],
-    ['Nasıl çalışır?', '#how-it-works'],
+    ['Nasıl Çalışır?', '#how-it-works'],
     ['Gizlilik', '#privacy'],
-    ['Diğer araçlar', '#tools'],
+    ['SSS', '#faq'],
   ];
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-white/55 bg-white/58 px-4 py-3 backdrop-blur-2xl sm:px-8" aria-label="Del-It sayfa navigasyonu">
-      <div className="mx-auto flex max-w-[1320px] items-center gap-3">
-        <a href="/" className="flex min-w-0 items-center gap-3 rounded-full pr-2 focus:outline-none focus:ring-2 focus:ring-[#7747F6]/50">
-          <img src={product.logo} alt="Del-It uygulama ikonu" className="h-11 w-11 rounded-2xl object-cover shadow-soft" />
-          <span className="font-display text-lg font-black tracking-tight">Del-It</span>
-        </a>
-        <div className="ml-auto hidden items-center gap-1 rounded-full border border-white/70 bg-white/58 p-1 shadow-[0_16px_50px_rgba(67,136,255,0.10)] md:flex">
-          {links.map(([label, href]) => (
-            <a key={href} href={href} className="rounded-full px-4 py-2 text-sm font-bold text-[#777784] transition hover:bg-white hover:text-[#11121A] focus:outline-none focus:ring-2 focus:ring-[#4388FF]/45">
-              {label}
-            </a>
-          ))}
-        </div>
-        <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="ml-auto inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#4388FF_0%,#7747F6_48%,#DC28C8_100%)] px-4 text-sm font-black text-white shadow-[0_14px_38px_rgba(119,71,246,0.25)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_44px_rgba(119,71,246,0.30)] focus:outline-none focus:ring-2 focus:ring-[#7747F6]/45 sm:px-5" aria-label="Del-It uygulamasını App Store’da aç">
-          <span className="hidden sm:inline">App Store’dan İndir</span>
-          <span className="sm:hidden">İndir</span>
+    <nav className="sticky top-20 z-40 border-b border-black/8 bg-[#faf8f5]/80 px-5 py-3 backdrop-blur-2xl sm:px-8" aria-label="Del-It sayfa navigasyonu">
+      <div className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto">
+        {links.map(([label, href]) => (
+          <a key={href} href={href} className="shrink-0 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink/65 shadow-soft transition hover:-translate-y-0.5 hover:text-ink focus:outline-none focus:ring-2 focus:ring-electric/60">
+            {label}
+          </a>
+        ))}
+        <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="ml-auto inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60" aria-label="Del-It uygulamasını App Store’da aç">
+          App Store’da İndir
           <ExternalLink size={15} />
         </a>
       </div>
@@ -468,86 +465,79 @@ function DelitPageNav() {
 
 function DelitHero() {
   return (
-    <section className="relative z-10 px-4 pb-14 pt-12 sm:px-8 lg:pb-20 lg:pt-16">
-      <div className="pointer-events-none absolute left-1/2 top-10 h-[560px] w-[min(980px,92vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_38%_42%,rgba(67,136,255,0.22),transparent_34%),radial-gradient(circle_at_68%_34%,rgba(119,71,246,0.20),transparent_32%),radial-gradient(circle_at_56%_72%,rgba(220,40,200,0.14),transparent_34%)] blur-2xl" />
-      <div className="relative mx-auto grid max-w-[1320px] items-center gap-8 lg:grid-cols-[0.92fr_1.08fr]">
-        <div className="scroll-reveal relative z-10 max-w-3xl lg:pt-10">
-          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/76 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-[#7747F6] shadow-[0_18px_60px_rgba(119,71,246,0.10)]">
-            <ShieldCheck size={15} />
-            Fotoğrafların cihazında kalır
+    <section className="relative z-10 px-5 pb-12 pt-12 sm:px-8 lg:pb-16 lg:pt-16">
+      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+        <div className="scroll-reveal max-w-3xl">
+          <p className="mb-5 inline-flex rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-ink/55 shadow-soft">
+            iPhone için galeri düzenleme
           </p>
-          <h1 className="font-display text-[clamp(3.15rem,7vw,7.55rem)] font-black leading-[0.94] tracking-tight">
-            Galerin hafiflesin.
-            <span className="block bg-[linear-gradient(135deg,#4388FF_0%,#7747F6_48%,#DC28C8_100%)] bg-clip-text text-transparent">Anıların sende kalsın.</span>
+          <h1 className="font-display text-[clamp(3rem,7vw,7.5rem)] font-black leading-[0.92]">
+            Galerini temizle.
+            <span className="block bg-gradient-to-r from-sky-500 via-violet-500 to-rose-500 bg-clip-text text-transparent">
+              Önemli anılarını koru.
+            </span>
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[#777784] sm:text-xl">
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/65">
             Fotoğraf ve videolarını hızlıca gözden geçir, gereksiz olanları güvenli çöp kutusuna ekle ve
             yalnızca sen hazır olduğunda sil.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#4388FF_0%,#7747F6_48%,#DC28C8_100%)] px-7 text-sm font-black text-white shadow-[0_18px_48px_rgba(119,71,246,0.28)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_56px_rgba(119,71,246,0.34)] focus:outline-none focus:ring-2 focus:ring-[#7747F6]/50" aria-label="Del-It uygulamasını App Store’da aç">
-              App Store’dan İndir
+            <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60" aria-label="Del-It uygulamasını App Store’da aç">
+              App Store’da İndir
               <Download size={18} />
             </a>
-            <a href="#how-it-works" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-white/80 bg-white/78 px-7 text-sm font-black text-[#11121A] shadow-[0_16px_45px_rgba(17,18,26,0.07)] transition hover:-translate-y-0.5 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#4388FF]/45">
-              Nasıl çalıştığını gör
+            <a href="#how-it-works" className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-black/8 bg-white px-7 text-sm font-bold text-ink transition hover:-translate-y-1 hover:bg-[#fbfaf7] focus:outline-none focus:ring-2 focus:ring-electric/60">
+              Nasıl Çalışır?
               <ArrowRight size={18} />
             </a>
           </div>
-          <p className="mt-5 text-sm font-bold text-[#777784]">
-            iPhone için · Ücretsiz indir · Uygulama içi satın alma içerir
+          <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-semibold text-ink/65 shadow-soft">
+            <ShieldCheck size={17} className="text-violet-500" />
+            Fotoğrafların ve videoların cihazında kalır.
           </p>
-          <div className="mt-10 inline-flex items-center gap-3 rounded-[1.4rem] border border-white/70 bg-white/62 px-4 py-3 shadow-[0_18px_60px_rgba(67,136,255,0.10)] backdrop-blur">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#28C887]" />
-            <span className="text-sm font-black text-[#11121A]">Karar senin. Son onay her zaman sende.</span>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {['Son karar senin', 'Güvenli çöp kutusu', 'Hesap gerekmez'].map((item) => (
+              <span key={item} className="rounded-full border border-black/8 bg-white/85 px-4 py-2 text-sm font-semibold text-ink/65 shadow-soft">
+                {item}
+              </span>
+            ))}
           </div>
         </div>
-        <div className="scroll-reveal relative z-0 mx-auto w-full max-w-[720px] lg:-ml-8">
-          <DelItGalleryOrbit />
+        <div className="scroll-reveal relative mx-auto min-h-[520px] w-full max-w-[590px] sm:min-h-[650px]">
+          <div className="absolute left-[4%] top-[8%] h-56 w-56 rounded-full bg-sky-300/35 blur-3xl sm:h-72 sm:w-72" />
+          <div className="absolute right-[4%] top-[18%] h-52 w-52 rounded-full bg-violet-300/30 blur-3xl sm:h-72 sm:w-72" />
+          <div className="absolute bottom-[8%] left-[20%] h-48 w-48 rounded-full bg-rose-300/28 blur-3xl sm:h-64 sm:w-64" />
+          <div className="absolute inset-x-8 top-[18%] h-44 rounded-full bg-gradient-to-r from-sky-200/35 via-violet-200/30 to-rose-200/35 blur-3xl" />
+          <img
+            src={delitHeroMockup}
+            alt="Del-It hızlı temizleme ekranını gösteren iPhone mockup"
+            className="relative z-10 mx-auto h-auto w-full max-w-[520px] drop-shadow-[0_34px_80px_rgba(124,88,255,0.22)]"
+            fetchPriority="high"
+          />
         </div>
       </div>
     </section>
   );
 }
 
-function DelitStory() {
-  const stages = [
-    {
-      title: 'Karmaşa',
-      text: 'Ekran görüntüleri, tekrar çekimler ve büyük videolar galeride sessizce birikir.',
-      visual: <MessyGalleryIllustration />,
-    },
-    {
-      title: 'Karar',
-      text: 'Sola veya sağa kaydır. Kararını saniyeler içinde ver.',
-      visual: <SwipeDecisionIllustration />,
-    },
-    {
-      title: 'Son kontrol',
-      text: 'Hiçbir şey hemen silinmez. Son kontrolü çöp kutusunda yaparsın.',
-      visual: <SecureTrashIllustration />,
-    },
+function DelitProblem() {
+  const problems = [
+    ['Tekrar tekrar çekilen fotoğraflar', Images, 'from-sky-100 via-white to-violet-100', 'text-sky-600'],
+    ['Unutulan ekran görüntüleri', Smartphone, 'from-violet-100 via-white to-rose-100', 'text-violet-600'],
+    ['Büyük yer kaplayan videolar', BarChart3, 'from-rose-100 via-white to-sky-100', 'text-rose-500'],
   ];
 
   return (
-    <section className="relative z-10 px-4 py-16 sm:px-8">
-      <div className="mx-auto max-w-[1240px]">
-        <div className="scroll-reveal max-w-4xl">
-          <p className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#7747F6]">Problemden çözüme</p>
-          <h2 className="font-display text-4xl font-black leading-[0.98] tracking-tight sm:text-6xl">
-            Binlerce fotoğraf.
-            <span className="block">Tek tek açmak zorunda değilsin.</span>
-          </h2>
-        </div>
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          {stages.map((stage, index) => (
-            <article key={stage.title} className={`scroll-reveal relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/78 p-5 shadow-[0_22px_70px_rgba(67,136,255,0.10)] backdrop-blur ${index === 1 ? 'lg:-mt-8' : ''}`}>
-              <div className="mb-5 flex items-center justify-between">
-                <span className="font-display text-5xl font-black text-[#11121A]/10">0{index + 1}</span>
-                <span className="rounded-full bg-[#F2F5FF] px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-[#777784]">{stage.title}</span>
+    <section className="relative z-10 px-5 py-12 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro eyebrow="Galeri neden bu kadar hızlı doluyor?" title="Binlerce fotoğraf. Aynı kareden onlarca tane." description="Ekran görüntüleri, tekrar çekimler, unutulmuş videolar ve artık ihtiyaç duymadığın dosyalar zamanla galerinde birikir. Del-It bu kalabalığı yorucu bir işe dönüştürmeden azaltmana yardımcı olur." />
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {problems.map(([title, Icon, gradient, iconColor]) => (
+            <article key={title} className={`scroll-reveal rounded-[1.5rem] border border-black/8 bg-gradient-to-br ${gradient} p-6 shadow-soft`}>
+              <div className={`grid h-12 w-12 place-items-center rounded-2xl border border-black/8 bg-white/78 ${iconColor}`}>
+                <Icon size={22} />
               </div>
-              {stage.visual}
-              <p className="mt-6 text-base font-semibold leading-7 text-[#777784]">{stage.text}</p>
+              <h3 className="mt-7 font-display text-2xl font-black leading-tight">{title}</h3>
             </article>
           ))}
         </div>
@@ -556,26 +546,33 @@ function DelitStory() {
   );
 }
 
-function DelitSteps() {
+function DelitHowItWorks() {
   const steps = [
-    ['01', 'Gözden geçir', 'Fotoğraf ve videolarını büyük ve net önizlemelerle incele.', <ReviewIllustration />],
-    ['02', 'Karar ver', 'Saklamak istediklerini sağa, ayırmak istediklerini sola kaydır.', <SwipeDecisionIllustration compact />],
-    ['03', 'Son kez kontrol et', 'Del-It çöp kutusunu aç ve yalnızca hazır olduğunda kalıcı silmeyi onayla.', <SecureTrashIllustration compact />],
+    ['01', 'Gözden geçir', 'Fotoğraf ve videolarını tam ekran, dikkat dağıtmayan bir akışta görüntüle.', Eye],
+    ['02', 'Kaydırarak karar ver', 'Sola kaydırarak çöpe ekle, sağa kaydırarak sakla.', MoveHorizontal],
+    ['03', 'Son kez kontrol et', 'Seçtiklerin hemen silinmez. Del-It Çöp Kutusu’nda son kontrolünü yapar, yalnızca onayladığında kalıcı olarak silersin.', CheckCircle2],
   ];
 
   return (
-    <section id="how-it-works" className="relative z-10 scroll-mt-28 px-4 py-16 sm:px-8">
-      <div className="mx-auto max-w-[1240px]">
-        <SectionIntro eyebrow="Üç harekette temizlik" title="Temizlemek basit. Kontrol tamamen sende." />
-        <div className="mt-11 grid gap-5 lg:grid-cols-3">
-          {steps.map(([number, title, description, visual]) => (
-            <article key={title} className="scroll-reveal rounded-[2rem] border border-white/70 bg-white/82 p-5 shadow-[0_22px_70px_rgba(17,18,26,0.06)]">
-              <div className="min-h-[220px] rounded-[1.6rem] bg-[#F2F5FF] p-4">
-                {visual}
+    <section id="how-it-works" className="relative z-10 scroll-mt-36 px-5 py-12 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro eyebrow="Nasıl çalışır?" title="Karar senin. Del-It sadece hızlandırır." />
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          {steps.map(([number, title, description, Icon], index) => (
+            <article key={title} className="scroll-reveal rounded-[1.6rem] border border-black/8 bg-white p-6 shadow-soft">
+              <div className="flex items-center justify-between gap-4">
+                <span className="font-display text-4xl font-black text-ink/18">{number}</span>
+                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-sky-100 to-rose-100 text-ink">
+                  <Icon size={22} />
+                </span>
               </div>
-              <p className="mt-6 font-display text-5xl font-black text-[#7747F6]/18">{number}</p>
-              <h3 className="mt-2 font-display text-2xl font-black">{title}</h3>
-              <p className="mt-3 text-base leading-7 text-[#777784]">{description}</p>
+              <h3 className="mt-7 font-display text-2xl font-black">{title}</h3>
+              <p className="mt-3 text-base leading-7 text-ink/64">{description}</p>
+              {index === 2 && (
+                <div className="mt-5 rounded-[1.1rem] border border-violet-200 bg-violet-50 px-4 py-3 text-sm font-bold text-violet-700">
+                  Hemen silinmez. Son onay senden gelir.
+                </div>
+              )}
             </article>
           ))}
         </div>
@@ -584,84 +581,56 @@ function DelitSteps() {
   );
 }
 
-function DelitProductExperience() {
-  const screens = [
-    ['Ana Sayfa', 'Temizlik akışına, galeriye ve diğer araçlara tek yerden ulaş.', '#7747F6'],
-    ['Galeri', 'Fotoğraf ve videolarını kategorilere göre görüntüle, tek tek veya toplu seç.', '#4388FF'],
-    ['Kasa', 'Özel tutmak istediğin içerikleri uygulama içinde ayrı bir alanda sakla.', '#DC28C8'],
-    ['Rehber', 'Aynı isimleri, aynı numaraları ve eksik kayıtları daha kolay bul.', '#7747F6'],
-    ['Kolaj', 'Fotoğraflarını farklı şablonlarla tek bir kompozisyonda birleştir.', '#FF8A32'],
+function DelitFeatures() {
+  const features = [
+    ['Hızlı Temizlik', 'Fotoğraf ve videolarını kaydırarak hızlıca gözden geçir. Gereksizleri ayırırken önemli anılarını koru.', MoveHorizontal, 'lg:col-span-2', 'from-sky-100 via-white to-violet-100', 'bg-sky-500'],
+    ['Güvenli Çöp Kutusu', 'Sola kaydırdığın öğeler hemen silinmez. Son kararını vermeden önce hepsini yeniden kontrol edebilirsin.', Trash2, '', 'from-rose-100 via-white to-violet-100', 'bg-rose-500'],
+    ['Galeri Görünümü', 'Fotoğraf ve videolarını düzenli bir görünümde incele ve ihtiyacın olan içeriklere daha kolay ulaş.', Images, '', 'from-white via-sky-50 to-white', 'bg-violet-500'],
+    ['Temizlik İstatistikleri', 'Bugün ve toplamda kaç öğe temizlediğini, ne kadar depolama alanı kazandığını takip et.', BarChart3, 'lg:col-span-2', 'from-violet-100 via-white to-rose-100', 'bg-ink'],
   ];
-  const [active, setActive] = React.useState(0);
-  const [label, description, color] = screens[active];
 
   return (
-    <section className="relative z-10 px-4 py-16 sm:px-8">
-      <div className="mx-auto max-w-[1240px]">
-        <SectionIntro eyebrow="Gerçek ürün deneyimi" title="Del-It’i yakından gör." description="Ana akışlara, galeri araçlarına ve düzenleme bölümlerine tek bir ritim içinde bak." />
-        <div className="scroll-reveal mt-10 grid gap-8 rounded-[2.4rem] border border-white/70 bg-white/78 p-5 shadow-[0_24px_80px_rgba(67,136,255,0.12)] backdrop-blur lg:grid-cols-[0.95fr_1.05fr] lg:p-8">
-          <div className="relative min-h-[520px] overflow-hidden rounded-[2rem] bg-[#F2F5FF] p-5">
-            <div className="absolute inset-0 opacity-60" style={{ background: `radial-gradient(circle at 50% 30%, ${color}35, transparent 42%)` }} />
-            <PhonePreview label={label} color={color} />
-          </div>
-          <div className="flex flex-col justify-center">
-            <div className="flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Del-It ekran bölümleri">
-              {screens.map(([item], index) => (
-                <button
-                  key={item}
-                  type="button"
-                  role="tab"
-                  aria-selected={active === index}
-                  aria-controls="delit-screen-panel"
-                  onClick={() => setActive(index)}
-                  className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-black transition focus:outline-none focus:ring-2 focus:ring-[#4388FF]/45 ${active === index ? 'text-white shadow-[0_14px_36px_rgba(119,71,246,0.22)]' : 'bg-[#F2F5FF] text-[#777784] hover:bg-white'}`}
-                  style={active === index ? { background: color } : undefined}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-            <div id="delit-screen-panel" role="tabpanel" className="mt-10">
-              <p className="text-sm font-black uppercase tracking-[0.24em]" style={{ color }}>{label}</p>
-              <h3 className="mt-3 font-display text-4xl font-black leading-tight sm:text-5xl">Uygulama içinde sade, hızlı ve kontrollü akış.</h3>
-              <p className="mt-5 text-lg leading-8 text-[#777784]">{description}</p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {['Toplu seçim desteklenir', 'Son onay korunur', 'İçerikler cihazda kalır', 'Hesap zorunlu değil'].map((item) => (
-                  <span key={item} className="rounded-[1.1rem] border border-white/70 bg-white px-4 py-3 text-sm font-black text-[#11121A] shadow-[0_12px_36px_rgba(17,18,26,0.05)]">
-                    {item}
-                  </span>
-                ))}
+    <section id="features" className="relative z-10 scroll-mt-36 px-5 py-12 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro eyebrow="Temel özellikler" title="Galerini kendi hızında düzenle." />
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          {features.map(([title, description, Icon, className, gradient, iconBg]) => (
+            <article key={title} className={`scroll-reveal rounded-[1.7rem] border border-black/8 bg-gradient-to-br ${gradient} p-6 shadow-soft ${className}`}>
+              <div className={`grid h-12 w-12 place-items-center rounded-2xl ${iconBg} text-white shadow-soft`}>
+                <Icon size={22} />
               </div>
-            </div>
-          </div>
+              <h3 className="mt-8 font-display text-3xl font-black leading-tight">{title}</h3>
+              <p className="mt-3 max-w-2xl text-base leading-7 text-ink/64">{description}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function DelitBento() {
+function DelitMoreFeatures() {
   const cards = [
-    ['Hızlı Temizlik', 'Fotoğraf ve videoları kaydırarak ayır.', <SwipeDecisionIllustration compact />, 'lg:col-span-2', '#7747F6'],
-    ['Galeri', 'Kategorilerle düzenli bak.', <GalleryMiniIllustration />, '', '#4388FF'],
-    ['Rehber', 'Benzer kayıtları incele.', <ContactMergeIllustration />, '', '#7747F6'],
-    ['Kasa', 'Özel içerikleri ayrı tut.', <VaultIllustration />, '', '#DC28C8'],
-    ['Kolaj', 'Fotoğrafları kompozisyona dönüştür.', <CollageIllustration />, 'lg:row-span-2', '#6D5DF6'],
-    ['İstatistikler', 'Temizlik ilerlemeni takip et.', <StatisticsIllustration />, 'lg:col-span-2', '#FF8A32'],
+    ['Medya Kasası', 'Özel fotoğraf ve videolarını cihazında tutulan, Face ID ile korunabilen ayrı bir alanda sakla.', 'Kasa içerikleri sunucuya yüklenmez. Uygulama silinirse kasadaki içerikler kaybolabilir.', LockKeyhole, 'from-violet-100 via-white to-fuchsia-100', 'text-violet-600'],
+    ['Rehber Temizliği', 'Yinelenen veya düzenlenmesi gereken kişileri incele, rehberindeki karmaşayı kendi onayınla düzenle.', 'Rehber işlemleri kullanıcının açık onayıyla gerçekleştirilir.', UsersRound, 'from-sky-100 via-white to-blue-100', 'text-sky-600'],
+    ['Kolaj', 'Fotoğraflarını farklı şablonlarla bir araya getir, kişiselleştir ve galerine kaydet.', 'Oluşturduğun kolajı galerine kaydedebilirsin.', LayoutTemplate, 'from-rose-100 via-white to-orange-100', 'text-rose-500'],
   ];
 
   return (
-    <section id="features" className="relative z-10 scroll-mt-28 px-4 py-16 sm:px-8">
-      <div className="mx-auto max-w-[1240px]">
-        <SectionIntro eyebrow="Özellik bento alanı" title="Galeriden daha fazlası." />
-        <div id="tools" className="mt-10 grid gap-5 scroll-mt-28 lg:grid-cols-3">
-          {cards.map(([title, description, visual, className, color]) => (
-            <article key={title} className={`scroll-reveal overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 p-5 shadow-[0_22px_70px_rgba(17,18,26,0.06)] ${className}`}>
-              <div className="rounded-[1.6rem] bg-[#F2F5FF] p-4">
-                {visual}
+    <section className="relative z-10 px-5 py-12 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro eyebrow="Daha fazlası" title="Galerinden fazlasını düzenle." />
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          {cards.map(([title, description, note, Icon, gradient, iconColor]) => (
+            <article key={title} className={`scroll-reveal overflow-hidden rounded-[1.7rem] border border-black/8 bg-gradient-to-br ${gradient} p-6 shadow-soft`}>
+              <div className={`grid h-12 w-12 place-items-center rounded-2xl border border-black/8 bg-white ${iconColor}`}>
+                <Icon size={24} />
               </div>
-              <p className="mt-6 text-sm font-black uppercase tracking-[0.2em]" style={{ color }}>{title}</p>
-              <p className="mt-3 max-w-xl text-lg font-bold leading-7 text-[#11121A]">{description}</p>
+              <h3 className="mt-8 font-display text-3xl font-black leading-tight">{title}</h3>
+              <p className="mt-3 text-base leading-7 text-ink/66">{description}</p>
+              <p className="mt-5 rounded-[1.1rem] border border-black/8 bg-white/72 px-4 py-3 text-sm font-semibold leading-6 text-ink/58">
+                {note}
+              </p>
             </article>
           ))}
         </div>
@@ -672,32 +641,35 @@ function DelitBento() {
 
 function DelitPrivacy() {
   const points = [
-    'Sunucuya yükleme yok',
-    'Otomatik kalıcı silme yok',
-    'Son onay her zaman sende',
+    'Medya içerikleri sunucuya yüklenmez',
+    'Hesap oluşturmak zorunlu değildir',
+    'Kalıcı silme için son onay gerekir',
+    'Face ID doğrulaması iOS tarafından gerçekleştirilir',
   ];
 
   return (
-    <section id="privacy" className="relative z-10 scroll-mt-28 px-4 py-16 sm:px-8">
-      <div className="mx-auto max-w-[1240px]">
-        <div className="scroll-reveal overflow-hidden rounded-[2.4rem] border border-white/70 bg-[#F2F5FF] p-5 shadow-[0_24px_90px_rgba(67,136,255,0.14)]">
-          <div className="grid gap-8 rounded-[1.9rem] bg-[linear-gradient(135deg,rgba(255,255,255,0.86),rgba(248,247,255,0.76))] p-6 sm:p-9 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+    <section id="privacy" className="relative z-10 scroll-mt-36 px-5 py-12 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="scroll-reveal overflow-hidden rounded-[2rem] border border-black/8 bg-white p-5 shadow-glow">
+          <div className="grid gap-8 rounded-[1.6rem] bg-gradient-to-br from-sky-100 via-white to-violet-100 p-6 sm:p-9 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
-              <p className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#4388FF]">Gizlilik</p>
-              <h2 className="font-display text-4xl font-black leading-[0.98] tracking-tight sm:text-6xl">Fotoğrafların cihazında kalır.</h2>
-              <p className="mt-5 text-base leading-8 text-[#777784] sm:text-lg">
-                Del-It fotoğraf ve video içeriklerini bir sunucuya yüklemez. Temizlik akışı cihazında gerçekleşir.
+              <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">Gizlilik önce gelir</p>
+              <h2 className="font-display text-4xl font-black leading-none sm:text-6xl">
+                Fotoğrafların sana ait. Öyle de kalır.
+              </h2>
+              <p className="mt-5 text-base leading-8 text-ink/66 sm:text-lg">
+                Del-It’in temel işlemleri cihazında gerçekleşir. Fotoğraf, video ve rehber içeriklerin Del-It
+                sunucularına yüklenmez. Ne temizleyeceğine ve hangi izinleri vereceğine yalnızca sen karar verirsin.
               </p>
-              <a href="/del-it/gizlilik-politikasi" className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/80 bg-white px-6 text-sm font-black text-[#11121A] shadow-[0_16px_45px_rgba(17,18,26,0.06)] transition hover:-translate-y-0.5 hover:bg-[#F8F7FF] focus:outline-none focus:ring-2 focus:ring-[#4388FF]/45">
+              <a href="/del-it/gizlilik-politikasi" className="mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-full border border-black/8 bg-white px-6 text-sm font-bold text-ink transition hover:-translate-y-1 hover:bg-[#fbfaf7] focus:outline-none focus:ring-2 focus:ring-electric/60">
                 Gizlilik Politikası
                 <ArrowRight size={17} />
               </a>
             </div>
-            <PrivacySphereIllustration />
             <div className="grid gap-3">
               {points.map((point) => (
-                <div key={point} className="flex items-center gap-3 rounded-[1.2rem] border border-white/70 bg-white/78 px-4 py-4 text-sm font-black text-[#11121A] shadow-[0_12px_40px_rgba(17,18,26,0.05)]">
-                  <ShieldCheck size={19} className="shrink-0 text-[#28C887]" />
+                <div key={point} className="flex items-center gap-3 rounded-[1.2rem] border border-black/8 bg-white/80 px-4 py-4 text-sm font-bold text-ink/70 shadow-soft">
+                  <ShieldCheck size={19} className="shrink-0 text-violet-500" />
                   {point}
                 </div>
               ))}
@@ -713,27 +685,26 @@ function DelitPlus() {
   const benefits = ['Reklamsız kullanım', 'Sınırsız temizlik hakkı', 'Gelişmiş galeri filtreleri'];
 
   return (
-    <section className="relative z-10 px-4 py-16 sm:px-8">
-      <div className="mx-auto max-w-[1240px]">
-        <div className="scroll-reveal grid gap-8 overflow-hidden rounded-[2.3rem] border border-white/70 bg-[#F2F5FF] p-6 shadow-[0_24px_80px_rgba(119,71,246,0.12)] sm:p-8 lg:grid-cols-[auto_1fr_auto] lg:items-center">
-          <CrownIllustration />
+    <section className="relative z-10 px-5 py-12 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="scroll-reveal grid gap-6 overflow-hidden rounded-[1.8rem] border border-black/8 bg-gradient-to-br from-violet-100 via-white to-sky-100 p-6 shadow-soft sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <p className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#7747F6]">Del-It Plus</p>
-            <h2 className="font-display text-4xl font-black leading-tight sm:text-5xl">Daha fazlasını keşfet.</h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-[#777784]">
-              Del-It Plus ile kullanım sınırlarını genişlet ve tüm özelliklere daha rahat ulaş.
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">Del-It Plus</p>
+            <h2 className="font-display text-4xl font-black leading-tight sm:text-5xl">Daha özgür bir Del-It deneyimi.</h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-ink/64">
+              Daha geniş kullanım hakları ve reklamsız bir deneyimle galerini kesintisiz düzenle.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {benefits.map((benefit) => (
-                <span key={benefit} className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white px-4 py-2 text-sm font-black text-[#11121A]">
-                  <Check size={15} className="text-[#28C887]" />
+                <span key={benefit} className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-[#fbfaf7] px-4 py-2 text-sm font-bold text-ink/65">
+                  <Check size={15} className="text-violet-500" />
                   {benefit}
                 </span>
               ))}
             </div>
           </div>
-          <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#4388FF_0%,#7747F6_48%,#DC28C8_100%)] px-7 text-sm font-black text-white shadow-[0_18px_48px_rgba(119,71,246,0.24)] transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#7747F6]/45" aria-label="Del-It uygulamasını App Store’da incele">
-            Del-It’i App Store’da Gör
+          <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60" aria-label="Del-It uygulamasını App Store’da incele">
+            App Store’da İncele
             <ExternalLink size={18} />
           </a>
         </div>
@@ -742,44 +713,51 @@ function DelitPlus() {
   );
 }
 
-function DelitFaq() {
-  const faqs = [
-    ['Sola kaydırdığım fotoğraflar hemen silinir mi?', 'Hayır. Sola kaydırdığın öğeler önce Del-It Çöp Kutusu’na eklenir. Buradan geri alabilir veya son kontrolünden sonra silebilirsin.'],
-    ['Fotoğraf ve videolarım sunucuya yüklenir mi?', 'Hayır. Del-It’in temel medya işlemleri cihazında gerçekleşir ve galeri içeriklerin Del-It sunucularına yüklenmez.'],
-    ['Birden fazla öğeyi aynı anda seçebilir miyim?', 'Evet. Galeri görünümünde içerikleri tek tek inceleyebilir veya toplu seçimle düzenleme akışını hızlandırabilirsin.'],
-    ['Del-It ücretsiz mi?', 'Del-It temel özellikleriyle ücretsiz olarak kullanılabilir. Kullanım limitleri ve Del-It Plus avantajları uygulama içinde gösterilir.'],
-    ['Kasa bölümündeki içerikler nerede saklanır?', 'Kasa içerikleri cihazında ve uygulamaya bağlı olarak saklanır. Del-It’i silersen kasadaki içerikler de kaybolabilir; önemli içeriklerini uygulamayı silmeden önce dışarı aktarmalısın.'],
-  ];
-  const [openIndex, setOpenIndex] = React.useState(0);
+function DelitScreens() {
+  const screens = ['Ana sayfa', 'Kaydırarak temizlik', 'Del-It Çöp Kutusu', 'Galeri', 'Medya Kasası', 'Rehber Temizliği', 'Kolaj', 'İstatistikler'];
 
   return (
-    <section id="faq" className="relative z-10 scroll-mt-28 px-4 py-16 sm:px-8">
-      <div className="mx-auto max-w-[980px]">
+    <section className="relative z-10 px-5 py-12 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro eyebrow="Uygulama ekranları" title="Del-It’e yakından bak." description="Projede gerçek Del-It ekran görüntüsü bulunmadığı için bu alanlar açıkça placeholder olarak bırakıldı." />
+        <div className="mt-10 flex snap-x gap-5 overflow-x-auto pb-4 lg:grid lg:grid-cols-4 lg:overflow-visible">
+          {screens.map((screen) => (
+            <article key={screen} className="scroll-reveal w-[76vw] max-w-[310px] shrink-0 snap-start rounded-[1.5rem] border border-black/8 bg-white p-4 shadow-soft lg:w-auto lg:max-w-none">
+              <ScreenshotPlaceholder title={screen} note="Screenshot placeholder" accent="from-sky-100 via-white to-rose-100" />
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DelitFaq() {
+  const faqs = [
+    ['Del-It fotoğraflarımı otomatik olarak siliyor mu?', 'Hayır. Hangi fotoğraf veya videonun silineceğine sen karar verirsin. Kalıcı silme işlemi yalnızca son onayından sonra başlatılır.'],
+    ['Sola kaydırdığım fotoğraflar hemen silinir mi?', 'Hayır. Sola kaydırdığın öğeler önce Del-It Çöp Kutusu’na eklenir. Buradan geri alabilir veya son kontrolünden sonra silebilirsin.'],
+    ['Fotoğraf ve videolarım sunucuya yükleniyor mu?', 'Hayır. Del-It’in temel medya işlemleri cihazında gerçekleşir ve galeri içeriklerin Del-It sunucularına yüklenmez.'],
+    ['Medya Kasası nasıl korunuyor?', 'Kasa içerikleri cihazında yerel olarak saklanır. Face ID korumasını etkinleştirdiğinde doğrulama iOS tarafından gerçekleştirilir.'],
+    ['Uygulamayı silersem kasadaki içerikler ne olur?', 'Kasa içerikleri cihazda ve uygulamaya bağlı olarak saklandığı için Del-It’i silersen kasadaki içerikler de kaybolabilir. Uygulamayı silmeden önce önemli içeriklerini dışarı aktarmalısın.'],
+    ['Rehber temizliği kişilerimi otomatik olarak değiştirir mi?', 'Hayır. Rehberde birleştirme, düzenleme veya silme gibi işlemler kullanıcının açık onayıyla gerçekleştirilir.'],
+    ['Del-It ücretsiz mi?', 'Del-It temel özellikleriyle ücretsiz olarak kullanılabilir. Kullanım limitleri ve Del-It Plus avantajları uygulama içinde gösterilir.'],
+    ['Del-It için hesap oluşturmam gerekiyor mu?', 'Hayır. Del-It’i kullanmak için zorunlu bir hesap sistemi bulunmaz.'],
+  ];
+
+  return (
+    <section id="faq" className="relative z-10 scroll-mt-36 px-5 py-12 sm:px-8">
+      <div className="mx-auto max-w-7xl">
         <SectionIntro eyebrow="SSS" title="Merak ettiklerin." />
         <div className="mt-10 grid gap-4">
-          {faqs.map(([q, a], index) => {
-            const isOpen = openIndex === index;
-            const panelId = `delit-faq-${index}`;
-            return (
-              <article key={q} className="scroll-reveal rounded-[1.6rem] border border-white/70 bg-white/82 shadow-[0_18px_54px_rgba(17,18,26,0.06)]">
-                <button
-                  type="button"
-                  aria-expanded={isOpen}
-                  aria-controls={panelId}
-                  onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                  className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left font-display text-xl font-black text-[#11121A] focus:outline-none focus:ring-2 focus:ring-[#4388FF]/45 sm:px-6"
-                >
+          {faqs.map(([q, a]) => (
+            <details key={q} className="group rounded-[1.4rem] border border-black/8 bg-white p-6 shadow-soft">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl font-black text-ink focus:outline-none focus:ring-2 focus:ring-electric/60">
                 <span>{q}</span>
-                  <ChevronRight className={`shrink-0 transition duration-300 ${isOpen ? 'rotate-90 text-[#7747F6]' : 'text-[#777784]'}`} size={20} />
-                </button>
-                <div id={panelId} role="region" className={`grid transition-[grid-template-rows] duration-300 ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
-                  <div className="overflow-hidden">
-                    <p className="px-5 pb-5 text-base leading-8 text-[#777784] sm:px-6">{a}</p>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
+                <ChevronRight className="shrink-0 transition duration-300 group-open:rotate-90" size={20} />
+              </summary>
+              <p className="mt-4 max-w-4xl text-base leading-8 text-ink/62">{a}</p>
+            </details>
+          ))}
         </div>
       </div>
     </section>
@@ -788,335 +766,29 @@ function DelitFaq() {
 
 function DelitFinalCta() {
   return (
-    <section className="relative z-10 px-4 py-16 sm:px-8">
-      <div className="mx-auto max-w-[1240px]">
-        <div className="scroll-reveal relative overflow-hidden rounded-[2.6rem] border border-white/70 bg-white p-6 text-center shadow-[0_28px_90px_rgba(119,71,246,0.14)] sm:p-10">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(67,136,255,0.16),transparent_28%),radial-gradient(circle_at_78%_12%,rgba(220,40,200,0.12),transparent_26%),radial-gradient(circle_at_52%_100%,rgba(119,71,246,0.14),transparent_32%)]" />
-          <FinalCardsIllustration />
-          <div className="relative z-10 mx-auto mt-4 max-w-3xl">
-            <p className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#7747F6]">Başlamak kolay</p>
-            <h2 className="font-display text-4xl font-black leading-tight tracking-tight sm:text-6xl">
-              Galerinde yer açmaya bugün başla.
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#777784]">
-              Fotoğraflarını gözden geçir, kararlarını güvenle ver ve kontrolü elinde tut.
-            </p>
-            <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#4388FF_0%,#7747F6_48%,#DC28C8_100%)] px-8 text-sm font-black text-white shadow-[0_18px_48px_rgba(119,71,246,0.26)] transition hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#7747F6]/45" aria-label="Del-It uygulamasını App Store’dan ücretsiz indir">
-              App Store’dan Ücretsiz İndir
+    <section className="relative z-10 px-5 py-12 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="scroll-reveal overflow-hidden rounded-[2rem] border border-black/8 bg-white p-5 shadow-glow">
+          <div className="grid gap-6 rounded-[1.6rem] bg-gradient-to-br from-sky-100 via-white to-rose-100 p-6 text-center sm:p-10 lg:grid-cols-[auto_1fr_auto] lg:items-center lg:text-left">
+            <div className="mx-auto grid h-24 w-24 place-items-center rounded-[1.5rem] bg-white shadow-soft lg:mx-0">
+              <img src={product.logo} alt="Del-It uygulama ikonu" className="h-20 w-20 rounded-[1.25rem] object-cover" loading="lazy" />
+            </div>
+            <div>
+              <h2 className="font-display text-4xl font-black leading-tight sm:text-5xl">
+                Daha ferah bir galeri birkaç kaydırma uzağında.
+              </h2>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-ink/65 sm:text-lg">
+                Galerini kendi hızında gözden geçir, gereksizleri güvenle ayır ve iPhone’unda yeniden yer aç.
+              </p>
+            </div>
+            <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60" aria-label="Del-It uygulamasını App Store’dan indir">
+              App Store’dan İndir
               <Download size={18} />
             </a>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function DelItGalleryOrbit() {
-  const ref = React.useRef(null);
-
-  React.useEffect(() => {
-    const node = ref.current;
-    if (!node) {
-      return undefined;
-    }
-
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const coarse = window.matchMedia('(pointer: coarse)');
-    if (reduced.matches || coarse.matches) {
-      return undefined;
-    }
-
-    const handleMove = (event) => {
-      const rect = node.getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-      node.style.setProperty('--tilt-x', `${(-y * 5).toFixed(2)}deg`);
-      node.style.setProperty('--tilt-y', `${(x * 5).toFixed(2)}deg`);
-    };
-
-    const reset = () => {
-      node.style.setProperty('--tilt-x', '0deg');
-      node.style.setProperty('--tilt-y', '0deg');
-    };
-
-    node.addEventListener('pointermove', handleMove);
-    node.addEventListener('pointerleave', reset);
-    return () => {
-      node.removeEventListener('pointermove', handleMove);
-      node.removeEventListener('pointerleave', reset);
-    };
-  }, []);
-
-  const photos = [
-    ['left-[3%] top-[16%] rotate-[-15deg]', 'from-[#BFE3FF] to-[#4388FF]'],
-    ['right-[5%] top-[12%] rotate-[13deg]', 'from-[#FFE0F6] to-[#DC28C8]'],
-    ['left-[10%] bottom-[16%] rotate-[10deg]', 'from-[#FFF0D9] to-[#FF8A32]'],
-    ['right-[12%] bottom-[18%] rotate-[-12deg]', 'from-[#DFF8EE] to-[#28C887]'],
-    ['left-[42%] top-[2%] rotate-[5deg]', 'from-[#EEE6FF] to-[#7747F6]'],
-  ];
-
-  return (
-    <div ref={ref} className="delit-orbit relative min-h-[560px] w-full sm:min-h-[660px]" aria-hidden="true">
-      <div className="absolute left-1/2 top-1/2 h-[74%] w-[82%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#7747F6]/12" />
-      <div className="absolute left-1/2 top-1/2 h-[54%] w-[60%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#4388FF]/14" />
-      <div className="absolute inset-16 rounded-full bg-[radial-gradient(circle,rgba(119,71,246,0.20),transparent_62%)] blur-2xl" />
-      {photos.map(([position, gradient], index) => (
-        <div key={position} className={`delit-float-card absolute h-24 w-20 rounded-[1.35rem] border border-white/70 bg-white p-2 shadow-[0_18px_45px_rgba(17,18,26,0.12)] sm:h-32 sm:w-28 ${position}`} style={{ animationDelay: `${index * -0.8}s` }}>
-          <div className={`h-full rounded-[1rem] bg-gradient-to-br ${gradient}`} />
-        </div>
-      ))}
-      <div className="delit-action-card delit-action-delete absolute left-[4%] top-[43%] rounded-[1.3rem] border border-white/70 bg-white/80 px-4 py-3 shadow-[0_20px_50px_rgba(220,40,200,0.18)] backdrop-blur">
-        <div className="h-10 w-10 rounded-2xl bg-[#DC28C8]/12 p-2 text-[#DC28C8]">
-          <Trash2 size={24} />
-        </div>
-      </div>
-      <div className="delit-action-card delit-action-keep absolute right-[4%] top-[45%] rounded-[1.3rem] border border-white/70 bg-white/80 px-4 py-3 shadow-[0_20px_50px_rgba(40,200,135,0.18)] backdrop-blur">
-        <div className="h-10 w-10 rounded-2xl bg-[#28C887]/12 p-2 text-[#28C887]">
-          <Check size={24} />
-        </div>
-      </div>
-      <div className="absolute left-[18%] top-[18%] h-3 w-3 rounded-full bg-[#DC28C8]/50" />
-      <div className="absolute right-[20%] top-[24%] h-2 w-2 rounded-full bg-[#4388FF]/60" />
-      <Sparkles className="absolute right-[14%] bottom-[28%] text-[#7747F6]/45" size={24} />
-      <div className="delit-phone absolute left-1/2 top-1/2 w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-[2.4rem] border-[10px] border-[#11121A] bg-white p-4 shadow-[0_34px_90px_rgba(17,18,26,0.24)] sm:w-[330px]">
-        <div className="mx-auto mb-4 h-6 w-24 rounded-full bg-[#11121A]" />
-        <div className="rounded-[1.8rem] bg-[#F8F7FF] p-4">
-          <div className="flex items-center justify-between">
-            <span className="h-10 w-10 rounded-full bg-white shadow-soft" />
-            <span className="rounded-full bg-white px-3 py-2 text-xs font-black text-[#7747F6]">18</span>
-          </div>
-          <div className="relative mx-auto mt-6 h-64 max-w-[220px] rounded-[2rem] bg-white p-4 shadow-[0_18px_50px_rgba(67,136,255,0.14)]">
-            <div className="absolute -left-3 top-7 h-48 w-full rotate-[-6deg] rounded-[1.7rem] bg-[#4388FF]/22" />
-            <div className="relative h-full rounded-[1.5rem] bg-gradient-to-br from-[#E6F4FF] via-white to-[#EEE6FF]">
-              <div className="absolute bottom-5 left-5 h-12 w-12 rounded-2xl bg-[#28C887]/35" />
-              <div className="absolute right-7 top-10 h-20 w-24 rounded-2xl bg-[#11121A]/12" />
-              <div className="absolute bottom-8 right-8 h-2 w-20 rounded-full bg-[#7747F6]/35" />
-            </div>
-          </div>
-          <div className="mt-7 grid grid-cols-4 gap-2">
-            {[0, 1, 2, 3].map((item) => (
-              <span key={item} className="h-10 rounded-xl bg-white shadow-[0_8px_22px_rgba(17,18,26,0.06)]" />
-            ))}
-          </div>
-          <div className="mt-6 flex justify-around rounded-[1.5rem] bg-white/88 p-3 text-[#11121A] shadow-soft">
-            <Images size={20} />
-            <Trash2 size={20} />
-            <LockKeyhole size={20} />
-          </div>
-        </div>
-      </div>
-      <div className="absolute right-[26%] top-[13%] grid h-11 w-11 place-items-center rounded-2xl bg-white/80 text-[#7747F6] shadow-soft backdrop-blur">
-        <ShieldCheck size={22} />
-      </div>
-    </div>
-  );
-}
-
-function MessyGalleryIllustration() {
-  return (
-    <div className="relative h-60 overflow-hidden rounded-[1.6rem] bg-[#F2F5FF]" aria-hidden="true">
-      {['left-8 top-12 rotate-[-16deg] bg-[#4388FF]', 'left-24 top-7 rotate-[9deg] bg-[#7747F6]', 'right-10 top-16 rotate-[15deg] bg-[#DC28C8]', 'left-16 bottom-8 rotate-[7deg] bg-[#28C887]', 'right-20 bottom-9 rotate-[-9deg] bg-[#FF8A32]'].map((className) => (
-        <span key={className} className={`absolute h-28 w-24 rounded-[1.4rem] border border-white/70 p-2 shadow-[0_16px_40px_rgba(17,18,26,0.10)] ${className}`}>
-          <span className="block h-full rounded-[1rem] bg-white/42" />
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function SwipeDecisionIllustration({ compact = false }) {
-  return (
-    <div className={`relative overflow-hidden rounded-[1.5rem] bg-[#F8F7FF] ${compact ? 'h-48' : 'h-60'}`} aria-hidden="true">
-      <div className="absolute left-5 top-1/2 -translate-y-1/2 rounded-[1.2rem] bg-white/80 p-3 text-[#DC28C8] shadow-soft">
-        <Trash2 size={compact ? 22 : 28} />
-      </div>
-      <div className="absolute right-5 top-1/2 -translate-y-1/2 rounded-[1.2rem] bg-white/80 p-3 text-[#28C887] shadow-soft">
-        <Check size={compact ? 22 : 28} />
-      </div>
-      <div className="absolute left-1/2 top-1/2 h-36 w-32 -translate-x-1/2 -translate-y-1/2 rotate-[-4deg] rounded-[1.5rem] bg-white p-3 shadow-[0_18px_48px_rgba(67,136,255,0.16)]">
-        <div className="h-full rounded-[1.1rem] bg-gradient-to-br from-[#DFF0FF] via-white to-[#F5D9FF]" />
-      </div>
-      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 320 220" fill="none">
-        <path d="M126 154C88 144 64 124 46 96" stroke="#DC28C8" strokeWidth="3" strokeLinecap="round" strokeDasharray="7 9" />
-        <path d="M194 154C232 144 256 124 274 96" stroke="#28C887" strokeWidth="3" strokeLinecap="round" strokeDasharray="7 9" />
-      </svg>
-    </div>
-  );
-}
-
-function SecureTrashIllustration({ compact = false }) {
-  return (
-    <div className={`relative overflow-hidden rounded-[1.5rem] bg-[#F8F7FF] ${compact ? 'h-48' : 'h-60'}`} aria-hidden="true">
-      <div className="absolute left-1/2 top-[54%] h-32 w-36 -translate-x-1/2 -translate-y-1/2 rounded-[1.6rem] bg-white shadow-[0_18px_48px_rgba(119,71,246,0.14)]">
-        <div className="absolute -top-5 left-5 h-8 w-26 rounded-full bg-[#7747F6]/16" />
-        <div className="absolute left-1/2 top-7 grid h-12 w-12 -translate-x-1/2 place-items-center rounded-2xl bg-[#7747F6]/12 text-[#7747F6]">
-          <LockKeyhole size={26} />
-        </div>
-        <div className="absolute bottom-5 left-5 right-5 h-9 rounded-2xl bg-[#F2F5FF]" />
-      </div>
-      <div className="absolute left-12 top-8 h-20 w-16 rotate-[-12deg] rounded-[1rem] bg-[#4388FF]/35 shadow-soft" />
-      <div className="absolute right-14 top-9 h-20 w-16 rotate-[10deg] rounded-[1rem] bg-[#DC28C8]/24 shadow-soft" />
-    </div>
-  );
-}
-
-function ReviewIllustration() {
-  return (
-    <div className="relative h-48 overflow-hidden rounded-[1.5rem] bg-[#F8F7FF]" aria-hidden="true">
-      <div className="absolute left-1/2 top-5 h-36 w-52 -translate-x-1/2 rounded-[1.7rem] bg-white p-3 shadow-soft">
-        <div className="h-full rounded-[1.3rem] bg-gradient-to-br from-[#E4F3FF] to-[#F7DBFF]" />
-      </div>
-      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2">
-        {[0, 1, 2, 3].map((item) => (
-          <span key={item} className="h-10 w-10 rounded-xl bg-white shadow-soft" />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PhonePreview({ label, color }) {
-  return (
-    <div className="relative z-10 mx-auto w-[250px] rounded-[2.2rem] border-[9px] border-[#11121A] bg-white p-3 shadow-[0_24px_70px_rgba(17,18,26,0.22)] sm:w-[290px]">
-      <div className="mx-auto mb-4 h-5 w-20 rounded-full bg-[#11121A]" />
-      <div className="rounded-[1.6rem] bg-[#F8F7FF] p-4">
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-black" style={{ color }}>{label}</span>
-          <span className="h-8 w-8 rounded-full bg-white shadow-soft" />
-        </div>
-        <div className="mt-5 h-44 rounded-[1.5rem] bg-white p-3 shadow-soft">
-          <div className="h-full rounded-[1.15rem]" style={{ background: `linear-gradient(135deg, ${color}33, #ffffff 52%, #F2F5FF)` }} />
-        </div>
-        <div className="mt-5 grid grid-cols-3 gap-2">
-          {[0, 1, 2].map((item) => (
-            <span key={item} className="h-16 rounded-2xl bg-white shadow-[0_10px_26px_rgba(17,18,26,0.06)]" />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function GalleryMiniIllustration() {
-  return (
-    <div className="grid h-48 grid-cols-3 gap-3 rounded-[1.5rem] bg-[#F8F7FF] p-4" aria-hidden="true">
-      {['#4388FF', '#7747F6', '#DC28C8', '#28C887', '#FF8A32', '#B8CAFF'].map((color) => (
-        <span key={color} className="rounded-2xl bg-white p-2 shadow-soft">
-          <span className="block h-full rounded-xl" style={{ background: color, opacity: 0.34 }} />
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function ContactMergeIllustration() {
-  return (
-    <div className="relative h-48 rounded-[1.5rem] bg-[#F8F7FF]" aria-hidden="true">
-      <div className="absolute left-5 top-10 h-24 w-24 rounded-[1.4rem] bg-white p-3 shadow-soft">
-        <span className="block h-9 w-9 rounded-full bg-[#7747F6]/22" />
-        <span className="mt-4 block h-2 w-14 rounded-full bg-[#7747F6]/18" />
-      </div>
-      <div className="absolute left-20 top-20 h-24 w-24 rounded-[1.4rem] bg-white p-3 shadow-soft">
-        <span className="block h-9 w-9 rounded-full bg-[#4388FF]/22" />
-        <span className="mt-4 block h-2 w-14 rounded-full bg-[#4388FF]/18" />
-      </div>
-      <div className="absolute right-5 top-12 h-28 w-28 rounded-[1.5rem] bg-white p-3 shadow-soft">
-        <span className="block h-12 w-12 rounded-full bg-[#28C887]/24" />
-        <span className="mt-4 block h-2 w-16 rounded-full bg-[#28C887]/20" />
-      </div>
-      <div className="absolute left-[48%] top-1/2 h-1 w-12 -translate-y-1/2 rounded-full bg-[#7747F6]/22" />
-    </div>
-  );
-}
-
-function VaultIllustration() {
-  return (
-    <div className="relative h-48 overflow-hidden rounded-[1.5rem] bg-[#F8F7FF]" aria-hidden="true">
-      <div className="absolute left-1/2 top-1/2 h-32 w-40 -translate-x-1/2 -translate-y-1/2 rounded-[1.8rem] bg-white shadow-soft">
-        <div className="absolute left-1/2 top-7 grid h-16 w-16 -translate-x-1/2 place-items-center rounded-[1.4rem] bg-[#DC28C8]/14 text-[#DC28C8]">
-          <LockKeyhole size={30} />
-        </div>
-        <div className="absolute bottom-5 left-6 right-6 grid grid-cols-3 gap-2">
-          <span className="h-8 rounded-lg bg-[#4388FF]/22" />
-          <span className="h-8 rounded-lg bg-[#7747F6]/22" />
-          <span className="h-8 rounded-lg bg-[#DC28C8]/22" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CollageIllustration() {
-  return (
-    <div className="delit-collage relative h-72 overflow-hidden rounded-[1.5rem] bg-[#F8F7FF] p-4" aria-hidden="true">
-      <div className="grid h-full grid-cols-3 grid-rows-4 gap-3">
-        <span className="col-span-2 row-span-2 rounded-[1.2rem] bg-[#4388FF]/25" />
-        <span className="row-span-2 rounded-[1.2rem] bg-[#DC28C8]/24" />
-        <span className="row-span-2 rounded-[1.2rem] bg-[#28C887]/24" />
-        <span className="col-span-2 rounded-[1.2rem] bg-[#7747F6]/22" />
-        <span className="col-span-2 rounded-[1.2rem] bg-[#FF8A32]/24" />
-      </div>
-    </div>
-  );
-}
-
-function StatisticsIllustration() {
-  return (
-    <div className="relative h-48 rounded-[1.5rem] bg-[#F8F7FF] p-5" aria-hidden="true">
-      <div className="flex h-full items-end gap-3">
-        {[44, 70, 54, 82, 66].map((height, index) => (
-          <span key={height} className="flex-1 rounded-t-2xl bg-[#FF8A32]/26" style={{ height: `${height}%`, animationDelay: `${index * 0.12}s` }} />
-        ))}
-      </div>
-      <div className="absolute right-5 top-5 h-14 w-14 rounded-2xl bg-white shadow-soft">
-        <BarChart3 className="m-4 text-[#FF8A32]" size={24} />
-      </div>
-    </div>
-  );
-}
-
-function PrivacySphereIllustration() {
-  return (
-    <div className="delit-privacy-sphere relative min-h-[320px] rounded-[2rem] bg-[#F8F7FF]" aria-hidden="true">
-      <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#4388FF]/18 bg-white/42 shadow-[inset_0_0_60px_rgba(67,136,255,0.12)]" />
-      <div className="absolute left-1/2 top-1/2 grid h-24 w-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[2rem] bg-white text-[#7747F6] shadow-[0_20px_60px_rgba(119,71,246,0.18)]">
-        <ShieldCheck size={42} />
-      </div>
-      {[['left-[18%] top-[24%]', '#4388FF'], ['right-[18%] top-[30%]', '#DC28C8'], ['left-[24%] bottom-[22%]', '#28C887'], ['right-[25%] bottom-[20%]', '#FF8A32']].map(([pos, color]) => (
-        <span key={pos} className={`delit-protected-card absolute h-20 w-16 rounded-[1rem] bg-white p-2 shadow-soft ${pos}`}>
-          <span className="block h-full rounded-xl" style={{ background: `${color}33` }} />
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function CrownIllustration() {
-  return (
-    <div className="relative mx-auto grid h-32 w-32 place-items-center rounded-[2rem] bg-white shadow-[0_18px_54px_rgba(119,71,246,0.12)] lg:mx-0" aria-hidden="true">
-      <svg viewBox="0 0 120 120" className="h-24 w-24">
-        <defs>
-          <linearGradient id="crownGradient" x1="18" y1="20" x2="104" y2="94" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#4388FF" />
-            <stop offset="0.5" stopColor="#7747F6" />
-            <stop offset="1" stopColor="#DC28C8" />
-          </linearGradient>
-        </defs>
-        <path d="M22 84L28 38L48 62L62 30L76 62L96 38L102 84H22Z" fill="url(#crownGradient)" opacity="0.95" />
-        <path d="M24 90H100V98H24V90Z" fill="#11121A" opacity="0.12" />
-      </svg>
-    </div>
-  );
-}
-
-function FinalCardsIllustration() {
-  return (
-    <div className="relative z-10 mx-auto flex h-24 max-w-md items-center justify-center gap-3" aria-hidden="true">
-      {['bg-[#4388FF]/18 rotate-[-8deg]', 'bg-[#7747F6]/18 rotate-[4deg]', 'bg-[#DC28C8]/16 rotate-[9deg]', 'bg-[#28C887]/16 rotate-[-5deg]'].map((className) => (
-        <span key={className} className={`h-20 w-16 rounded-[1.2rem] border border-white/70 shadow-soft ${className}`} />
-      ))}
-    </div>
   );
 }
 
@@ -1171,9 +843,29 @@ function DelitLegalLinks({ variant = 'compact' }) {
 function SectionIntro({ eyebrow, title, description }) {
   return (
     <div className="scroll-reveal max-w-4xl">
-      <p className="mb-4 text-sm font-black uppercase tracking-[0.24em] text-[#7747F6]">{eyebrow}</p>
-      <h2 className="font-display text-4xl font-black leading-[0.98] tracking-tight text-[#11121A] sm:text-6xl">{title}</h2>
-      {description && <p className="mt-5 max-w-3xl text-base leading-8 text-[#777784] sm:text-lg">{description}</p>}
+      <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">{eyebrow}</p>
+      <h2 className="font-display text-4xl font-black leading-none sm:text-6xl">{title}</h2>
+      {description && <p className="mt-5 max-w-3xl text-base leading-8 text-ink/62 sm:text-lg">{description}</p>}
+    </div>
+  );
+}
+
+function ScreenshotPlaceholder({ title, note, accent, large = false }) {
+  return (
+    <div className={`relative mx-auto aspect-[9/16] ${large ? 'max-w-[310px]' : 'w-full'} overflow-hidden rounded-[2rem] border border-black/10 bg-ink p-2 shadow-soft`}>
+      <div className={`flex h-full flex-col rounded-[1.55rem] bg-gradient-to-br ${accent} p-4`}>
+        <div className="mx-auto mb-4 h-1.5 w-16 rounded-full bg-ink/18" />
+        <div className="flex items-center gap-3 rounded-[1.1rem] border border-black/8 bg-white/78 p-3">
+          <img src={product.logo} alt="" className="h-10 w-10 rounded-xl object-cover" loading="lazy" />
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-ink/38">Placeholder</p>
+            <p className="font-display text-lg font-black leading-tight">{title}</p>
+          </div>
+        </div>
+        <div className="mt-auto rounded-[1.2rem] border border-black/8 bg-white/78 p-4">
+          <p className="text-sm font-semibold leading-6 text-ink/62">{note}</p>
+        </div>
+      </div>
     </div>
   );
 }
