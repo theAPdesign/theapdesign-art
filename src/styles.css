@@ -48,6 +48,52 @@ body {
   transform: translate3d(0, 0, 0) scale(1);
 }
 
+.delit-page {
+  background:
+    radial-gradient(circle at 10% 8%, rgba(67, 136, 255, 0.14), transparent 28%),
+    radial-gradient(circle at 92% 12%, rgba(220, 40, 200, 0.10), transparent 24%),
+    linear-gradient(180deg, #f8f7ff 0%, #f2f5ff 48%, #f8f7ff 100%);
+}
+
+.delit-orbit {
+  transform: perspective(1100px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 260ms ease;
+}
+
+.delit-phone {
+  transform: translate3d(-50%, -50%, 80px) rotate(-2deg);
+}
+
+.delit-float-card {
+  animation: delit-float-card 8s ease-in-out infinite;
+}
+
+.delit-action-delete {
+  animation: delit-breathe-left 6s ease-in-out infinite;
+}
+
+.delit-action-keep {
+  animation: delit-breathe-right 6.4s ease-in-out infinite;
+}
+
+.delit-collage span {
+  animation: delit-soft-shuffle 8s ease-in-out infinite;
+}
+
+.delit-privacy-sphere::before {
+  animation: delit-sphere-ring 18s linear infinite;
+  border: 1px solid rgba(119, 71, 246, 0.16);
+  border-radius: 999px;
+  content: '';
+  inset: 14%;
+  position: absolute;
+}
+
+.delit-protected-card {
+  animation: delit-protected-float 7s ease-in-out infinite;
+}
+
 @keyframes home-float {
   0%,
   100% {
@@ -56,6 +102,71 @@ body {
 
   50% {
     transform: translate3d(0, -16px, 0) rotate(4deg);
+  }
+}
+
+@keyframes delit-float-card {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(var(--tw-rotate));
+  }
+
+  50% {
+    transform: translate3d(0, -10px, 18px) rotate(var(--tw-rotate));
+  }
+}
+
+@keyframes delit-breathe-left {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 40px) rotate(-3deg);
+  }
+
+  50% {
+    transform: translate3d(-8px, 0, 40px) rotate(-6deg);
+  }
+}
+
+@keyframes delit-breathe-right {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 40px) rotate(3deg);
+  }
+
+  50% {
+    transform: translate3d(8px, 0, 40px) rotate(6deg);
+  }
+}
+
+@keyframes delit-soft-shuffle {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes delit-sphere-ring {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes delit-protected-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -8px, 0);
   }
 }
 
@@ -72,5 +183,20 @@ body {
   .scroll-reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .delit-orbit,
+  .delit-phone,
+  .delit-float-card,
+  .delit-action-delete,
+  .delit-action-keep,
+  .delit-collage span,
+  .delit-protected-card {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .delit-privacy-sphere::before {
+    animation: none !important;
   }
 }
