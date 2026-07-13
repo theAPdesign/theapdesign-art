@@ -30,6 +30,7 @@ const product = {
 };
 
 const delitAppStoreUrl = 'https://apps.apple.com/tr/app/del-it/id6780890586?l=tr';
+const delitHeroMockup = '/del-it-hero-mockup.png';
 
 const xoxProduct = {
   title: 'XOX Taktik Arena',
@@ -502,13 +503,17 @@ function DelitHero() {
             ))}
           </div>
         </div>
-        <div className="scroll-reveal relative mx-auto w-full max-w-[560px]">
-          <div className="absolute inset-x-10 top-12 h-52 rounded-full bg-gradient-to-r from-sky-200/70 via-violet-200/60 to-rose-200/70 blur-3xl" />
-          <div className="relative overflow-hidden rounded-[2rem] border border-black/8 bg-white p-5 shadow-glow">
-            <div className="rounded-[1.5rem] bg-gradient-to-br from-sky-100 via-white to-rose-100 p-5">
-              <ScreenshotPlaceholder title="Hero uygulama ekranı" note="Gerçek Del-It ekran görüntüsü eklendiğinde bu alan değiştirilecek." accent="from-sky-100 via-white to-violet-100" large />
-            </div>
-          </div>
+        <div className="scroll-reveal relative mx-auto min-h-[520px] w-full max-w-[590px] sm:min-h-[650px]">
+          <div className="absolute left-[4%] top-[8%] h-56 w-56 rounded-full bg-sky-300/35 blur-3xl sm:h-72 sm:w-72" />
+          <div className="absolute right-[4%] top-[18%] h-52 w-52 rounded-full bg-violet-300/30 blur-3xl sm:h-72 sm:w-72" />
+          <div className="absolute bottom-[8%] left-[20%] h-48 w-48 rounded-full bg-rose-300/28 blur-3xl sm:h-64 sm:w-64" />
+          <div className="absolute inset-x-8 top-[18%] h-44 rounded-full bg-gradient-to-r from-sky-200/35 via-violet-200/30 to-rose-200/35 blur-3xl" />
+          <img
+            src={delitHeroMockup}
+            alt="Del-It hızlı temizleme ekranını gösteren iPhone mockup"
+            className="relative z-10 mx-auto h-auto w-full max-w-[520px] drop-shadow-[0_34px_80px_rgba(124,88,255,0.22)]"
+            fetchPriority="high"
+          />
         </div>
       </div>
     </section>
@@ -517,9 +522,9 @@ function DelitHero() {
 
 function DelitProblem() {
   const problems = [
-    ['Tekrar tekrar çekilen fotoğraflar', Images],
-    ['Unutulan ekran görüntüleri', Smartphone],
-    ['Büyük yer kaplayan videolar', BarChart3],
+    ['Tekrar tekrar çekilen fotoğraflar', Images, 'from-sky-100 via-white to-violet-100', 'text-sky-600'],
+    ['Unutulan ekran görüntüleri', Smartphone, 'from-violet-100 via-white to-rose-100', 'text-violet-600'],
+    ['Büyük yer kaplayan videolar', BarChart3, 'from-rose-100 via-white to-sky-100', 'text-rose-500'],
   ];
 
   return (
@@ -527,9 +532,9 @@ function DelitProblem() {
       <div className="mx-auto max-w-7xl">
         <SectionIntro eyebrow="Galeri neden bu kadar hızlı doluyor?" title="Binlerce fotoğraf. Aynı kareden onlarca tane." description="Ekran görüntüleri, tekrar çekimler, unutulmuş videolar ve artık ihtiyaç duymadığın dosyalar zamanla galerinde birikir. Del-It bu kalabalığı yorucu bir işe dönüştürmeden azaltmana yardımcı olur." />
         <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {problems.map(([title, Icon]) => (
-            <article key={title} className="scroll-reveal rounded-[1.5rem] border border-black/8 bg-white p-6 shadow-soft">
-              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[#fbfaf7] text-violet-500">
+          {problems.map(([title, Icon, gradient, iconColor]) => (
+            <article key={title} className={`scroll-reveal rounded-[1.5rem] border border-black/8 bg-gradient-to-br ${gradient} p-6 shadow-soft`}>
+              <div className={`grid h-12 w-12 place-items-center rounded-2xl border border-black/8 bg-white/78 ${iconColor}`}>
                 <Icon size={22} />
               </div>
               <h3 className="mt-7 font-display text-2xl font-black leading-tight">{title}</h3>
@@ -578,10 +583,10 @@ function DelitHowItWorks() {
 
 function DelitFeatures() {
   const features = [
-    ['Hızlı Temizlik', 'Fotoğraf ve videolarını kaydırarak hızlıca gözden geçir. Gereksizleri ayırırken önemli anılarını koru.', MoveHorizontal, 'lg:col-span-2'],
-    ['Güvenli Çöp Kutusu', 'Sola kaydırdığın öğeler hemen silinmez. Son kararını vermeden önce hepsini yeniden kontrol edebilirsin.', Trash2, ''],
-    ['Galeri Görünümü', 'Fotoğraf ve videolarını düzenli bir görünümde incele ve ihtiyacın olan içeriklere daha kolay ulaş.', Images, ''],
-    ['Temizlik İstatistikleri', 'Bugün ve toplamda kaç öğe temizlediğini, ne kadar depolama alanı kazandığını takip et.', BarChart3, 'lg:col-span-2'],
+    ['Hızlı Temizlik', 'Fotoğraf ve videolarını kaydırarak hızlıca gözden geçir. Gereksizleri ayırırken önemli anılarını koru.', MoveHorizontal, 'lg:col-span-2', 'from-sky-100 via-white to-violet-100', 'bg-sky-500'],
+    ['Güvenli Çöp Kutusu', 'Sola kaydırdığın öğeler hemen silinmez. Son kararını vermeden önce hepsini yeniden kontrol edebilirsin.', Trash2, '', 'from-rose-100 via-white to-violet-100', 'bg-rose-500'],
+    ['Galeri Görünümü', 'Fotoğraf ve videolarını düzenli bir görünümde incele ve ihtiyacın olan içeriklere daha kolay ulaş.', Images, '', 'from-white via-sky-50 to-white', 'bg-violet-500'],
+    ['Temizlik İstatistikleri', 'Bugün ve toplamda kaç öğe temizlediğini, ne kadar depolama alanı kazandığını takip et.', BarChart3, 'lg:col-span-2', 'from-violet-100 via-white to-rose-100', 'bg-ink'],
   ];
 
   return (
@@ -589,9 +594,9 @@ function DelitFeatures() {
       <div className="mx-auto max-w-7xl">
         <SectionIntro eyebrow="Temel özellikler" title="Galerini kendi hızında düzenle." />
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {features.map(([title, description, Icon, className]) => (
-            <article key={title} className={`scroll-reveal rounded-[1.7rem] border border-black/8 bg-white p-6 shadow-soft ${className}`}>
-              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-ink text-white">
+          {features.map(([title, description, Icon, className, gradient, iconBg]) => (
+            <article key={title} className={`scroll-reveal rounded-[1.7rem] border border-black/8 bg-gradient-to-br ${gradient} p-6 shadow-soft ${className}`}>
+              <div className={`grid h-12 w-12 place-items-center rounded-2xl ${iconBg} text-white shadow-soft`}>
                 <Icon size={22} />
               </div>
               <h3 className="mt-8 font-display text-3xl font-black leading-tight">{title}</h3>
@@ -682,7 +687,7 @@ function DelitPlus() {
   return (
     <section className="relative z-10 px-5 py-12 sm:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="scroll-reveal grid gap-6 rounded-[1.8rem] border border-black/8 bg-white p-6 shadow-soft sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
+        <div className="scroll-reveal grid gap-6 overflow-hidden rounded-[1.8rem] border border-black/8 bg-gradient-to-br from-violet-100 via-white to-sky-100 p-6 shadow-soft sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">Del-It Plus</p>
             <h2 className="font-display text-4xl font-black leading-tight sm:text-5xl">Daha özgür bir Del-It deneyimi.</h2>
