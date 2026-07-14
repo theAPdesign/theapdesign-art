@@ -4,11 +4,10 @@ import {
   ArrowRight,
   BarChart3,
   Check,
-  CheckCircle2,
   ChevronRight,
   Download,
-  Eye,
   ExternalLink,
+  Hand,
   Images,
   LayoutTemplate,
   LockKeyhole,
@@ -16,9 +15,9 @@ import {
   MoveHorizontal,
   ShieldCheck,
   Sparkles,
-  Smartphone,
   Trash2,
   UsersRound,
+  Video,
 } from 'lucide-react';
 import './styles.css';
 
@@ -30,7 +29,7 @@ const product = {
 };
 
 const delitAppStoreUrl = 'https://apps.apple.com/tr/app/del-it/id6780890586?l=tr';
-const delitHeroMockup = '/del-it-hero-mockup.png';
+const delitPhoneTr = '/del-it-phone-tr.png';
 
 const xoxProduct = {
   title: 'XOX Taktik Arena',
@@ -150,18 +149,11 @@ function DelitPage() {
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
       <Background />
       <Header />
-      <DelitPageNav />
       <DelitHero />
       <DelitProblem />
-      <DelitHowItWorks />
-      <DelitFeatures />
-      <DelitMoreFeatures />
-      <DelitPrivacy />
-      <DelitPlus />
       <DelitScreens />
+      <DelitHowItWorks />
       <DelitFaq />
-      <DelitFinalCta />
-      <DelitLegalLinks variant="full" />
       <Footer variant="delit" />
     </main>
   );
@@ -464,56 +456,59 @@ function DelitPageNav() {
 }
 
 function DelitHero() {
+  const heroCards = [
+    ['Fotoğraf Temizleme', Images, 'left-1/2 top-8 -translate-x-[300px]', 'h-[4.6rem] w-[4.6rem]', 'rgba(186,230,253,0.46)', '#0ea5e9', '-6deg', '0s', 'left', '4.6rem', '15rem'],
+    ['Video Temizleme', Video, 'left-1/2 top-36 -translate-x-[390px]', 'h-20 w-20', 'rgba(221,214,254,0.48)', '#8b5cf6', '3deg', '-1.1s', 'left', '5rem', '14rem'],
+    ['Özel Kasa', LockKeyhole, 'left-1/2 top-64 -translate-x-[315px]', 'h-[4.35rem] w-[4.35rem]', 'rgba(254,215,170,0.46)', '#f97316', '-4deg', '-2.2s', 'left', '4.35rem', '11.5rem'],
+    ['Çöp Kutusu', Trash2, 'left-1/2 top-8 translate-x-[225px]', 'h-[4.8rem] w-[4.8rem]', 'rgba(254,205,211,0.48)', '#f43f5e', '5deg', '-0.6s', 'right', '4.8rem', '11.5rem'],
+    ['Rehber Temizleme', UsersRound, 'left-1/2 top-36 translate-x-[315px]', 'h-[5.1rem] w-[5.1rem]', 'rgba(167,243,208,0.46)', '#10b981', '-3deg', '-1.7s', 'right', '5.1rem', '15rem'],
+    ['Kolaj Oluşturma', LayoutTemplate, 'left-1/2 top-64 translate-x-[240px]', 'h-[4.5rem] w-[4.5rem]', 'rgba(165,243,252,0.46)', '#06b6d4', '4deg', '-2.8s', 'right', '4.5rem', '14rem'],
+  ];
+
   return (
-    <section className="relative z-10 px-5 pb-12 pt-12 sm:px-8 lg:pb-16 lg:pt-16">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
-        <div className="scroll-reveal max-w-3xl">
-          <p className="mb-5 inline-flex rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-ink/55 shadow-soft">
-            iPhone için galeri düzenleme
-          </p>
-          <h1 className="font-display text-[clamp(3rem,7vw,7.5rem)] font-black leading-[0.92]">
-            Galerini temizle.
-            <span className="block bg-gradient-to-r from-sky-500 via-violet-500 to-rose-500 bg-clip-text text-transparent">
-              Önemli anılarını koru.
-            </span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/65">
-            Fotoğraf ve videolarını hızlıca gözden geçir, gereksiz olanları güvenli çöp kutusuna ekle ve
-            yalnızca sen hazır olduğunda sil.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60" aria-label="Del-It uygulamasını App Store’da aç">
-              App Store’da İndir
-              <Download size={18} />
-            </a>
-            <a href="#how-it-works" className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-black/8 bg-white px-7 text-sm font-bold text-ink transition hover:-translate-y-1 hover:bg-[#fbfaf7] focus:outline-none focus:ring-2 focus:ring-electric/60">
-              Nasıl Çalışır?
-              <ArrowRight size={18} />
-            </a>
+    <section className="relative z-10 flex min-h-[calc(100svh-5rem)] overflow-hidden bg-[#eee9ff] px-5 pb-0 pt-8 sm:px-8 sm:pt-10 lg:pt-12">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_100%,rgba(123,98,255,0.22),transparent_32%),radial-gradient(circle_at_82%_90%,rgba(255,95,223,0.18),transparent_28%)]" />
+      <div className="scroll-reveal relative z-10 mx-auto flex min-h-[calc(100svh-5rem)] w-full max-w-5xl flex-col items-center text-center">
+        <span className="grid h-[4.5rem] w-[4.5rem] place-items-center rounded-[1.1rem] bg-white shadow-[0_14px_36px_rgba(80,64,150,0.12)] sm:h-20 sm:w-20">
+          <img src={product.logo} alt="Del-It uygulama ikonu" className="h-12 w-12 rounded-[0.85rem] object-cover sm:h-14 sm:w-14" />
+        </span>
+        <h1 className="mt-5 font-display text-[clamp(2.45rem,7.2vw,6.35rem)] font-black leading-[0.95] tracking-tight text-black">
+          <span className="block">Tek Uygulamada</span>
+          <span className="block">
+            <span className="bg-gradient-to-r from-[#ef55b8] via-[#9b52f5] to-[#4388ff] bg-clip-text text-transparent">Onlarca</span>{' '}
+            Çözüm
+          </span>
+        </h1>
+        <p className="mx-auto mt-4 max-w-3xl text-sm font-normal leading-6 text-[#6f6a78] sm:text-base sm:leading-7">
+          Fotoğraflarınızı, videolarınızı, kişilerinizi ve daha fazlasını temizleyin.
+          <span className="block">Her şey güvenli. Her şey iPhone'unuzda.</span>
+        </p>
+        <div className="relative mt-auto flex w-full max-w-5xl justify-center overflow-visible pt-6 sm:pt-8">
+          {heroCards.map(([label, Icon, position, size, background, color, rotate, delay, side, base, hoverWidth]) => (
+            <div
+              key={label}
+              className={`absolute z-30 hidden md:block ${position}`}
+            >
+              <div className="delit-hero-card-float" style={{ '--hero-rotate': rotate, '--hero-delay': delay }}>
+                <div
+                  className={`delit-hero-card delit-hero-card-${side} flex items-center justify-center rounded-[1.35rem] border border-white/55 px-5 shadow-[0_18px_42px_rgba(60,44,125,0.12)] backdrop-blur-xl ${size}`}
+                  style={{ background, color, '--hero-base': base, '--hero-hover': hoverWidth }}
+                  aria-label={label}
+                >
+                  <Icon className="shrink-0" size={30} strokeWidth={2.25} aria-hidden="true" />
+                  <span className="delit-hero-card-label">{label}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+          <div className="relative z-0 w-[min(270px,68vw)] sm:w-[min(360px,52vw)] lg:w-[min(470px,34vw)]">
+            <img
+              src={delitPhoneTr}
+              alt="Del-It ana ekranını gösteren iPhone"
+              className="delit-phone-image mx-auto h-auto max-h-[40svh] w-auto max-w-full drop-shadow-[0_24px_54px_rgba(40,28,90,0.18)] sm:max-h-[46svh] lg:max-h-[52svh]"
+              fetchPriority="high"
+            />
           </div>
-          <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-semibold text-ink/65 shadow-soft">
-            <ShieldCheck size={17} className="text-violet-500" />
-            Fotoğrafların ve videoların cihazında kalır.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {['Son karar senin', 'Güvenli çöp kutusu', 'Hesap gerekmez'].map((item) => (
-              <span key={item} className="rounded-full border border-black/8 bg-white/85 px-4 py-2 text-sm font-semibold text-ink/65 shadow-soft">
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="scroll-reveal relative mx-auto min-h-[520px] w-full max-w-[590px] sm:min-h-[650px]">
-          <div className="absolute left-[4%] top-[8%] h-56 w-56 rounded-full bg-sky-300/35 blur-3xl sm:h-72 sm:w-72" />
-          <div className="absolute right-[4%] top-[18%] h-52 w-52 rounded-full bg-violet-300/30 blur-3xl sm:h-72 sm:w-72" />
-          <div className="absolute bottom-[8%] left-[20%] h-48 w-48 rounded-full bg-rose-300/28 blur-3xl sm:h-64 sm:w-64" />
-          <div className="absolute inset-x-8 top-[18%] h-44 rounded-full bg-gradient-to-r from-sky-200/35 via-violet-200/30 to-rose-200/35 blur-3xl" />
-          <img
-            src={delitHeroMockup}
-            alt="Del-It hızlı temizleme ekranını gösteren iPhone mockup"
-            className="relative z-10 mx-auto h-auto w-full max-w-[520px] drop-shadow-[0_34px_80px_rgba(124,88,255,0.22)]"
-            fetchPriority="high"
-          />
         </div>
       </div>
     </section>
@@ -521,23 +516,37 @@ function DelitHero() {
 }
 
 function DelitProblem() {
-  const problems = [
-    ['Tekrar tekrar çekilen fotoğraflar', Images, 'from-sky-100 via-white to-violet-100', 'text-sky-600'],
-    ['Unutulan ekran görüntüleri', Smartphone, 'from-violet-100 via-white to-rose-100', 'text-violet-600'],
-    ['Büyük yer kaplayan videolar', BarChart3, 'from-rose-100 via-white to-sky-100', 'text-rose-500'],
+  const features = [
+    ['Hızlı Temizleme', 'Fotoğraf ve videolarını kart tabanlı kaydırma deneyimiyle hızlıca gözden geçir.', Hand, 'rgba(186,230,253,0.7)', '#0ea5e9'],
+    ['Güvenli Çöp Kutusu', 'Sola kaydırılan öğeler hemen silinmez. Son kontrolden sonra kalıcı silme başlatılır.', Trash2, 'rgba(254,205,211,0.72)', '#f43f5e'],
+    ['Galeri Görünümü', 'Fotoğraf, video ve ekran görüntülerini düzenli bir görünümde daha kolay incele.', Images, 'rgba(221,214,254,0.72)', '#8b5cf6'],
+    ['Rehber Temizliği', 'Yinelenen veya düzenlenmesi gereken kişileri kendi onayınla gözden geçir.', UsersRound, 'rgba(191,219,254,0.72)', '#3b82f6'],
+    ['Medya Kasası', 'Özel fotoğraf ve videolarını cihazında tutulan, Face ID ile korunabilen alanda sakla.', LockKeyhole, 'rgba(245,208,254,0.72)', '#d946ef'],
+    ['Kolaj Oluşturma', 'Fotoğraflarını farklı şablonlarla bir araya getir ve galerine kaydet.', LayoutTemplate, 'rgba(251,207,232,0.72)', '#ec4899'],
   ];
 
   return (
-    <section className="relative z-10 px-5 py-12 sm:px-8">
+    <section className="relative z-10 bg-white px-5 py-16 sm:px-8 lg:py-20">
       <div className="mx-auto max-w-7xl">
-        <SectionIntro eyebrow="Galeri neden bu kadar hızlı doluyor?" title="Binlerce fotoğraf. Aynı kareden onlarca tane." description="Ekran görüntüleri, tekrar çekimler, unutulmuş videolar ve artık ihtiyaç duymadığın dosyalar zamanla galerinde birikir. Del-It bu kalabalığı yorucu bir işe dönüştürmeden azaltmana yardımcı olur." />
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {problems.map(([title, Icon, gradient, iconColor]) => (
-            <article key={title} className={`scroll-reveal rounded-[1.5rem] border border-black/8 bg-gradient-to-br ${gradient} p-6 shadow-soft`}>
-              <div className={`grid h-12 w-12 place-items-center rounded-2xl border border-black/8 bg-white/78 ${iconColor}`}>
-                <Icon size={22} />
+        <div className="scroll-reveal mx-auto max-w-4xl text-center">
+          <p className="inline-flex rounded-full border border-violet-200 bg-violet-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-violet-600">
+            Özellikler
+          </p>
+          <h2 className="mt-5 font-display text-[clamp(2rem,4vw,3.6rem)] font-black leading-[1.08] tracking-tight text-ink">
+            <span className="block">Temizlik, düzen ve gizlilik</span>
+            <span className="block bg-gradient-to-r from-[#ef55b8] via-[#9b52f5] to-[#4388ff] bg-clip-text text-transparent">
+              aynı yerde
+            </span>
+          </h2>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {features.map(([title, description, Icon, iconBg, iconColor], index) => (
+            <article key={title} className={`scroll-reveal rounded-[1.55rem] border bg-white p-6 shadow-[0_18px_52px_rgba(31,38,70,0.07)] transition hover:-translate-y-1 hover:shadow-[0_22px_64px_rgba(90,64,160,0.12)] ${index === 0 ? 'border-sky-200' : 'border-black/8'}`}>
+              <div className="grid h-12 w-12 place-items-center rounded-[1rem]" style={{ backgroundColor: iconBg, color: iconColor }}>
+                <Icon size={21} strokeWidth={2.35} />
               </div>
-              <h3 className="mt-7 font-display text-2xl font-black leading-tight">{title}</h3>
+              <h3 className="mt-7 font-display text-xl font-black leading-tight text-ink sm:text-2xl">{title}</h3>
+              <p className="mt-3 text-sm leading-7 text-ink/58 sm:text-base">{description}</p>
             </article>
           ))}
         </div>
@@ -547,34 +556,73 @@ function DelitProblem() {
 }
 
 function DelitHowItWorks() {
-  const steps = [
-    ['01', 'Gözden geçir', 'Fotoğraf ve videolarını tam ekran, dikkat dağıtmayan bir akışta görüntüle.', Eye],
-    ['02', 'Kaydırarak karar ver', 'Sola kaydırarak çöpe ekle, sağa kaydırarak sakla.', MoveHorizontal],
-    ['03', 'Son kez kontrol et', 'Seçtiklerin hemen silinmez. Del-It Çöp Kutusu’nda son kontrolünü yapar, yalnızca onayladığında kalıcı olarak silersin.', CheckCircle2],
+  const cards = [
+    ['Cihaz içi işleme', 'Temel medya işlemleri iPhone üzerinde gerçekleşir.', '/del-it-privacy/device-processing-white.png', 'from-sky-100 via-white to-violet-100'],
+    ['Sunucuya yükleme yok', 'Fotoğraf, video, rehber ve kasa içeriklerin Del-It sunucularına gönderilmez.', '/del-it-privacy/no-upload-white.png', 'from-violet-100 via-white to-fuchsia-100'],
+    ['Şeffaf izin akışı', 'Hangi izinleri verdiğini ve neye onay verdiğini açıkça görürsün.', '/del-it-privacy/permissions-white.png', 'from-rose-100 via-white to-sky-100'],
+    ['Kontrol tamamen sende', 'Kalıcı silme ve rehber işlemleri yalnızca açık onayınla başlar.', '/del-it-privacy/control-white.png', 'from-emerald-100 via-white to-sky-100'],
   ];
 
   return (
-    <section id="how-it-works" className="relative z-10 scroll-mt-36 px-5 py-12 sm:px-8">
-      <div className="mx-auto max-w-7xl">
-        <SectionIntro eyebrow="Nasıl çalışır?" title="Karar senin. Del-It sadece hızlandırır." />
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {steps.map(([number, title, description, Icon], index) => (
-            <article key={title} className="scroll-reveal rounded-[1.6rem] border border-black/8 bg-white p-6 shadow-soft">
-              <div className="flex items-center justify-between gap-4">
-                <span className="font-display text-4xl font-black text-ink/18">{number}</span>
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-sky-100 to-rose-100 text-ink">
-                  <Icon size={22} />
-                </span>
+    <section id="security-privacy" className="relative z-10 overflow-hidden bg-[#eee9ff] px-5 py-16 sm:px-8 lg:py-20">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_100%,rgba(123,98,255,0.22),transparent_32%),radial-gradient(circle_at_82%_90%,rgba(255,95,223,0.18),transparent_28%)]" />
+      <div className="relative mx-auto max-w-7xl">
+        <div className="scroll-reveal mx-auto max-w-4xl text-center">
+          <p className="inline-flex rounded-full border border-white/65 bg-white/60 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-violet-600 shadow-soft backdrop-blur-xl">
+            Güvenlik ve gizlilik
+          </p>
+          <h2 className="mt-5 font-display text-[clamp(2.15rem,4.6vw,4.4rem)] font-black leading-[1.02] tracking-tight text-ink">
+            Bilgileriniz cihazında kalır
+          </h2>
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-ink/62 sm:text-lg">
+            Del-It, fotoğraf, video, rehber ve Kasa içeriklerini sunucuya yüklemez. Kişisel içeriklerin reklam
+            hedefleme amacıyla kullanılmaz.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {cards.map(([title, description, image, gradient]) => (
+            <article key={title} className={`scroll-reveal overflow-hidden rounded-[1.8rem] border border-white/70 bg-white/78 p-5 shadow-[0_22px_70px_rgba(80,64,150,0.1)] backdrop-blur-xl transition hover:-translate-y-1 hover:bg-white ${gradient}`}>
+              <div className="grid aspect-square place-items-center rounded-[1.45rem] bg-white shadow-[inset_0_0_0_1px_rgba(17,17,17,0.04)]">
+                <img
+                  src={image}
+                  alt={`${title} illüstrasyonu`}
+                  className="h-full w-full rounded-[1.45rem] object-contain p-5"
+                  loading="lazy"
+                />
               </div>
-              <h3 className="mt-7 font-display text-2xl font-black">{title}</h3>
-              <p className="mt-3 text-base leading-7 text-ink/64">{description}</p>
-              {index === 2 && (
-                <div className="mt-5 rounded-[1.1rem] border border-violet-200 bg-violet-50 px-4 py-3 text-sm font-bold text-violet-700">
-                  Hemen silinmez. Son onay senden gelir.
-                </div>
-              )}
+              <h3 className="mt-6 font-display text-xl font-black leading-tight text-ink">{title}</h3>
+              <p className="mt-3 text-sm leading-7 text-ink/58">{description}</p>
             </article>
           ))}
+        </div>
+        <div className="scroll-reveal mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href="/del-it/gizlilik-politikasi" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-6 text-sm font-bold text-white shadow-soft transition hover:-translate-y-1 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60">
+            Gizlilik Politikası
+            <ArrowRight size={17} />
+          </a>
+          <a href="/del-it/kullanim-sartlari" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-black/8 bg-white/78 px-6 text-sm font-bold text-ink shadow-soft backdrop-blur-xl transition hover:-translate-y-1 hover:bg-white focus:outline-none focus:ring-2 focus:ring-electric/60">
+            Kullanım Şartları
+            <ArrowRight size={17} />
+          </a>
+        </div>
+        <div className="scroll-reveal mt-12 overflow-hidden rounded-[2rem] border border-white/70 bg-white/72 p-5 shadow-[0_26px_80px_rgba(80,64,150,0.12)] backdrop-blur-xl">
+          <div className="grid gap-6 rounded-[1.6rem] bg-white/70 p-6 text-center shadow-[inset_0_0_0_1px_rgba(255,255,255,0.75)] sm:p-10 lg:grid-cols-[auto_1fr_auto] lg:items-center lg:text-left">
+            <div className="mx-auto grid h-24 w-24 place-items-center rounded-[1.5rem] bg-white shadow-soft lg:mx-0">
+              <img src={product.logo} alt="Del-It uygulama ikonu" className="h-20 w-20 rounded-[1.25rem] object-cover" loading="lazy" />
+            </div>
+            <div>
+              <h2 className="font-display text-4xl font-black leading-tight sm:text-5xl">
+                Daha ferah bir galeri birkaç kaydırma uzağında.
+              </h2>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-ink/65 sm:text-lg">
+                Galerini kendi hızında gözden geçir, gereksizleri güvenle ayır ve iPhone’unda yeniden yer aç.
+              </p>
+            </div>
+            <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60" aria-label="Del-It uygulamasını App Store’dan indir">
+              App Store’dan İndir
+              <Download size={18} />
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -714,16 +762,43 @@ function DelitPlus() {
 }
 
 function DelitScreens() {
-  const screens = ['Ana sayfa', 'Kaydırarak temizlik', 'Del-It Çöp Kutusu', 'Galeri', 'Medya Kasası', 'Rehber Temizliği', 'Kolaj', 'İstatistikler'];
+  const screens = [
+    ['Kaydırarak çöpe at', '/del-it-screens/cope-at.png'],
+    ['Kaydırarak sakla', '/del-it-screens/sakla.png'],
+    ['Del-It Çöp Kutusu', '/del-it-screens/cop-kutusu.png'],
+    ['Medya Kasası', '/del-it-screens/kasa.png'],
+    ['Rehber Temizliği', '/del-it-screens/takvim.png'],
+    ['Kolaj Oluşturma', '/del-it-screens/kolaj.png'],
+    ['Temizlik İstatistikleri', '/del-it-screens/istatistik.png'],
+  ];
+  const marqueeScreens = [...screens, ...screens];
 
   return (
-    <section className="relative z-10 px-5 py-12 sm:px-8">
-      <div className="mx-auto max-w-7xl">
-        <SectionIntro eyebrow="Uygulama ekranları" title="Del-It’e yakından bak." description="Projede gerçek Del-It ekran görüntüsü bulunmadığı için bu alanlar açıkça placeholder olarak bırakıldı." />
-        <div className="mt-10 flex snap-x gap-5 overflow-x-auto pb-4 lg:grid lg:grid-cols-4 lg:overflow-visible">
-          {screens.map((screen) => (
-            <article key={screen} className="scroll-reveal w-[76vw] max-w-[310px] shrink-0 snap-start rounded-[1.5rem] border border-black/8 bg-white p-4 shadow-soft lg:w-auto lg:max-w-none">
-              <ScreenshotPlaceholder title={screen} note="Screenshot placeholder" accent="from-sky-100 via-white to-rose-100" />
+    <section className="relative z-10 overflow-hidden bg-[#0d0b16] px-5 py-16 text-white sm:px-8 lg:py-20">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(139,92,246,0.28),transparent_30%),radial-gradient(circle_at_82%_12%,rgba(236,72,153,0.22),transparent_28%),radial-gradient(circle_at_50%_100%,rgba(14,165,233,0.18),transparent_34%)]" />
+      <div className="relative mx-auto max-w-7xl">
+        <div className="scroll-reveal mx-auto max-w-3xl text-center">
+          <p className="inline-flex rounded-full border border-white/12 bg-white/8 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-white/72 backdrop-blur-xl">
+            Ekranlar
+          </p>
+          <h2 className="mt-5 font-display text-[clamp(2rem,4vw,3.7rem)] font-black leading-[1.04] tracking-tight">
+            Del-It deneyimine yakından bak
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/58 sm:text-base">
+            Temizlik, kasa, rehber, kolaj ve istatistik akışlarını gerçek uygulama ekranlarıyla keşfet.
+          </p>
+        </div>
+      </div>
+      <div className="delit-screen-marquee scroll-reveal relative mt-12">
+        <div className="delit-screen-track flex w-max gap-5 pr-5">
+          {marqueeScreens.map(([title, src], index) => (
+            <article key={`${title}-${index}`} className="delit-screen-card group w-[210px] shrink-0 transition duration-300 ease-in-out hover:z-20 sm:w-[240px] lg:w-[270px]">
+              <img
+                src={src}
+                alt={`Del-It ${title} ekranı`}
+                className="aspect-[934/1960] w-full object-contain drop-shadow-[0_24px_70px_rgba(0,0,0,0.35)]"
+                loading="lazy"
+              />
             </article>
           ))}
         </div>
@@ -745,47 +820,28 @@ function DelitFaq() {
   ];
 
   return (
-    <section id="faq" className="relative z-10 scroll-mt-36 px-5 py-12 sm:px-8">
+    <section id="faq" className="relative z-10 scroll-mt-36 bg-white px-5 py-16 sm:px-8 lg:py-20">
       <div className="mx-auto max-w-7xl">
-        <SectionIntro eyebrow="SSS" title="Merak ettiklerin." />
-        <div className="mt-10 grid gap-4">
+        <div className="scroll-reveal mx-auto max-w-4xl text-center">
+          <p className="inline-flex rounded-full border border-violet-200 bg-violet-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-violet-600">
+            SSS
+          </p>
+          <h2 className="mt-5 font-display text-[clamp(2rem,4vw,3.6rem)] font-black leading-[1.08] tracking-tight text-ink">
+            Merak ettikleriniz
+          </h2>
+        </div>
+        <div className="mx-auto mt-10 grid max-w-4xl gap-4">
           {faqs.map(([q, a]) => (
-            <details key={q} className="group rounded-[1.4rem] border border-black/8 bg-white p-6 shadow-soft">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl font-black text-ink focus:outline-none focus:ring-2 focus:ring-electric/60">
+            <details key={q} className="group rounded-[1.45rem] border border-black/8 bg-white p-5 shadow-[0_16px_48px_rgba(31,38,70,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_58px_rgba(90,64,160,0.1)]">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-black text-ink focus:outline-none focus:ring-2 focus:ring-electric/60 sm:text-xl">
                 <span>{q}</span>
-                <ChevronRight className="shrink-0 transition duration-300 group-open:rotate-90" size={20} />
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-violet-50 text-violet-600 transition duration-300 group-open:rotate-90">
+                  <ChevronRight size={18} />
+                </span>
               </summary>
-              <p className="mt-4 max-w-4xl text-base leading-8 text-ink/62">{a}</p>
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-ink/60 sm:text-base">{a}</p>
             </details>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function DelitFinalCta() {
-  return (
-    <section className="relative z-10 px-5 py-12 sm:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="scroll-reveal overflow-hidden rounded-[2rem] border border-black/8 bg-white p-5 shadow-glow">
-          <div className="grid gap-6 rounded-[1.6rem] bg-gradient-to-br from-sky-100 via-white to-rose-100 p-6 text-center sm:p-10 lg:grid-cols-[auto_1fr_auto] lg:items-center lg:text-left">
-            <div className="mx-auto grid h-24 w-24 place-items-center rounded-[1.5rem] bg-white shadow-soft lg:mx-0">
-              <img src={product.logo} alt="Del-It uygulama ikonu" className="h-20 w-20 rounded-[1.25rem] object-cover" loading="lazy" />
-            </div>
-            <div>
-              <h2 className="font-display text-4xl font-black leading-tight sm:text-5xl">
-                Daha ferah bir galeri birkaç kaydırma uzağında.
-              </h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-ink/65 sm:text-lg">
-                Galerini kendi hızında gözden geçir, gereksizleri güvenle ayır ve iPhone’unda yeniden yer aç.
-              </p>
-            </div>
-            <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60" aria-label="Del-It uygulamasını App Store’dan indir">
-              App Store’dan İndir
-              <Download size={18} />
-            </a>
-          </div>
         </div>
       </div>
     </section>
