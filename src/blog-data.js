@@ -1,4 +1,9 @@
 export const siteUrl = 'https://theapdesign.art';
+export const canonicalPath = (path = '/') => {
+  if (path === '/') return '/';
+  return path.endsWith('/') ? path : `${path}/`;
+};
+export const canonicalUrl = (path = '/') => `${siteUrl}${canonicalPath(path)}`;
 
 export const blogCategories = {
   'mobil-uygulamalar': {
@@ -30,7 +35,7 @@ export const blogPosts = [
     tags: ['iPhone', 'depolama alanı', 'galeri temizleme', 'fotoğraf temizleme', 'iOS'],
     coverImage: '/blog/iphone-depolama-alani-nasil-acilir.png',
     coverImageAlt: 'iPhone galeri temizliği ve depolama alanı açma konulu görsel',
-    canonicalUrl: `${siteUrl}/blog/iphone-depolama-alani-nasil-acilir`,
+    canonicalUrl: canonicalUrl('/blog/iphone-depolama-alani-nasil-acilir'),
     draft: false,
     featured: true,
     relatedPosts: [],
@@ -426,7 +431,7 @@ export const blogPosts = [
     ],
     internalLinks: [
       {
-        href: '/del-it',
+        href: '/del-it/',
         label: 'Del-It ürün sayfasını incele',
       },
     ],
@@ -444,7 +449,7 @@ export const blogPosts = [
     tags: ['iPhone', 'iPhone storage', 'free up storage', 'gallery cleanup', 'photo cleanup', 'iOS'],
     coverImage: '/blog/iphone-depolama-alani-nasil-acilir.png',
     coverImageAlt: 'iPhone gallery and storage cleanup illustration',
-    canonicalUrl: `${siteUrl}/en/blog/how-to-free-up-storage-on-iphone`,
+    canonicalUrl: canonicalUrl('/en/blog/how-to-free-up-storage-on-iphone'),
     draft: false,
     featured: true,
     relatedPosts: [],
@@ -840,7 +845,7 @@ export const blogPosts = [
     ],
     internalLinks: [
       {
-        href: '/del-it',
+        href: '/del-it/',
         label: 'Explore the Del-It product page',
       },
     ],
@@ -850,7 +855,7 @@ export const blogPosts = [
 export const legacyBlogRedirects = [
   {
     from: '/blog/del-it-ile-galerini-daha-sakin-yonet',
-    to: '/blog/iphone-depolama-alani-nasil-acilir',
+    to: '/blog/iphone-depolama-alani-nasil-acilir/',
   },
 ];
 
@@ -922,14 +927,14 @@ export function getTranslatedPost(post, targetLanguage) {
 }
 
 export function getPostPath(post) {
-  if (!post) return '/blog';
-  return post.language === 'en' ? `/en/blog/${post.slug}` : `/blog/${post.slug}`;
+  if (!post) return '/blog/';
+  return post.language === 'en' ? `/en/blog/${post.slug}/` : `/blog/${post.slug}/`;
 }
 
 export function getBlogIndexPath(language = 'tr') {
-  return language === 'en' ? '/en/blog' : '/blog';
+  return language === 'en' ? '/en/blog/' : '/blog/';
 }
 
 export function getCategoryPath(categorySlug, language = 'tr') {
-  return language === 'en' ? `/en/blog/category/${categorySlug}` : `/blog/kategori/${categorySlug}`;
+  return language === 'en' ? `/en/blog/category/${categorySlug}/` : `/blog/kategori/${categorySlug}/`;
 }

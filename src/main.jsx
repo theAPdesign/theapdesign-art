@@ -771,7 +771,7 @@ function BlogPostPage({ slug }) {
                   <h2 className="font-display text-2xl font-black">{relatedPostsLabel}</h2>
                   <div className="mt-4 grid gap-3 sm:grid-cols-2">
                     {relatedPosts.map((relatedPost) => (
-                      <a key={relatedPost.slug} href={`/blog/${relatedPost.slug}`} className="rounded-[1.2rem] border border-black/8 bg-[#fbfaf7] p-4 font-bold text-ink transition hover:bg-white">
+                      <a key={relatedPost.slug} href={getPostPath(relatedPost)} className="rounded-[1.2rem] border border-black/8 bg-[#fbfaf7] p-4 font-bold text-ink transition hover:bg-white">
                         {relatedPost.title}
                       </a>
                     ))}
@@ -881,11 +881,11 @@ function Header() {
   });
   const navLinks = [
     [t('navHome'), '/'],
-    [t('navDelit'), '/del-it'],
-    [t('navXox'), '/xox-taktik-arena'],
+    [t('navDelit'), '/del-it/'],
+    [t('navXox'), '/xox-taktik-arena/'],
     [t('navBlog'), getBlogIndexPath(language)],
   ];
-  const contactLink = [t('navContact'), '/contact'];
+  const contactLink = [t('navContact'), '/contact/'];
   const isActive = (href) => {
     const cleanHref = stripLanguagePrefix(normalizePath(href));
 
@@ -1055,7 +1055,7 @@ function HomeHero() {
               <ArrowRight size={18} />
             </a>
             <a
-              href="/contact"
+              href="/contact/"
               className="inline-flex h-14 items-center justify-center rounded-full border border-black/8 bg-white px-7 text-sm font-bold text-ink transition hover:-translate-y-1 hover:bg-[#fbfaf7]"
             >
               {t('contact')}
@@ -1264,7 +1264,7 @@ function HomeDelitOverview() {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center gap-3 pt-1 sm:flex-row lg:col-span-2">
-          <a href="/del-it" className="inline-flex h-14 min-w-44 items-center justify-center gap-2 rounded-full bg-ink px-6 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
+          <a href="/del-it/" className="inline-flex h-14 min-w-44 items-center justify-center gap-2 rounded-full bg-ink px-6 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
             {t('more')}
             <ChevronRight size={17} />
           </a>
@@ -1350,7 +1350,7 @@ function HomeXoxOverview() {
           </div>
         </div>
         <div className="order-3 flex flex-col items-center justify-center gap-3 pt-1 sm:flex-row lg:col-span-2">
-          <a href="/xox-taktik-arena" className="inline-flex h-14 min-w-44 items-center justify-center gap-2 rounded-full bg-ink px-6 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
+          <a href="/xox-taktik-arena/" className="inline-flex h-14 min-w-44 items-center justify-center gap-2 rounded-full bg-ink px-6 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
             {t('more')}
             <ChevronRight size={17} />
           </a>
@@ -1657,11 +1657,11 @@ function DelitHowItWorks() {
           ))}
         </div>
         <div className="scroll-reveal mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href="/del-it/gizlilik-politikasi" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-6 text-sm font-bold text-white shadow-soft transition hover:-translate-y-1 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60">
+          <a href="/del-it/gizlilik-politikasi/" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-6 text-sm font-bold text-white shadow-soft transition hover:-translate-y-1 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60">
             {t('privacyPolicy')}
             <ArrowRight size={17} />
           </a>
-          <a href="/del-it/kullanim-sartlari" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-black/8 bg-white/78 px-6 text-sm font-bold text-ink shadow-soft backdrop-blur-xl transition hover:-translate-y-1 hover:bg-white focus:outline-none focus:ring-2 focus:ring-electric/60">
+          <a href="/del-it/kullanim-sartlari/" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-black/8 bg-white/78 px-6 text-sm font-bold text-ink shadow-soft backdrop-blur-xl transition hover:-translate-y-1 hover:bg-white focus:outline-none focus:ring-2 focus:ring-electric/60">
             {t('terms')}
             <ArrowRight size={17} />
           </a>
@@ -1770,7 +1770,7 @@ function DelitPrivacy() {
                 Del-It’in temel işlemleri cihazında gerçekleşir. Fotoğraf, video ve rehber içeriklerin Del-It
                 sunucularına yüklenmez. Ne temizleyeceğine ve hangi izinleri vereceğine yalnızca sen karar verirsin.
               </p>
-              <a href="/del-it/gizlilik-politikasi" className="mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-full border border-black/8 bg-white px-6 text-sm font-bold text-ink transition hover:-translate-y-1 hover:bg-[#fbfaf7] focus:outline-none focus:ring-2 focus:ring-electric/60">
+              <a href="/del-it/gizlilik-politikasi/" className="mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-full border border-black/8 bg-white px-6 text-sm font-bold text-ink transition hover:-translate-y-1 hover:bg-[#fbfaf7] focus:outline-none focus:ring-2 focus:ring-electric/60">
                 Gizlilik Politikası
                 <ArrowRight size={17} />
               </a>
@@ -1932,13 +1932,13 @@ function DelitLegalLinks({ variant = 'compact' }) {
           <div className="rounded-[1.6rem] border border-black/8 bg-white p-5 shadow-soft">
             <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
-                href="/del-it/gizlilik-politikasi"
+                href="/del-it/gizlilik-politikasi/"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-white px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#fbfaf7]"
               >
                 {t('privacyPolicy')}
               </a>
               <a
-                href="/del-it/kullanim-sartlari"
+                href="/del-it/kullanim-sartlari/"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-[#fbfaf7] px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white"
               >
                 {t('terms')}
@@ -1960,8 +1960,8 @@ function DelitLegalLinks({ variant = 'compact' }) {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-2">
               <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-black/8 bg-[#fbfaf7] px-4 py-2 text-sm font-bold text-ink transition hover:bg-white">App Store</a>
-              <a href="/del-it/gizlilik-politikasi" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">{t('privacyPolicy')}</a>
-              <a href="/del-it/kullanim-sartlari" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">{t('terms')}</a>
+              <a href="/del-it/gizlilik-politikasi/" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">{t('privacyPolicy')}</a>
+              <a href="/del-it/kullanim-sartlari/" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">{t('terms')}</a>
               <a href="mailto:theapdesign26@gmail.com" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">{t('supportEmail')}</a>
               <a href="/" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">AP Design</a>
             </div>
@@ -2173,13 +2173,13 @@ function XoxLegalLinks() {
         <div className="rounded-[1.6rem] border border-black/8 bg-white p-5 shadow-soft">
           <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
-              href="/xox-taktik-arena/gizlilik-politikasi"
+              href="/xox-taktik-arena/gizlilik-politikasi/"
               className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-white px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#fbfaf7]"
             >
               {t('privacyPolicy')}
             </a>
             <a
-              href="/xox-taktik-arena/kullanim-sartlari"
+              href="/xox-taktik-arena/kullanim-sartlari/"
               className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-[#fbfaf7] px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white"
             >
               {t('terms')}
@@ -2301,15 +2301,15 @@ function Footer({ variant = 'default' }) {
               {isDelit ? (
                 <>
                   <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">App Store</a>
-                  <a href="/del-it/gizlilik-politikasi" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('privacyPolicy')}</a>
-                  <a href="/del-it/kullanim-sartlari" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('terms')}</a>
+                  <a href="/del-it/gizlilik-politikasi/" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('privacyPolicy')}</a>
+                  <a href="/del-it/kullanim-sartlari/" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('terms')}</a>
                   <a href="/" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">AP Design</a>
                 </>
               ) : (
                 <>
                   <a href="/" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('navHome')}</a>
-                  <a href="/blog" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('navBlog')}</a>
-                  <a href="/contact" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('navContact')}</a>
+                  <a href="/blog/" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('navBlog')}</a>
+                  <a href="/contact/" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('navContact')}</a>
                 </>
               )}
             </div>
@@ -2382,11 +2382,11 @@ function getLocalizedPath(pathname, targetLanguage) {
 
   if (routePath.startsWith('/blog/kategori/') || routePath.startsWith('/blog/category/')) {
     const slug = routePath.replace('/blog/kategori/', '').replace('/blog/category/', '');
-    if (targetLanguage === 'en' && slug === 'mobil-uygulamalar') return '/en/blog/category/mobile-apps';
-    if (targetLanguage === 'tr' && slug === 'mobile-apps') return '/blog/kategori/mobil-uygulamalar';
+    if (targetLanguage === 'en' && slug === 'mobil-uygulamalar') return '/en/blog/category/mobile-apps/';
+    if (targetLanguage === 'tr' && slug === 'mobile-apps') return '/blog/kategori/mobil-uygulamalar/';
   }
 
-  if (targetLanguage === 'en' && routePath === '/blog') return '/en/blog';
+  if (targetLanguage === 'en' && routePath === '/blog') return '/en/blog/';
   if (targetLanguage === 'tr' && cleanPath.startsWith('/en/')) return routePath;
 
   return cleanPath;

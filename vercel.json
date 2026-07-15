@@ -1,10 +1,10 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
+  "trailingSlash": true,
   "redirects": [
     {
       "source": "/blog/del-it-ile-galerini-daha-sakin-yonet",
-      "destination": "/blog/iphone-depolama-alani-nasil-acilir",
+      "destination": "/blog/iphone-depolama-alani-nasil-acilir/",
       "permanent": true
     }
   ]

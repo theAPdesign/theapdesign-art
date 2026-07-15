@@ -3,8 +3,11 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   blogCategories,
+  canonicalPath,
+  canonicalUrl,
   getAllPublishedBlogPosts,
   getBlogIndexPath,
+  getCategoryPath,
   getPostsByCategory,
   getPublishedBlogPosts,
   getPostPath,
@@ -34,6 +37,10 @@ function escapeHtml(value) {
 function absoluteUrl(path) {
   if (path.startsWith('http')) return path;
   return `${siteUrl}${path.startsWith('/') ? path : `/${path}`}`;
+}
+
+function pageUrl(path) {
+  return canonicalUrl(path);
 }
 
 function formatDate(date) {
@@ -97,7 +104,7 @@ function organizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'The AP Design',
-    url: siteUrl,
+    url: pageUrl('/'),
     logo: `${siteUrl}/ap-logo.svg`,
   };
 }
@@ -107,7 +114,7 @@ function websiteSchema() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'The AP Design',
-    url: siteUrl,
+    url: pageUrl('/'),
   };
 }
 
@@ -130,7 +137,7 @@ function blogSchema(posts) {
     '@context': 'https://schema.org',
     '@type': 'Blog',
     name: 'The AP Design Blog',
-    url: `${siteUrl}${getBlogIndexPath(language)}`,
+    url: pageUrl(getBlogIndexPath(language)),
     description: language === 'en'
       ? 'The AP Design notes on products, design, and mobile experiences.'
       : 'The AP Design ürün, tasarım ve mobil deneyim notları.',
@@ -158,7 +165,7 @@ function articleSchema(post) {
     author: {
       '@type': 'Organization',
       name: post.author,
-      url: siteUrl,
+      url: pageUrl('/'),
     },
     publisher: {
       '@type': 'Organization',
@@ -235,7 +242,7 @@ function renderBlogListBody(posts, language = 'tr') {
     ${posts.map((post) => `<article>
       <h3><a href="${getPostPath(post)}">${escapeHtml(post.title)}</a></h3>
       <p>${escapeHtml(post.description)}</p>
-      <p><a href="${copy.categoryPathPrefix}${post.category}">${escapeHtml(blogCategories[post.category]?.title || post.category)}</a></p>
+      <p><a href="${getCategoryPath(post.category, language)}">${escapeHtml(blogCategories[post.category]?.title || post.category)}</a></p>
       <time datetime="${post.publishedAt}">${formatDate(post.publishedAt)}</time>
       <p>${escapeHtml(post.readingTime)} ${copy.read}</p>
     </article>`).join('\n    ')}
@@ -267,7 +274,7 @@ function renderPostBody(post) {
   return `<main>
   <article>
     <header>
-      <p><a href="${copy.categoryPrefix}${post.category}">${escapeHtml(blogCategories[post.category]?.title || post.category)}</a></p>
+      <p><a href="${getCategoryPath(post.category, post.language)}">${escapeHtml(blogCategories[post.category]?.title || post.category)}</a></p>
       <h1>${escapeHtml(post.title)}</h1>
       <p>${escapeHtml(post.description)}</p>
       <p>${copy.author}: ${escapeHtml(post.author)}</p>
@@ -379,18 +386,18 @@ function validatePosts(posts) {
 function sitemapXml(posts) {
   const staticPages = [
     ['/', generatedAt],
-    ['/en/blog', generatedAt],
-    ['/contact', generatedAt],
-    ['/del-it', generatedAt],
-    ['/del-it/gizlilik-politikasi', generatedAt],
-    ['/del-it/kullanim-sartlari', generatedAt],
-    ['/xox-taktik-arena', generatedAt],
-    ['/xox-taktik-arena/gizlilik-politikasi', generatedAt],
-    ['/xox-taktik-arena/kullanim-sartlari', generatedAt],
-    ['/blog', generatedAt],
+    ['/en/blog/', generatedAt],
+    ['/contact/', generatedAt],
+    ['/del-it/', generatedAt],
+    ['/del-it/gizlilik-politikasi/', generatedAt],
+    ['/del-it/kullanim-sartlari/', generatedAt],
+    ['/xox-taktik-arena/', generatedAt],
+    ['/xox-taktik-arena/gizlilik-politikasi/', generatedAt],
+    ['/xox-taktik-arena/kullanim-sartlari/', generatedAt],
+    ['/blog/', generatedAt],
   ];
   const urls = [
-    ...staticPages.map(([path, lastmod]) => ({ loc: `${siteUrl}${path === '/' ? '/' : path}`, lastmod })),
+    ...staticPages.map(([path, lastmod]) => ({ loc: pageUrl(path), lastmod })),
     ...posts.map((post) => ({ loc: post.canonicalUrl, lastmod: formatDate(post.updatedAt) })),
   ];
 
@@ -413,7 +420,7 @@ function rssXml(posts) {
 <rss version="2.0">
   <channel>
     <title>The AP Design Blog</title>
-    <link>${siteUrl}/blog</link>
+    <link>${pageUrl('/blog/')}</link>
     <description>Ürün, tasarım ve mobil deneyim notları.</description>
     <language>tr</language>
     <lastBuildDate>${new Date(latestUpdatedAt).toUTCString()}</lastBuildDate>
@@ -436,13 +443,13 @@ function rssXmlForLanguage(posts, language = 'tr') {
   const copy = language === 'en'
     ? {
       title: 'The AP Design Blog',
-      link: `${siteUrl}/en/blog`,
+      link: pageUrl('/en/blog/'),
       description: 'Notes on products, design, and mobile experiences.',
       language: 'en',
     }
     : {
       title: 'The AP Design Blog',
-      link: `${siteUrl}/blog`,
+      link: pageUrl('/blog/'),
       description: 'Ürün, tasarım ve mobil deneyim notları.',
       language: 'tr',
     };
@@ -540,7 +547,24 @@ Sitemap: ${siteUrl}/sitemap.xml
 }
 
 function redirectsTxt() {
-  return legacyBlogRedirects
+  const staticPaths = [
+    '/blog',
+    '/en/blog',
+    '/contact',
+    '/del-it',
+    '/del-it/gizlilik-politikasi',
+    '/del-it/kullanim-sartlari',
+    '/xox-taktik-arena',
+    '/xox-taktik-arena/gizlilik-politikasi',
+    '/xox-taktik-arena/kullanim-sartlari',
+  ];
+  const postPaths = getAllPublishedBlogPosts().map((post) => getPostPath(post).replace(/\/$/, ''));
+  const categoryPaths = Object.keys(blogCategories)
+    .map((slug) => getCategoryPath(slug, blogCategories[slug].language).replace(/\/$/, ''));
+  const canonicalRedirects = [...staticPaths, ...postPaths, ...categoryPaths]
+    .map((path) => ({ from: path, to: canonicalPath(path) }));
+
+  return [...legacyBlogRedirects, ...canonicalRedirects]
     .map((redirect) => `${redirect.from} ${redirect.to} 301`)
     .join('\n');
 }
@@ -555,14 +579,14 @@ async function main() {
   await writePage('blog', renderDocument({
     title: 'Blog | The AP Design',
     description: 'The AP Design blogunda mobil uygulama geliştirme, UI/UX tasarım, dijital ürünler, App Store süreçleri ve ürün hikayeleri üzerine yazılar.',
-    canonical: `${siteUrl}/blog`,
+    canonical: pageUrl('/blog/'),
     jsonLd: [
       organizationSchema(),
       websiteSchema(),
       blogSchema(trPosts),
       breadcrumbSchema([
-        { name: 'The AP Design', url: siteUrl },
-        { name: 'Blog', url: `${siteUrl}/blog` },
+        { name: 'The AP Design', url: pageUrl('/') },
+        { name: 'Blog', url: pageUrl('/blog/') },
       ]),
     ],
     body: renderBlogListBody(trPosts, 'tr'),
@@ -572,7 +596,7 @@ async function main() {
   await writePage('en/blog', renderDocument({
     title: 'Blog | The AP Design',
     description: 'The AP Design blog features articles about mobile app development, UI/UX design, digital products, App Store processes, and product stories.',
-    canonical: `${siteUrl}/en/blog`,
+    canonical: pageUrl('/en/blog/'),
     language: 'en',
     ogLocale: 'en_US',
     jsonLd: [
@@ -580,8 +604,8 @@ async function main() {
       websiteSchema(),
       blogSchema(enPosts),
       breadcrumbSchema([
-        { name: 'The AP Design', url: siteUrl },
-        { name: 'Blog', url: `${siteUrl}/en/blog` },
+        { name: 'The AP Design', url: pageUrl('/') },
+        { name: 'Blog', url: pageUrl('/en/blog/') },
       ]),
     ],
     body: renderBlogListBody(enPosts, 'en'),
@@ -600,8 +624,8 @@ async function main() {
       articleSchema(post),
       faqSchema(post),
       breadcrumbSchema([
-        { name: 'The AP Design', url: siteUrl },
-        { name: 'Blog', url: `${siteUrl}${getBlogIndexPath(post.language)}` },
+        { name: 'The AP Design', url: pageUrl('/') },
+        { name: 'Blog', url: pageUrl(getBlogIndexPath(post.language)) },
         { name: post.title, url: post.canonicalUrl },
       ]),
     ].filter(Boolean),
@@ -612,7 +636,7 @@ async function main() {
     const categoryPosts = getPostsByCategory(slug, category.language);
     if (!categoryPosts.length) return Promise.resolve();
     const categoryPath = category.language === 'en' ? `en/blog/category/${slug}` : `blog/kategori/${slug}`;
-    const categoryUrl = category.language === 'en' ? `${siteUrl}/en/blog/category/${slug}` : `${siteUrl}/blog/kategori/${slug}`;
+    const categoryUrl = pageUrl(getCategoryPath(slug, category.language));
 
     return writePage(categoryPath, renderDocument({
       title: `${category.title} | The AP Design Blog`,
@@ -623,8 +647,8 @@ async function main() {
       ogLocale: category.language === 'en' ? 'en_US' : 'tr_TR',
       jsonLd: [
         breadcrumbSchema([
-          { name: 'The AP Design', url: siteUrl },
-          { name: 'Blog', url: `${siteUrl}${getBlogIndexPath(category.language)}` },
+          { name: 'The AP Design', url: pageUrl('/') },
+          { name: 'Blog', url: pageUrl(getBlogIndexPath(category.language)) },
           { name: category.title, url: categoryUrl },
         ]),
       ],
