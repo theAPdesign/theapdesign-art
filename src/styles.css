@@ -43,12 +43,7 @@ body {
   will-change: width;
 }
 
-.site-nav-card-expanded {
-  max-width: calc(100vw - 2.5rem);
-  width: min(80rem, calc(100vw - 2.5rem));
-}
-
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .site-nav-card {
     max-width: min(80rem, calc(100vw - 4rem));
     width: min(var(--nav-compact-width, 39rem), calc(100vw - 4rem));

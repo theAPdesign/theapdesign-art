@@ -15,12 +15,14 @@ import {
   LayoutTemplate,
   LockKeyhole,
   Mail,
+  Menu,
   MoveHorizontal,
   ShieldCheck,
   Sparkles,
   Trash2,
   UsersRound,
   Video,
+  X,
 } from 'lucide-react';
 import {
   blogCategories,
@@ -60,6 +62,8 @@ const translations = {
     navContact: 'İletişim',
     expandMenu: 'Menüyü genişlet',
     collapseMenu: 'Menüyü daralt',
+    openMenu: 'Menüyü aç',
+    closeMenu: 'Menüyü kapat',
     languageLabel: 'Dil seçimi',
     studioTag: 'Uygulama stüdyosu',
     heroLine1: 'Eğlenceli, Çözümlü',
@@ -190,6 +194,8 @@ const translations = {
     navContact: 'Contact',
     expandMenu: 'Expand menu',
     collapseMenu: 'Collapse menu',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
     languageLabel: 'Language',
     studioTag: 'App studio',
     heroLine1: 'Playful, Useful',
@@ -870,7 +876,7 @@ function Header() {
   const animationTimerRef = React.useRef(null);
   const [compactWidth, setCompactWidth] = React.useState(null);
   const [isAnimating, setIsAnimating] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [isExpanded, setIsExpanded] = React.useState(() => {
     if (typeof window === 'undefined') return false;
     return window.localStorage.getItem('ap-header-expanded') === 'true';
@@ -893,11 +899,15 @@ function Header() {
   };
   const switchLanguage = (nextLanguage) => {
     const nextPath = getLocalizedPath(rawPath, nextLanguage);
-    setLanguage(nextLanguage);
+    setMobileMenuOpen(false);
 
     if (nextPath !== rawPath) {
+      window.localStorage.setItem('ap-language', nextLanguage);
       window.location.href = nextPath;
+      return;
     }
+
+    setLanguage(nextLanguage);
   };
   const toggleExpanded = () => {
     if (animationTimerRef.current) {
@@ -907,18 +917,15 @@ function Header() {
     setIsAnimating(true);
 
     if (isExpanded) {
-      setIsClosing(true);
       setIsExpanded(false);
       window.localStorage.setItem('ap-header-expanded', 'false');
       animationTimerRef.current = window.setTimeout(() => {
         setIsAnimating(false);
-        setIsClosing(false);
         animationTimerRef.current = null;
       }, 620);
       return;
     }
 
-    setIsClosing(false);
     setIsExpanded(true);
     window.localStorage.setItem('ap-header-expanded', 'true');
     animationTimerRef.current = window.setTimeout(() => {
@@ -926,7 +933,6 @@ function Header() {
       animationTimerRef.current = null;
     }, 620);
   };
-  const useWideLayout = isExpanded || isClosing;
   const navLinkClass = (href, compact = false) => (
     `whitespace-nowrap rounded-full ${compact ? 'px-3' : 'px-4'} py-2 transition ${isActive(href) ? 'bg-ink font-bold text-white shadow-soft hover:text-white' : 'hover:bg-[#f3f1ec] hover:text-ink'}`
   );
@@ -939,6 +945,14 @@ function Header() {
     }
   ), []);
 
+  React.useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   React.useLayoutEffect(() => {
     const measureCompactWidth = () => {
       const logoWidth = logoRef.current?.scrollWidth || logoRef.current?.getBoundingClientRect().width || 0;
@@ -947,11 +961,11 @@ function Header() {
         : 0;
       const rightWidth = rightNavRef.current?.scrollWidth || rightNavRef.current?.getBoundingClientRect().width || 0;
       const visibleGroups = [logoWidth, centerWidth, rightWidth].filter(Boolean).length;
-      const gap = window.matchMedia('(min-width: 768px)').matches ? 8 : 12;
+      const gap = window.matchMedia('(min-width: 1024px)').matches ? 8 : 12;
       const padding = 16;
       const border = 2;
       const measuredWidth = logoWidth + centerWidth + rightWidth + Math.max(0, visibleGroups - 1) * gap + padding + border;
-      const maxWidth = window.innerWidth - (window.matchMedia('(min-width: 768px)').matches ? 64 : 40);
+      const maxWidth = window.innerWidth - (window.matchMedia('(min-width: 1024px)').matches ? 64 : 40);
 
       setCompactWidth(Math.ceil(Math.min(measuredWidth, maxWidth)));
     };
@@ -964,17 +978,17 @@ function Header() {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-center px-5 sm:px-8">
+      <nav className="relative z-50 mx-auto flex h-20 max-w-7xl items-center justify-center px-5 sm:px-8">
         <div
-          className={`site-nav-card ${isExpanded ? 'site-nav-card-expanded' : ''} ${useWideLayout ? 'md:grid-cols-[1fr_auto_1fr]' : 'md:grid-cols-[auto_auto_auto]'} ${isAnimating ? 'site-nav-card-animating' : ''} pointer-events-auto grid grid-cols-[auto_auto] items-center justify-center gap-3 rounded-full border border-black/8 bg-white/78 p-2 shadow-soft backdrop-blur-xl md:gap-2`}
+          className={`site-nav-card ${isExpanded ? 'site-nav-card-expanded' : ''} ${isExpanded ? 'lg:grid-cols-[1fr_auto_1fr]' : 'lg:grid-cols-[auto_auto_auto]'} ${isAnimating ? 'site-nav-card-animating' : ''} pointer-events-auto grid grid-cols-[auto_auto] items-center justify-center gap-3 rounded-full border border-black/8 bg-white/78 p-2 shadow-soft backdrop-blur-xl lg:gap-2`}
           style={compactWidth ? { '--nav-compact-width': `${compactWidth}px` } : undefined}
         >
-          <a ref={logoRef} href="/" className="flex items-center md:justify-self-start" aria-label="AP Design anasayfa">
+          <a ref={logoRef} href="/" className="flex items-center lg:justify-self-start" aria-label="AP Design anasayfa">
             <span className="grid h-11 w-11 place-items-center rounded-full border border-black/8 bg-white shadow-soft">
               <img src="/ap-logo.svg" alt="AP Design logosu" className="h-8 w-8 object-contain" />
             </span>
           </a>
-          <div ref={centerNavRef} className="hidden items-center justify-center gap-2 text-sm font-medium text-ink/65 md:flex">
+          <div ref={centerNavRef} className="hidden items-center justify-center gap-2 text-sm font-medium text-ink/65 lg:flex">
             {navLinks.map(([label, href]) => (
               <a
                 key={href}
@@ -985,8 +999,8 @@ function Header() {
               </a>
             ))}
           </div>
-          <div ref={rightNavRef} className="flex items-center justify-end gap-1 md:gap-2">
-            <a href={contactLink[1]} className={`hidden text-sm font-medium md:inline-flex ${navLinkClass(contactLink[1], true)}`}>
+          <div ref={rightNavRef} className="flex items-center justify-end gap-1 lg:gap-2">
+            <a href={contactLink[1]} className={`hidden text-sm font-medium lg:inline-flex ${navLinkClass(contactLink[1], true)}`}>
               {contactLink[0]}
             </a>
             <div className="flex items-center rounded-full border border-black/8 bg-white/55 p-1" aria-label={t('languageLabel')}>
@@ -1008,16 +1022,62 @@ function Header() {
             </div>
             <button
               type="button"
-              className="grid h-10 w-10 place-items-center rounded-full text-ink/60 transition hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-electric/50 active:bg-transparent"
+              className="hidden h-10 w-10 place-items-center rounded-full text-ink/60 transition hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-electric/50 active:bg-transparent lg:grid"
               aria-label={isExpanded ? t('collapseMenu') : t('expandMenu')}
               aria-pressed={isExpanded}
               onClick={toggleExpanded}
             >
               <ChevronRight className={`transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isExpanded ? 'rotate-180' : ''}`} size={18} />
             </button>
+            <button
+              type="button"
+              className="grid h-10 w-10 place-items-center rounded-full text-ink transition hover:bg-[#f3f1ec] focus:outline-none focus-visible:ring-2 focus-visible:ring-electric/50 lg:hidden"
+              aria-label={mobileMenuOpen ? t('closeMenu') : t('openMenu')}
+              aria-expanded={mobileMenuOpen}
+              onClick={() => setMobileMenuOpen((open) => !open)}
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
       </nav>
+      <div className={`mobile-menu-panel fixed inset-0 z-40 bg-white/92 px-5 pb-8 pt-24 backdrop-blur-2xl transition duration-300 ease-out lg:hidden ${mobileMenuOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-4 opacity-0'}`}>
+        <div className="mx-auto flex min-h-full max-w-lg flex-col justify-between rounded-[2rem] border border-black/8 bg-white/78 p-5 shadow-soft">
+          <div className="grid gap-3">
+            {[...navLinks, contactLink].map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex min-h-16 items-center justify-between rounded-[1.35rem] px-5 text-xl font-black transition ${isActive(href) ? 'bg-ink text-white shadow-soft' : 'bg-[#fbfaf7] text-ink hover:bg-[#f3f1ec]'}`}
+              >
+                {label}
+                <ChevronRight size={18} />
+              </a>
+            ))}
+          </div>
+          <div className="mt-8 rounded-[1.5rem] border border-black/8 bg-[#fbfaf7] p-4">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-ink/45">{t('languageLabel')}</p>
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              {[
+                ['tr', '🇹🇷', 'Türkçe'],
+                ['en', '🇬🇧', 'English'],
+              ].map(([code, flag, label]) => (
+                <button
+                  key={code}
+                  type="button"
+                  className={`flex h-14 items-center justify-center rounded-full text-2xl transition ${language === code ? 'bg-ink shadow-soft' : 'bg-white hover:bg-[#f3f1ec]'}`}
+                  aria-label={label}
+                  aria-pressed={language === code}
+                  onClick={() => switchLanguage(code)}
+                >
+                  <span aria-hidden="true">{flag}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }
@@ -2361,6 +2421,7 @@ function stripLanguagePrefix(pathname) {
 function getLocalizedPath(pathname, targetLanguage) {
   const cleanPath = normalizePath(pathname);
   const routePath = stripLanguagePrefix(cleanPath);
+  const currentLanguage = getRouteLanguage(cleanPath) || 'tr';
 
   if (routePath === '/blog') {
     return getBlogIndexPath(targetLanguage);
@@ -2368,7 +2429,7 @@ function getLocalizedPath(pathname, targetLanguage) {
 
   if (routePath.startsWith('/blog/')) {
     const slug = routePath.replace('/blog/', '');
-    const currentPost = getBlogPostBySlug(slug);
+    const currentPost = getBlogPostBySlug(slug, currentLanguage) || getBlogPostBySlug(slug);
 
     if (currentPost) {
       const translatedPost = getTranslatedPost(currentPost, targetLanguage);
