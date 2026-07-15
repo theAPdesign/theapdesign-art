@@ -5,6 +5,7 @@ import {
   blogCategories,
   getPostsByCategory,
   getPublishedBlogPosts,
+  legacyBlogRedirects,
   siteUrl,
 } from '../src/blog-data.js';
 
@@ -12,7 +13,7 @@ const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = resolve(rootDir, 'public');
 const blogDir = resolve(rootDir, 'blog');
 const defaultImage = `${siteUrl}/og-image.svg`;
-const generatedAt = '2026-07-15';
+const generatedAt = '2026-07-16';
 
 const baseTemplate = await readFile(resolve(rootDir, 'index.html'), 'utf8');
 const analyticsBlock = (baseTemplate.match(/<script async src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-W219ZBJWH0"><\/script>[\s\S]*?<\/script>/) || [''])[0];
@@ -32,7 +33,7 @@ function absoluteUrl(path) {
 }
 
 function formatDate(date) {
-  return new Date(date).toISOString().split('T')[0];
+  return new Date(date).toLocaleDateString('en-CA', { timeZone: 'Europe/Istanbul' });
 }
 
 function scriptTag(data) {
@@ -151,6 +152,23 @@ function articleSchema(post) {
   };
 }
 
+function faqSchema(post) {
+  if (!post.faq?.length) return null;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: post.faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+}
+
 function renderBlogListBody(posts) {
   return `<main>
   <header>
@@ -187,8 +205,8 @@ function renderPostBody(post) {
       <img src="${post.coverImage}" alt="${escapeHtml(post.coverImageAlt)}" width="1200" height="630" />
     </figure>
     ${post.content.map((section) => `<section>
-      <h2>${escapeHtml(section.heading)}</h2>
-      ${section.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('\n      ')}
+      ${section.heading ? `<h2>${escapeHtml(section.heading)}</h2>` : ''}
+      ${renderStaticBlocks(section.blocks, post)}
     </section>`).join('\n    ')}
     ${post.internalLinks.length ? `<aside>
       <h2>İlgili bağlantılar</h2>
@@ -196,6 +214,40 @@ function renderPostBody(post) {
     </aside>` : ''}
   </article>
 </main>`;
+}
+
+function renderStaticBlocks(blocks, post) {
+  return blocks.map((block) => {
+    if (block.type === 'paragraph') {
+      return `<p>${escapeHtml(block.text)}</p>`;
+    }
+
+    if (block.type === 'list') {
+      return `<ul>${block.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`;
+    }
+
+    if (block.type === 'steps') {
+      return `<ol>${block.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ol>`;
+    }
+
+    if (block.type === 'callout') {
+      return `<aside><p>${escapeHtml(block.text)}</p></aside>`;
+    }
+
+    if (block.type === 'cta') {
+      return `<aside><a href="${block.href}" target="_blank" rel="noopener noreferrer">${escapeHtml(block.label)}</a></aside>`;
+    }
+
+    if (block.type === 'links') {
+      return `<p>${block.links.map((link) => `<a href="${link.href}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`).join(' ')}</p>`;
+    }
+
+    if (block.type === 'faq') {
+      return `<div>${post.faq.map((item) => `<section><h3>${escapeHtml(item.question)}</h3><p>${escapeHtml(item.answer)}</p></section>`).join('')}</div>`;
+    }
+
+    return '';
+  }).join('\n      ');
 }
 
 function renderCategoryBody(category, posts) {
@@ -370,6 +422,12 @@ Sitemap: ${siteUrl}/sitemap.xml
 `;
 }
 
+function redirectsTxt() {
+  return legacyBlogRedirects
+    .map((redirect) => `${redirect.from} ${redirect.to} 301`)
+    .join('\n');
+}
+
 async function main() {
   const posts = getPublishedBlogPosts();
   validatePosts(posts);
@@ -399,12 +457,13 @@ async function main() {
     image: post.socialImage,
     jsonLd: [
       articleSchema(post),
+      faqSchema(post),
       breadcrumbSchema([
         { name: 'The AP Design', url: siteUrl },
         { name: 'Blog', url: `${siteUrl}/blog` },
         { name: post.title, url: post.canonicalUrl },
       ]),
-    ],
+    ].filter(Boolean),
     body: renderPostBody(post),
   }))));
 
@@ -430,6 +489,7 @@ async function main() {
 
   await writeFile(resolve(publicDir, 'sitemap.xml'), sitemapXml(posts));
   await writeFile(resolve(publicDir, 'robots.txt'), robotsTxt());
+  await writeFile(resolve(publicDir, '_redirects'), redirectsTxt());
   await mkdir(resolve(publicDir, 'blog'), { recursive: true });
   await writeFile(resolve(publicDir, 'blog/rss.xml'), rssXml(posts));
 }

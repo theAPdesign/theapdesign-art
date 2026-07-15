@@ -573,20 +573,17 @@ function BlogMeta({ post, className = '' }) {
 }
 
 function BlogVisual({ post, title }) {
-  const icons = {
-    images: Images,
-    shield: ShieldCheck,
-    sparkles: Sparkles,
-  };
-  const Icon = icons[post.iconKey] || BookOpenText;
-
   return (
     <figure className={`relative min-h-56 overflow-hidden bg-gradient-to-br ${post.accent}`}>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,255,255,0.72),transparent_28%),radial-gradient(circle_at_78%_82%,rgba(255,255,255,0.38),transparent_30%)]" />
-      <div className="absolute -left-10 bottom-5 h-32 w-32 rounded-full border border-white/45 bg-white/14 backdrop-blur" />
-      <div className="absolute right-5 top-5 grid h-16 w-16 place-items-center rounded-[1.25rem] border border-white/55 bg-white/35 text-white shadow-[0_18px_44px_rgba(22,16,60,0.16)] backdrop-blur-xl">
-        <Icon size={30} strokeWidth={2.4} />
-      </div>
+      <img
+        src={post.coverImage}
+        alt={post.coverImageAlt}
+        width="1200"
+        height="630"
+        className="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/34 via-black/6 to-white/6" />
       <div className="absolute inset-x-5 bottom-5 rounded-[1.35rem] border border-white/55 bg-white/42 p-4 shadow-[0_18px_46px_rgba(22,16,60,0.16)] backdrop-blur-xl">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/80">AP Design</p>
         <p className="mt-2 font-display text-2xl font-black leading-tight text-white drop-shadow-sm">
@@ -595,6 +592,88 @@ function BlogVisual({ post, title }) {
       </div>
     </figure>
   );
+}
+
+function BlogContentBlocks({ blocks, post }) {
+  return blocks.map((block, index) => {
+    if (block.type === 'paragraph') {
+      return <p key={`${block.type}-${index}`}>{block.text}</p>;
+    }
+
+    if (block.type === 'list') {
+      return (
+        <ul key={`${block.type}-${index}`} className="list-disc space-y-2 pl-6">
+          {block.items.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+      );
+    }
+
+    if (block.type === 'steps') {
+      return (
+        <ol key={`${block.type}-${index}`} className="list-decimal space-y-2 pl-6">
+          {block.items.map((item) => <li key={item}>{item}</li>)}
+        </ol>
+      );
+    }
+
+    if (block.type === 'callout') {
+      return (
+        <aside key={`${block.type}-${index}`} className="rounded-[1.4rem] border border-violet-100 bg-gradient-to-br from-violet-50 to-sky-50 p-5 text-base font-semibold leading-7 text-ink/70">
+          {block.text}
+        </aside>
+      );
+    }
+
+    if (block.type === 'cta') {
+      return (
+        <aside key={`${block.type}-${index}`} className="rounded-[1.5rem] border border-black/8 bg-[#fbfaf7] p-5">
+          <a
+            href={block.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85"
+          >
+            {block.label}
+            <ExternalLink size={16} />
+          </a>
+        </aside>
+      );
+    }
+
+    if (block.type === 'links') {
+      return (
+        <p key={`${block.type}-${index}`} className="flex flex-wrap gap-2">
+          {block.links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#f3f1ec]"
+            >
+              {link.label}
+              <ExternalLink size={14} />
+            </a>
+          ))}
+        </p>
+      );
+    }
+
+    if (block.type === 'faq') {
+      return (
+        <div key={`${block.type}-${index}`} className="space-y-4">
+          {post.faq.map((item) => (
+            <section key={item.question} className="rounded-[1.25rem] border border-black/8 bg-[#fbfaf7] p-5">
+              <h3 className="font-display text-xl font-black leading-tight text-ink">{item.question}</h3>
+              <p className="mt-3 text-base leading-7 text-ink/68">{item.answer}</p>
+            </section>
+          ))}
+        </div>
+      );
+    }
+
+    return null;
+  });
 }
 
 function BlogPostPage({ slug }) {
@@ -640,13 +719,13 @@ function BlogPostPage({ slug }) {
                 </p>
               </aside>
               <div className="mt-10 space-y-10 text-lg leading-9 text-ink/72">
-                {post.content.map((section) => (
-                  <section key={section.heading}>
-                    <h2 className="font-display text-3xl font-black leading-tight text-ink">{section.heading}</h2>
+                {post.content.map((section, index) => (
+                  <section key={section.heading || `intro-${index}`}>
+                    {section.heading ? (
+                      <h2 className="font-display text-3xl font-black leading-tight text-ink">{section.heading}</h2>
+                    ) : null}
                     <div className="mt-4 space-y-5">
-                      {section.paragraphs.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
+                      <BlogContentBlocks blocks={section.blocks} post={post} />
                     </div>
                   </section>
                 ))}
