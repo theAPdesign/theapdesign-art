@@ -472,7 +472,7 @@ function BlogPage() {
           </div>
           {featuredPost ? (
             <article className="scroll-reveal mt-10 grid overflow-hidden rounded-[2rem] border border-black/8 bg-[#fbfaf7] shadow-soft lg:grid-cols-[0.95fr_1.05fr]">
-              <BlogVisual post={featuredPost} title={featuredPost.title} />
+              <BlogVisual post={featuredPost} />
               <div className="flex flex-col justify-center p-6 sm:p-8">
                 <a href={getCategoryPath(featuredPost.category, language)} className="w-fit rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-ink/50 transition hover:bg-[#f3f1ec]">
                   {blogCategories[featuredPost.category]?.title}
@@ -546,7 +546,7 @@ function BlogCard({ post }) {
 
   return (
     <article className="scroll-reveal group flex h-full flex-col overflow-hidden rounded-[1.7rem] border border-black/8 bg-white shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(60,44,125,0.13)]">
-      <BlogVisual post={post} title={post.title} />
+      <BlogVisual post={post} />
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <a href={getCategoryPath(post.category, language)} className="mb-3 w-fit rounded-full bg-[#f3f1ec] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-ink/48 transition hover:bg-violet-50 hover:text-violet-600">
           {blogCategories[post.category]?.title}
@@ -590,7 +590,7 @@ function BlogMeta({ post, className = '' }) {
   );
 }
 
-function BlogVisual({ post, title }) {
+function BlogVisual({ post }) {
   return (
     <figure className={`relative min-h-56 overflow-hidden bg-gradient-to-br ${post.accent}`}>
       <img
@@ -601,13 +601,6 @@ function BlogVisual({ post, title }) {
         className="absolute inset-0 h-full w-full object-cover"
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/34 via-black/6 to-white/6" />
-      <div className="absolute inset-x-5 bottom-5 rounded-[1.35rem] border border-white/55 bg-white/42 p-4 shadow-[0_18px_46px_rgba(22,16,60,0.16)] backdrop-blur-xl">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/80">AP Design</p>
-        <p className="mt-2 font-display text-2xl font-black leading-tight text-white drop-shadow-sm">
-          {title}
-        </p>
-      </div>
     </figure>
   );
 }
@@ -722,7 +715,7 @@ function BlogPostPage({ slug }) {
             {t('backToBlog')}
           </a>
           <div className="mt-8 overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-soft">
-            <BlogVisual post={post} title={post.title} />
+            <BlogVisual post={post} />
             <div className="p-6 sm:p-10 lg:p-12">
               <a href={getCategoryPath(post.category, language)} className="inline-flex rounded-full bg-[#f3f1ec] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-ink/48 transition hover:bg-violet-50 hover:text-violet-600">
                 {blogCategories[post.category]?.title}
