@@ -38,44 +38,297 @@ const xoxProduct = {
   logo: '/xox-taktik-arena-logo.png',
 };
 
+const translations = {
+  tr: {
+    navHome: 'Anasayfa',
+    navDelit: 'Del-It',
+    navXox: 'XOX',
+    navContact: 'İletişim',
+    expandMenu: 'Menüyü genişlet',
+    collapseMenu: 'Menüyü daralt',
+    languageLabel: 'Dil seçimi',
+    studioTag: 'Uygulama stüdyosu',
+    heroLine1: 'Eğlenceli, Çözümlü',
+    heroLine2: 'Fikirler',
+    heroText: 'Biz, eğlenceli ve ilgi çekici mini oyunlar ile pratik mobil deneyimler geliştirmeye odaklanan yaratıcı bir stüdyoyuz. Yeniliği, yaratıcılığı ve kullanıcı geri bildirimlerini birleştirerek kolay öğrenilen, bırakması zor ve herkes için keyifli uygulamalar tasarlıyoruz.',
+    viewApps: 'Uygulamaları Gör',
+    contact: 'İletişim',
+    appsTag: 'Uygulamalarımız',
+    appsTitlePrefix: 'Her uygulama kendi',
+    appsTitleAccent: 'küçük dünyasını',
+    appsTitleSuffix: 'taşır.',
+    appsDescription: 'Kısa sürede anlaşılır, tekrar açıldığında yine keyif verir. Oyunlardan pratik araçlara kadar ürünleri sade, canlı ve mobil öncelikli tasarlıyoruz.',
+    carouselLabel: 'Uygulamalarımız',
+    showSlide: 'bölümünü göster',
+    delitSubtitle: 'iPhone için galeri düzenleme',
+    delitTitle1: 'Galerini temizle',
+    delitTitle2: 'anılarını koru',
+    delitDescription: 'Fotoğraf ve videolarını hızlıca gözden geçir, gereksiz olanları güvenli çöp kutusuna ayır. Medya kasası, rehber temizliği, kolaj ve istatistikler tek yerde.',
+    quickClean: 'Hızlı temizlik',
+    quickCleanText: 'Kaydırarak karar ver',
+    safeTrash: 'Güvenli çöp kutusu',
+    safeTrashText: 'Silmeden önce kontrol et',
+    mediaVault: 'Medya kasası',
+    mediaVaultText: 'Face ID ile koru',
+    contactsCollage: 'Rehber ve kolaj',
+    contactsCollageText: 'Galerinden fazlasını düzenle',
+    onDeviceTag: 'On-device güvenlik',
+    onDeviceTitle: 'İçeriklerin cihazında kalır.',
+    onDeviceText: 'Fotoğraf, video, rehber ve kasa içerikleri Del-It sunucularına yüklenmez.',
+    noAccount: 'Hesap gerekmez',
+    finalDecision: 'Son karar senin',
+    localProcess: 'Yerel işlem',
+    more: 'Daha fazla',
+    appStore: 'App Store',
+    xoxSubtitle: 'Beraberliksiz 3x3 strateji',
+    xoxTitle1: 'Klasik X-O',
+    xoxTitle2: 'daha taktik',
+    xoxDescription: '3 taş limiti, eski taş silinme mekaniği ve beraberliksiz akışla her hamle daha değerli hale gelir. Kısa turlarda hızlı düşün, doğru köşeyi tut ve çizgiyi tamamla.',
+    threeStone: '3 taş limiti',
+    threeStoneText: 'Tahtada her oyuncunun en fazla 3 taşı kalır.',
+    noDraw: 'Beraberlik yok',
+    noDrawText: 'Eski taş silindiği için oyun sürekli karar ister.',
+    shortRounds: 'Kısa turlar',
+    shortRoundsText: 'Hızlı, taktik ve tekrar oynanabilir maçlar.',
+    tacticalTempo: 'Taktik tempo',
+    tacticalTempoText: 'Her hamlede tahtanın ritmi değişir.',
+    footerDescription: 'Mobil uygulamalar, mini oyunlar ve sade dijital deneyimler geliştiriyoruz.',
+    supportEmail: 'Destek e-postası',
+    contactTitle: 'Kısa bir mesaj bırak.',
+    contactText: 'Burada footer yok. Doğrudan formu kullanıp bize ulaşabilirsin.',
+    fullName: 'Ad Soyad',
+    email: 'E-posta',
+    subject: 'Konu',
+    message: 'Mesaj',
+    messagePlaceholder: 'Mesajınızı yazın',
+    send: 'Gönder',
+    delitHeroTitle1: 'Tek Uygulamada',
+    delitHeroAccent: 'Onlarca',
+    delitHeroTitle2: 'Çözüm',
+    delitHeroText1: 'Fotoğraflarınızı, videolarınızı, kişilerinizi ve daha fazlasını temizleyin.',
+    delitHeroText2: "Her şey güvenli. Her şey iPhone'unuzda.",
+    photoClean: 'Fotoğraf Temizleme',
+    videoClean: 'Video Temizleme',
+    privateVault: 'Özel Kasa',
+    trashBox: 'Çöp Kutusu',
+    contactClean: 'Rehber Temizleme',
+    collageCreate: 'Kolaj Oluşturma',
+    features: 'Özellikler',
+    delitFeatureTitle1: 'Temizlik, düzen ve gizlilik',
+    delitFeatureTitle2: 'aynı yerde',
+    galleryView: 'Galeri Görünümü',
+    galleryViewText: 'Fotoğraf, video ve ekran görüntülerini düzenli bir görünümde daha kolay incele.',
+    privacyPolicy: 'Gizlilik Politikası',
+    terms: 'Kullanım Şartları',
+    securityPrivacy: 'Güvenlik ve gizlilik',
+    securityTitle: 'Bilgileriniz cihazında kalır',
+    securityText: 'Del-It, fotoğraf, video, rehber ve Kasa içeriklerini sunucuya yüklemez. Kişisel içeriklerin reklam hedefleme amacıyla kullanılmaz.',
+    deviceProcessing: 'Cihaz içi işleme',
+    deviceProcessingText: 'Temel medya işlemleri iPhone üzerinde gerçekleşir.',
+    noUpload: 'Sunucuya yükleme yok',
+    noUploadText: 'Fotoğraf, video, rehber ve kasa içeriklerin Del-It sunucularına gönderilmez.',
+    transparentPermissions: 'Şeffaf izin akışı',
+    transparentPermissionsText: 'Hangi izinleri verdiğini ve neye onay verdiğini açıkça görürsün.',
+    fullControl: 'Kontrol tamamen sende',
+    fullControlText: 'Kalıcı silme ve rehber işlemleri yalnızca açık onayınla başlar.',
+    finalCtaTitle: 'Daha ferah bir galeri birkaç kaydırma uzağında.',
+    finalCtaText: 'Galerini kendi hızında gözden geçir, gereksizleri güvenle ayır ve iPhone’unda yeniden yer aç.',
+    appStoreDownload: 'App Store’dan İndir',
+    screens: 'Ekranlar',
+    screensTitle: 'Del-It deneyimine yakından bak',
+    screensText: 'Temizlik, kasa, rehber, kolaj ve istatistik akışlarını gerçek uygulama ekranlarıyla keşfet.',
+    faq: 'SSS',
+    faqTitle: 'Merak ettikleriniz',
+    xoxHeroTitle1: 'Beraberliksiz',
+    xoxHeroTitle2: 'X-O-X stratejisi.',
+    xoxHeroText: 'Klasik X-O hissini koruyan, 3 taş limiti ve eski taş silinme mekaniğiyle her turu daha hızlı, dinamik ve taktik hale getiren 3x3 mobil strateji oyunu.',
+    neonThemes: 'Neon temalar',
+    gameLogic: 'Oyun Mantığı',
+    xoxRulesTitle: 'Klasik X-O, daha hızlı.',
+    xoxRulesText: 'Eski taş silinme mekaniği oyunu tıkamaz, beraberliği ortadan kaldırır ve her turda kazanan üretir.',
+    singlePlayer: 'Tek Oyunculu Mod',
+    singlePlayerText: 'Kolay, orta ve zor zorluk seçenekleriyle yapay zekaya karşı hızlı maçlar.',
+    twoPlayer: 'İki Kişilik Mod',
+    twoPlayerText: 'Aynı cihazda iki oyuncu, oyuncu isimleri ve hedef skor seçimiyle karşılıklı oynar.',
+    themesSound: 'Tema ve Ses Sistemi',
+    themesSoundText: 'Neon, Klasik, Kırmızı, Mavi ve Yeşil tema seçenekleri; ses, müzik ve hamle efektleri.',
+    footerDelitTitle: 'Galerini daha sade, güvenli ve yönetilebilir hale getiren iOS araçları.',
+    footerDelitText: 'Galerini daha sade, güvenli ve yönetilebilir hale getiren iOS araçları geliştiriyoruz.',
+    footerDefaultTitle: 'Kısa, eğlenceli ve tekrar oynanabilir deneyimler.',
+    footerDefaultText: 'Mobil uygulamalar ve mini oyunlar geliştiriyoruz. Amacımız öğrenmesi kolay, geri dönmesi keyifli ürünler üretmek.',
+    effectiveDate: 'Yürürlük tarihi',
+    lastUpdate: 'Son güncelleme',
+    appLabel: 'Uygulama',
+  },
+  en: {
+    navHome: 'Home',
+    navDelit: 'Del-It',
+    navXox: 'XOX',
+    navContact: 'Contact',
+    expandMenu: 'Expand menu',
+    collapseMenu: 'Collapse menu',
+    languageLabel: 'Language',
+    studioTag: 'App studio',
+    heroLine1: 'Playful, Useful',
+    heroLine2: 'Ideas',
+    heroText: 'We are a creative studio focused on building playful mini games and practical mobile experiences. We combine innovation, creativity, and user feedback to design apps that are easy to learn, hard to put down, and enjoyable for everyone.',
+    viewApps: 'View Apps',
+    contact: 'Contact',
+    appsTag: 'Our Apps',
+    appsTitlePrefix: 'Every app carries',
+    appsTitleAccent: 'its own little',
+    appsTitleSuffix: 'world.',
+    appsDescription: 'Easy to understand quickly, enjoyable when opened again. From games to practical tools, we design simple, lively, mobile-first products.',
+    carouselLabel: 'Our apps',
+    showSlide: 'slide',
+    delitSubtitle: 'Gallery organizer for iPhone',
+    delitTitle1: 'Clean your gallery',
+    delitTitle2: 'keep your memories',
+    delitDescription: 'Review photos and videos quickly, move unnecessary items into a safe trash flow, and manage vault, contacts, collage, and statistics in one place.',
+    quickClean: 'Quick clean',
+    quickCleanText: 'Decide by swiping',
+    safeTrash: 'Safe trash',
+    safeTrashText: 'Review before deleting',
+    mediaVault: 'Media vault',
+    mediaVaultText: 'Protect with Face ID',
+    contactsCollage: 'Contacts and collage',
+    contactsCollageText: 'Organize more than your gallery',
+    onDeviceTag: 'On-device security',
+    onDeviceTitle: 'Your content stays on your device.',
+    onDeviceText: 'Photos, videos, contacts, and vault content are not uploaded to Del-It servers.',
+    noAccount: 'No account needed',
+    finalDecision: 'Your final decision',
+    localProcess: 'Local processing',
+    more: 'Learn more',
+    appStore: 'App Store',
+    xoxSubtitle: 'Draw-free 3x3 strategy',
+    xoxTitle1: 'Classic X-O',
+    xoxTitle2: 'more tactical',
+    xoxDescription: 'With the 3-stone limit, oldest-stone removal, and a draw-free flow, every move matters more. Think fast, control the right corner, and complete the line.',
+    threeStone: '3-stone limit',
+    threeStoneText: 'Each player can keep at most 3 pieces on the board.',
+    noDraw: 'No draws',
+    noDrawText: 'Because old pieces disappear, the game keeps asking for decisions.',
+    shortRounds: 'Short rounds',
+    shortRoundsText: 'Fast, tactical, and easy to replay.',
+    tacticalTempo: 'Tactical tempo',
+    tacticalTempoText: 'The rhythm of the board changes with every move.',
+    footerDescription: 'We build mobile apps, mini games, and simple digital experiences.',
+    supportEmail: 'Support email',
+    contactTitle: 'Leave a quick message.',
+    contactText: 'No footer here. Use the form directly to reach us.',
+    fullName: 'Full name',
+    email: 'Email',
+    subject: 'Subject',
+    message: 'Message',
+    messagePlaceholder: 'Write your message',
+    send: 'Send',
+    delitHeroTitle1: 'One App',
+    delitHeroAccent: 'Dozens',
+    delitHeroTitle2: 'of Solutions',
+    delitHeroText1: 'Clean your photos, videos, contacts, and more.',
+    delitHeroText2: 'Everything is safe. Everything stays on your iPhone.',
+    photoClean: 'Photo Cleaning',
+    videoClean: 'Video Cleaning',
+    privateVault: 'Private Vault',
+    trashBox: 'Trash Box',
+    contactClean: 'Contact Cleaning',
+    collageCreate: 'Create Collage',
+    features: 'Features',
+    delitFeatureTitle1: 'Cleaning, order, and privacy',
+    delitFeatureTitle2: 'in one place',
+    galleryView: 'Gallery View',
+    galleryViewText: 'Review photos, videos, and screenshots more easily in an organized view.',
+    privacyPolicy: 'Privacy Policy',
+    terms: 'Terms of Use',
+    securityPrivacy: 'Security and privacy',
+    securityTitle: 'Your data stays on your device',
+    securityText: 'Del-It does not upload photo, video, contact, or Vault content to servers. Personal content is not used for ad targeting.',
+    deviceProcessing: 'On-device processing',
+    deviceProcessingText: 'Core media operations happen on your iPhone.',
+    noUpload: 'No server upload',
+    noUploadText: 'Your photos, videos, contacts, and vault content are not sent to Del-It servers.',
+    transparentPermissions: 'Transparent permissions',
+    transparentPermissionsText: 'Clearly see which permissions you grant and what you approve.',
+    fullControl: 'You stay in control',
+    fullControlText: 'Permanent deletion and contact actions only start with your explicit approval.',
+    finalCtaTitle: 'A lighter gallery is only a few swipes away.',
+    finalCtaText: 'Review your gallery at your own pace, safely separate what you no longer need, and free up space on your iPhone.',
+    appStoreDownload: 'Download on the App Store',
+    screens: 'Screens',
+    screensTitle: 'Take a closer look at Del-It',
+    screensText: 'Explore cleaning, vault, contacts, collage, and statistics flows with real app screens.',
+    faq: 'FAQ',
+    faqTitle: 'Questions you may have',
+    xoxHeroTitle1: 'Draw-Free',
+    xoxHeroTitle2: 'X-O-X Strategy.',
+    xoxHeroText: 'A 3x3 mobile strategy game that keeps the classic X-O feel while making every round faster, more dynamic, and more tactical with the 3-stone limit and oldest-piece removal.',
+    neonThemes: 'Neon themes',
+    gameLogic: 'Game Logic',
+    xoxRulesTitle: 'Classic X-O, faster.',
+    xoxRulesText: 'The oldest-piece removal mechanic keeps the game moving, removes draws, and produces a winner every round.',
+    singlePlayer: 'Single Player Mode',
+    singlePlayerText: 'Quick matches against AI with easy, medium, and hard difficulty options.',
+    twoPlayer: 'Two Player Mode',
+    twoPlayerText: 'Two players on the same device with player names and target score selection.',
+    themesSound: 'Themes and Sound',
+    themesSoundText: 'Neon, Classic, Red, Blue, and Green themes plus sound, music, and move effects.',
+    footerDelitTitle: 'iOS tools that make your gallery simpler, safer, and easier to manage.',
+    footerDelitText: 'We build iOS tools that make your gallery simpler, safer, and easier to manage.',
+    footerDefaultTitle: 'Short, playful, and replayable experiences.',
+    footerDefaultText: 'We build mobile apps and mini games. Our goal is to create products that are easy to learn and enjoyable to return to.',
+    effectiveDate: 'Effective date',
+    lastUpdate: 'Last updated',
+    appLabel: 'App',
+  },
+};
+
+const LanguageContext = React.createContext(null);
+
+function useLanguage() {
+  return React.useContext(LanguageContext);
+}
+
 function App() {
   useScrollReveal();
+  const [language, setLanguageState] = React.useState(() => {
+    if (typeof window === 'undefined') return 'tr';
+    return window.localStorage.getItem('ap-language') || 'tr';
+  });
+  const setLanguage = (nextLanguage) => {
+    window.localStorage.setItem('ap-language', nextLanguage);
+    setLanguageState(nextLanguage);
+  };
+  const t = (key) => translations[language]?.[key] || translations.tr[key] || key;
 
   const path = normalizePath(window.location.pathname);
+  let page;
 
   if (path === '/products') {
-    return <ProductsPage />;
+    page = <RedirectHome />;
+  } else if (path === '/contact') {
+    page = <ContactPage />;
+  } else if (path === '/del-it') {
+    page = <DelitPage />;
+  } else if (path === '/del-it/gizlilik-politikasi') {
+    page = <DelitPrivacyPage />;
+  } else if (path === '/del-it/kullanim-sartlari') {
+    page = <DelitTermsPage />;
+  } else if (path === '/xox-taktik-arena') {
+    page = <XoxPage />;
+  } else if (path === '/xox-taktik-arena/gizlilik-politikasi') {
+    page = <XoxPrivacyPage />;
+  } else if (path === '/xox-taktik-arena/kullanim-sartlari') {
+    page = <XoxTermsPage />;
+  } else {
+    page = <HomePage />;
   }
 
-  if (path === '/contact') {
-    return <ContactPage />;
-  }
-
-  if (path === '/del-it') {
-    return <DelitPage />;
-  }
-
-  if (path === '/del-it/gizlilik-politikasi') {
-    return <DelitPrivacyPage />;
-  }
-
-  if (path === '/del-it/kullanim-sartlari') {
-    return <DelitTermsPage />;
-  }
-
-  if (path === '/xox-taktik-arena') {
-    return <XoxPage />;
-  }
-
-  if (path === '/xox-taktik-arena/gizlilik-politikasi') {
-    return <XoxPrivacyPage />;
-  }
-
-  if (path === '/xox-taktik-arena/kullanim-sartlari') {
-    return <XoxTermsPage />;
-  }
-
-  return <HomePage />;
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+      {page}
+    </LanguageContext.Provider>
+  );
 }
 
 function useScrollReveal() {
@@ -119,6 +372,14 @@ function HomePage() {
       <Footer />
     </main>
   );
+}
+
+function RedirectHome() {
+  React.useEffect(() => {
+    window.history.replaceState(null, '', '/');
+  }, []);
+
+  return <HomePage />;
 }
 
 function ProductsPage() {
@@ -169,21 +430,149 @@ function Background() {
 }
 
 function Header() {
+  const { language, setLanguage, t } = useLanguage();
+  const path = normalizePath(window.location.pathname);
+  const logoRef = React.useRef(null);
+  const centerNavRef = React.useRef(null);
+  const rightNavRef = React.useRef(null);
+  const animationTimerRef = React.useRef(null);
+  const [compactWidth, setCompactWidth] = React.useState(null);
+  const [isAnimating, setIsAnimating] = React.useState(false);
+  const [isClosing, setIsClosing] = React.useState(false);
+  const [isExpanded, setIsExpanded] = React.useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.localStorage.getItem('ap-header-expanded') === 'true';
+  });
+  const navLinks = [
+    [t('navHome'), '/'],
+    [t('navDelit'), '/del-it'],
+    [t('navXox'), '/xox-taktik-arena'],
+  ];
+  const contactLink = [t('navContact'), '/contact'];
+  const isActive = (href) => {
+    if (href === '/') {
+      return path === '/' || path === '/products';
+    }
+
+    return path === href || path.startsWith(`${href}/`);
+  };
+  const toggleExpanded = () => {
+    if (animationTimerRef.current) {
+      window.clearTimeout(animationTimerRef.current);
+    }
+
+    setIsAnimating(true);
+
+    if (isExpanded) {
+      setIsClosing(true);
+      setIsExpanded(false);
+      window.localStorage.setItem('ap-header-expanded', 'false');
+      animationTimerRef.current = window.setTimeout(() => {
+        setIsAnimating(false);
+        setIsClosing(false);
+        animationTimerRef.current = null;
+      }, 620);
+      return;
+    }
+
+    setIsClosing(false);
+    setIsExpanded(true);
+    window.localStorage.setItem('ap-header-expanded', 'true');
+    animationTimerRef.current = window.setTimeout(() => {
+      setIsAnimating(false);
+      animationTimerRef.current = null;
+    }, 620);
+  };
+  const useWideLayout = isExpanded || isClosing;
+  const navLinkClass = (href, compact = false) => (
+    `whitespace-nowrap rounded-full ${compact ? 'px-3' : 'px-4'} py-2 transition ${isActive(href) ? 'bg-ink font-bold text-white shadow-soft hover:text-white' : 'hover:bg-[#f3f1ec] hover:text-ink'}`
+  );
+
+  React.useEffect(() => (
+    () => {
+      if (animationTimerRef.current) {
+        window.clearTimeout(animationTimerRef.current);
+      }
+    }
+  ), []);
+
+  React.useLayoutEffect(() => {
+    const measureCompactWidth = () => {
+      const logoWidth = logoRef.current?.scrollWidth || logoRef.current?.getBoundingClientRect().width || 0;
+      const centerWidth = centerNavRef.current && window.getComputedStyle(centerNavRef.current).display !== 'none'
+        ? centerNavRef.current.scrollWidth
+        : 0;
+      const rightWidth = rightNavRef.current?.scrollWidth || rightNavRef.current?.getBoundingClientRect().width || 0;
+      const visibleGroups = [logoWidth, centerWidth, rightWidth].filter(Boolean).length;
+      const gap = window.matchMedia('(min-width: 768px)').matches ? 8 : 12;
+      const padding = 16;
+      const border = 2;
+      const measuredWidth = logoWidth + centerWidth + rightWidth + Math.max(0, visibleGroups - 1) * gap + padding + border;
+      const maxWidth = window.innerWidth - (window.matchMedia('(min-width: 768px)').matches ? 64 : 40);
+
+      setCompactWidth(Math.ceil(Math.min(measuredWidth, maxWidth)));
+    };
+
+    measureCompactWidth();
+    window.addEventListener('resize', measureCompactWidth);
+
+    return () => window.removeEventListener('resize', measureCompactWidth);
+  }, [language, path]);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-black/8 bg-white/75 backdrop-blur-2xl">
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <a href="/" className="flex items-center gap-3">
-          <span className="grid h-11 w-11 place-items-center rounded-full border border-black/8 bg-white shadow-soft">
-            <img src="/ap-logo.svg" alt="AP Design logosu" className="h-8 w-8 object-contain" />
-          </span>
-          <span className="font-display text-sm font-semibold uppercase tracking-[0.28em] text-ink">
-            AP Design
-          </span>
-        </a>
-        <div className="hidden items-center gap-7 text-sm font-medium text-ink/65 md:flex">
-          <a href="/" className="transition hover:text-ink">Anasayfa</a>
-          <a href="/products" className="transition hover:text-ink">Uygulamalar</a>
-          <a href="/contact" className="transition hover:text-ink">İletişim</a>
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-center px-5 sm:px-8">
+        <div
+          className={`site-nav-card ${isExpanded ? 'site-nav-card-expanded' : ''} ${useWideLayout ? 'md:grid-cols-[1fr_auto_1fr]' : 'md:grid-cols-[auto_auto_auto]'} ${isAnimating ? 'site-nav-card-animating' : ''} pointer-events-auto grid grid-cols-[auto_auto] items-center justify-center gap-3 rounded-full border border-black/8 bg-white/78 p-2 shadow-soft backdrop-blur-xl md:gap-2`}
+          style={compactWidth ? { '--nav-compact-width': `${compactWidth}px` } : undefined}
+        >
+          <a ref={logoRef} href="/" className="flex items-center md:justify-self-start" aria-label="AP Design anasayfa">
+            <span className="grid h-11 w-11 place-items-center rounded-full border border-black/8 bg-white shadow-soft">
+              <img src="/ap-logo.svg" alt="AP Design logosu" className="h-8 w-8 object-contain" />
+            </span>
+          </a>
+          <div ref={centerNavRef} className="hidden items-center justify-center gap-2 text-sm font-medium text-ink/65 md:flex">
+            {navLinks.map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                className={navLinkClass(href)}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+          <div ref={rightNavRef} className="flex items-center justify-end gap-1 md:gap-2">
+            <a href={contactLink[1]} className={`hidden text-sm font-medium md:inline-flex ${navLinkClass(contactLink[1], true)}`}>
+              {contactLink[0]}
+            </a>
+            <div className="flex items-center rounded-full border border-black/8 bg-white/55 p-1" aria-label={t('languageLabel')}>
+              {[
+                ['tr', '🇹🇷', 'Türkçe'],
+                ['en', '🇬🇧', 'English'],
+              ].map(([code, flag, label]) => (
+                <button
+                  key={code}
+                  type="button"
+                  className={`grid h-8 w-8 place-items-center rounded-full text-base transition ${language === code ? 'bg-ink shadow-soft' : 'hover:bg-[#f3f1ec]'}`}
+                  aria-label={label}
+                  aria-pressed={language === code}
+                  onClick={() => setLanguage(code)}
+                >
+                  <span aria-hidden="true">{flag}</span>
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              className="grid h-10 w-10 place-items-center rounded-full text-ink/60 transition hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-electric/50 active:bg-transparent"
+              aria-label={isExpanded ? t('collapseMenu') : t('expandMenu')}
+              aria-pressed={isExpanded}
+              onClick={toggleExpanded}
+            >
+              <ChevronRight className={`transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${isExpanded ? 'rotate-180' : ''}`} size={18} />
+            </button>
+          </div>
         </div>
       </nav>
     </header>
@@ -191,38 +580,38 @@ function Header() {
 }
 
 function HomeHero() {
+  const { t } = useLanguage();
+
   return (
-    <section className="relative z-10 flex min-h-[calc(100svh-5rem)] items-center overflow-hidden px-5 py-10 sm:px-8 lg:py-14">
+    <section className="relative z-10 flex min-h-[100svh] items-center overflow-hidden px-5 pb-10 pt-24 sm:px-8 sm:pb-12 lg:pb-14 lg:pt-28">
       <HomeHeroFloaters />
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="mx-auto max-w-4xl text-center">
           <p className="mb-6 inline-flex rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-ink/65 shadow-soft">
-            Uygulama stüdyosu
+            {t('studioTag')}
           </p>
           <h1 className="font-display text-[clamp(2.8rem,6vw,6.8rem)] font-black leading-[0.88] tracking-tight">
-            <span className="block whitespace-nowrap">Eğlenceli, Çözümlü</span>
+            <span className="block whitespace-nowrap">{t('heroLine1')}</span>
             <span className="block bg-gradient-to-r from-[#00c8ff] via-[#3f7cff] to-[#9b35ff] bg-clip-text text-transparent">
-              Fikirler
+              {t('heroLine2')}
             </span>
           </h1>
           <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-ink/66 sm:text-xl">
-            Biz, eğlenceli ve ilgi çekici mini oyunlar ile pratik mobil deneyimler geliştirmeye odaklanan
-            yaratıcı bir stüdyoyuz. Yeniliği, yaratıcılığı ve kullanıcı geri bildirimlerini birleştirerek
-            kolay öğrenilen, bırakması zor ve herkes için keyifli uygulamalar tasarlıyoruz.
+            {t('heroText')}
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
-              href="/products"
+              href="#uygulamalar"
               className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-black/85"
             >
-              Uygulamaları Gör
+              {t('viewApps')}
               <ArrowRight size={18} />
             </a>
             <a
               href="/contact"
               className="inline-flex h-14 items-center justify-center rounded-full border border-black/8 bg-white px-7 text-sm font-bold text-ink transition hover:-translate-y-1 hover:bg-[#fbfaf7]"
             >
-              İletişim
+              {t('contact')}
             </a>
           </div>
         </div>
@@ -261,19 +650,20 @@ function HomeHeroFloaters() {
 }
 
 function HomeApplications() {
+  const { t } = useLanguage();
+
   return (
-    <section className="relative z-10 px-5 py-12 sm:px-8">
+    <section id="uygulamalar" className="relative z-10 scroll-mt-28 px-5 py-12 sm:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="scroll-reveal mx-auto mb-8 max-w-3xl text-center">
           <div>
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">Uygulamalarımız</p>
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">{t('appsTag')}</p>
             <h2 className="font-display text-4xl font-black leading-none sm:text-5xl">
-              Her uygulama kendi <span className="bg-gradient-to-r from-[#00c8ff] via-[#3f7cff] to-[#9b35ff] bg-clip-text text-transparent">küçük dünyasını</span> taşır.
+              {t('appsTitlePrefix')} <span className="bg-gradient-to-r from-[#00c8ff] via-[#3f7cff] to-[#9b35ff] bg-clip-text text-transparent">{t('appsTitleAccent')}</span> {t('appsTitleSuffix')}
             </h2>
           </div>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-ink/62">
-            Kısa sürede anlaşılır, tekrar açıldığında yine keyif verir. Oyunlardan pratik araçlara kadar
-            ürünleri sade, canlı ve mobil öncelikli tasarlıyoruz.
+            {t('appsDescription')}
           </p>
         </div>
         <HomeApplicationShowcase />
@@ -283,35 +673,253 @@ function HomeApplications() {
 }
 
 function HomeApplicationShowcase() {
-  const homeApps = [
-    {
-      href: '/del-it',
-      logo: product.logo,
-      logoAlt: 'Del-it uygulama logosu',
-      title: 'Del-it',
-      status: 'App Store’da',
-      description: 'Fotoğraflarını hızlıca gözden geçir, gereksizleri güvenli Del-It çöp kutusuna ekle.',
-      appStoreUrl: 'https://apps.apple.com/us/app/del-it/id6780890586',
-      background: 'from-pink-100 via-white to-violet-100',
-    },
-    {
-      href: '/xox-taktik-arena',
-      logo: xoxProduct.logo,
-      logoAlt: 'XOX Taktik Arena logosu',
-      title: 'XOX Taktik Arena',
-      status: 'App Store’da',
-      description: '3 taş limitiyle hızlanan, beraberliksiz ve kısa turlu strateji oyunu.',
-      appStoreUrl: 'https://apps.apple.com/us/app/xox-arena/id6783572878',
-      background: 'from-sky-100 via-white to-fuchsia-100',
-    },
+  const { t } = useLanguage();
+  const slides = [
+    { id: 'delit', label: 'Del-It', content: <HomeDelitOverview /> },
+    { id: 'xox', label: 'XOX', content: <HomeXoxOverview /> },
   ];
+  const duration = 3000;
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [isPaused, setIsPaused] = React.useState(false);
+  const timerRef = React.useRef(null);
+  const startedAtRef = React.useRef(0);
+  const remainingRef = React.useRef(duration);
+
+  React.useEffect(() => {
+    window.clearTimeout(timerRef.current);
+
+    if (!isPaused) {
+      startedAtRef.current = Date.now();
+      timerRef.current = window.setTimeout(() => {
+        remainingRef.current = duration;
+        setActiveIndex((current) => (current + 1) % slides.length);
+      }, remainingRef.current);
+    }
+
+    return () => window.clearTimeout(timerRef.current);
+  }, [activeIndex, isPaused, slides.length]);
+
+  const pauseCarousel = () => {
+    if (isPaused) return;
+    window.clearTimeout(timerRef.current);
+    remainingRef.current = Math.max(0, remainingRef.current - (Date.now() - startedAtRef.current));
+    setIsPaused(true);
+  };
+
+  const resumeCarousel = () => {
+    if (!isPaused) return;
+    setIsPaused(false);
+  };
+
+  const selectSlide = (index) => {
+    remainingRef.current = duration;
+    setActiveIndex(index);
+  };
 
   return (
-    <div className="mx-auto grid max-w-5xl gap-5 lg:grid-cols-2">
-      {homeApps.map((app, index) => (
-        <HomeAppFeatureCard key={app.title} {...app} delay={`${index * 120}ms`} />
-      ))}
+    <div
+      className="mx-auto max-w-6xl"
+      onMouseEnter={pauseCarousel}
+      onMouseLeave={resumeCarousel}
+      onFocus={pauseCarousel}
+      onBlur={resumeCarousel}
+      aria-roledescription="carousel"
+      aria-label={t('carouselLabel')}
+    >
+      <div className="home-app-carousel-slide" key={slides[activeIndex].id}>
+        {slides[activeIndex].content}
+      </div>
+      <div className="mt-5 flex items-center justify-center gap-2" aria-label={t('carouselLabel')}>
+        {slides.map((slide, index) => (
+          <button
+            key={slide.id}
+            type="button"
+            className={`h-2.5 rounded-full transition-all duration-300 ${activeIndex === index ? 'w-9 bg-ink' : 'w-2.5 bg-ink/18 hover:bg-ink/35'}`}
+            aria-label={`${slide.label} ${t('showSlide')}`}
+            aria-current={activeIndex === index}
+            onClick={() => selectSlide(index)}
+          />
+        ))}
+      </div>
     </div>
+  );
+}
+
+function HomeDelitOverview() {
+  const { t } = useLanguage();
+  const featureItems = [
+    [t('quickClean'), Hand, t('quickCleanText')],
+    [t('safeTrash'), Trash2, t('safeTrashText')],
+    [t('mediaVault'), LockKeyhole, t('mediaVaultText')],
+    [t('contactsCollage'), LayoutTemplate, t('contactsCollageText')],
+  ];
+  return (
+    <article className="overflow-hidden rounded-[2.25rem] border border-black/8 bg-white shadow-soft">
+      <div className="grid gap-8 bg-gradient-to-br from-[#fff7fb] via-white to-[#eee9ff] p-5 sm:p-7 lg:grid-cols-[1fr_0.92fr] lg:p-8">
+        <div className="flex flex-col">
+          <div className="flex items-center gap-3">
+            <img src={product.logo} alt="Del-It uygulama ikonu" className="h-14 w-14 rounded-[1rem] object-cover shadow-soft" loading="lazy" />
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.24em] text-ink/45">Del-It</p>
+              <p className="text-sm font-semibold text-ink/58">{t('delitSubtitle')}</p>
+            </div>
+          </div>
+          <h3 className="mt-7 font-display text-[clamp(2.15rem,5vw,4.8rem)] font-black leading-[0.92] tracking-tight">
+            {t('delitTitle1')}
+            <span className="block bg-gradient-to-r from-[#ef55b8] via-[#9b52f5] to-[#4388ff] bg-clip-text text-transparent">
+              {t('delitTitle2')}
+            </span>
+          </h3>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-ink/64">
+            {t('delitDescription')}
+          </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {featureItems.map(([label, Icon, text]) => (
+              <div key={label} className="rounded-[1.25rem] border border-white/70 bg-white/70 p-4 shadow-[0_18px_42px_rgba(52,43,92,0.08)] backdrop-blur">
+                <div className="mb-3 grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-[#f0e7ff] to-[#e5f4ff] text-[#7b45f3]">
+                  <Icon size={21} />
+                </div>
+                <p className="font-display text-lg font-black leading-tight">{label}</p>
+                <p className="mt-1 text-sm leading-5 text-ink/58">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="relative h-full min-h-[32rem] overflow-hidden rounded-[1.75rem] border border-white/70 bg-[#eee9ff] shadow-[0_24px_64px_rgba(80,64,150,0.12)] backdrop-blur">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_92%,rgba(123,98,255,0.22),transparent_32%),radial-gradient(circle_at_84%_88%,rgba(255,95,223,0.18),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.35),rgba(238,233,255,0.92)_46%,rgba(255,231,250,0.82))]" />
+          <div className="pointer-events-none absolute inset-x-10 bottom-0 h-52 rounded-t-full bg-white/32 blur-3xl" />
+          <div className="relative flex h-full min-h-[32rem] items-end justify-center overflow-hidden px-4 pt-6">
+            <div className="absolute inset-x-5 top-7 z-20 mx-auto max-w-[27rem] rounded-[1.45rem] border border-white/70 bg-white/72 p-4 shadow-[0_20px_48px_rgba(54,45,105,0.14)] backdrop-blur-xl sm:top-8 sm:p-5">
+              <div className="flex items-start gap-3">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[#f0e7ff] to-[#dff4ff] text-[#7b45f3]">
+                  <ShieldCheck size={24} />
+                </span>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-ink/42">{t('onDeviceTag')}</p>
+                  <h4 className="mt-1 font-display text-xl font-black leading-tight text-ink">{t('onDeviceTitle')}</h4>
+                  <p className="mt-2 text-sm leading-6 text-ink/62">
+                    {t('onDeviceText')}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-4 grid gap-2 text-xs font-bold text-ink/58 sm:grid-cols-3">
+                <span className="rounded-full bg-white/70 px-3 py-2 text-center">{t('noAccount')}</span>
+                <span className="rounded-full bg-white/70 px-3 py-2 text-center">{t('finalDecision')}</span>
+                <span className="rounded-full bg-white/70 px-3 py-2 text-center">{t('localProcess')}</span>
+              </div>
+            </div>
+            <img
+              src={delitPhoneTr}
+              alt="Del-It ana ekranı"
+              className="relative z-10 mb-[-6.5rem] h-auto max-h-[35rem] w-[min(84vw,31rem)] object-contain object-bottom drop-shadow-[0_28px_55px_rgba(44,36,88,0.20)]"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center gap-3 pt-1 sm:flex-row lg:col-span-2">
+          <a href="/del-it" className="inline-flex h-14 min-w-44 items-center justify-center gap-2 rounded-full bg-ink px-6 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
+            {t('more')}
+            <ChevronRight size={17} />
+          </a>
+          <a
+            href={delitAppStoreUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Del-It uygulamasını App Store’da aç"
+            className="inline-flex h-14 min-w-44 items-center justify-center gap-2 rounded-full border border-black/8 bg-white px-6 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#f3f1ec]"
+          >
+            {t('appStore')}
+            <ArrowRight size={16} />
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function HomeXoxOverview() {
+  const { t } = useLanguage();
+  const xoxFeatures = [
+    [t('threeStone'), MoveHorizontal, t('threeStoneText')],
+    [t('noDraw'), Check, t('noDrawText')],
+    [t('shortRounds'), Sparkles, t('shortRoundsText')],
+    [t('tacticalTempo'), BarChart3, t('tacticalTempoText')],
+  ];
+  const board = ['X', '', 'O', '', 'X', '', 'O', '', 'X'];
+
+  return (
+    <article className="h-full overflow-hidden rounded-[2.25rem] border border-black/8 bg-white shadow-soft">
+      <div className="grid h-full gap-8 bg-gradient-to-br from-[#eef7ff] via-white to-[#ffeef8] p-5 sm:p-7 lg:grid-cols-[0.95fr_1fr] lg:p-8">
+        <div className="order-2 flex h-full flex-col lg:order-1">
+          <div className="flex items-center gap-3">
+            <img src={xoxProduct.logo} alt="XOX Taktik Arena uygulama ikonu" className="h-14 w-14 rounded-[1rem] object-cover shadow-soft" loading="lazy" />
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.24em] text-ink/45">XOX Taktik Arena</p>
+              <p className="text-sm font-semibold text-ink/58">{t('xoxSubtitle')}</p>
+            </div>
+          </div>
+          <h3 className="mt-7 font-display text-[clamp(2.15rem,5vw,4.6rem)] font-black leading-[0.92] tracking-tight">
+            {t('xoxTitle1')}
+            <span className="block bg-gradient-to-r from-[#0ea5e9] via-[#8b5cf6] to-[#f43f8f] bg-clip-text text-transparent">
+              {t('xoxTitle2')}
+            </span>
+          </h3>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-ink/64">
+            {t('xoxDescription')}
+          </p>
+          <div className="mt-6 grid gap-3">
+            {xoxFeatures.map(([label, Icon, text]) => (
+              <div key={label} className="flex items-start gap-3 rounded-[1.25rem] border border-white/70 bg-white/72 p-4 shadow-[0_18px_42px_rgba(52,43,92,0.08)] backdrop-blur">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[#e3f5ff] to-[#ffe3f4] text-[#7b45f3]">
+                  <Icon size={21} />
+                </span>
+                <div>
+                  <p className="font-display text-lg font-black leading-tight">{label}</p>
+                  <p className="mt-1 text-sm leading-5 text-ink/58">{text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="order-1 relative min-h-[34rem] overflow-hidden rounded-[1.75rem] border border-white/70 bg-[#101426] shadow-[0_24px_64px_rgba(38,32,82,0.16)] lg:order-2 lg:min-h-full">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_24%_22%,rgba(14,165,233,0.34),transparent_34%),radial-gradient(circle_at_78%_76%,rgba(244,63,143,0.34),transparent_34%),linear-gradient(135deg,#070a18,#141c3a_48%,#351044)]" />
+          <div className="pointer-events-none absolute inset-8 rounded-[2rem] border border-white/10" />
+          <div className="relative flex min-h-[34rem] h-full items-center justify-center p-6">
+            <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/70 backdrop-blur">
+              {t('threeStone')}
+            </div>
+            <div className="absolute bottom-6 right-6 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-white/70 backdrop-blur">
+              {t('noDraw')}
+            </div>
+            <div className="grid w-[min(72vw,20rem)] grid-cols-3 gap-3 rounded-[2rem] border border-white/15 bg-white/10 p-4 shadow-[0_24px_70px_rgba(0,0,0,0.22)] backdrop-blur">
+              {board.map((mark, index) => (
+                <div key={index} className="grid aspect-square place-items-center rounded-[1.1rem] border border-white/12 bg-white/10 text-5xl font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]">
+                  <span className={mark === 'X' ? 'bg-gradient-to-r from-sky-300 to-cyan-100 bg-clip-text text-transparent' : 'bg-gradient-to-r from-fuchsia-300 to-rose-200 bg-clip-text text-transparent'}>
+                    {mark}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="order-3 flex flex-col items-center justify-center gap-3 pt-1 sm:flex-row lg:col-span-2">
+          <a href="/xox-taktik-arena" className="inline-flex h-14 min-w-44 items-center justify-center gap-2 rounded-full bg-ink px-6 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
+            {t('more')}
+            <ChevronRight size={17} />
+          </a>
+          <a
+            href="https://apps.apple.com/us/app/xox-arena/id6783572878"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="XOX Taktik Arena uygulamasını App Store’da aç"
+            className="inline-flex h-14 min-w-44 items-center justify-center gap-2 rounded-full border border-black/8 bg-white px-6 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#f3f1ec]"
+          >
+            {t('appStore')}
+            <ArrowRight size={16} />
+          </a>
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -384,15 +992,17 @@ function ProductsGrid() {
 }
 
 function ContactHero() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative z-10 px-5 pb-8 pt-12 sm:px-8 lg:pt-16">
       <div className="mx-auto max-w-7xl">
-        <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">İletişim</p>
+        <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">{t('contact')}</p>
         <h1 className="font-display text-[clamp(3rem,7vw,7rem)] font-black leading-[0.92]">
-          Kısa bir mesaj bırak.
+          {t('contactTitle')}
         </h1>
         <p className="mt-5 max-w-3xl text-lg leading-8 text-ink/62">
-          Burada footer yok. Doğrudan formu kullanıp bize ulaşabilirsin.
+          {t('contactText')}
         </p>
       </div>
     </section>
@@ -400,28 +1010,30 @@ function ContactHero() {
 }
 
 function ContactForm() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto max-w-4xl rounded-[2rem] border border-black/8 bg-white p-7 shadow-soft sm:p-10">
         <form className="grid gap-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Ad Soyad" />
-            <Field label="E-posta" type="email" />
+            <Field label={t('fullName')} />
+            <Field label={t('email')} type="email" />
           </div>
-          <Field label="Konu" />
+          <Field label={t('subject')} />
           <label className="grid gap-2 text-sm font-semibold text-ink/70">
-            <span>Mesaj</span>
+            <span>{t('message')}</span>
             <textarea
               rows="7"
               className="rounded-[1.2rem] border border-black/8 bg-[#fbfaf7] px-4 py-4 text-base text-ink outline-none transition placeholder:text-ink/28 focus:border-black/20"
-              placeholder="Mesajınızı yazın"
+              placeholder={t('messagePlaceholder')}
             />
           </label>
           <button
             type="submit"
             className="mt-2 inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-black/85"
           >
-            Gönder
+            {t('send')}
             <ArrowRight size={16} />
           </button>
         </form>
@@ -456,32 +1068,33 @@ function DelitPageNav() {
 }
 
 function DelitHero() {
+  const { t } = useLanguage();
   const heroCards = [
-    ['Fotoğraf Temizleme', Images, 'left-1/2 top-8 -translate-x-[300px]', 'h-[4.6rem] w-[4.6rem]', 'rgba(186,230,253,0.46)', '#0ea5e9', '-6deg', '0s', 'left', '4.6rem', '15rem'],
-    ['Video Temizleme', Video, 'left-1/2 top-36 -translate-x-[390px]', 'h-20 w-20', 'rgba(221,214,254,0.48)', '#8b5cf6', '3deg', '-1.1s', 'left', '5rem', '14rem'],
-    ['Özel Kasa', LockKeyhole, 'left-1/2 top-64 -translate-x-[315px]', 'h-[4.35rem] w-[4.35rem]', 'rgba(254,215,170,0.46)', '#f97316', '-4deg', '-2.2s', 'left', '4.35rem', '11.5rem'],
-    ['Çöp Kutusu', Trash2, 'left-1/2 top-8 translate-x-[225px]', 'h-[4.8rem] w-[4.8rem]', 'rgba(254,205,211,0.48)', '#f43f5e', '5deg', '-0.6s', 'right', '4.8rem', '11.5rem'],
-    ['Rehber Temizleme', UsersRound, 'left-1/2 top-36 translate-x-[315px]', 'h-[5.1rem] w-[5.1rem]', 'rgba(167,243,208,0.46)', '#10b981', '-3deg', '-1.7s', 'right', '5.1rem', '15rem'],
-    ['Kolaj Oluşturma', LayoutTemplate, 'left-1/2 top-64 translate-x-[240px]', 'h-[4.5rem] w-[4.5rem]', 'rgba(165,243,252,0.46)', '#06b6d4', '4deg', '-2.8s', 'right', '4.5rem', '14rem'],
+    [t('photoClean'), Images, 'left-1/2 top-8 -translate-x-[300px]', 'h-[4.6rem] w-[4.6rem]', 'rgba(186,230,253,0.46)', '#0ea5e9', '-6deg', '0s', 'left', '4.6rem', '15rem'],
+    [t('videoClean'), Video, 'left-1/2 top-36 -translate-x-[390px]', 'h-20 w-20', 'rgba(221,214,254,0.48)', '#8b5cf6', '3deg', '-1.1s', 'left', '5rem', '14rem'],
+    [t('privateVault'), LockKeyhole, 'left-1/2 top-64 -translate-x-[315px]', 'h-[4.35rem] w-[4.35rem]', 'rgba(254,215,170,0.46)', '#f97316', '-4deg', '-2.2s', 'left', '4.35rem', '11.5rem'],
+    [t('trashBox'), Trash2, 'left-1/2 top-8 translate-x-[225px]', 'h-[4.8rem] w-[4.8rem]', 'rgba(254,205,211,0.48)', '#f43f5e', '5deg', '-0.6s', 'right', '4.8rem', '11.5rem'],
+    [t('contactClean'), UsersRound, 'left-1/2 top-36 translate-x-[315px]', 'h-[5.1rem] w-[5.1rem]', 'rgba(167,243,208,0.46)', '#10b981', '-3deg', '-1.7s', 'right', '5.1rem', '15rem'],
+    [t('collageCreate'), LayoutTemplate, 'left-1/2 top-64 translate-x-[240px]', 'h-[4.5rem] w-[4.5rem]', 'rgba(165,243,252,0.46)', '#06b6d4', '4deg', '-2.8s', 'right', '4.5rem', '14rem'],
   ];
 
   return (
-    <section className="relative z-10 flex min-h-[calc(100svh-5rem)] overflow-hidden bg-[#eee9ff] px-5 pb-0 pt-8 sm:px-8 sm:pt-10 lg:pt-12">
+    <section className="relative z-10 flex min-h-[100svh] overflow-hidden bg-[#eee9ff] px-5 pb-0 pt-24 sm:px-8 sm:pt-24 lg:pt-24">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_100%,rgba(123,98,255,0.22),transparent_32%),radial-gradient(circle_at_82%_90%,rgba(255,95,223,0.18),transparent_28%)]" />
-      <div className="scroll-reveal relative z-10 mx-auto flex min-h-[calc(100svh-5rem)] w-full max-w-5xl flex-col items-center text-center">
+      <div className="scroll-reveal relative z-10 mx-auto flex min-h-[calc(100svh-6rem)] w-full max-w-5xl flex-col items-center text-center">
         <span className="grid h-[4.5rem] w-[4.5rem] place-items-center rounded-[1.1rem] bg-white shadow-[0_14px_36px_rgba(80,64,150,0.12)] sm:h-20 sm:w-20">
           <img src={product.logo} alt="Del-It uygulama ikonu" className="h-12 w-12 rounded-[0.85rem] object-cover sm:h-14 sm:w-14" />
         </span>
         <h1 className="mt-5 font-display text-[clamp(2.45rem,7.2vw,6.35rem)] font-black leading-[0.95] tracking-tight text-black">
-          <span className="block">Tek Uygulamada</span>
+          <span className="block">{t('delitHeroTitle1')}</span>
           <span className="block">
-            <span className="bg-gradient-to-r from-[#ef55b8] via-[#9b52f5] to-[#4388ff] bg-clip-text text-transparent">Onlarca</span>{' '}
-            Çözüm
+            <span className="bg-gradient-to-r from-[#ef55b8] via-[#9b52f5] to-[#4388ff] bg-clip-text text-transparent">{t('delitHeroAccent')}</span>{' '}
+            {t('delitHeroTitle2')}
           </span>
         </h1>
         <p className="mx-auto mt-4 max-w-3xl text-sm font-normal leading-6 text-[#6f6a78] sm:text-base sm:leading-7">
-          Fotoğraflarınızı, videolarınızı, kişilerinizi ve daha fazlasını temizleyin.
-          <span className="block">Her şey güvenli. Her şey iPhone'unuzda.</span>
+          {t('delitHeroText1')}
+          <span className="block">{t('delitHeroText2')}</span>
         </p>
         <div className="relative mt-auto flex w-full max-w-5xl justify-center overflow-visible pt-6 sm:pt-8">
           {heroCards.map(([label, Icon, position, size, background, color, rotate, delay, side, base, hoverWidth]) => (
@@ -516,13 +1129,14 @@ function DelitHero() {
 }
 
 function DelitProblem() {
+  const { t } = useLanguage();
   const features = [
-    ['Hızlı Temizleme', 'Fotoğraf ve videolarını kart tabanlı kaydırma deneyimiyle hızlıca gözden geçir.', Hand, 'rgba(186,230,253,0.7)', '#0ea5e9'],
-    ['Güvenli Çöp Kutusu', 'Sola kaydırılan öğeler hemen silinmez. Son kontrolden sonra kalıcı silme başlatılır.', Trash2, 'rgba(254,205,211,0.72)', '#f43f5e'],
-    ['Galeri Görünümü', 'Fotoğraf, video ve ekran görüntülerini düzenli bir görünümde daha kolay incele.', Images, 'rgba(221,214,254,0.72)', '#8b5cf6'],
-    ['Rehber Temizliği', 'Yinelenen veya düzenlenmesi gereken kişileri kendi onayınla gözden geçir.', UsersRound, 'rgba(191,219,254,0.72)', '#3b82f6'],
-    ['Medya Kasası', 'Özel fotoğraf ve videolarını cihazında tutulan, Face ID ile korunabilen alanda sakla.', LockKeyhole, 'rgba(245,208,254,0.72)', '#d946ef'],
-    ['Kolaj Oluşturma', 'Fotoğraflarını farklı şablonlarla bir araya getir ve galerine kaydet.', LayoutTemplate, 'rgba(251,207,232,0.72)', '#ec4899'],
+    [t('quickClean'), t('quickCleanText'), Hand, 'rgba(186,230,253,0.7)', '#0ea5e9'],
+    [t('safeTrash'), t('safeTrashText'), Trash2, 'rgba(254,205,211,0.72)', '#f43f5e'],
+    [t('galleryView'), t('galleryViewText'), Images, 'rgba(221,214,254,0.72)', '#8b5cf6'],
+    [t('contactClean'), t('contactClean'), UsersRound, 'rgba(191,219,254,0.72)', '#3b82f6'],
+    [t('mediaVault'), t('mediaVaultText'), LockKeyhole, 'rgba(245,208,254,0.72)', '#d946ef'],
+    [t('collageCreate'), t('contactsCollageText'), LayoutTemplate, 'rgba(251,207,232,0.72)', '#ec4899'],
   ];
 
   return (
@@ -530,12 +1144,12 @@ function DelitProblem() {
       <div className="mx-auto max-w-7xl">
         <div className="scroll-reveal mx-auto max-w-4xl text-center">
           <p className="inline-flex rounded-full border border-violet-200 bg-violet-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-violet-600">
-            Özellikler
+            {t('features')}
           </p>
           <h2 className="mt-5 font-display text-[clamp(2rem,4vw,3.6rem)] font-black leading-[1.08] tracking-tight text-ink">
-            <span className="block">Temizlik, düzen ve gizlilik</span>
+            <span className="block">{t('delitFeatureTitle1')}</span>
             <span className="block bg-gradient-to-r from-[#ef55b8] via-[#9b52f5] to-[#4388ff] bg-clip-text text-transparent">
-              aynı yerde
+              {t('delitFeatureTitle2')}
             </span>
           </h2>
         </div>
@@ -556,11 +1170,12 @@ function DelitProblem() {
 }
 
 function DelitHowItWorks() {
+  const { t } = useLanguage();
   const cards = [
-    ['Cihaz içi işleme', 'Temel medya işlemleri iPhone üzerinde gerçekleşir.', '/del-it-privacy/device-processing-white.png', 'from-sky-100 via-white to-violet-100'],
-    ['Sunucuya yükleme yok', 'Fotoğraf, video, rehber ve kasa içeriklerin Del-It sunucularına gönderilmez.', '/del-it-privacy/no-upload-white.png', 'from-violet-100 via-white to-fuchsia-100'],
-    ['Şeffaf izin akışı', 'Hangi izinleri verdiğini ve neye onay verdiğini açıkça görürsün.', '/del-it-privacy/permissions-white.png', 'from-rose-100 via-white to-sky-100'],
-    ['Kontrol tamamen sende', 'Kalıcı silme ve rehber işlemleri yalnızca açık onayınla başlar.', '/del-it-privacy/control-white.png', 'from-emerald-100 via-white to-sky-100'],
+    [t('deviceProcessing'), t('deviceProcessingText'), '/del-it-privacy/device-processing-white.png', 'from-sky-100 via-white to-violet-100'],
+    [t('noUpload'), t('noUploadText'), '/del-it-privacy/no-upload-white.png', 'from-violet-100 via-white to-fuchsia-100'],
+    [t('transparentPermissions'), t('transparentPermissionsText'), '/del-it-privacy/permissions-white.png', 'from-rose-100 via-white to-sky-100'],
+    [t('fullControl'), t('fullControlText'), '/del-it-privacy/control-white.png', 'from-emerald-100 via-white to-sky-100'],
   ];
 
   return (
@@ -569,14 +1184,13 @@ function DelitHowItWorks() {
       <div className="relative mx-auto max-w-7xl">
         <div className="scroll-reveal mx-auto max-w-4xl text-center">
           <p className="inline-flex rounded-full border border-white/65 bg-white/60 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-violet-600 shadow-soft backdrop-blur-xl">
-            Güvenlik ve gizlilik
+            {t('securityPrivacy')}
           </p>
           <h2 className="mt-5 font-display text-[clamp(2.15rem,4.6vw,4.4rem)] font-black leading-[1.02] tracking-tight text-ink">
-            Bilgileriniz cihazında kalır
+            {t('securityTitle')}
           </h2>
           <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-ink/62 sm:text-lg">
-            Del-It, fotoğraf, video, rehber ve Kasa içeriklerini sunucuya yüklemez. Kişisel içeriklerin reklam
-            hedefleme amacıyla kullanılmaz.
+            {t('securityText')}
           </p>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -597,11 +1211,11 @@ function DelitHowItWorks() {
         </div>
         <div className="scroll-reveal mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href="/del-it/gizlilik-politikasi" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-6 text-sm font-bold text-white shadow-soft transition hover:-translate-y-1 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60">
-            Gizlilik Politikası
+            {t('privacyPolicy')}
             <ArrowRight size={17} />
           </a>
           <a href="/del-it/kullanim-sartlari" className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-black/8 bg-white/78 px-6 text-sm font-bold text-ink shadow-soft backdrop-blur-xl transition hover:-translate-y-1 hover:bg-white focus:outline-none focus:ring-2 focus:ring-electric/60">
-            Kullanım Şartları
+            {t('terms')}
             <ArrowRight size={17} />
           </a>
         </div>
@@ -612,14 +1226,14 @@ function DelitHowItWorks() {
             </div>
             <div>
               <h2 className="font-display text-4xl font-black leading-tight sm:text-5xl">
-                Daha ferah bir galeri birkaç kaydırma uzağında.
+                {t('finalCtaTitle')}
               </h2>
               <p className="mt-4 max-w-2xl text-base leading-7 text-ink/65 sm:text-lg">
-                Galerini kendi hızında gözden geçir, gereksizleri güvenle ayır ve iPhone’unda yeniden yer aç.
+                {t('finalCtaText')}
               </p>
             </div>
             <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-1 hover:bg-black/85 focus:outline-none focus:ring-2 focus:ring-electric/60" aria-label="Del-It uygulamasını App Store’dan indir">
-              App Store’dan İndir
+              {t('appStoreDownload')}
               <Download size={18} />
             </a>
           </div>
@@ -762,14 +1376,15 @@ function DelitPlus() {
 }
 
 function DelitScreens() {
+  const { t } = useLanguage();
   const screens = [
-    ['Kaydırarak çöpe at', '/del-it-screens/cope-at.png'],
-    ['Kaydırarak sakla', '/del-it-screens/sakla.png'],
-    ['Del-It Çöp Kutusu', '/del-it-screens/cop-kutusu.png'],
-    ['Medya Kasası', '/del-it-screens/kasa.png'],
-    ['Rehber Temizliği', '/del-it-screens/takvim.png'],
-    ['Kolaj Oluşturma', '/del-it-screens/kolaj.png'],
-    ['Temizlik İstatistikleri', '/del-it-screens/istatistik.png'],
+    [t('trashBox'), '/del-it-screens/cope-at.png'],
+    [t('quickClean'), '/del-it-screens/sakla.png'],
+    [t('trashBox'), '/del-it-screens/cop-kutusu.png'],
+    [t('mediaVault'), '/del-it-screens/kasa.png'],
+    [t('contactClean'), '/del-it-screens/takvim.png'],
+    [t('collageCreate'), '/del-it-screens/kolaj.png'],
+    [t('screens'), '/del-it-screens/istatistik.png'],
   ];
   const marqueeScreens = [...screens, ...screens];
 
@@ -779,13 +1394,13 @@ function DelitScreens() {
       <div className="relative mx-auto max-w-7xl">
         <div className="scroll-reveal mx-auto max-w-3xl text-center">
           <p className="inline-flex rounded-full border border-white/12 bg-white/8 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-white/72 backdrop-blur-xl">
-            Ekranlar
+            {t('screens')}
           </p>
           <h2 className="mt-5 font-display text-[clamp(2rem,4vw,3.7rem)] font-black leading-[1.04] tracking-tight">
-            Del-It deneyimine yakından bak
+            {t('screensTitle')}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/58 sm:text-base">
-            Temizlik, kasa, rehber, kolaj ve istatistik akışlarını gerçek uygulama ekranlarıyla keşfet.
+            {t('screensText')}
           </p>
         </div>
       </div>
@@ -808,6 +1423,7 @@ function DelitScreens() {
 }
 
 function DelitFaq() {
+  const { language, t } = useLanguage();
   const faqs = [
     ['Del-It fotoğraflarımı otomatik olarak siliyor mu?', 'Hayır. Hangi fotoğraf veya videonun silineceğine sen karar verirsin. Kalıcı silme işlemi yalnızca son onayından sonra başlatılır.'],
     ['Sola kaydırdığım fotoğraflar hemen silinir mi?', 'Hayır. Sola kaydırdığın öğeler önce Del-It Çöp Kutusu’na eklenir. Buradan geri alabilir veya son kontrolünden sonra silebilirsin.'],
@@ -818,20 +1434,31 @@ function DelitFaq() {
     ['Del-It ücretsiz mi?', 'Del-It temel özellikleriyle ücretsiz olarak kullanılabilir. Kullanım limitleri ve Del-It Plus avantajları uygulama içinde gösterilir.'],
     ['Del-It için hesap oluşturmam gerekiyor mu?', 'Hayır. Del-It’i kullanmak için zorunlu bir hesap sistemi bulunmaz.'],
   ];
+  const enFaqs = [
+    ['Does Del-It delete my photos automatically?', 'No. You decide which photo or video should be deleted. Permanent deletion only starts after your final approval.'],
+    ['Are photos deleted immediately when I swipe left?', 'No. Items you swipe left are first added to the Del-It Trash. You can restore them or delete them after a final review.'],
+    ['Are my photos and videos uploaded to a server?', 'No. Del-It’s core media operations happen on your device and your gallery content is not uploaded to Del-It servers.'],
+    ['How is Media Vault protected?', 'Vault content is stored locally on your device. When Face ID protection is enabled, authentication is handled by iOS.'],
+    ['What happens to vault content if I delete the app?', 'Vault content is stored locally and tied to the app, so deleting Del-It may also remove vault content. Export important items before deleting the app.'],
+    ['Does contact cleaning change my contacts automatically?', 'No. Merge, edit, or delete operations happen only with your explicit approval.'],
+    ['Is Del-It free?', 'Del-It can be used with its core features for free. Usage limits and Del-It Plus benefits are shown inside the app.'],
+    ['Do I need to create an account for Del-It?', 'No. Del-It does not require an account system.'],
+  ];
+  const visibleFaqs = language === 'en' ? enFaqs : faqs;
 
   return (
     <section id="faq" className="relative z-10 scroll-mt-36 bg-white px-5 py-16 sm:px-8 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="scroll-reveal mx-auto max-w-4xl text-center">
           <p className="inline-flex rounded-full border border-violet-200 bg-violet-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-violet-600">
-            SSS
+            {t('faq')}
           </p>
           <h2 className="mt-5 font-display text-[clamp(2rem,4vw,3.6rem)] font-black leading-[1.08] tracking-tight text-ink">
-            Merak ettikleriniz
+            {t('faqTitle')}
           </h2>
         </div>
         <div className="mx-auto mt-10 grid max-w-4xl gap-4">
-          {faqs.map(([q, a]) => (
+          {visibleFaqs.map(([q, a]) => (
             <details key={q} className="group rounded-[1.45rem] border border-black/8 bg-white p-5 shadow-[0_16px_48px_rgba(31,38,70,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_58px_rgba(90,64,160,0.1)]">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-black text-ink focus:outline-none focus:ring-2 focus:ring-electric/60 sm:text-xl">
                 <span>{q}</span>
@@ -849,6 +1476,8 @@ function DelitFaq() {
 }
 
 function DelitLegalLinks({ variant = 'compact' }) {
+  const { t } = useLanguage();
+
   if (variant === 'compact') {
     return (
       <section className="relative z-10 px-5 py-10 sm:px-8">
@@ -859,13 +1488,13 @@ function DelitLegalLinks({ variant = 'compact' }) {
                 href="/del-it/gizlilik-politikasi"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-white px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#fbfaf7]"
               >
-                Gizlilik Politikası
+                {t('privacyPolicy')}
               </a>
               <a
                 href="/del-it/kullanim-sartlari"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-[#fbfaf7] px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white"
               >
-                Kullanım Şartları
+                {t('terms')}
               </a>
             </div>
           </div>
@@ -880,13 +1509,13 @@ function DelitLegalLinks({ variant = 'compact' }) {
         <div className="rounded-[1.6rem] border border-black/8 bg-white p-5 shadow-soft">
           <div className="flex flex-col items-center justify-between gap-4 lg:flex-row">
             <p className="text-center text-sm font-semibold text-ink/58 lg:text-left">
-              Del-It bağlantıları ve destek kanalları.
+              Del-It
             </p>
             <div className="flex flex-wrap items-center justify-center gap-2">
               <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-black/8 bg-[#fbfaf7] px-4 py-2 text-sm font-bold text-ink transition hover:bg-white">App Store</a>
-              <a href="/del-it/gizlilik-politikasi" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">Gizlilik Politikası</a>
-              <a href="/del-it/kullanim-sartlari" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">Kullanım Şartları</a>
-              <a href="mailto:theapdesign26@gmail.com" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">Destek e-postası</a>
+              <a href="/del-it/gizlilik-politikasi" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">{t('privacyPolicy')}</a>
+              <a href="/del-it/kullanim-sartlari" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">{t('terms')}</a>
+              <a href="mailto:theapdesign26@gmail.com" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">{t('supportEmail')}</a>
               <a href="/" className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#fbfaf7]">AP Design</a>
             </div>
           </div>
@@ -927,14 +1556,16 @@ function ScreenshotPlaceholder({ title, note, accent, large = false }) {
 }
 
 function DelitPrivacyPage() {
+  const { t } = useLanguage();
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
       <Background />
       <Header />
       <LegalHero
-        eyebrow="Gizlilik Politikası"
-        title="Del-It Gizlilik Politikası"
-        description="Yürürlük tarihi: 05.07.2026. Uygulama: Del-It."
+        eyebrow={t('privacyPolicy')}
+        title={`Del-It ${t('privacyPolicy')}`}
+        description={`${t('effectiveDate')}: 05.07.2026. ${t('appLabel')}: Del-It.`}
       />
       <LegalContent sections={privacySections} />
       <DelitLegalLinks />
@@ -944,14 +1575,16 @@ function DelitPrivacyPage() {
 }
 
 function DelitTermsPage() {
+  const { t } = useLanguage();
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
       <Background />
       <Header />
       <LegalHero
-        eyebrow="Kullanım Şartları"
-        title="Del-It Kullanım Şartları"
-        description="Son güncelleme: 19 Haziran 2026. Uygulama: Del-It. İletişim: theapdesign26@gmail.com"
+        eyebrow={t('terms')}
+        title={`Del-It ${t('terms')}`}
+        description={`${t('lastUpdate')}: 19 Haziran 2026. ${t('appLabel')}: Del-It. ${t('contact')}: theapdesign26@gmail.com`}
       />
       <LegalContent sections={termsSections} />
       <DelitLegalLinks />
@@ -975,25 +1608,26 @@ function XoxPage() {
 }
 
 function XoxHero() {
+  const { t } = useLanguage();
+
   return (
-    <section className="relative z-10 px-5 pb-10 pt-12 sm:px-8 lg:pt-16">
+    <section className="relative z-10 px-5 pb-10 pt-24 sm:px-8 lg:pt-28">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
         <div className="max-w-3xl">
           <p className="mb-5 inline-flex rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-ink/55 shadow-soft">
             XOX Taktik Arena
           </p>
           <h1 className="font-display text-[clamp(3.2rem,7vw,7.8rem)] font-black leading-[0.9]">
-            Beraberliksiz
+            {t('xoxHeroTitle1')}
             <span className="block bg-gradient-to-r from-sky-500 via-fuchsia-500 to-rose-500 bg-clip-text text-transparent">
-              X-O-X stratejisi.
+              {t('xoxHeroTitle2')}
             </span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/65">
-            Klasik X-O hissini koruyan, 3 taş limiti ve eski taş silinme mekaniğiyle her turu daha hızlı,
-            dinamik ve taktik hale getiren 3x3 mobil strateji oyunu.
+            {t('xoxHeroText')}
           </p>
           <div className="mt-8 flex flex-wrap gap-2">
-            {['3 taş limiti', 'Beraberlik yok', 'Neon temalar'].map((item) => (
+            {[t('threeStone'), t('noDraw'), t('neonThemes')].map((item) => (
               <span key={item} className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-semibold text-ink/65 shadow-soft">
                 {item}
               </span>
@@ -1016,29 +1650,37 @@ function XoxHero() {
 }
 
 function XoxRules() {
+  const { language, t } = useLanguage();
   const rules = [
     'Tahta 3x3’tür ve oyuncular sırayla boş hücrelere X veya O koyar.',
     'Her oyuncunun tahtada aynı anda en fazla 3 taşı bulunabilir.',
     '4. taş koyulduğunda, aynı oyuncunun en eski taşı otomatik olarak silinir.',
     'Yatay, dikey veya çapraz 3’lü çizgi yapan oyuncu turu kazanır.',
   ];
+  const enRules = [
+    'The board is 3x3 and players take turns placing X or O on empty cells.',
+    'Each player can have at most 3 pieces on the board at the same time.',
+    'When a 4th piece is placed, that player’s oldest piece is automatically removed.',
+    'The player who completes a horizontal, vertical, or diagonal line wins the round.',
+  ];
+  const visibleRules = language === 'en' ? enRules : rules;
 
   return (
     <section className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <div>
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">Oyun Mantığı</p>
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">{t('gameLogic')}</p>
             <h2 className="font-display text-4xl font-black leading-none sm:text-6xl">
-              Klasik X-O, daha hızlı.
+              {t('xoxRulesTitle')}
             </h2>
           </div>
           <p className="max-w-xl text-ink/58">
-            Eski taş silinme mekaniği oyunu tıkamaz, beraberliği ortadan kaldırır ve her turda kazanan üretir.
+            {t('xoxRulesText')}
           </p>
         </div>
         <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {rules.map((rule, index) => (
+          {visibleRules.map((rule, index) => (
             <article key={rule} className="rounded-[1.4rem] border border-black/8 bg-white p-6 shadow-soft">
               <div className="grid h-12 w-12 place-items-center rounded-2xl bg-ink text-white">
                 <span className="text-sm font-bold">{String(index + 1).padStart(2, '0')}</span>
@@ -1053,10 +1695,11 @@ function XoxRules() {
 }
 
 function XoxModes() {
+  const { t } = useLanguage();
   const modes = [
-    ['Tek Oyunculu Mod', 'Kolay, orta ve zor zorluk seçenekleriyle yapay zekaya karşı hızlı maçlar.'],
-    ['İki Kişilik Mod', 'Aynı cihazda iki oyuncu, oyuncu isimleri ve hedef skor seçimiyle karşılıklı oynar.'],
-    ['Tema ve Ses Sistemi', 'Neon, Klasik, Kırmızı, Mavi ve Yeşil tema seçenekleri; ses, müzik ve hamle efektleri.'],
+    [t('singlePlayer'), t('singlePlayerText')],
+    [t('twoPlayer'), t('twoPlayerText')],
+    [t('themesSound'), t('themesSoundText')],
   ];
 
   return (
@@ -1075,6 +1718,8 @@ function XoxModes() {
 }
 
 function XoxLegalLinks() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto max-w-3xl">
@@ -1084,13 +1729,13 @@ function XoxLegalLinks() {
               href="/xox-taktik-arena/gizlilik-politikasi"
               className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-white px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#fbfaf7]"
             >
-              Gizlilik Politikası
+              {t('privacyPolicy')}
             </a>
             <a
               href="/xox-taktik-arena/kullanim-sartlari"
               className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-[#fbfaf7] px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white"
             >
-              Kullanım Şartları
+              {t('terms')}
             </a>
           </div>
         </div>
@@ -1100,14 +1745,16 @@ function XoxLegalLinks() {
 }
 
 function XoxPrivacyPage() {
+  const { t } = useLanguage();
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
       <Background />
       <Header />
       <LegalHero
-        eyebrow="Gizlilik Politikası"
-        title="X-O-X Gizlilik Politikası"
-        description="Yürürlük Tarihi: 24 Haziran 2026. Geliştirici: AP Design. İletişim: theapdesign26@gmail.com"
+        eyebrow={t('privacyPolicy')}
+        title={`X-O-X ${t('privacyPolicy')}`}
+        description={`${t('effectiveDate')}: 24 Haziran 2026. AP Design. ${t('contact')}: theapdesign26@gmail.com`}
       />
       <LegalContent sections={xoxPrivacySections} />
       <XoxLegalLinks />
@@ -1117,14 +1764,16 @@ function XoxPrivacyPage() {
 }
 
 function XoxTermsPage() {
+  const { t } = useLanguage();
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
       <Background />
       <Header />
       <LegalHero
-        eyebrow="Kullanım Şartları"
-        title="X-O-X Kullanım Şartları"
-        description="Yürürlük Tarihi: 24 Haziran 2026. Geliştirici: AP Design. İletişim: theapdesign26@gmail.com"
+        eyebrow={t('terms')}
+        title={`X-O-X ${t('terms')}`}
+        description={`${t('effectiveDate')}: 24 Haziran 2026. AP Design. ${t('contact')}: theapdesign26@gmail.com`}
       />
       <LegalContent sections={xoxTermsSections} />
       <XoxLegalLinks />
@@ -1135,7 +1784,7 @@ function XoxTermsPage() {
 
 function LegalHero({ eyebrow, title, description }) {
   return (
-    <section className="relative z-10 px-5 pb-6 pt-12 sm:px-8 lg:pt-16">
+    <section className="relative z-10 px-5 pb-6 pt-24 sm:px-8 lg:pt-28">
       <div className="mx-auto max-w-5xl">
         <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">{eyebrow}</p>
         <h1 className="font-display text-[clamp(2.8rem,6vw,6.5rem)] font-black leading-[0.94]">{title}</h1>
@@ -1165,6 +1814,7 @@ function LegalContent({ sections }) {
 }
 
 function Footer({ variant = 'default' }) {
+  const { t } = useLanguage();
   const isDelit = variant === 'delit';
 
   return (
@@ -1181,15 +1831,15 @@ function Footer({ variant = 'default' }) {
               </span>
             </a>
             <h2 className="mt-7 font-display text-4xl font-black leading-none sm:text-5xl">
-              {isDelit ? 'Galerini daha sade, güvenli ve yönetilebilir hale getiren iOS araçları.' : 'Kısa, eğlenceli ve tekrar oynanabilir deneyimler.'}
+              {isDelit ? t('footerDelitTitle') : t('footerDefaultTitle')}
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-ink/62">
-              {isDelit ? 'Galerini daha sade, güvenli ve yönetilebilir hale getiren iOS araçları geliştiriyoruz.' : 'Mobil uygulamalar ve mini oyunlar geliştiriyoruz. Amacımız öğrenmesi kolay, geri dönmesi keyifli ürünler üretmek.'}
+              {isDelit ? t('footerDelitText') : t('footerDefaultText')}
             </p>
           </div>
 
           <div className="grid gap-5 lg:justify-items-end">
-            <p className="text-sm font-bold uppercase tracking-[0.28em] text-ink/45">İletişim</p>
+            <p className="text-sm font-bold uppercase tracking-[0.28em] text-ink/45">{t('contact')}</p>
             <a
               href="mailto:theapdesign26@gmail.com"
               className="flex w-full items-center justify-between rounded-[1.2rem] border border-black/8 bg-[#fbfaf7] px-5 py-4 font-semibold text-ink transition hover:bg-white lg:max-w-md"
@@ -1204,15 +1854,14 @@ function Footer({ variant = 'default' }) {
               {isDelit ? (
                 <>
                   <a href={delitAppStoreUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">App Store</a>
-                  <a href="/del-it/gizlilik-politikasi" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">Gizlilik Politikası</a>
-                  <a href="/del-it/kullanim-sartlari" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">Kullanım Şartları</a>
+                  <a href="/del-it/gizlilik-politikasi" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('privacyPolicy')}</a>
+                  <a href="/del-it/kullanim-sartlari" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('terms')}</a>
                   <a href="/" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">AP Design</a>
                 </>
               ) : (
                 <>
-                  <a href="/" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">Anasayfa</a>
-                  <a href="/products" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">Uygulamalar</a>
-                  <a href="/contact" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">İletişim</a>
+                  <a href="/" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('navHome')}</a>
+                  <a href="/contact" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('navContact')}</a>
                 </>
               )}
             </div>

@@ -28,8 +28,58 @@ body {
   color: #111111;
 }
 
+.site-nav-card {
+  max-width: calc(100vw - 2.5rem);
+  overflow: hidden;
+  transform: translate3d(0, 0, 0) scale(1);
+  transform-origin: center;
+  transition:
+    background-color 420ms ease,
+    border-color 420ms ease,
+    box-shadow 420ms ease,
+    transform 420ms cubic-bezier(0.34, 1.28, 0.64, 1),
+    width 560ms cubic-bezier(0.34, 1.08, 0.64, 1);
+  width: var(--nav-compact-width, max-content);
+  will-change: width;
+}
+
+.site-nav-card-expanded {
+  max-width: calc(100vw - 2.5rem);
+  width: min(80rem, calc(100vw - 2.5rem));
+}
+
+@media (min-width: 768px) {
+  .site-nav-card {
+    max-width: min(80rem, calc(100vw - 4rem));
+    width: min(var(--nav-compact-width, 39rem), calc(100vw - 4rem));
+  }
+
+  .site-nav-card-expanded {
+    max-width: min(80rem, calc(100vw - 4rem));
+    width: min(80rem, calc(100vw - 4rem));
+  }
+}
+
+.site-nav-card:not(.site-nav-card-expanded):not(.site-nav-card-animating):hover {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(17, 17, 17, 0.1);
+  box-shadow: 0 18px 50px rgba(32, 22, 84, 0.14);
+  transform: translate3d(0, 0, 0) scale(1.018);
+}
+
+.site-nav-card-expanded:hover {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(17, 17, 17, 0.08);
+  box-shadow: 0 14px 42px rgba(32, 22, 84, 0.1);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
 .home-floater {
   animation: home-float 7.5s ease-in-out infinite;
+}
+
+.home-app-carousel-slide {
+  animation: home-carousel-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .delit-hero-card-float {
@@ -189,6 +239,18 @@ body {
 
   to {
     transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes home-carousel-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(18px, 0, 0) scale(0.992);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
   }
 }
 
