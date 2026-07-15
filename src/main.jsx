@@ -24,9 +24,13 @@ import {
 } from 'lucide-react';
 import {
   blogCategories,
+  getBlogIndexPath,
   getBlogPostBySlug,
+  getCategoryPath,
   getPostsByCategory,
   getPublishedBlogPosts,
+  getPostPath,
+  getTranslatedPost,
 } from './blog-data.js';
 import './styles.css';
 
@@ -318,7 +322,11 @@ function useLanguage() {
 
 function App() {
   useScrollReveal();
+  const normalizedPath = normalizePath(window.location.pathname);
+  const routeLanguage = getRouteLanguage(normalizedPath);
+  const routePath = stripLanguagePrefix(normalizedPath);
   const [language, setLanguageState] = React.useState(() => {
+    if (routeLanguage) return routeLanguage;
     if (typeof window === 'undefined') return 'tr';
     return window.localStorage.getItem('ap-language') || 'tr';
   });
@@ -326,9 +334,16 @@ function App() {
     window.localStorage.setItem('ap-language', nextLanguage);
     setLanguageState(nextLanguage);
   };
-  const t = (key) => translations[language]?.[key] || translations.tr[key] || key;
+  React.useEffect(() => {
+    if (routeLanguage && routeLanguage !== language) {
+      window.localStorage.setItem('ap-language', routeLanguage);
+      setLanguageState(routeLanguage);
+    }
+  }, [language, routeLanguage]);
+  const activeLanguage = routeLanguage || language;
+  const t = (key) => translations[activeLanguage]?.[key] || translations.tr[key] || key;
 
-  const path = normalizePath(window.location.pathname);
+  const path = routePath;
   let page;
 
   if (path === '/products') {
@@ -345,6 +360,8 @@ function App() {
     page = <BlogPage />;
   } else if (path.startsWith('/blog/kategori/')) {
     page = <BlogCategoryPage slug={path.replace('/blog/kategori/', '')} />;
+  } else if (path.startsWith('/blog/category/')) {
+    page = <BlogCategoryPage slug={path.replace('/blog/category/', '')} />;
   } else if (path.startsWith('/blog/')) {
     page = <BlogPostPage slug={path.replace('/blog/', '')} />;
   } else if (path === '/xox-taktik-arena') {
@@ -358,7 +375,7 @@ function App() {
   }
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language: activeLanguage, setLanguage, t }}>
       {page}
     </LanguageContext.Provider>
   );
@@ -416,8 +433,8 @@ function RedirectHome() {
 }
 
 function BlogPage() {
-  const { t } = useLanguage();
-  const posts = getPublishedBlogPosts();
+  const { language, t } = useLanguage();
+  const posts = getPublishedBlogPosts(language);
   const featuredPost = posts.find((post) => post.featured) || posts[0];
 
   return (
@@ -457,7 +474,7 @@ function BlogPage() {
             <article className="scroll-reveal mt-10 grid overflow-hidden rounded-[2rem] border border-black/8 bg-[#fbfaf7] shadow-soft lg:grid-cols-[0.95fr_1.05fr]">
               <BlogVisual post={featuredPost} title={featuredPost.title} />
               <div className="flex flex-col justify-center p-6 sm:p-8">
-                <a href={`/blog/kategori/${featuredPost.category}`} className="w-fit rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-ink/50 transition hover:bg-[#f3f1ec]">
+                <a href={getCategoryPath(featuredPost.category, language)} className="w-fit rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-ink/50 transition hover:bg-[#f3f1ec]">
                   {blogCategories[featuredPost.category]?.title}
                 </a>
                 <h2 className="mt-5 font-display text-[clamp(2rem,4vw,4rem)] font-black leading-[0.96] tracking-tight">
@@ -467,7 +484,7 @@ function BlogPage() {
                   {featuredPost.description}
                 </p>
                 <BlogMeta post={featuredPost} className="mt-5" />
-                <a href={`/blog/${featuredPost.slug}`} className="mt-7 inline-flex h-12 w-fit items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
+                <a href={getPostPath(featuredPost)} className="mt-7 inline-flex h-12 w-fit items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
                   {t('readMore')}
                   <ChevronRight size={16} />
                 </a>
@@ -487,9 +504,9 @@ function BlogPage() {
 }
 
 function BlogCategoryPage({ slug }) {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const category = blogCategories[slug];
-  const posts = getPostsByCategory(slug);
+  const posts = getPostsByCategory(slug, language);
 
   if (!category || !posts.length) {
     return <NotFoundPage />;
@@ -501,7 +518,7 @@ function BlogCategoryPage({ slug }) {
       <Header />
       <section className="relative z-10 px-5 pb-12 pt-24 sm:px-8 lg:pt-28">
         <div className="mx-auto max-w-7xl">
-          <a href="/blog" className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink shadow-soft transition hover:bg-[#fbfaf7]">
+          <a href={getBlogIndexPath(language)} className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink shadow-soft transition hover:bg-[#fbfaf7]">
             <ChevronRight className="rotate-180" size={16} />
             {t('backToBlog')}
           </a>
@@ -525,13 +542,13 @@ function BlogCategoryPage({ slug }) {
 }
 
 function BlogCard({ post }) {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <article className="scroll-reveal group flex h-full flex-col overflow-hidden rounded-[1.7rem] border border-black/8 bg-white shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(60,44,125,0.13)]">
       <BlogVisual post={post} title={post.title} />
       <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <a href={`/blog/kategori/${post.category}`} className="mb-3 w-fit rounded-full bg-[#f3f1ec] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-ink/48 transition hover:bg-violet-50 hover:text-violet-600">
+        <a href={getCategoryPath(post.category, language)} className="mb-3 w-fit rounded-full bg-[#f3f1ec] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-ink/48 transition hover:bg-violet-50 hover:text-violet-600">
           {blogCategories[post.category]?.title}
         </a>
         <h3 className="font-display text-2xl font-black leading-tight tracking-tight text-ink">
@@ -542,9 +559,9 @@ function BlogCard({ post }) {
         </p>
         <BlogMeta post={post} className="mt-5" />
         <a
-          href={`/blog/${post.slug}`}
+          href={getPostPath(post)}
           className="mt-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85"
-          aria-label={`${post.title} yazısını oku`}
+          aria-label={language === 'en' ? `Read ${post.title}` : `${post.title} yazısını oku`}
         >
           {t('readMore')}
           <ChevronRight size={16} />
@@ -555,14 +572,15 @@ function BlogCard({ post }) {
 }
 
 function BlogMeta({ post, className = '' }) {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
   const published = new Date(post.publishedAt);
+  const dateLocale = language === 'en' ? 'en-US' : 'tr-TR';
 
   return (
     <div className={`flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.16em] text-ink/42 ${className}`}>
       <time dateTime={post.publishedAt} className="inline-flex items-center gap-1.5">
         <CalendarDays size={15} />
-        {published.toLocaleDateString('tr-TR', { day: '2-digit', month: 'long', year: 'numeric' })}
+        {published.toLocaleDateString(dateLocale, { day: '2-digit', month: 'long', year: 'numeric' })}
       </time>
       <span className="inline-flex items-center gap-1.5">
         <Clock3 size={15} />
@@ -677,16 +695,21 @@ function BlogContentBlocks({ blocks, post }) {
 }
 
 function BlogPostPage({ slug }) {
-  const { t } = useLanguage();
-  const post = getBlogPostBySlug(slug);
+  const { language, t } = useLanguage();
+  const post = getBlogPostBySlug(slug, language);
 
   if (!post) {
     return <NotFoundPage />;
   }
 
   const relatedPosts = post.relatedPosts
-    .map((relatedSlug) => getBlogPostBySlug(relatedSlug))
+    .map((relatedSlug) => getBlogPostBySlug(relatedSlug, language))
     .filter(Boolean);
+  const dateLocale = language === 'en' ? 'en-US' : 'tr-TR';
+  const authorLabel = language === 'en' ? 'Author' : 'Yazar';
+  const updatedLabel = language === 'en' ? 'Updated' : 'Güncellendi';
+  const relatedLinksLabel = language === 'en' ? 'Related links' : 'İlgili bağlantılar';
+  const relatedPostsLabel = language === 'en' ? 'Related posts' : 'İlgili yazılar';
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
@@ -694,14 +717,14 @@ function BlogPostPage({ slug }) {
       <Header />
       <article className="relative z-10 px-5 pb-12 pt-24 sm:px-8 lg:pt-28">
         <div className="mx-auto max-w-5xl">
-          <a href="/blog" className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink shadow-soft transition hover:bg-[#fbfaf7]">
+          <a href={getBlogIndexPath(language)} className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink shadow-soft transition hover:bg-[#fbfaf7]">
             <ChevronRight className="rotate-180" size={16} />
             {t('backToBlog')}
           </a>
           <div className="mt-8 overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-soft">
             <BlogVisual post={post} title={post.title} />
             <div className="p-6 sm:p-10 lg:p-12">
-              <a href={`/blog/kategori/${post.category}`} className="inline-flex rounded-full bg-[#f3f1ec] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-ink/48 transition hover:bg-violet-50 hover:text-violet-600">
+              <a href={getCategoryPath(post.category, language)} className="inline-flex rounded-full bg-[#f3f1ec] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-ink/48 transition hover:bg-violet-50 hover:text-violet-600">
                 {blogCategories[post.category]?.title}
               </a>
               <BlogMeta post={post} className="mt-5" />
@@ -712,10 +735,10 @@ function BlogPostPage({ slug }) {
                 {post.description}
               </p>
               <aside className="mt-8 rounded-[1.4rem] border border-black/8 bg-[#fbfaf7] p-5">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-ink/42">Yazar</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-ink/42">{authorLabel}</p>
                 <p className="mt-2 font-display text-xl font-black">{post.author}</p>
                 <p className="mt-1 text-sm text-ink/55">
-                  Güncellendi: <time dateTime={post.updatedAt}>{new Date(post.updatedAt).toLocaleDateString('tr-TR', { day: '2-digit', month: 'long', year: 'numeric' })}</time>
+                  {updatedLabel}: <time dateTime={post.updatedAt}>{new Date(post.updatedAt).toLocaleDateString(dateLocale, { day: '2-digit', month: 'long', year: 'numeric' })}</time>
                 </p>
               </aside>
               <div className="mt-10 space-y-10 text-lg leading-9 text-ink/72">
@@ -732,7 +755,7 @@ function BlogPostPage({ slug }) {
               </div>
               {post.internalLinks.length ? (
                 <aside className="mt-10 rounded-[1.5rem] border border-black/8 bg-[#fbfaf7] p-5">
-                  <h2 className="font-display text-2xl font-black">İlgili bağlantılar</h2>
+                  <h2 className="font-display text-2xl font-black">{relatedLinksLabel}</h2>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {post.internalLinks.map((link) => (
                       <a key={link.href} href={link.href} className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#f3f1ec]">
@@ -745,7 +768,7 @@ function BlogPostPage({ slug }) {
               ) : null}
               {relatedPosts.length ? (
                 <aside className="mt-10">
-                  <h2 className="font-display text-2xl font-black">İlgili yazılar</h2>
+                  <h2 className="font-display text-2xl font-black">{relatedPostsLabel}</h2>
                   <div className="mt-4 grid gap-3 sm:grid-cols-2">
                     {relatedPosts.map((relatedPost) => (
                       <a key={relatedPost.slug} href={`/blog/${relatedPost.slug}`} className="rounded-[1.2rem] border border-black/8 bg-[#fbfaf7] p-4 font-bold text-ink transition hover:bg-white">
@@ -765,7 +788,7 @@ function BlogPostPage({ slug }) {
 }
 
 function NotFoundPage() {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
@@ -777,12 +800,14 @@ function NotFoundPage() {
             404
           </p>
           <h1 className="mt-6 font-display text-[clamp(3rem,8vw,7rem)] font-black leading-[0.9]">
-            Sayfa bulunamadı
+            {language === 'en' ? 'Page not found' : 'Sayfa bulunamadı'}
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-ink/62">
-            Aradığın blog yazısı yayınlanmamış, taşınmış ya da kaldırılmış olabilir.
+            {language === 'en'
+              ? 'The page you are looking for may be unpublished, moved, or removed.'
+              : 'Aradığın blog yazısı yayınlanmamış, taşınmış ya da kaldırılmış olabilir.'}
           </p>
-          <a href="/blog" className="mt-8 inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
+          <a href={getBlogIndexPath(language)} className="mt-8 inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
             {t('backToBlog')}
             <ArrowRight size={17} />
           </a>
@@ -841,7 +866,8 @@ function Background() {
 
 function Header() {
   const { language, setLanguage, t } = useLanguage();
-  const path = normalizePath(window.location.pathname);
+  const rawPath = normalizePath(window.location.pathname);
+  const path = stripLanguagePrefix(rawPath);
   const logoRef = React.useRef(null);
   const centerNavRef = React.useRef(null);
   const rightNavRef = React.useRef(null);
@@ -857,15 +883,25 @@ function Header() {
     [t('navHome'), '/'],
     [t('navDelit'), '/del-it'],
     [t('navXox'), '/xox-taktik-arena'],
-    [t('navBlog'), '/blog'],
+    [t('navBlog'), getBlogIndexPath(language)],
   ];
   const contactLink = [t('navContact'), '/contact'];
   const isActive = (href) => {
-    if (href === '/') {
+    const cleanHref = stripLanguagePrefix(normalizePath(href));
+
+    if (cleanHref === '/') {
       return path === '/' || path === '/products';
     }
 
-    return path === href || path.startsWith(`${href}/`);
+    return path === cleanHref || path.startsWith(`${cleanHref}/`);
+  };
+  const switchLanguage = (nextLanguage) => {
+    const nextPath = getLocalizedPath(rawPath, nextLanguage);
+    setLanguage(nextLanguage);
+
+    if (nextPath !== rawPath) {
+      window.location.href = nextPath;
+    }
   };
   const toggleExpanded = () => {
     if (animationTimerRef.current) {
@@ -968,7 +1004,7 @@ function Header() {
                   className={`grid h-8 w-8 place-items-center rounded-full text-base transition ${language === code ? 'bg-ink shadow-soft' : 'hover:bg-[#f3f1ec]'}`}
                   aria-label={label}
                   aria-pressed={language === code}
-                  onClick={() => setLanguage(code)}
+                  onClick={() => switchLanguage(code)}
                 >
                   <span aria-hidden="true">{flag}</span>
                 </button>
@@ -2314,6 +2350,46 @@ function Field({ label, type = 'text' }) {
 function normalizePath(pathname) {
   const clean = pathname.replace(/\/+$/, '') || '/';
   return clean === '' ? '/' : clean;
+}
+
+function getRouteLanguage(pathname) {
+  return pathname === '/en' || pathname.startsWith('/en/') ? 'en' : null;
+}
+
+function stripLanguagePrefix(pathname) {
+  if (pathname === '/en') return '/';
+  if (pathname.startsWith('/en/')) return pathname.slice(3) || '/';
+  return pathname;
+}
+
+function getLocalizedPath(pathname, targetLanguage) {
+  const cleanPath = normalizePath(pathname);
+  const routePath = stripLanguagePrefix(cleanPath);
+
+  if (routePath === '/blog') {
+    return getBlogIndexPath(targetLanguage);
+  }
+
+  if (routePath.startsWith('/blog/')) {
+    const slug = routePath.replace('/blog/', '');
+    const currentPost = getBlogPostBySlug(slug);
+
+    if (currentPost) {
+      const translatedPost = getTranslatedPost(currentPost, targetLanguage);
+      if (translatedPost) return getPostPath(translatedPost);
+    }
+  }
+
+  if (routePath.startsWith('/blog/kategori/') || routePath.startsWith('/blog/category/')) {
+    const slug = routePath.replace('/blog/kategori/', '').replace('/blog/category/', '');
+    if (targetLanguage === 'en' && slug === 'mobil-uygulamalar') return '/en/blog/category/mobile-apps';
+    if (targetLanguage === 'tr' && slug === 'mobile-apps') return '/blog/kategori/mobil-uygulamalar';
+  }
+
+  if (targetLanguage === 'en' && routePath === '/blog') return '/en/blog';
+  if (targetLanguage === 'tr' && cleanPath.startsWith('/en/')) return routePath;
+
+  return cleanPath;
 }
 
 const privacySections = [

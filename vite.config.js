@@ -2,21 +2,21 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { blogCategories, getPostsByCategory, getPublishedBlogPosts } from './src/blog-data.js';
+import { blogCategories, getAllPublishedBlogPosts, getPostsByCategory } from './src/blog-data.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const blogInputs = Object.fromEntries(
-  getPublishedBlogPosts().map((post) => [
+  getAllPublishedBlogPosts().map((post) => [
     `blog-${post.slug}`,
-    resolve(__dirname, `blog/${post.slug}/index.html`),
+    resolve(__dirname, `${post.language === 'en' ? 'en/blog' : 'blog'}/${post.slug}/index.html`),
   ]),
 );
 const categoryInputs = Object.fromEntries(
   Object.keys(blogCategories)
-    .filter((slug) => getPostsByCategory(slug).length > 0)
+    .filter((slug) => getPostsByCategory(slug, blogCategories[slug].language).length > 0)
     .map((slug) => [
       `blog-category-${slug}`,
-      resolve(__dirname, `blog/kategori/${slug}/index.html`),
+      resolve(__dirname, `${blogCategories[slug].language === 'en' ? 'en/blog/category' : 'blog/kategori'}/${slug}/index.html`),
     ]),
 );
 
@@ -35,6 +35,7 @@ export default defineConfig({
         xoxPrivacy: resolve(__dirname, 'xox-taktik-arena/gizlilik-politikasi/index.html'),
         xoxTerms: resolve(__dirname, 'xox-taktik-arena/kullanim-sartlari/index.html'),
         blog: resolve(__dirname, 'blog/index.html'),
+        blogEn: resolve(__dirname, 'en/blog/index.html'),
         ...blogInputs,
         ...categoryInputs,
       },

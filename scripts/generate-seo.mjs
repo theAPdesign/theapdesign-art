@@ -3,8 +3,12 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   blogCategories,
+  getAllPublishedBlogPosts,
+  getBlogIndexPath,
   getPostsByCategory,
   getPublishedBlogPosts,
+  getPostPath,
+  getTranslatedPost,
   legacyBlogRedirects,
   siteUrl,
 } from '../src/blog-data.js';
@@ -40,9 +44,21 @@ function scriptTag(data) {
   return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
 }
 
-function renderDocument({ title, description, canonical, ogType = 'website', image = defaultImage, robots = 'index, follow', jsonLd = [], body = '' }) {
+function renderDocument({
+  title,
+  description,
+  canonical,
+  ogType = 'website',
+  image = defaultImage,
+  robots = 'index, follow',
+  jsonLd = [],
+  body = '',
+  language = 'tr',
+  alternateLinks = [],
+  ogLocale,
+}) {
   return `<!doctype html>
-<html lang="tr">
+<html lang="${language}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -53,12 +69,13 @@ function renderDocument({ title, description, canonical, ogType = 'website', ima
     <link rel="icon" href="/ap-logo.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/ap-logo.svg" />
     <link rel="canonical" href="${canonical}" />
-    <link rel="alternate" type="application/rss+xml" title="The AP Design Blog RSS" href="${siteUrl}/blog/rss.xml" />
-    <meta property="og:type" content="${ogType}" />
+    <link rel="alternate" type="application/rss+xml" title="The AP Design Blog RSS" href="${siteUrl}${language === 'en' ? '/en/blog/rss.xml' : '/blog/rss.xml'}" />
+${alternateLinks.length ? `    ${alternateLinks.map((link) => `<link rel="alternate" hreflang="${link.hreflang}" href="${link.href}" />`).join('\n    ')}\n` : ''}    <meta property="og:type" content="${ogType}" />
     <meta property="og:url" content="${canonical}" />
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:site_name" content="The AP Design" />
+    <meta property="og:locale" content="${ogLocale || (language === 'en' ? 'en_US' : 'tr_TR')}" />
     <meta property="og:image" content="${absoluteUrl(image)}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
@@ -108,12 +125,15 @@ function breadcrumbSchema(items) {
 }
 
 function blogSchema(posts) {
+  const language = posts[0]?.language || 'tr';
   return {
     '@context': 'https://schema.org',
     '@type': 'Blog',
     name: 'The AP Design Blog',
-    url: `${siteUrl}/blog`,
-    description: 'The AP Design ürün, tasarım ve mobil deneyim notları.',
+    url: `${siteUrl}${getBlogIndexPath(language)}`,
+    description: language === 'en'
+      ? 'The AP Design notes on products, design, and mobile experiences.'
+      : 'The AP Design ürün, tasarım ve mobil deneyim notları.',
     blogPost: posts.map((post) => ({
       '@type': 'BlogPosting',
       headline: post.title,
@@ -121,6 +141,7 @@ function blogSchema(posts) {
       datePublished: post.publishedAt,
       dateModified: post.updatedAt,
       author: { '@type': 'Organization', name: post.author },
+      inLanguage: post.language,
     })),
   };
 }
@@ -149,6 +170,7 @@ function articleSchema(post) {
     },
     mainEntityOfPage: post.canonicalUrl,
     url: post.canonicalUrl,
+    inLanguage: post.language,
   };
 }
 
@@ -169,37 +191,89 @@ function faqSchema(post) {
   };
 }
 
-function renderBlogListBody(posts) {
+function alternateLinksForPost(post) {
+  const translated = getTranslatedPost(post, post.language === 'en' ? 'tr' : 'en');
+  if (!translated) return [];
+
+  const trPost = post.language === 'tr' ? post : translated;
+  const enPost = post.language === 'en' ? post : translated;
+
+  return [
+    { hreflang: 'tr', href: trPost.canonicalUrl },
+    { hreflang: 'en', href: enPost.canonicalUrl },
+    { hreflang: 'x-default', href: trPost.canonicalUrl },
+  ];
+}
+
+function renderBlogListBody(posts, language = 'tr') {
+  const copy = language === 'en'
+    ? {
+      tag: 'Blog',
+      title: 'Notes on products, design, and mobile experiences.',
+      description: 'Short, readable posts from AP Design about the apps we build, user experience decisions, and mobile product craft.',
+      sectionTitle: 'Latest posts',
+      read: 'read',
+      categoryPathPrefix: '/en/blog/category/',
+    }
+    : {
+      tag: 'Blog',
+      title: 'Ürün, tasarım ve mobil deneyim notları.',
+      description: 'AP Design’da geliştirdiğimiz uygulamalardan, kullanıcı deneyimi kararlarından ve mobil ürün üretim sürecinden kısa, okunabilir yazılar.',
+      sectionTitle: 'Son yazılar',
+      read: 'okuma',
+      categoryPathPrefix: '/blog/kategori/',
+    };
+
   return `<main>
   <header>
-    <p>Blog</p>
-    <h1>Ürün, tasarım ve mobil deneyim notları.</h1>
-    <p>AP Design’da geliştirdiğimiz uygulamalardan, kullanıcı deneyimi kararlarından ve mobil ürün üretim sürecinden kısa, okunabilir yazılar.</p>
+    <p>${copy.tag}</p>
+    <h1>${copy.title}</h1>
+    <p>${copy.description}</p>
   </header>
   <section aria-labelledby="blog-posts-title">
-    <h2 id="blog-posts-title">Son yazılar</h2>
+    <h2 id="blog-posts-title">${copy.sectionTitle}</h2>
     ${posts.map((post) => `<article>
-      <h3><a href="/blog/${post.slug}">${escapeHtml(post.title)}</a></h3>
+      <h3><a href="${getPostPath(post)}">${escapeHtml(post.title)}</a></h3>
       <p>${escapeHtml(post.description)}</p>
-      <p><a href="/blog/kategori/${post.category}">${escapeHtml(blogCategories[post.category]?.title || post.category)}</a></p>
+      <p><a href="${copy.categoryPathPrefix}${post.category}">${escapeHtml(blogCategories[post.category]?.title || post.category)}</a></p>
       <time datetime="${post.publishedAt}">${formatDate(post.publishedAt)}</time>
-      <p>${escapeHtml(post.readingTime)} okuma</p>
+      <p>${escapeHtml(post.readingTime)} ${copy.read}</p>
     </article>`).join('\n    ')}
   </section>
 </main>`;
 }
 
 function renderPostBody(post) {
+  const copy = post.language === 'en'
+    ? {
+      author: 'Author',
+      published: 'Published',
+      updated: 'Updated',
+      read: 'read',
+      relatedLinks: 'Related links',
+      categoryPrefix: '/en/blog/category/',
+      blogPath: '/en/blog',
+    }
+    : {
+      author: 'Yazar',
+      published: 'Yayın tarihi',
+      updated: 'Güncelleme tarihi',
+      read: 'okuma',
+      relatedLinks: 'İlgili bağlantılar',
+      categoryPrefix: '/blog/kategori/',
+      blogPath: '/blog',
+    };
+
   return `<main>
   <article>
     <header>
-      <p><a href="/blog/kategori/${post.category}">${escapeHtml(blogCategories[post.category]?.title || post.category)}</a></p>
+      <p><a href="${copy.categoryPrefix}${post.category}">${escapeHtml(blogCategories[post.category]?.title || post.category)}</a></p>
       <h1>${escapeHtml(post.title)}</h1>
       <p>${escapeHtml(post.description)}</p>
-      <p>Yazar: ${escapeHtml(post.author)}</p>
-      <time datetime="${post.publishedAt}">Yayın tarihi: ${formatDate(post.publishedAt)}</time>
-      <time datetime="${post.updatedAt}">Güncelleme tarihi: ${formatDate(post.updatedAt)}</time>
-      <p>${escapeHtml(post.readingTime)} okuma</p>
+      <p>${copy.author}: ${escapeHtml(post.author)}</p>
+      <time datetime="${post.publishedAt}">${copy.published}: ${formatDate(post.publishedAt)}</time>
+      <time datetime="${post.updatedAt}">${copy.updated}: ${formatDate(post.updatedAt)}</time>
+      <p>${escapeHtml(post.readingTime)} ${copy.read}</p>
     </header>
     <figure>
       <img src="${post.coverImage}" alt="${escapeHtml(post.coverImageAlt)}" width="1200" height="630" />
@@ -209,7 +283,7 @@ function renderPostBody(post) {
       ${renderStaticBlocks(section.blocks, post)}
     </section>`).join('\n    ')}
     ${post.internalLinks.length ? `<aside>
-      <h2>İlgili bağlantılar</h2>
+      <h2>${copy.relatedLinks}</h2>
       ${post.internalLinks.map((link) => `<a href="${link.href}">${escapeHtml(link.label)}</a>`).join('\n      ')}
     </aside>` : ''}
   </article>
@@ -250,16 +324,20 @@ function renderStaticBlocks(blocks, post) {
   }).join('\n      ');
 }
 
-function renderCategoryBody(category, posts) {
+function renderCategoryBody(category, posts, language = 'tr') {
+  const copy = language === 'en'
+    ? { tag: 'Blog category', prefix: '/en/blog/' }
+    : { tag: 'Blog kategorisi', prefix: '/blog/' };
+
   return `<main>
   <header>
-    <p>Blog kategorisi</p>
+    <p>${copy.tag}</p>
     <h1>${escapeHtml(category.title)}</h1>
     <p>${escapeHtml(category.description)}</p>
   </header>
   <section>
     ${posts.map((post) => `<article>
-      <h2><a href="/blog/${post.slug}">${escapeHtml(post.title)}</a></h2>
+      <h2><a href="${getPostPath(post)}">${escapeHtml(post.title)}</a></h2>
       <p>${escapeHtml(post.description)}</p>
       <time datetime="${post.publishedAt}">${formatDate(post.publishedAt)}</time>
     </article>`).join('\n    ')}
@@ -301,6 +379,7 @@ function validatePosts(posts) {
 function sitemapXml(posts) {
   const staticPages = [
     ['/', generatedAt],
+    ['/en/blog', generatedAt],
     ['/contact', generatedAt],
     ['/del-it', generatedAt],
     ['/del-it/gizlilik-politikasi', generatedAt],
@@ -338,6 +417,44 @@ function rssXml(posts) {
     <description>Ürün, tasarım ve mobil deneyim notları.</description>
     <language>tr</language>
     <lastBuildDate>${new Date(latestUpdatedAt).toUTCString()}</lastBuildDate>
+${posts.map((post) => `    <item>
+      <title>${escapeHtml(post.title)}</title>
+      <link>${post.canonicalUrl}</link>
+      <guid isPermaLink="true">${post.canonicalUrl}</guid>
+      <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
+      <description>${escapeHtml(post.description)}</description>
+    </item>`).join('\n')}
+  </channel>
+</rss>
+`;
+}
+
+function rssXmlForLanguage(posts, language = 'tr') {
+  const latestUpdatedAt = posts
+    .map((post) => new Date(post.updatedAt).getTime())
+    .sort((a, b) => b - a)[0];
+  const copy = language === 'en'
+    ? {
+      title: 'The AP Design Blog',
+      link: `${siteUrl}/en/blog`,
+      description: 'Notes on products, design, and mobile experiences.',
+      language: 'en',
+    }
+    : {
+      title: 'The AP Design Blog',
+      link: `${siteUrl}/blog`,
+      description: 'Ürün, tasarım ve mobil deneyim notları.',
+      language: 'tr',
+    };
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>${copy.title}</title>
+    <link>${copy.link}</link>
+    <description>${copy.description}</description>
+    <language>${copy.language}</language>
+    <lastBuildDate>${new Date(latestUpdatedAt || Date.now()).toUTCString()}</lastBuildDate>
 ${posts.map((post) => `    <item>
       <title>${escapeHtml(post.title)}</title>
       <link>${post.canonicalUrl}</link>
@@ -429,7 +546,9 @@ function redirectsTxt() {
 }
 
 async function main() {
-  const posts = getPublishedBlogPosts();
+  const trPosts = getPublishedBlogPosts('tr');
+  const enPosts = getPublishedBlogPosts('en');
+  const posts = getAllPublishedBlogPosts();
   validatePosts(posts);
   await rm(blogDir, { recursive: true, force: true });
 
@@ -440,27 +559,49 @@ async function main() {
     jsonLd: [
       organizationSchema(),
       websiteSchema(),
-      blogSchema(posts),
+      blogSchema(trPosts),
       breadcrumbSchema([
         { name: 'The AP Design', url: siteUrl },
         { name: 'Blog', url: `${siteUrl}/blog` },
       ]),
     ],
-    body: renderBlogListBody(posts),
+    body: renderBlogListBody(trPosts, 'tr'),
+    language: 'tr',
   }));
 
-  await Promise.all(posts.map((post) => writePage(`blog/${post.slug}`, renderDocument({
+  await writePage('en/blog', renderDocument({
+    title: 'Blog | The AP Design',
+    description: 'The AP Design blog features articles about mobile app development, UI/UX design, digital products, App Store processes, and product stories.',
+    canonical: `${siteUrl}/en/blog`,
+    language: 'en',
+    ogLocale: 'en_US',
+    jsonLd: [
+      organizationSchema(),
+      websiteSchema(),
+      blogSchema(enPosts),
+      breadcrumbSchema([
+        { name: 'The AP Design', url: siteUrl },
+        { name: 'Blog', url: `${siteUrl}/en/blog` },
+      ]),
+    ],
+    body: renderBlogListBody(enPosts, 'en'),
+  }));
+
+  await Promise.all(posts.map((post) => writePage(`${post.language === 'en' ? 'en/blog' : 'blog'}/${post.slug}`, renderDocument({
     title: post.seoTitle,
     description: post.seoDescription,
     canonical: post.canonicalUrl,
     ogType: 'article',
     image: post.socialImage,
+    language: post.language,
+    ogLocale: post.language === 'en' ? 'en_US' : 'tr_TR',
+    alternateLinks: alternateLinksForPost(post),
     jsonLd: [
       articleSchema(post),
       faqSchema(post),
       breadcrumbSchema([
         { name: 'The AP Design', url: siteUrl },
-        { name: 'Blog', url: `${siteUrl}/blog` },
+        { name: 'Blog', url: `${siteUrl}${getBlogIndexPath(post.language)}` },
         { name: post.title, url: post.canonicalUrl },
       ]),
     ].filter(Boolean),
@@ -468,22 +609,26 @@ async function main() {
   }))));
 
   await Promise.all(Object.entries(blogCategories).map(([slug, category]) => {
-    const categoryPosts = getPostsByCategory(slug);
+    const categoryPosts = getPostsByCategory(slug, category.language);
     if (!categoryPosts.length) return Promise.resolve();
+    const categoryPath = category.language === 'en' ? `en/blog/category/${slug}` : `blog/kategori/${slug}`;
+    const categoryUrl = category.language === 'en' ? `${siteUrl}/en/blog/category/${slug}` : `${siteUrl}/blog/kategori/${slug}`;
 
-    return writePage(`blog/kategori/${slug}`, renderDocument({
+    return writePage(categoryPath, renderDocument({
       title: `${category.title} | The AP Design Blog`,
       description: category.description,
-      canonical: `${siteUrl}/blog/kategori/${slug}`,
+      canonical: categoryUrl,
       robots: categoryPosts.length >= 2 ? 'index, follow' : 'noindex, follow',
+      language: category.language,
+      ogLocale: category.language === 'en' ? 'en_US' : 'tr_TR',
       jsonLd: [
         breadcrumbSchema([
           { name: 'The AP Design', url: siteUrl },
-          { name: 'Blog', url: `${siteUrl}/blog` },
-          { name: category.title, url: `${siteUrl}/blog/kategori/${slug}` },
+          { name: 'Blog', url: `${siteUrl}${getBlogIndexPath(category.language)}` },
+          { name: category.title, url: categoryUrl },
         ]),
       ],
-      body: renderCategoryBody(category, categoryPosts),
+      body: renderCategoryBody(category, categoryPosts, category.language),
     }));
   }));
 
@@ -491,7 +636,9 @@ async function main() {
   await writeFile(resolve(publicDir, 'robots.txt'), robotsTxt());
   await writeFile(resolve(publicDir, '_redirects'), redirectsTxt());
   await mkdir(resolve(publicDir, 'blog'), { recursive: true });
-  await writeFile(resolve(publicDir, 'blog/rss.xml'), rssXml(posts));
+  await writeFile(resolve(publicDir, 'blog/rss.xml'), rssXmlForLanguage(trPosts, 'tr'));
+  await mkdir(resolve(publicDir, 'en/blog'), { recursive: true });
+  await writeFile(resolve(publicDir, 'en/blog/rss.xml'), rssXmlForLanguage(enPosts, 'en'));
 }
 
 main().catch((error) => {
