@@ -435,7 +435,8 @@ function RedirectHome() {
 function BlogPage() {
   const { language, t } = useLanguage();
   const posts = getPublishedBlogPosts(language);
-  const featuredPost = posts.find((post) => post.featured) || posts[0];
+  const featuredPost = posts[0];
+  const remainingPosts = featuredPost ? posts.filter((post) => post.slug !== featuredPost.slug) : posts;
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
@@ -491,11 +492,13 @@ function BlogPage() {
               </div>
             </article>
           ) : null}
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {posts.map((post) => (
-              <BlogCard key={post.slug} post={post} />
-            ))}
-          </div>
+          {remainingPosts.length ? (
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+              {remainingPosts.map((post) => (
+                <BlogCard key={post.slug} post={post} />
+              ))}
+            </div>
+          ) : null}
         </div>
       </section>
       <Footer />
@@ -551,10 +554,10 @@ function BlogCard({ post }) {
         <a href={getCategoryPath(post.category, language)} className="mb-3 w-fit rounded-full bg-[#f3f1ec] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-ink/48 transition hover:bg-violet-50 hover:text-violet-600">
           {blogCategories[post.category]?.title}
         </a>
-        <h3 className="font-display text-2xl font-black leading-tight tracking-tight text-ink">
+        <h3 className="font-display text-2xl font-black leading-tight tracking-tight text-ink [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
           {post.title}
         </h3>
-        <p className="mt-3 text-base leading-7 text-ink/62">
+        <p className="mt-3 text-base leading-7 text-ink/62 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
           {post.description}
         </p>
         <BlogMeta post={post} className="mt-5" />
@@ -660,7 +663,7 @@ function BlogContentBlocks({ blocks, post }) {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#f3f1ec]"
+              className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-bold text-sky-700 transition hover:border-sky-300 hover:bg-sky-100"
             >
               {link.label}
               <ExternalLink size={14} />
@@ -751,7 +754,7 @@ function BlogPostPage({ slug }) {
                   <h2 className="font-display text-2xl font-black">{relatedLinksLabel}</h2>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {post.internalLinks.map((link) => (
-                      <a key={link.href} href={link.href} className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#f3f1ec]">
+                      <a key={link.href} href={link.href} className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-bold text-sky-700 transition hover:border-sky-300 hover:bg-sky-100">
                         {link.label}
                         <ArrowRight size={15} />
                       </a>
@@ -764,7 +767,7 @@ function BlogPostPage({ slug }) {
                   <h2 className="font-display text-2xl font-black">{relatedPostsLabel}</h2>
                   <div className="mt-4 grid gap-3 sm:grid-cols-2">
                     {relatedPosts.map((relatedPost) => (
-                      <a key={relatedPost.slug} href={getPostPath(relatedPost)} className="rounded-[1.2rem] border border-black/8 bg-[#fbfaf7] p-4 font-bold text-ink transition hover:bg-white">
+                      <a key={relatedPost.slug} href={getPostPath(relatedPost)} className="rounded-[1.2rem] border border-sky-200 bg-sky-50 p-4 font-bold text-sky-700 transition hover:border-sky-300 hover:bg-sky-100">
                         {relatedPost.title}
                       </a>
                     ))}

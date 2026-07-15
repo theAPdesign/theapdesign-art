@@ -88,6 +88,55 @@ ${alternateLinks.length ? `    ${alternateLinks.map((link) => `<link rel="altern
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
     <meta name="twitter:image" content="${absoluteUrl(image)}" />
+    <style>
+      #root > main:not([class]) {
+        min-height: 100vh;
+        margin: 0;
+        padding: clamp(2rem, 5vw, 4rem);
+        background: radial-gradient(circle at 16% 12%, rgba(238, 210, 255, 0.65), transparent 32%), radial-gradient(circle at 84% 10%, rgba(204, 232, 255, 0.7), transparent 30%), #faf8f5;
+        color: #111;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      #root > main:not([class]) header,
+      #root > main:not([class]) section,
+      #root > main:not([class]) article {
+        max-width: 1120px;
+        margin-inline: auto;
+      }
+      #root > main:not([class]) header {
+        padding-block: clamp(3rem, 8vw, 7rem);
+        text-align: center;
+      }
+      #root > main:not([class]) h1 {
+        margin: 1rem auto;
+        max-width: 880px;
+        font-size: clamp(2.8rem, 7vw, 6.4rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+      #root > main:not([class]) h2 {
+        margin-top: 0;
+        font-size: clamp(2rem, 4vw, 3.8rem);
+        line-height: 1;
+      }
+      #root > main:not([class]) p {
+        color: rgba(17, 17, 17, 0.68);
+        font-size: 1.05rem;
+        line-height: 1.8;
+      }
+      #root > main:not([class]) article {
+        margin-top: 1.5rem;
+        border: 1px solid rgba(17, 17, 17, 0.08);
+        border-radius: 2rem;
+        background: rgba(255, 255, 255, 0.82);
+        padding: clamp(1.25rem, 3vw, 2rem);
+        box-shadow: 0 22px 70px rgba(60, 44, 125, 0.1);
+      }
+      #root > main:not([class]) a {
+        color: #2563eb;
+        font-weight: 800;
+      }
+    </style>
     ${jsonLd.map(scriptTag).join('\n    ')}
     ${analyticsBlock}
   </head>
@@ -213,11 +262,14 @@ function alternateLinksForPost(post) {
 }
 
 function renderBlogListBody(posts, language = 'tr') {
+  const featuredPost = posts[0];
+  const remainingPosts = featuredPost ? posts.filter((post) => post.slug !== featuredPost.slug) : posts;
   const copy = language === 'en'
     ? {
       tag: 'Blog',
       title: 'Notes on products, design, and mobile experiences.',
       description: 'Short, readable posts from AP Design about the apps we build, user experience decisions, and mobile product craft.',
+      featuredTitle: 'Featured post',
       sectionTitle: 'Latest posts',
       read: 'read',
       categoryPathPrefix: '/en/blog/category/',
@@ -226,10 +278,31 @@ function renderBlogListBody(posts, language = 'tr') {
       tag: 'Blog',
       title: 'Ürün, tasarım ve mobil deneyim notları.',
       description: 'AP Design’da geliştirdiğimiz uygulamalardan, kullanıcı deneyimi kararlarından ve mobil ürün üretim sürecinden kısa, okunabilir yazılar.',
+      featuredTitle: 'Öne çıkan yazı',
       sectionTitle: 'Son yazılar',
       read: 'okuma',
       categoryPathPrefix: '/blog/kategori/',
     };
+  const featuredMarkup = featuredPost ? `<section aria-labelledby="blog-featured-title">
+    <h2 id="blog-featured-title">${copy.featuredTitle}</h2>
+    <article>
+      <h3><a href="${getPostPath(featuredPost)}">${escapeHtml(featuredPost.title)}</a></h3>
+      <p>${escapeHtml(featuredPost.description)}</p>
+      <p><a href="${getCategoryPath(featuredPost.category, language)}">${escapeHtml(blogCategories[featuredPost.category]?.title || featuredPost.category)}</a></p>
+      <time datetime="${featuredPost.publishedAt}">${formatDate(featuredPost.publishedAt)}</time>
+      <p>${escapeHtml(featuredPost.readingTime)} ${copy.read}</p>
+    </article>
+  </section>` : '';
+  const remainingMarkup = remainingPosts.length ? `<section aria-labelledby="blog-posts-title">
+    <h2 id="blog-posts-title">${copy.sectionTitle}</h2>
+    ${remainingPosts.map((post) => `<article>
+      <h3><a href="${getPostPath(post)}">${escapeHtml(post.title)}</a></h3>
+      <p>${escapeHtml(post.description)}</p>
+      <p><a href="${getCategoryPath(post.category, language)}">${escapeHtml(blogCategories[post.category]?.title || post.category)}</a></p>
+      <time datetime="${post.publishedAt}">${formatDate(post.publishedAt)}</time>
+      <p>${escapeHtml(post.readingTime)} ${copy.read}</p>
+    </article>`).join('\n    ')}
+  </section>` : '';
 
   return `<main>
   <header>
@@ -237,16 +310,7 @@ function renderBlogListBody(posts, language = 'tr') {
     <h1>${copy.title}</h1>
     <p>${copy.description}</p>
   </header>
-  <section aria-labelledby="blog-posts-title">
-    <h2 id="blog-posts-title">${copy.sectionTitle}</h2>
-    ${posts.map((post) => `<article>
-      <h3><a href="${getPostPath(post)}">${escapeHtml(post.title)}</a></h3>
-      <p>${escapeHtml(post.description)}</p>
-      <p><a href="${getCategoryPath(post.category, language)}">${escapeHtml(blogCategories[post.category]?.title || post.category)}</a></p>
-      <time datetime="${post.publishedAt}">${formatDate(post.publishedAt)}</time>
-      <p>${escapeHtml(post.readingTime)} ${copy.read}</p>
-    </article>`).join('\n    ')}
-  </section>
+  ${[featuredMarkup, remainingMarkup].filter(Boolean).join('\n  ')}
 </main>`;
 }
 

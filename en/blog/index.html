@@ -22,6 +22,55 @@
     <meta name="twitter:title" content="Blog | The AP Design" />
     <meta name="twitter:description" content="The AP Design blog features articles about mobile app development, UI/UX design, digital products, App Store processes, and product stories." />
     <meta name="twitter:image" content="https://theapdesign.art/og-image.svg" />
+    <style>
+      #root > main:not([class]) {
+        min-height: 100vh;
+        margin: 0;
+        padding: clamp(2rem, 5vw, 4rem);
+        background: radial-gradient(circle at 16% 12%, rgba(238, 210, 255, 0.65), transparent 32%), radial-gradient(circle at 84% 10%, rgba(204, 232, 255, 0.7), transparent 30%), #faf8f5;
+        color: #111;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      #root > main:not([class]) header,
+      #root > main:not([class]) section,
+      #root > main:not([class]) article {
+        max-width: 1120px;
+        margin-inline: auto;
+      }
+      #root > main:not([class]) header {
+        padding-block: clamp(3rem, 8vw, 7rem);
+        text-align: center;
+      }
+      #root > main:not([class]) h1 {
+        margin: 1rem auto;
+        max-width: 880px;
+        font-size: clamp(2.8rem, 7vw, 6.4rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+      #root > main:not([class]) h2 {
+        margin-top: 0;
+        font-size: clamp(2rem, 4vw, 3.8rem);
+        line-height: 1;
+      }
+      #root > main:not([class]) p {
+        color: rgba(17, 17, 17, 0.68);
+        font-size: 1.05rem;
+        line-height: 1.8;
+      }
+      #root > main:not([class]) article {
+        margin-top: 1.5rem;
+        border: 1px solid rgba(17, 17, 17, 0.08);
+        border-radius: 2rem;
+        background: rgba(255, 255, 255, 0.82);
+        padding: clamp(1.25rem, 3vw, 2rem);
+        box-shadow: 0 22px 70px rgba(60, 44, 125, 0.1);
+      }
+      #root > main:not([class]) a {
+        color: #2563eb;
+        font-weight: 800;
+      }
+    </style>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"The AP Design","url":"https://theapdesign.art/","logo":"https://theapdesign.art/ap-logo.svg"}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"The AP Design","url":"https://theapdesign.art/"}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"The AP Design Blog","url":"https://theapdesign.art/en/blog/","description":"The AP Design notes on products, design, and mobile experiences.","blogPost":[{"@type":"BlogPosting","headline":"How to Free Up Storage on iPhone: 8 Effective Methods","url":"https://theapdesign.art/en/blog/how-to-free-up-storage-on-iphone/","datePublished":"2026-07-16T00:35:00+03:00","dateModified":"2026-07-16T00:35:00+03:00","author":{"@type":"Organization","name":"The AP Design"},"inLanguage":"en"}]}</script>
@@ -41,8 +90,8 @@
     <h1>Notes on products, design, and mobile experiences.</h1>
     <p>Short, readable posts from AP Design about the apps we build, user experience decisions, and mobile product craft.</p>
   </header>
-  <section aria-labelledby="blog-posts-title">
-    <h2 id="blog-posts-title">Latest posts</h2>
+  <section aria-labelledby="blog-featured-title">
+    <h2 id="blog-featured-title">Featured post</h2>
     <article>
       <h3><a href="/en/blog/how-to-free-up-storage-on-iphone/">How to Free Up Storage on iPhone: 8 Effective Methods</a></h3>
       <p>Learn how to free up storage on your iPhone by reviewing photos, videos, unused apps, downloads, and other space-consuming content.</p>
