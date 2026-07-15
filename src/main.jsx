@@ -3,8 +3,11 @@ import { createRoot } from 'react-dom/client';
 import {
   ArrowRight,
   BarChart3,
+  BookOpenText,
+  CalendarDays,
   Check,
   ChevronRight,
+  Clock3,
   Download,
   ExternalLink,
   Hand,
@@ -19,6 +22,12 @@ import {
   UsersRound,
   Video,
 } from 'lucide-react';
+import {
+  blogCategories,
+  getBlogPostBySlug,
+  getPostsByCategory,
+  getPublishedBlogPosts,
+} from './blog-data.js';
 import './styles.css';
 
 const product = {
@@ -43,6 +52,7 @@ const translations = {
     navHome: 'Anasayfa',
     navDelit: 'Del-It',
     navXox: 'XOX',
+    navBlog: 'Blog',
     navContact: 'İletişim',
     expandMenu: 'Menüyü genişlet',
     collapseMenu: 'Menüyü daralt',
@@ -156,6 +166,14 @@ const translations = {
     footerDelitText: 'Galerini daha sade, güvenli ve yönetilebilir hale getiren iOS araçları geliştiriyoruz.',
     footerDefaultTitle: 'Kısa, eğlenceli ve tekrar oynanabilir deneyimler.',
     footerDefaultText: 'Mobil uygulamalar ve mini oyunlar geliştiriyoruz. Amacımız öğrenmesi kolay, geri dönmesi keyifli ürünler üretmek.',
+    blogTag: 'Blog',
+    blogHeroTitle: 'Ürün, tasarım ve mobil deneyim notları.',
+    blogHeroText: 'AP Design’da geliştirdiğimiz uygulamalardan, kullanıcı deneyimi kararlarından ve mobil ürün üretim sürecinden kısa, okunabilir yazılar.',
+    latestPosts: 'Son yazılar',
+    blogGridTitle: 'Yeni fikirler, küçük notlar ve ürün hikayeleri.',
+    readMore: 'Daha fazla',
+    readTime: 'okuma',
+    backToBlog: 'Bloga dön',
     effectiveDate: 'Yürürlük tarihi',
     lastUpdate: 'Son güncelleme',
     appLabel: 'Uygulama',
@@ -164,6 +182,7 @@ const translations = {
     navHome: 'Home',
     navDelit: 'Del-It',
     navXox: 'XOX',
+    navBlog: 'Blog',
     navContact: 'Contact',
     expandMenu: 'Expand menu',
     collapseMenu: 'Collapse menu',
@@ -277,6 +296,14 @@ const translations = {
     footerDelitText: 'We build iOS tools that make your gallery simpler, safer, and easier to manage.',
     footerDefaultTitle: 'Short, playful, and replayable experiences.',
     footerDefaultText: 'We build mobile apps and mini games. Our goal is to create products that are easy to learn and enjoyable to return to.',
+    blogTag: 'Blog',
+    blogHeroTitle: 'Notes on products, design, and mobile experiences.',
+    blogHeroText: 'Short, readable posts from AP Design about the apps we build, user experience decisions, and mobile product craft.',
+    latestPosts: 'Latest posts',
+    blogGridTitle: 'Fresh ideas, compact notes, and product stories.',
+    readMore: 'Read more',
+    readTime: 'read',
+    backToBlog: 'Back to blog',
     effectiveDate: 'Effective date',
     lastUpdate: 'Last updated',
     appLabel: 'App',
@@ -314,6 +341,12 @@ function App() {
     page = <DelitPrivacyPage />;
   } else if (path === '/del-it/kullanim-sartlari') {
     page = <DelitTermsPage />;
+  } else if (path === '/blog') {
+    page = <BlogPage />;
+  } else if (path.startsWith('/blog/kategori/')) {
+    page = <BlogCategoryPage slug={path.replace('/blog/kategori/', '')} />;
+  } else if (path.startsWith('/blog/')) {
+    page = <BlogPostPage slug={path.replace('/blog/', '')} />;
   } else if (path === '/xox-taktik-arena') {
     page = <XoxPage />;
   } else if (path === '/xox-taktik-arena/gizlilik-politikasi') {
@@ -382,6 +415,304 @@ function RedirectHome() {
   return <HomePage />;
 }
 
+function BlogPage() {
+  const { t } = useLanguage();
+  const posts = getPublishedBlogPosts();
+  const featuredPost = posts.find((post) => post.featured) || posts[0];
+
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <section className="relative z-10 flex min-h-[100svh] items-center overflow-hidden px-5 pb-10 pt-24 sm:px-8 sm:pb-12 lg:pt-28">
+        <div className="pointer-events-none absolute left-[8%] top-[22%] h-48 w-48 rounded-full bg-pink-200/45 blur-3xl" />
+        <div className="pointer-events-none absolute right-[10%] top-[20%] h-56 w-56 rounded-full bg-sky-200/55 blur-3xl" />
+        <div className="pointer-events-none absolute bottom-[12%] left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-violet-200/45 blur-3xl" />
+        <div className="relative z-10 mx-auto max-w-7xl text-center">
+          <p className="inline-flex rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-ink/58 shadow-soft">
+            {t('blogTag')}
+          </p>
+          <h1 className="mx-auto mt-6 max-w-5xl font-display text-[clamp(3rem,7vw,7.4rem)] font-black leading-[0.9] tracking-tight">
+            {t('blogHeroTitle')}
+          </h1>
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-ink/64 sm:text-xl">
+            {t('blogHeroText')}
+          </p>
+        </div>
+      </section>
+
+      <section className="relative z-10 bg-white px-5 py-16 sm:px-8 lg:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="scroll-reveal flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+            <div>
+              <p className="inline-flex rounded-full border border-violet-200 bg-violet-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-violet-600">
+                {t('latestPosts')}
+              </p>
+              <h2 className="mt-5 max-w-4xl font-display text-[clamp(2.2rem,5vw,5rem)] font-black leading-[0.96] tracking-tight">
+                {t('blogGridTitle')}
+              </h2>
+            </div>
+          </div>
+          {featuredPost ? (
+            <article className="scroll-reveal mt-10 grid overflow-hidden rounded-[2rem] border border-black/8 bg-[#fbfaf7] shadow-soft lg:grid-cols-[0.95fr_1.05fr]">
+              <BlogVisual post={featuredPost} title={featuredPost.title} />
+              <div className="flex flex-col justify-center p-6 sm:p-8">
+                <a href={`/blog/kategori/${featuredPost.category}`} className="w-fit rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-ink/50 transition hover:bg-[#f3f1ec]">
+                  {blogCategories[featuredPost.category]?.title}
+                </a>
+                <h2 className="mt-5 font-display text-[clamp(2rem,4vw,4rem)] font-black leading-[0.96] tracking-tight">
+                  {featuredPost.title}
+                </h2>
+                <p className="mt-4 max-w-2xl text-base leading-7 text-ink/62">
+                  {featuredPost.description}
+                </p>
+                <BlogMeta post={featuredPost} className="mt-5" />
+                <a href={`/blog/${featuredPost.slug}`} className="mt-7 inline-flex h-12 w-fit items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
+                  {t('readMore')}
+                  <ChevronRight size={16} />
+                </a>
+              </div>
+            </article>
+          ) : null}
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            {posts.map((post) => (
+              <BlogCard key={post.slug} post={post} />
+            ))}
+          </div>
+        </div>
+      </section>
+      <Footer />
+    </main>
+  );
+}
+
+function BlogCategoryPage({ slug }) {
+  const { t } = useLanguage();
+  const category = blogCategories[slug];
+  const posts = getPostsByCategory(slug);
+
+  if (!category || !posts.length) {
+    return <NotFoundPage />;
+  }
+
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <section className="relative z-10 px-5 pb-12 pt-24 sm:px-8 lg:pt-28">
+        <div className="mx-auto max-w-7xl">
+          <a href="/blog" className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink shadow-soft transition hover:bg-[#fbfaf7]">
+            <ChevronRight className="rotate-180" size={16} />
+            {t('backToBlog')}
+          </a>
+          <p className="mt-8 inline-flex rounded-full border border-violet-200 bg-violet-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-violet-600">
+            {t('blogTag')}
+          </p>
+          <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.6rem,6vw,6rem)] font-black leading-[0.94] tracking-tight">
+            {category.title}
+          </h1>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-ink/62">{category.description}</p>
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            {posts.map((post) => (
+              <BlogCard key={post.slug} post={post} />
+            ))}
+          </div>
+        </div>
+      </section>
+      <Footer />
+    </main>
+  );
+}
+
+function BlogCard({ post }) {
+  const { t } = useLanguage();
+
+  return (
+    <article className="scroll-reveal group flex h-full flex-col overflow-hidden rounded-[1.7rem] border border-black/8 bg-white shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(60,44,125,0.13)]">
+      <BlogVisual post={post} title={post.title} />
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <a href={`/blog/kategori/${post.category}`} className="mb-3 w-fit rounded-full bg-[#f3f1ec] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-ink/48 transition hover:bg-violet-50 hover:text-violet-600">
+          {blogCategories[post.category]?.title}
+        </a>
+        <h3 className="font-display text-2xl font-black leading-tight tracking-tight text-ink">
+          {post.title}
+        </h3>
+        <p className="mt-3 text-base leading-7 text-ink/62">
+          {post.description}
+        </p>
+        <BlogMeta post={post} className="mt-5" />
+        <a
+          href={`/blog/${post.slug}`}
+          className="mt-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85"
+          aria-label={`${post.title} yazısını oku`}
+        >
+          {t('readMore')}
+          <ChevronRight size={16} />
+        </a>
+      </div>
+    </article>
+  );
+}
+
+function BlogMeta({ post, className = '' }) {
+  const { t } = useLanguage();
+  const published = new Date(post.publishedAt);
+
+  return (
+    <div className={`flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.16em] text-ink/42 ${className}`}>
+      <time dateTime={post.publishedAt} className="inline-flex items-center gap-1.5">
+        <CalendarDays size={15} />
+        {published.toLocaleDateString('tr-TR', { day: '2-digit', month: 'long', year: 'numeric' })}
+      </time>
+      <span className="inline-flex items-center gap-1.5">
+        <Clock3 size={15} />
+        {post.readingTime} {t('readTime')}
+      </span>
+    </div>
+  );
+}
+
+function BlogVisual({ post, title }) {
+  const icons = {
+    images: Images,
+    shield: ShieldCheck,
+    sparkles: Sparkles,
+  };
+  const Icon = icons[post.iconKey] || BookOpenText;
+
+  return (
+    <figure className={`relative min-h-56 overflow-hidden bg-gradient-to-br ${post.accent}`}>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,255,255,0.72),transparent_28%),radial-gradient(circle_at_78%_82%,rgba(255,255,255,0.38),transparent_30%)]" />
+      <div className="absolute -left-10 bottom-5 h-32 w-32 rounded-full border border-white/45 bg-white/14 backdrop-blur" />
+      <div className="absolute right-5 top-5 grid h-16 w-16 place-items-center rounded-[1.25rem] border border-white/55 bg-white/35 text-white shadow-[0_18px_44px_rgba(22,16,60,0.16)] backdrop-blur-xl">
+        <Icon size={30} strokeWidth={2.4} />
+      </div>
+      <div className="absolute inset-x-5 bottom-5 rounded-[1.35rem] border border-white/55 bg-white/42 p-4 shadow-[0_18px_46px_rgba(22,16,60,0.16)] backdrop-blur-xl">
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/80">AP Design</p>
+        <p className="mt-2 font-display text-2xl font-black leading-tight text-white drop-shadow-sm">
+          {title}
+        </p>
+      </div>
+    </figure>
+  );
+}
+
+function BlogPostPage({ slug }) {
+  const { t } = useLanguage();
+  const post = getBlogPostBySlug(slug);
+
+  if (!post) {
+    return <NotFoundPage />;
+  }
+
+  const relatedPosts = post.relatedPosts
+    .map((relatedSlug) => getBlogPostBySlug(relatedSlug))
+    .filter(Boolean);
+
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <article className="relative z-10 px-5 pb-12 pt-24 sm:px-8 lg:pt-28">
+        <div className="mx-auto max-w-5xl">
+          <a href="/blog" className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink shadow-soft transition hover:bg-[#fbfaf7]">
+            <ChevronRight className="rotate-180" size={16} />
+            {t('backToBlog')}
+          </a>
+          <div className="mt-8 overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-soft">
+            <BlogVisual post={post} title={post.title} />
+            <div className="p-6 sm:p-10 lg:p-12">
+              <a href={`/blog/kategori/${post.category}`} className="inline-flex rounded-full bg-[#f3f1ec] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-ink/48 transition hover:bg-violet-50 hover:text-violet-600">
+                {blogCategories[post.category]?.title}
+              </a>
+              <BlogMeta post={post} className="mt-5" />
+              <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,5.8rem)] font-black leading-[0.95] tracking-tight">
+                {post.title}
+              </h1>
+              <p className="mt-6 max-w-3xl text-xl leading-8 text-ink/62">
+                {post.description}
+              </p>
+              <aside className="mt-8 rounded-[1.4rem] border border-black/8 bg-[#fbfaf7] p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-ink/42">Yazar</p>
+                <p className="mt-2 font-display text-xl font-black">{post.author}</p>
+                <p className="mt-1 text-sm text-ink/55">
+                  Güncellendi: <time dateTime={post.updatedAt}>{new Date(post.updatedAt).toLocaleDateString('tr-TR', { day: '2-digit', month: 'long', year: 'numeric' })}</time>
+                </p>
+              </aside>
+              <div className="mt-10 space-y-10 text-lg leading-9 text-ink/72">
+                {post.content.map((section) => (
+                  <section key={section.heading}>
+                    <h2 className="font-display text-3xl font-black leading-tight text-ink">{section.heading}</h2>
+                    <div className="mt-4 space-y-5">
+                      {section.paragraphs.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+              {post.internalLinks.length ? (
+                <aside className="mt-10 rounded-[1.5rem] border border-black/8 bg-[#fbfaf7] p-5">
+                  <h2 className="font-display text-2xl font-black">İlgili bağlantılar</h2>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {post.internalLinks.map((link) => (
+                      <a key={link.href} href={link.href} className="inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-[#f3f1ec]">
+                        {link.label}
+                        <ArrowRight size={15} />
+                      </a>
+                    ))}
+                  </div>
+                </aside>
+              ) : null}
+              {relatedPosts.length ? (
+                <aside className="mt-10">
+                  <h2 className="font-display text-2xl font-black">İlgili yazılar</h2>
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                    {relatedPosts.map((relatedPost) => (
+                      <a key={relatedPost.slug} href={`/blog/${relatedPost.slug}`} className="rounded-[1.2rem] border border-black/8 bg-[#fbfaf7] p-4 font-bold text-ink transition hover:bg-white">
+                        {relatedPost.title}
+                      </a>
+                    ))}
+                  </div>
+                </aside>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      </article>
+      <Footer />
+    </main>
+  );
+}
+
+function NotFoundPage() {
+  const { t } = useLanguage();
+
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <section className="relative z-10 flex min-h-[100svh] items-center px-5 py-24 sm:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="inline-flex rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-ink/58 shadow-soft">
+            404
+          </p>
+          <h1 className="mt-6 font-display text-[clamp(3rem,8vw,7rem)] font-black leading-[0.9]">
+            Sayfa bulunamadı
+          </h1>
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-ink/62">
+            Aradığın blog yazısı yayınlanmamış, taşınmış ya da kaldırılmış olabilir.
+          </p>
+          <a href="/blog" className="mt-8 inline-flex h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
+            {t('backToBlog')}
+            <ArrowRight size={17} />
+          </a>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 function ProductsPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
@@ -447,6 +778,7 @@ function Header() {
     [t('navHome'), '/'],
     [t('navDelit'), '/del-it'],
     [t('navXox'), '/xox-taktik-arena'],
+    [t('navBlog'), '/blog'],
   ];
   const contactLink = [t('navContact'), '/contact'];
   const isActive = (href) => {
@@ -1861,6 +2193,7 @@ function Footer({ variant = 'default' }) {
               ) : (
                 <>
                   <a href="/" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('navHome')}</a>
+                  <a href="/blog" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('navBlog')}</a>
                   <a href="/contact" className="rounded-full border border-black/8 bg-white px-4 py-2 transition hover:bg-[#fbfaf7]">{t('navContact')}</a>
                 </>
               )}

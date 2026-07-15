@@ -2,8 +2,23 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { blogCategories, getPostsByCategory, getPublishedBlogPosts } from './src/blog-data.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const blogInputs = Object.fromEntries(
+  getPublishedBlogPosts().map((post) => [
+    `blog-${post.slug}`,
+    resolve(__dirname, `blog/${post.slug}/index.html`),
+  ]),
+);
+const categoryInputs = Object.fromEntries(
+  Object.keys(blogCategories)
+    .filter((slug) => getPostsByCategory(slug).length > 0)
+    .map((slug) => [
+      `blog-category-${slug}`,
+      resolve(__dirname, `blog/kategori/${slug}/index.html`),
+    ]),
+);
 
 export default defineConfig({
   plugins: [react()],
@@ -19,6 +34,9 @@ export default defineConfig({
         xox: resolve(__dirname, 'xox-taktik-arena/index.html'),
         xoxPrivacy: resolve(__dirname, 'xox-taktik-arena/gizlilik-politikasi/index.html'),
         xoxTerms: resolve(__dirname, 'xox-taktik-arena/kullanim-sartlari/index.html'),
+        blog: resolve(__dirname, 'blog/index.html'),
+        ...blogInputs,
+        ...categoryInputs,
       },
     },
   },
