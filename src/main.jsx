@@ -554,22 +554,22 @@ function BlogCard({ post }) {
   const { language, t } = useLanguage();
 
   return (
-    <article className="scroll-reveal group flex h-full flex-col overflow-hidden rounded-[1.7rem] border border-black/8 bg-white shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(60,44,125,0.13)]">
-      <BlogVisual post={post} />
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <a href={getCategoryPath(post.category, language)} className="mb-3 w-fit rounded-full bg-[#f3f1ec] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-ink/48 transition hover:bg-violet-50 hover:text-violet-600">
+    <article className="scroll-reveal group flex h-full flex-col overflow-hidden rounded-[1.55rem] border border-black/8 bg-white shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(60,44,125,0.13)]">
+      <BlogVisual post={post} compact />
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <a href={getCategoryPath(post.category, language)} className="mb-3 w-fit rounded-full bg-[#f3f1ec] px-3 py-1.5 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-ink/48 transition hover:bg-violet-50 hover:text-violet-600">
           {blogCategories[post.category]?.title}
         </a>
-        <h3 className="font-display text-2xl font-black leading-tight tracking-tight text-ink [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+        <h3 className="font-display text-xl font-black leading-[1.05] tracking-tight text-ink sm:text-[1.35rem] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
           {post.title}
         </h3>
-        <p className="mt-3 text-base leading-7 text-ink/62 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
+        <p className="mt-3 text-sm leading-6 text-ink/62 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
           {post.description}
         </p>
-        <BlogMeta post={post} className="mt-5" />
+        <BlogMeta post={post} compact className="mt-4" />
         <a
           href={getPostPath(post)}
-          className="mt-auto inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85"
+          className="mt-5 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85"
           aria-label={language === 'en' ? `Read ${post.title}` : `${post.title} yazısını oku`}
         >
           {t('readMore')}
@@ -580,28 +580,29 @@ function BlogCard({ post }) {
   );
 }
 
-function BlogMeta({ post, className = '' }) {
+function BlogMeta({ post, className = '', compact = false }) {
   const { language, t } = useLanguage();
   const published = new Date(post.publishedAt);
   const dateLocale = language === 'en' ? 'en-US' : 'tr-TR';
+  const iconSize = compact ? 14 : 15;
 
   return (
-    <div className={`flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.16em] text-ink/42 ${className}`}>
+    <div className={`flex flex-wrap items-center ${compact ? 'gap-x-2 gap-y-1 text-[0.68rem] tracking-[0.12em]' : 'gap-3 text-xs tracking-[0.16em]'} font-bold uppercase text-ink/42 ${className}`}>
       <time dateTime={post.publishedAt} className="inline-flex items-center gap-1.5">
-        <CalendarDays size={15} />
+        <CalendarDays size={iconSize} />
         {published.toLocaleDateString(dateLocale, { day: '2-digit', month: 'long', year: 'numeric' })}
       </time>
       <span className="inline-flex items-center gap-1.5">
-        <Clock3 size={15} />
+        <Clock3 size={iconSize} />
         {post.readingTime} {t('readTime')}
       </span>
     </div>
   );
 }
 
-function BlogVisual({ post }) {
+function BlogVisual({ post, compact = false }) {
   return (
-    <figure className={`relative min-h-56 overflow-hidden bg-gradient-to-br ${post.accent}`}>
+    <figure className={`relative overflow-hidden bg-gradient-to-br ${compact ? 'aspect-[16/9]' : 'min-h-56'} ${post.accent}`}>
       <img
         src={post.coverImage}
         alt={post.coverImageAlt}
