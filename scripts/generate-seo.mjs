@@ -349,8 +349,8 @@ function renderPostBody(post) {
     <figure>
       <img src="${post.coverImage}" alt="${escapeHtml(post.coverImageAlt)}" width="1200" height="630" />
     </figure>
-    ${post.content.map((section) => `<section>
-      ${section.heading ? `<h2>${escapeHtml(section.heading)}</h2>` : ''}
+    ${post.content.map((section) => `<section>${section.heading ? `
+      <h2>${escapeHtml(section.heading)}</h2>` : ''}
       ${renderStaticBlocks(section.blocks, post)}
     </section>`).join('\n    ')}
     ${post.internalLinks.length ? `<aside>

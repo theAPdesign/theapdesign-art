@@ -2441,6 +2441,8 @@ function getLocalizedPath(pathname, targetLanguage) {
     const slug = routePath.replace('/blog/kategori/', '').replace('/blog/category/', '');
     if (targetLanguage === 'en' && slug === 'mobil-uygulamalar') return '/en/blog/category/mobile-apps/';
     if (targetLanguage === 'tr' && slug === 'mobile-apps') return '/blog/kategori/mobil-uygulamalar/';
+    if (targetLanguage === 'en' && slug === 'gizlilik-ve-guvenlik') return '/en/blog/category/privacy-and-security/';
+    if (targetLanguage === 'tr' && slug === 'privacy-and-security') return '/blog/kategori/gizlilik-ve-guvenlik/';
   }
 
   if (targetLanguage === 'en' && routePath === '/blog') return '/en/blog/';
