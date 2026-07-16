@@ -852,6 +852,7 @@ function DelitPage() {
       <DelitProblem />
       <DelitScreens />
       <DelitHowItWorks />
+      <DelitSocialPosts />
       <DelitFaq />
       <Footer variant="delit" />
     </main>
@@ -1920,6 +1921,205 @@ function DelitScreens() {
               />
             </article>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DelitSocialPosts() {
+  const { language } = useLanguage();
+  const copy = language === 'en'
+    ? {
+        tag: 'Instagram',
+        title: 'Del-It on social media',
+        text: 'Selected posts from the Del-It Instagram feed, presented without likes or engagement numbers.',
+        view: 'View on Instagram',
+        next: 'Show next posts',
+      }
+    : {
+        tag: 'Instagram',
+        title: 'Del-It sosyal medyada',
+        text: 'Del-It Instagram akışından seçili paylaşımlar. Beğeni veya etkileşim sayıları olmadan, sadece içerikler.',
+        view: 'Instagram’da gör',
+        next: 'Sonraki paylaşımları göster',
+      };
+  const posts = language === 'en'
+    ? [
+        {
+          title: 'On-device gallery cleanup',
+          description: 'Your photos do not need to be uploaded anywhere while cleaning your gallery.',
+          image: '/social/delit-instagram-1.jpg',
+          alt: 'Del-It Instagram post about on-device gallery cleanup',
+          url: 'https://www.instagram.com/p/Da0ZgNoIHfa/',
+          caption: 'Your photos do not need to be uploaded anywhere while cleaning your gallery. Del-It helps organize your library while core actions happen on your iPhone.',
+        },
+        {
+          title: 'Clean your gallery faster',
+          description: 'Review photos, separate unnecessary items, gain storage, and follow progress.',
+          image: '/social/delit-instagram-2.jpg',
+          alt: 'Del-It Instagram post about faster gallery cleanup',
+          url: 'https://www.instagram.com/p/DaihA-9otYP/',
+          caption: 'Cleaning your gallery does not have to take hours. Review photos, separate unnecessary items, gain storage, and track progress with stats.',
+        },
+        {
+          title: 'Swipe, decide, review',
+          description: 'Swipe left to set aside, swipe right to keep, then review before final deletion.',
+          image: '/social/delit-instagram-3.jpg',
+          alt: 'Del-It Instagram post about swipe-based photo cleanup',
+          url: 'https://www.instagram.com/p/DadTqXbqThg/',
+          caption: 'Thousands of photos in your gallery? Swipe left to delete, swipe right to keep, and make decisions faster with Del-It.',
+        },
+      ]
+    : [
+        {
+          title: 'Cihaz içi galeri temizliği',
+          description: 'Fotoğraflarını temizlerken onları hiçbir yere yüklemek zorunda değilsin.',
+          image: '/social/delit-instagram-1.jpg',
+          alt: 'Del-It cihaz içi galeri temizliği Instagram paylaşımı',
+          url: 'https://www.instagram.com/p/Da0ZgNoIHfa/',
+          caption: 'Fotoğraflarını temizlerken onları hiçbir yere yüklemek zorunda değilsin. Del-It, galerini düzenlemene yardımcı olurken tüm işlemleri cihazın üzerinde gerçekleştirir.',
+        },
+        {
+          title: 'Galerini daha hızlı düzenle',
+          description: 'Fotoğraflarını gözden geçir, gereksizleri ayıkla ve ilerlemeyi istatistiklerle takip et.',
+          image: '/social/delit-instagram-2.jpg',
+          alt: 'Del-It hızlı galeri temizliği Instagram paylaşımı',
+          url: 'https://www.instagram.com/p/DaihA-9otYP/',
+          caption: 'Galerini temizlemek saatler sürmek zorunda değil. Fotoğraflarını hızlıca gözden geçir, gereksizleri ayıkla ve ilerlemeyi istatistiklerle takip et.',
+        },
+        {
+          title: 'Kaydır, karar ver',
+          description: 'Sola kaydırarak silmek için ayır, sağa kaydırarak sakla. Son karar yine sende.',
+          image: '/social/delit-instagram-3.jpg',
+          alt: 'Del-It kaydırarak fotoğraf temizleme Instagram paylaşımı',
+          url: 'https://www.instagram.com/p/DadTqXbqThg/',
+          caption: 'Galerinde binlerce fotoğraf mı birikti? Sola kaydır, silmek için ayır. Sağa kaydır, sakla. Karar vermeyi Del-It ile hızlandır.',
+        },
+      ];
+  const [index, setIndex] = React.useState(0);
+  const [visibleCount, setVisibleCount] = React.useState(3);
+
+  React.useEffect(() => {
+    const updateVisibleCount = () => {
+      if (window.innerWidth < 720) {
+        setVisibleCount(1);
+        return;
+      }
+
+      if (window.innerWidth < 1100) {
+        setVisibleCount(2);
+        return;
+      }
+
+      setVisibleCount(3);
+    };
+
+    updateVisibleCount();
+    window.addEventListener('resize', updateVisibleCount);
+    return () => window.removeEventListener('resize', updateVisibleCount);
+  }, []);
+
+  React.useEffect(() => {
+    const maxIndex = Math.max(posts.length - visibleCount, 0);
+    setIndex((current) => Math.min(current, maxIndex));
+  }, [posts.length, visibleCount]);
+
+  const canSlide = posts.length > visibleCount;
+  const nextPosts = () => {
+    const maxIndex = Math.max(posts.length - visibleCount, 0);
+    setIndex((current) => (current >= maxIndex ? 0 : current + 1));
+  };
+  const translate = `translate3d(calc(-${index} * (100% / ${posts.length})), 0, 0)`;
+
+  return (
+    <section className="relative z-10 overflow-hidden bg-white px-5 py-16 sm:px-8 lg:py-20" aria-labelledby="delit-social-title">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(214,233,255,0.6),transparent_30%),radial-gradient(circle_at_86%_26%,rgba(244,194,231,0.45),transparent_28%)]" />
+      <div className="relative mx-auto max-w-7xl">
+        <div className="scroll-reveal flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-3xl">
+            <p className="inline-flex items-center gap-2 rounded-full border border-pink-200 bg-white/80 px-4 py-2 text-xs font-bold uppercase tracking-[0.24em] text-pink-600 shadow-[0_10px_30px_rgba(236,72,153,0.08)] backdrop-blur-xl">
+              <span className="grid h-5 w-5 place-items-center rounded-full bg-pink-100 text-[0.58rem] font-black tracking-normal text-pink-600">IG</span>
+              {copy.tag}
+            </p>
+            <h2 id="delit-social-title" className="mt-5 font-display text-[clamp(2rem,4vw,3.6rem)] font-black leading-[1.06] tracking-tight text-ink">
+              {copy.title}
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/58 sm:text-base">{copy.text}</p>
+          </div>
+          {canSlide && (
+            <button
+              type="button"
+              onClick={nextPosts}
+              className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-black/8 bg-white text-ink shadow-soft transition duration-300 hover:-translate-y-0.5 hover:bg-[#f3f1ec] focus:outline-none focus:ring-2 focus:ring-electric/60"
+              aria-label={copy.next}
+            >
+              <ChevronRight size={22} />
+            </button>
+          )}
+        </div>
+        <div className="scroll-reveal mt-10 overflow-hidden">
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: translate }}
+          >
+            {posts.map((post) => (
+              <article
+                key={post.title}
+                className="min-w-full px-0 pb-2 md:min-w-[50%] md:px-2 xl:min-w-[33.333333%]"
+              >
+                <a
+                  href={post.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex h-full flex-col overflow-hidden rounded-[1.65rem] border border-black/10 bg-white shadow-[0_22px_70px_rgba(63,54,112,0.1)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(139,92,246,0.14)] focus:outline-none focus:ring-2 focus:ring-electric/60"
+                  aria-label={`${post.title} - ${copy.view}`}
+                >
+                  <div className="flex items-center justify-between gap-3 border-b border-black/6 px-4 py-3">
+                    <div className="flex min-w-0 items-center gap-3">
+                      <img src={product.logo} alt="" className="h-10 w-10 rounded-full object-cover ring-2 ring-pink-200" loading="lazy" />
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-black leading-tight text-ink">delit.app</p>
+                        <p className="truncate text-xs font-semibold text-ink/45">Del-It</p>
+                      </div>
+                    </div>
+                    <span className="flex items-center gap-1" aria-hidden="true">
+                      <span className="h-1 w-1 rounded-full bg-ink/70" />
+                      <span className="h-1 w-1 rounded-full bg-ink/70" />
+                      <span className="h-1 w-1 rounded-full bg-ink/70" />
+                    </span>
+                  </div>
+                  <div className="relative aspect-[4/5] overflow-hidden bg-gradient-to-br from-[#f5f2ff] via-white to-[#ffe9f7]">
+                    <img
+                      src={post.image}
+                      alt={post.alt}
+                      className="h-full w-full object-contain transition duration-500 group-hover:scale-[1.02]"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-4">
+                    <div className="flex items-center justify-between text-2xl leading-none text-ink" aria-hidden="true">
+                      <div className="flex items-center gap-4">
+                        <span className="transition group-hover:scale-110">♡</span>
+                        <span className="transition group-hover:scale-110">○</span>
+                        <span className="transition group-hover:scale-110">↗</span>
+                      </div>
+                      <span>▱</span>
+                    </div>
+                    <p className="mt-4 text-sm leading-6 text-ink">
+                      <span className="font-black">delit.app</span>{' '}
+                      <span className="text-ink/70">{post.caption}</span>
+                    </p>
+                    <p className="mt-3 text-xs font-semibold text-ink/38">{post.description}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-violet-600">
+                      {copy.view}
+                      <ExternalLink size={15} />
+                    </span>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
