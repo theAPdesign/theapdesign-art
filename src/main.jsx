@@ -6,6 +6,7 @@ import {
   BookOpenText,
   CalendarDays,
   Check,
+  ChevronLeft,
   ChevronRight,
   Clock3,
   Download,
@@ -1935,6 +1936,7 @@ function DelitSocialPosts() {
         title: 'Del-It on social media',
         text: 'Selected posts from the Del-It Instagram feed, presented without likes or engagement numbers.',
         view: 'View on Instagram',
+        previous: 'Show previous post',
         next: 'Show next posts',
       }
     : {
@@ -1942,6 +1944,7 @@ function DelitSocialPosts() {
         title: 'Del-It sosyal medyada',
         text: 'Del-It Instagram akışından seçili paylaşımlar. Beğeni veya etkileşim sayıları olmadan, sadece içerikler.',
         view: 'Instagram’da gör',
+        previous: 'Önceki paylaşımı göster',
         next: 'Sonraki paylaşımları göster',
       };
   const posts = language === 'en'
@@ -2015,9 +2018,14 @@ function DelitSocialPosts() {
       ];
   const [index, setIndex] = React.useState(0);
   const [visibleCount, setVisibleCount] = React.useState(3);
+  const [viewportWidth, setViewportWidth] = React.useState(0);
+  const viewportRef = React.useRef(null);
+  const cardGap = 18;
 
   React.useEffect(() => {
     const updateVisibleCount = () => {
+      setViewportWidth(viewportRef.current?.clientWidth ?? 0);
+
       if (window.innerWidth < 720) {
         setVisibleCount(1);
         return;
@@ -2042,11 +2050,16 @@ function DelitSocialPosts() {
   }, [posts.length, visibleCount]);
 
   const canSlide = posts.length > visibleCount;
+  const maxIndex = Math.max(posts.length - visibleCount, 0);
+  const previousPosts = () => {
+    setIndex((current) => (current <= 0 ? maxIndex : current - 1));
+  };
   const nextPosts = () => {
-    const maxIndex = Math.max(posts.length - visibleCount, 0);
     setIndex((current) => (current >= maxIndex ? 0 : current + 1));
   };
-  const translate = `translate3d(calc(-${index} * (100% / ${posts.length})), 0, 0)`;
+  const cardWidth = viewportWidth > 0 ? (viewportWidth - cardGap * (visibleCount - 1)) / visibleCount : 0;
+  const translate = `translate3d(-${index * (cardWidth + cardGap)}px, 0, 0)`;
+  const cardBasis = `calc((100% - ${cardGap * (visibleCount - 1)}px) / ${visibleCount})`;
 
   return (
     <section className="relative z-10 overflow-hidden bg-white px-5 py-16 sm:px-8 lg:py-20" aria-labelledby="delit-social-title">
@@ -2064,25 +2077,36 @@ function DelitSocialPosts() {
             <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/58 sm:text-base">{copy.text}</p>
           </div>
           {canSlide && (
-            <button
-              type="button"
-              onClick={nextPosts}
-              className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-black/8 bg-white text-ink shadow-soft transition duration-300 hover:-translate-y-0.5 hover:bg-[#f3f1ec] focus:outline-none focus:ring-2 focus:ring-electric/60"
-              aria-label={copy.next}
-            >
-              <ChevronRight size={22} />
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={previousPosts}
+                className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-black/8 bg-white text-ink shadow-soft transition duration-300 hover:-translate-y-0.5 hover:bg-[#f3f1ec] focus:outline-none focus:ring-2 focus:ring-electric/60"
+                aria-label={copy.previous}
+              >
+                <ChevronLeft size={22} />
+              </button>
+              <button
+                type="button"
+                onClick={nextPosts}
+                className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-black/8 bg-white text-ink shadow-soft transition duration-300 hover:-translate-y-0.5 hover:bg-[#f3f1ec] focus:outline-none focus:ring-2 focus:ring-electric/60"
+                aria-label={copy.next}
+              >
+                <ChevronRight size={22} />
+              </button>
+            </div>
           )}
         </div>
-        <div className="scroll-reveal mt-10 overflow-hidden">
+        <div ref={viewportRef} className="scroll-reveal mt-10 overflow-hidden">
           <div
             className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: translate }}
+            style={{ gap: `${cardGap}px`, transform: translate }}
           >
             {posts.map((post) => (
               <article
                 key={post.title}
-                className="min-w-full px-0 pb-2 md:min-w-[50%] md:px-2 xl:min-w-[33.333333%]"
+                className="shrink-0 pb-2"
+                style={{ flexBasis: cardBasis }}
               >
                 <a
                   href={post.url}
