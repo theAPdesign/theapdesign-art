@@ -1947,6 +1947,14 @@ function DelitSocialPosts() {
   const posts = language === 'en'
     ? [
         {
+          title: 'Swipe to clean faster',
+          description: 'Swipe left to set aside, swipe right to keep, then check how much space you gained.',
+          image: '/social/delit-instagram-4.jpg',
+          alt: 'Del-It Instagram post about swipe-based photo cleanup and storage gain',
+          url: 'https://www.instagram.com/p/Da5X1uToCAT/',
+          caption: 'Could photo cleanup be this easy? Swipe left to delete, swipe right to keep. Decide in seconds, send unnecessary photos and videos to trash, then see how much space you gained.',
+        },
+        {
           title: 'On-device gallery cleanup',
           description: 'Your photos do not need to be uploaded anywhere while cleaning your gallery.',
           image: '/social/delit-instagram-1.jpg',
@@ -1972,6 +1980,14 @@ function DelitSocialPosts() {
         },
       ]
     : [
+        {
+          title: 'Kaydırarak hızlı temizlik',
+          description: 'Sola kaydır, silmek için ayır. Sağa kaydır, kalsın. Sonra kazandığın alanı gör.',
+          image: '/social/delit-instagram-4.jpg',
+          alt: 'Del-It kaydırarak fotoğraf temizleme ve alan kazanma Instagram paylaşımı',
+          url: 'https://www.instagram.com/p/Da5X1uToCAT/',
+          caption: 'Fotoğraf temizlemek bu kadar kolay olabilir mi? Sola kaydır, sil. Sağa kaydır, kalsın. Kararını saniyeler içinde ver, gereksiz fotoğraf ve videoları çöp kutusuna gönder.',
+        },
         {
           title: 'Cihaz içi galeri temizliği',
           description: 'Fotoğraflarını temizlerken onları hiçbir yere yüklemek zorunda değilsin.',
