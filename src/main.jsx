@@ -2756,7 +2756,7 @@ const privacySections = [
   {
     title: '7. Reklamlar ve Takip İzni',
     paragraphs: [
-      'Del-It ücretsiz kullanıcılara reklam gösterebilir. Reklamlar Yandex Mobile Ads SDK üzerinden sunulabilir. Reklam türleri banner, native, geçiş reklamı ve ödüllü reklam olabilir. Del-It Plus kullanıcılarına reklam gösterilmemesi hedeflenir.',
+      'Del-It ücretsiz kullanıcılara reklam gösterebilir. Reklamlar Google Mobile Ads / AdMob SDK üzerinden sunulabilir. Reklam türleri banner, native, geçiş reklamı ve ödüllü reklam olabilir. Del-It Plus kullanıcılarına reklam gösterilmemesi hedeflenir.',
       'Ödüllü reklamlar, kullanıcının açık şekilde reklam izlemeyi seçmesi halinde ek hak veya deneme hakkı vermek için kullanılır. Reklam tamamlanmadan hak verilmez.',
       'Uygulama, App Tracking Transparency (ATT) kapsamında kullanıcıdan takip izni isteyebilir. Kullanıcı izin verirse reklam deneyimi daha kişiselleştirilmiş olabilir. Kullanıcı izin vermezse uygulama çalışmaya devam eder ve reklamlar kişiselleştirilmemiş veya bağlamsal şekilde sunulabilir.',
       'Del-It fotoğraf, video veya rehber içeriklerini reklam hedefleme için kullanmaz.',
@@ -2798,9 +2798,9 @@ const privacySections = [
   {
     title: '12. Üçüncü Taraf Servisler',
     paragraphs: [
-      'Del-It aşağıdaki üçüncü taraf servisleri kullanabilir: Apple PhotoKit, Apple Contacts, Apple StoreKit, Apple LocalAuthentication, Yandex Mobile Ads, AppMetrica ve Google Analytics / Firebase Analytics.',
+      'Del-It aşağıdaki üçüncü taraf servisleri kullanabilir: Apple PhotoKit, Apple Contacts, Apple StoreKit, Apple LocalAuthentication, Google Mobile Ads / AdMob, AppMetrica ve Google Analytics / Firebase Analytics.',
       'Apple PhotoKit fotoğraf ve video izinleri, listeleme ve silme işlemleri için; Apple Contacts rehber izinleri ve kullanıcı onaylı rehber işlemleri için; Apple StoreKit abonelik ve satın alma doğrulama için; Apple LocalAuthentication Face ID / cihaz kimlik doğrulaması için kullanılabilir.',
-      'Yandex Mobile Ads reklam gösterimi ve reklam performansı için; AppMetrica ve Google Analytics / Firebase Analytics uygulama analitiği için kullanılabilir.',
+      'Google Mobile Ads / AdMob reklam gösterimi ve reklam performansı için; AppMetrica ve Google Analytics / Firebase Analytics uygulama analitiği için kullanılabilir.',
       'Bu servislerin veri işleme pratikleri kendi gizlilik politikalarına tabidir. Del-It, fotoğraf/video veya rehber içeriğini bu servislerle paylaşmamak üzere tasarlanmıştır.',
     ],
   },

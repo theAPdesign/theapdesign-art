@@ -109,7 +109,6 @@ opera.com, pub10014056052800, RESELLER, 55a0c5fd61378de3
 openx.com, 538959099, RESELLER, 6a698e2ec38604c6
 lijit.com, 488437, RESELLER, fafdf38b16bf6b2b
 tpmn.io, 664, RESELLER
-yandex.com, 327074583, DIRECT
 pubnative.net, 1008289, RESELLER, d641df8625486a7b
 adform.com, 2831, RESELLER, 9f5210a2f0999e32
 admanmedia.com, 613, RESELLER
