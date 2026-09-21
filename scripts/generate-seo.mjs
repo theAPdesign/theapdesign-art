@@ -458,6 +458,9 @@ function sitemapXml(posts) {
     ['/xox-taktik-arena/', generatedAt],
     ['/xox-taktik-arena/gizlilik-politikasi/', generatedAt],
     ['/xox-taktik-arena/kullanim-sartlari/', generatedAt],
+    ['/sand-party/', generatedAt],
+    ['/sand-party/gizlilik-politikasi/', generatedAt],
+    ['/sand-party/kullanim-sartlari/', generatedAt],
     ['/blog/', generatedAt],
   ];
   const urls = [
@@ -621,6 +624,9 @@ function redirectsTxt() {
     '/xox-taktik-arena',
     '/xox-taktik-arena/gizlilik-politikasi',
     '/xox-taktik-arena/kullanim-sartlari',
+    '/sand-party',
+    '/sand-party/gizlilik-politikasi',
+    '/sand-party/kullanim-sartlari',
   ];
   const postPaths = getAllPublishedBlogPosts().map((post) => getPostPath(post).replace(/\/$/, ''));
   const categoryPaths = Object.keys(blogCategories)

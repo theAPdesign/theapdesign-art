@@ -11,6 +11,8 @@ import {
   Clock3,
   Download,
   ExternalLink,
+  Gauge,
+  Gamepad2,
   Hand,
   Images,
   LayoutTemplate,
@@ -18,9 +20,11 @@ import {
   Mail,
   Menu,
   MoveHorizontal,
+  RotateCcw,
   ShieldCheck,
   Sparkles,
   Trash2,
+  Trophy,
   UsersRound,
   Video,
   X,
@@ -54,11 +58,19 @@ const xoxProduct = {
   logo: '/xox-taktik-arena-logo.png',
 };
 
+const sandPartyProduct = {
+  title: 'Sand Party',
+  description: 'Renkli kum bloklarını yönlendirerek yüksek skor yapmaya çalıştığın eğlenceli ve akıcı bulmaca oyunu.',
+  summary: 'Kum blokları, renk patlatmaları, kombolar ve zorluk seçenekleri.',
+  logo: '/sand-party-logo.png',
+};
+
 const translations = {
   tr: {
     navHome: 'Anasayfa',
     navDelit: 'Del-It',
     navXox: 'XOX',
+    navSandParty: 'Sand Party',
     navBlog: 'Blog',
     navContact: 'İletişim',
     expandMenu: 'Menüyü genişlet',
@@ -162,6 +174,31 @@ const translations = {
     xoxHeroTitle2: 'X-O-X stratejisi.',
     xoxHeroText: 'Klasik X-O hissini koruyan, 3 taş limiti ve eski taş silinme mekaniğiyle her turu daha hızlı, dinamik ve taktik hale getiren 3x3 mobil strateji oyunu.',
     neonThemes: 'Neon temalar',
+    sandSubtitle: 'Renkli kum blok bulmacası',
+    sandTitle1: 'Kumları yönet',
+    sandTitle2: 'komboyu büyüt',
+    sandDescription: 'Gelen şekilleri doğru yere yerleştir, kumların birikmesini kontrol et ve aynı renkleri patlatarak alanı temizle. Her hamle skor zincirini değiştirebilir.',
+    sandPlaceBlocks: 'Şekilleri yerleştir',
+    sandPlaceBlocksText: 'Gelen blokları tahta dolmadan en doğru boşluğa konumlandır.',
+    sandColorPop: 'Renk patlat',
+    sandColorPopText: 'Aynı renkleri bir araya getirerek alan aç ve puan kazan.',
+    sandCombos: 'Kombo skoru',
+    sandCombosText: 'Üst üste patlatmalarla daha yüksek skor hedefle.',
+    sandDifficulty: 'Zorluk seçenekleri',
+    sandDifficultyText: 'Rahat tempodan hızlı moda kadar seviyeni seç.',
+    sandHeroTitle1: 'Renkli kumlar,',
+    sandHeroTitle2: 'yüksek skorlar.',
+    sandHeroText: 'Sand Party, renkli kum bloklarını yönlendirip doğru yerlere yerleştirerek alanı temizlediğin akıcı bir bulmaca oyunudur. Tahta dolmadan karar ver, aynı renkleri patlat ve kombolarla skorunu büyüt.',
+    sandHeroChip1: 'Geri alma hakkı',
+    sandHeroChip2: 'Reklam izleyerek devam',
+    sandHeroChip3: 'TR/EN dil desteği',
+    sandMechanics: 'Oyun akışı',
+    sandRulesTitle: 'Her hamle alanı değiştirir.',
+    sandRulesText: 'Tahtayı dolmadan yönetmek, aynı renkleri doğru zamanda patlatmak ve kombo fırsatlarını takip etmek oyunun temel ritmini oluşturur.',
+    sandModesTitle: 'Kendi temponda oyna.',
+    sandModesText: 'Rahat bir deneme yapmak istediğinde düşük tempoyla başlayabilir, daha hızlı ve zorlayıcı modlarda reflekslerini test edebilirsin.',
+    sandComfortTitle: 'Kısa mola, uzun skor denemesi.',
+    sandComfortText: 'Geri alma, reklam izleyerek devam etme, müzik ve ses ayarları sayesinde oyun ister hızlı bir mola ister uzun bir skor koşusu için hazırdır.',
     gameLogic: 'Oyun Mantığı',
     xoxRulesTitle: 'Klasik X-O, daha hızlı.',
     xoxRulesText: 'Eski taş silinme mekaniği oyunu tıkamaz, beraberliği ortadan kaldırır ve her turda kazanan üretir.',
@@ -191,6 +228,7 @@ const translations = {
     navHome: 'Home',
     navDelit: 'Del-It',
     navXox: 'XOX',
+    navSandParty: 'Sand Party',
     navBlog: 'Blog',
     navContact: 'Contact',
     expandMenu: 'Expand menu',
@@ -294,6 +332,31 @@ const translations = {
     xoxHeroTitle2: 'X-O-X Strategy.',
     xoxHeroText: 'A 3x3 mobile strategy game that keeps the classic X-O feel while making every round faster, more dynamic, and more tactical with the 3-stone limit and oldest-piece removal.',
     neonThemes: 'Neon themes',
+    sandSubtitle: 'Colorful sand block puzzle',
+    sandTitle1: 'Guide the sand',
+    sandTitle2: 'grow the combo',
+    sandDescription: 'Place incoming shapes carefully, control how the sand stacks up, and clear space by popping matching colors. Every move can change the scoring chain.',
+    sandPlaceBlocks: 'Place shapes',
+    sandPlaceBlocksText: 'Fit incoming blocks into the right spaces before the board fills up.',
+    sandColorPop: 'Pop colors',
+    sandColorPopText: 'Bring matching colors together to clear room and score.',
+    sandCombos: 'Combo scoring',
+    sandCombosText: 'Chain pops back to back to chase higher scores.',
+    sandDifficulty: 'Difficulty options',
+    sandDifficultyText: 'Choose your pace, from relaxed play to faster challenge modes.',
+    sandHeroTitle1: 'Colorful sand,',
+    sandHeroTitle2: 'higher scores.',
+    sandHeroText: 'Sand Party is a fluid puzzle game where you guide colorful sand blocks, place shapes, clear matching colors, and build combos before the board fills up.',
+    sandHeroChip1: 'Undo support',
+    sandHeroChip2: 'Continue with rewarded ads',
+    sandHeroChip3: 'TR/EN language support',
+    sandMechanics: 'Game Flow',
+    sandRulesTitle: 'Every move changes the space.',
+    sandRulesText: 'Managing the board before it fills, popping matching colors at the right time, and spotting combo chances shape the core rhythm.',
+    sandModesTitle: 'Play at your own pace.',
+    sandModesText: 'Start relaxed when you want a softer run, or test your reflexes in faster and more demanding modes.',
+    sandComfortTitle: 'Quick break, long score run.',
+    sandComfortText: 'Undo, rewarded continues, music, and sound settings make the game comfortable for short sessions and longer high-score attempts.',
     gameLogic: 'Game Logic',
     xoxRulesTitle: 'Classic X-O, faster.',
     xoxRulesText: 'The oldest-piece removal mechanic keeps the game moving, removes draws, and produces a winner every round.',
@@ -377,6 +440,12 @@ function App() {
     page = <XoxPrivacyPage />;
   } else if (path === '/xox-taktik-arena/kullanim-sartlari') {
     page = <XoxTermsPage />;
+  } else if (path === '/sand-party') {
+    page = <SandPartyPage />;
+  } else if (path === '/sand-party/gizlilik-politikasi') {
+    page = <SandPartyPrivacyPage />;
+  } else if (path === '/sand-party/kullanim-sartlari') {
+    page = <SandPartyTermsPage />;
   } else {
     page = <HomePage />;
   }
@@ -888,6 +957,7 @@ function Header() {
     [t('navHome'), '/'],
     [t('navDelit'), '/del-it/'],
     [t('navXox'), '/xox-taktik-arena/'],
+    [t('navSandParty'), '/sand-party/'],
     [t('navBlog'), getBlogIndexPath(language)],
   ];
   const contactLink = [t('navContact'), '/contact/'];
@@ -1132,6 +1202,7 @@ function HomeHeroFloaters() {
     { src: xoxProduct.logo, alt: 'XOX Taktik Arena uygulama ikonu', className: 'right-[9%] top-[18%] h-16 w-16 sm:h-20 sm:w-20', delay: '-1.8s', fit: 'contain' },
     { src: product.logo, alt: 'Del-it uygulama ikonu', className: 'left-[18%] bottom-[14%] h-14 w-14 sm:h-[4.5rem] sm:w-[4.5rem]', delay: '-3.2s', fit: 'contain' },
     { src: xoxProduct.logo, alt: 'XOX Taktik Arena uygulama ikonu', className: 'right-[18%] bottom-[16%] h-14 w-14 sm:h-16 sm:w-16', delay: '-0.9s', fit: 'contain' },
+    { src: sandPartyProduct.logo, alt: 'Sand Party uygulama ikonu', className: 'left-[46%] bottom-[8%] h-14 w-14 sm:h-16 sm:w-16', delay: '-2.4s', fit: 'cover' },
   ];
 
   return (
@@ -1183,6 +1254,7 @@ function HomeApplicationShowcase() {
   const slides = [
     { id: 'delit', label: 'Del-It', content: <HomeDelitOverview /> },
     { id: 'xox', label: 'XOX', content: <HomeXoxOverview /> },
+    { id: 'sand-party', label: 'Sand Party', content: <HomeSandPartyOverview /> },
   ];
   const duration = 3000;
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -1422,6 +1494,66 @@ function HomeXoxOverview() {
           >
             {t('appStore')}
             <ArrowRight size={16} />
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function HomeSandPartyOverview() {
+  const { t } = useLanguage();
+  const sandFeatures = [
+    [t('sandPlaceBlocks'), Gamepad2, t('sandPlaceBlocksText')],
+    [t('sandColorPop'), Sparkles, t('sandColorPopText')],
+    [t('sandCombos'), Trophy, t('sandCombosText')],
+    [t('sandDifficulty'), Gauge, t('sandDifficultyText')],
+  ];
+
+  return (
+    <article className="overflow-hidden rounded-[2.25rem] border border-black/8 bg-white shadow-soft">
+      <div className="grid gap-8 bg-gradient-to-br from-[#fff1f9] via-white to-[#e8fbff] p-5 sm:p-7 lg:grid-cols-[1fr_0.96fr] lg:p-8">
+        <div className="flex flex-col">
+          <div className="flex items-center gap-3">
+            <img src={sandPartyProduct.logo} alt="Sand Party uygulama ikonu" className="h-14 w-14 rounded-[1rem] object-cover shadow-soft" loading="lazy" />
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.24em] text-ink/45">Sand Party</p>
+              <p className="text-sm font-semibold text-ink/58">{t('sandSubtitle')}</p>
+            </div>
+          </div>
+          <h3 className="mt-7 font-display text-[clamp(2.15rem,5vw,4.6rem)] font-black leading-[0.92] tracking-tight">
+            {t('sandTitle1')}
+            <span className="block bg-gradient-to-r from-[#ff2fb2] via-[#ffcc24] to-[#00c8ff] bg-clip-text text-transparent">
+              {t('sandTitle2')}
+            </span>
+          </h3>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-ink/64">
+            {t('sandDescription')}
+          </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {sandFeatures.map(([label, Icon, text]) => (
+              <div key={label} className="rounded-[1.25rem] border border-white/70 bg-white/72 p-4 shadow-[0_18px_42px_rgba(52,43,92,0.08)] backdrop-blur">
+                <div className="mb-3 grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-[#ffe4f4] via-[#fff2b8] to-[#d8fbff] text-[#d946ef]">
+                  <Icon size={21} />
+                </div>
+                <p className="font-display text-lg font-black leading-tight">{label}</p>
+                <p className="mt-1 text-sm leading-5 text-ink/58">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="relative min-h-[32rem] overflow-hidden rounded-[1.75rem] border border-white/70 bg-[#271052] shadow-[0_24px_64px_rgba(80,32,120,0.16)]">
+          <img src={sandPartyProduct.logo} alt="Sand Party oyun logosu" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-white/8" />
+          <div className="absolute bottom-5 left-5 right-5 rounded-[1.35rem] border border-white/25 bg-white/18 p-4 text-white shadow-[0_24px_70px_rgba(0,0,0,0.2)] backdrop-blur-xl">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/74">{t('sandCombos')}</p>
+            <p className="mt-2 font-display text-3xl font-black leading-none">x4 Combo</p>
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center gap-3 pt-1 sm:flex-row lg:col-span-2">
+          <a href="/sand-party/" className="inline-flex h-14 min-w-44 items-center justify-center gap-2 rounded-full bg-ink px-6 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-black/85">
+            {t('more')}
+            <ChevronRight size={17} />
           </a>
         </div>
       </div>
@@ -2337,6 +2469,185 @@ function DelitTermsPage() {
   );
 }
 
+function SandPartyPage() {
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <SandPartyHero />
+      <SandPartyFlow />
+      <SandPartyModes />
+      <SandPartyLegalLinks />
+      <Footer />
+    </main>
+  );
+}
+
+function SandPartyHero() {
+  const { t } = useLanguage();
+
+  return (
+    <section className="relative z-10 overflow-hidden px-5 pb-12 pt-24 sm:px-8 lg:pt-28">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(255,47,178,0.16),transparent_30%),radial-gradient(circle_at_82%_20%,rgba(0,200,255,0.18),transparent_28%),radial-gradient(circle_at_50%_86%,rgba(255,204,36,0.24),transparent_34%)]" />
+      <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.98fr] lg:items-center">
+        <div className="max-w-3xl">
+          <p className="mb-5 inline-flex rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-ink/55 shadow-soft">
+            Sand Party
+          </p>
+          <h1 className="font-display text-[clamp(3.1rem,7vw,7.7rem)] font-black leading-[0.9]">
+            {t('sandHeroTitle1')}
+            <span className="block bg-gradient-to-r from-[#ff2fb2] via-[#ffcc24] to-[#00c8ff] bg-clip-text text-transparent">
+              {t('sandHeroTitle2')}
+            </span>
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/65">
+            {t('sandHeroText')}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {[t('sandHeroChip1'), t('sandHeroChip2'), t('sandHeroChip3')].map((item) => (
+              <span key={item} className="rounded-full border border-black/8 bg-white px-4 py-2 text-sm font-semibold text-ink/65 shadow-soft">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="relative mx-auto w-full max-w-[580px]">
+          <div className="absolute inset-x-10 top-10 h-48 rounded-full bg-gradient-to-r from-fuchsia-300/70 via-yellow-200/65 to-cyan-300/70 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-black/8 bg-white p-5 shadow-glow">
+            <img src={sandPartyProduct.logo} alt="Sand Party logosu" className="h-auto w-full rounded-[1.5rem] object-cover" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SandPartyFlow() {
+  const { t } = useLanguage();
+  const cards = [
+    [t('sandPlaceBlocks'), t('sandPlaceBlocksText'), Gamepad2, 'from-[#ffe4f4] via-white to-[#fff2b8]', '#ff2fb2'],
+    [t('sandColorPop'), t('sandColorPopText'), Sparkles, 'from-[#e0fbff] via-white to-[#ecffcc]', '#00a3ff'],
+    [t('sandCombos'), t('sandCombosText'), Trophy, 'from-[#fff2b8] via-white to-[#ffe1f2]', '#f59e0b'],
+    [t('sandDifficulty'), t('sandDifficultyText'), Gauge, 'from-[#eee7ff] via-white to-[#dffbff]', '#8b5cf6'],
+  ];
+
+  return (
+    <section className="relative z-10 px-5 py-10 sm:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+          <div>
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-ink/45">{t('sandMechanics')}</p>
+            <h2 className="font-display text-4xl font-black leading-none sm:text-6xl">
+              {t('sandRulesTitle')}
+            </h2>
+          </div>
+          <p className="max-w-xl text-ink/58">
+            {t('sandRulesText')}
+          </p>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {cards.map(([title, text, Icon, gradient, color]) => (
+            <article key={title} className={`rounded-[1.5rem] border border-black/8 bg-gradient-to-br ${gradient} p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(60,44,125,0.13)]`}>
+              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-white shadow-soft" style={{ color }}>
+                <Icon size={22} />
+              </div>
+              <h3 className="mt-7 font-display text-2xl font-black leading-tight">{title}</h3>
+              <p className="mt-4 text-base leading-7 text-ink/65">{text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SandPartyModes() {
+  const { t } = useLanguage();
+  const panels = [
+    [t('sandModesTitle'), t('sandModesText'), Gauge],
+    [t('sandComfortTitle'), t('sandComfortText'), RotateCcw],
+  ];
+
+  return (
+    <section className="relative z-10 px-5 py-10 sm:px-8">
+      <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
+        {panels.map(([title, text, Icon]) => (
+          <article key={title} className="rounded-[1.6rem] border border-black/8 bg-white p-7 shadow-soft">
+            <Icon size={24} className="text-fuchsia-500" />
+            <h3 className="mt-6 font-display text-3xl font-black leading-tight">{title}</h3>
+            <p className="mt-4 text-base leading-7 text-ink/65">{text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function SandPartyLegalLinks() {
+  const { t } = useLanguage();
+
+  return (
+    <section className="relative z-10 px-5 py-10 sm:px-8">
+      <div className="mx-auto max-w-3xl">
+        <div className="rounded-[1.6rem] border border-black/8 bg-white p-5 shadow-soft">
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href="/sand-party/gizlilik-politikasi/"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-white px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-[#fbfaf7]"
+            >
+              {t('privacyPolicy')}
+            </a>
+            <a
+              href="/sand-party/kullanim-sartlari/"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-black/8 bg-[#fbfaf7] px-5 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-white"
+            >
+              {t('terms')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SandPartyPrivacyPage() {
+  const { t } = useLanguage();
+
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <LegalHero
+        eyebrow={t('privacyPolicy')}
+        title={`Sand Party ${t('privacyPolicy')}`}
+        description={`${t('effectiveDate')}: 21 Eylül 2026. AP Design. ${t('contact')}: theapdesign26@gmail.com`}
+      />
+      <LegalContent sections={sandPartyPrivacySections} />
+      <SandPartyLegalLinks />
+      <Footer />
+    </main>
+  );
+}
+
+function SandPartyTermsPage() {
+  const { t } = useLanguage();
+
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <LegalHero
+        eyebrow={t('terms')}
+        title={`Sand Party ${t('terms')}`}
+        description={`${t('effectiveDate')}: 21 Eylül 2026. AP Design. ${t('contact')}: theapdesign26@gmail.com`}
+      />
+      <LegalContent sections={sandPartyTermsSections} />
+      <SandPartyLegalLinks />
+      <Footer />
+    </main>
+  );
+}
+
 function XoxPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
@@ -2947,6 +3258,170 @@ const termsSections = [
   {
     title: '15. İletişim',
     paragraphs: ['Kullanım Şartları, Gizlilik Politikası veya uygulamayla ilgili soruların için bize ulaşabilirsin: theapdesign26@gmail.com'],
+  },
+];
+
+const sandPartyPrivacySections = [
+  {
+    title: '1. Genel bilgi',
+    paragraphs: [
+      'Sand Party, renkli kum bloklarını yerleştirmeye, aynı renkleri patlatmaya ve yüksek skor yapmaya dayalı bir mobil bulmaca oyunudur.',
+      'Uygulama, kullanıcıdan hesap oluşturma, üyelik açma veya doğrudan kişisel profil bilgisi girme zorunluluğu istemez.',
+    ],
+  },
+  {
+    title: '2. Cihazda saklanan oyun verileri',
+    paragraphs: [
+      'Sand Party; oyun deneyimini sürdürebilmek için skor, yüksek skor, zorluk tercihi, dil seçimi, müzik ve ses ayarları, geri alma veya devam hakkı gibi bazı bilgileri cihaz üzerinde saklayabilir.',
+      'Bu bilgiler oyunun çalışması, kullanıcı tercihlerini hatırlamak ve oyun ilerlemesini yerel olarak korumak için kullanılır.',
+    ],
+  },
+  {
+    title: '3. Reklamlar ve ödüllü reklamlar',
+    paragraphs: [
+      'Sand Party ücretsiz kullanıcılara reklam gösterebilir. Reklamlar Google Mobile Ads / AdMob gibi üçüncü taraf reklam servisleri üzerinden sunulabilir.',
+      'Oyunda reklam izleyerek devam etme veya ek hak kazanma gibi ödüllü reklam özellikleri bulunabilir. Ödül, reklamın tamamlanması ve reklam SDK’sinin başarılı sonuç bildirmesi halinde verilir.',
+      'Gerekli bölgelerde Google UMP consent akışı veya benzer izin formları reklam SDK başlamadan önce gösterilebilir.',
+    ],
+  },
+  {
+    title: '4. Analitik ve hata verileri',
+    paragraphs: [
+      'Uygulama; performansı ölçmek, hataları gidermek ve oyun deneyimini iyileştirmek için teknik analitik veriler işleyebilir.',
+      'Bu veriler uygulama açılışı, ekran görüntüleme, oyun modu kullanımı, reklam akışı, hata ve performans sinyalleri gibi teknik olaylardan oluşabilir.',
+      'Sand Party, cihazınızdaki kişisel dosyaları, fotoğrafları, rehberi veya özel içerikleri oyun amacıyla işlemez.',
+    ],
+  },
+  {
+    title: '5. Uygulama içi satın alma',
+    paragraphs: [
+      'Sand Party içinde reklam kaldırma, ek haklar veya benzer oyun avantajları gibi uygulama içi satın almalar sunulabilir.',
+      'Satın alma işlemleri Apple App Store altyapısı üzerinden yürütülür. Sand Party ödeme kartı bilgilerinizi görmez, işlemez veya saklamaz.',
+      'Satın alma durumu, StoreKit üzerinden doğrulanabilir ve cihazda ya da Apple hesabınız üzerinden geri yüklenebilir.',
+    ],
+  },
+  {
+    title: '6. Üçüncü taraf servisler',
+    paragraphs: [
+      'Sand Party; Apple StoreKit, Google Mobile Ads / AdMob, Google UMP ve uygulamanın sürümüne göre analitik veya hata izleme servisleri kullanabilir.',
+      'Bu servislerin veri işleme pratikleri kendi gizlilik politikalarına tabidir. AP Design, oyunun çalışması için gereksiz kişisel veri toplamamayı hedefler.',
+    ],
+  },
+  {
+    title: '7. Çocukların gizliliği',
+    paragraphs: [
+      'Sand Party genel kitleye yönelik bir eğlence oyunudur ve bilerek çocuklardan kişisel veri toplamayı hedeflemez.',
+      'Bir ebeveyn veya yasal temsilci gizlilikle ilgili bir endişe taşıyorsa bizimle iletişime geçebilir.',
+    ],
+  },
+  {
+    title: '8. Kullanıcı kontrolleri',
+    paragraphs: [
+      'Reklam kişiselleştirme, takip izni veya bildirim benzeri izinler işletim sistemi ayarları üzerinden yönetilebilir.',
+      'Müzik, ses, dil ve oyun tercihleri uygulama içinden değiştirilebilir.',
+      'Uygulama kaldırıldığında cihazda tutulan yerel oyun verileri silinebilir. Bazı satın alma kayıtları Apple tarafından saklanır ve App Store üzerinden yönetilir.',
+    ],
+  },
+  {
+    title: '9. Politika güncellemeleri',
+    paragraphs: [
+      'Bu gizlilik politikası zaman zaman güncellenebilir. Uygulamanın veri işleme pratiklerinde, reklam/analitik servislerinde veya oyun özelliklerinde önemli değişiklik olursa bu metin de güncellenebilir.',
+    ],
+  },
+  {
+    title: '10. İletişim',
+    paragraphs: [
+      'Gizlilikle ilgili sorularınız için bizimle iletişime geçebilirsiniz.',
+      'E-posta: theapdesign26@gmail.com',
+      'Web Sitesi: theapdesign.art',
+    ],
+  },
+];
+
+const sandPartyTermsSections = [
+  {
+    title: '1. Kabul',
+    paragraphs: [
+      'Sand Party uygulamasını indirerek, açarak veya kullanarak bu Kullanım Şartları’nı kabul etmiş olursunuz.',
+      'Bu şartları kabul etmiyorsanız uygulamayı kullanmamalısınız.',
+    ],
+  },
+  {
+    title: '2. Oyunun amacı',
+    paragraphs: [
+      'Sand Party, renkli kum bloklarını doğru yerlere yerleştirerek aynı renkleri patlatmaya, alanı temizlemeye ve yüksek skor elde etmeye dayalı eğlence amaçlı bir bulmaca oyunudur.',
+      'Oyunda her hamle önemlidir. Tahta dolmadan önce doğru kararlar vermek, blokları dikkatli konumlandırmak ve kombolar oluşturmak kullanıcının sorumluluğundadır.',
+    ],
+  },
+  {
+    title: '3. Oyun özellikleri',
+    paragraphs: [
+      'Uygulama; zorluk seçenekleri, geri alma hakkı, reklam izleyerek devam etme, Türkçe ve İngilizce dil desteği, müzik ve ses ayarları gibi özellikler sunabilir.',
+      'Bu özelliklerin kapsamı, sayısı, kuralları veya kullanılabilirliği uygulama sürümüne, cihaz durumuna, reklam servislerine veya App Store koşullarına göre değişebilir.',
+    ],
+  },
+  {
+    title: '4. Reklamlar ve ödüller',
+    paragraphs: [
+      'Sand Party ücretsiz kullanımda reklam gösterebilir. Reklamlar oyun aralarında, devam etme akışında veya ödüllü reklam şeklinde sunulabilir.',
+      'Ödüllü reklam izleyerek devam etme veya ek hak kazanma özelliğinde ödül, reklamın başarıyla tamamlanmasına bağlıdır.',
+      'Reklam servisindeki hata, bağlantı sorunu veya reklamın tamamlanmadan kapanması durumunda ödül verilmeyebilir.',
+    ],
+  },
+  {
+    title: '5. Satın almalar',
+    paragraphs: [
+      'Uygulama içinde reklam kaldırma, ek haklar veya benzer içerikler için uygulama içi satın alma sunulabilir.',
+      'Satın almalar Apple App Store üzerinden yapılır ve Apple hesabınız üzerinden yönetilir. İptal, iade ve ödeme süreçleri Apple kurallarına tabidir.',
+      'AP Design ödeme bilgilerinizi görmez veya saklamaz.',
+    ],
+  },
+  {
+    title: '6. Kullanıcı sorumluluğu',
+    paragraphs: [
+      'Uygulamayı yasalara uygun, adil ve normal oyun işleyişini bozmayacak şekilde kullanmalısınız.',
+      'Oyunu tersine mühendislik yapmak, reklam veya satın alma kontrollerini aşmak, hile yapmak, otomasyon kullanmak veya uygulamanın teknik işleyişine müdahale etmek yasaktır.',
+    ],
+  },
+  {
+    title: '7. Hizmetin değişmesi',
+    paragraphs: [
+      'AP Design, Sand Party’de zaman zaman güncelleme yapabilir. Oyun kuralları, zorluk dengesi, reklam davranışı, görsel tasarım, sesler veya teknik altyapı değiştirilebilir.',
+      'Uygulamanın kesintisiz, hatasız veya her cihazda aynı performansla çalışacağı garanti edilmez.',
+    ],
+  },
+  {
+    title: '8. Sorumluluğun sınırlandırılması',
+    paragraphs: [
+      'Sand Party eğlence amaçlı bir oyundur. Skor kaybı, oyun ilerlemesinin sıfırlanması, reklam servislerinin çalışmaması, cihaz veya işletim sistemi kaynaklı sorunlar ve üçüncü taraf servis kesintilerinden kanunen izin verilen ölçüde AP Design sorumlu değildir.',
+    ],
+  },
+  {
+    title: '9. Fikri mülkiyet',
+    paragraphs: [
+      'Sand Party adı, oyunun tasarımı, görsel öğeleri, metinleri, sesleri, kullanıcı arayüzü ve yazılım bileşenleri AP Design veya ilgili hak sahiplerine aittir.',
+      'Uygulama izinsiz kopyalanamaz, dağıtılamaz veya türev çalışma oluşturmak için kullanılamaz.',
+    ],
+  },
+  {
+    title: '10. Gizlilik',
+    paragraphs: [
+      'Sand Party’nin veri işleme yaklaşımı Gizlilik Politikası’nda açıklanır. Uygulamayı kullanarak Gizlilik Politikası’nı da kabul etmiş olursunuz.',
+    ],
+  },
+  {
+    title: '11. Değişiklikler',
+    paragraphs: [
+      'Bu Kullanım Şartları zaman zaman güncellenebilir. Güncel metin uygulama içinde veya web sitemizde yayınlanabilir.',
+    ],
+  },
+  {
+    title: '12. İletişim',
+    paragraphs: [
+      'Kullanım Şartları, Gizlilik Politikası veya uygulamayla ilgili sorularınız için bize ulaşabilirsiniz.',
+      'E-posta: theapdesign26@gmail.com',
+      'Web Sitesi: theapdesign.art',
+    ],
   },
 ];
 
