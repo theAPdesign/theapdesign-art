@@ -264,3 +264,17 @@ body {
     transform: none;
   }
 }
+
+.block-escape-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  border-radius: 9999px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.block-escape-link:hover { background: #e8f4ff; }
+.block-escape-link:focus-visible { outline: 2px solid #128cff; outline-offset: 4px; }

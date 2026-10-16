@@ -40,6 +40,7 @@ import {
   getTranslatedPost,
 } from './blog-data.js';
 import './styles.css';
+import { BlockEscapeContent, BlockEscapeLegalLinks, BlockEscapeLegalReferences, blockEscapePrivacySections, blockEscapeTermsSections } from './block-escape.jsx';
 
 const product = {
   title: 'Del-it',
@@ -71,6 +72,7 @@ const translations = {
     navDelit: 'Del-It',
     navXox: 'XOX',
     navSandParty: 'Sand Party',
+    navBlockEscape: 'Block Escape',
     navBlog: 'Blog',
     navContact: 'İletişim',
     expandMenu: 'Menüyü genişlet',
@@ -229,6 +231,7 @@ const translations = {
     navDelit: 'Del-It',
     navXox: 'XOX',
     navSandParty: 'Sand Party',
+    navBlockEscape: 'Block Escape',
     navBlog: 'Blog',
     navContact: 'Contact',
     expandMenu: 'Expand menu',
@@ -440,6 +443,12 @@ function App() {
     page = <XoxPrivacyPage />;
   } else if (path === '/xox-taktik-arena/kullanim-sartlari') {
     page = <XoxTermsPage />;
+  } else if (path === '/block-escape') {
+    page = <BlockEscapePage />;
+  } else if (path === '/block-escape/gizlilik-politikasi') {
+    page = <BlockEscapeLegalPage type="privacy" />;
+  } else if (path === '/block-escape/kullanim-sartlari') {
+    page = <BlockEscapeLegalPage type="terms" />;
   } else if (path === '/sand-party') {
     page = <SandPartyPage />;
   } else if (path === '/sand-party/gizlilik-politikasi') {
@@ -958,6 +967,7 @@ function Header() {
     [t('navDelit'), '/del-it/'],
     [t('navXox'), '/xox-taktik-arena/'],
     [t('navSandParty'), '/sand-party/'],
+    [t('navBlockEscape'), '/block-escape/'],
     [t('navBlog'), getBlogIndexPath(language)],
   ];
   const contactLink = [t('navContact'), '/contact/'];
@@ -2464,6 +2474,33 @@ function DelitTermsPage() {
       />
       <LegalContent sections={termsSections} />
       <DelitLegalLinks />
+      <Footer />
+    </main>
+  );
+}
+
+function BlockEscapePage() {
+  const { language } = useLanguage();
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <BlockEscapeContent language={language} />
+      <Footer />
+    </main>
+  );
+}
+
+function BlockEscapeLegalPage({ type }) {
+  const title = type === 'privacy' ? 'Gizlilik Politikası' : 'Kullanım Şartları';
+  return (
+    <main lang="tr" className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      <Background />
+      <Header />
+      <LegalHero eyebrow="Block Escape" title={`Block Escape ${title}`} description="Son güncelleme: 16 Ekim 2026. AP Design. İletişim: theapdesign26@gmail.com" />
+      <LegalContent sections={type === 'privacy' ? blockEscapePrivacySections : blockEscapeTermsSections} />
+      <BlockEscapeLegalReferences type={type} />
+      <BlockEscapeLegalLinks back />
       <Footer />
     </main>
   );

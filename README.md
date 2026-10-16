@@ -72,3 +72,16 @@ google.com, pub-5911219580546074, DIRECT, f08c47fec0942fa0
 ## Deploy
 
 Cloudflare otomatik deploy akisi build sonrasi `npx wrangler deploy` calistirir. `_redirects` dosyasi kullanilmaz; SPA fallback `wrangler.jsonc` icindeki `assets.not_found_handling` ile yonetilir.
+
+
+## Block Escape (lokal)
+
+- Tanıtım: `/block-escape/`
+- Gizlilik Politikası: `/block-escape/gizlilik-politikasi/`
+- Kullanım Şartları: `/block-escape/kullanim-sartlari/`
+- İçerik: `src/block-escape.jsx`; logo: `public/block-escape-logo.png`
+
+`npm run dev` ile başlatılır. Block Escape mevcut üst menüden açılabilir.
+Tanıtım Türkçe ve İngilizce destekler; yasal metinler Türkçedir.
+Uygulama dokümanındaki genel `/privacy-policy` ve `/terms-of-use` adresleri yerine,
+yayın sonrasında uygulama ayarlarında Block Escape'e özel yukarıdaki yollar kullanılmalıdır.
